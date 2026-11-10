@@ -121,7 +121,14 @@ GUST ships with more features than a proxy arguably needs, but we wanted your pr
 
 ## Getting started
 
-**Option 1:  Just open the file**
+**Option 0: Single-File Installer & Launcher (`install.html`)**
+
+Open `install.html` directly in any web browser. It contains the entire GUST browser bundled inside a single portable file, and lets you:
+- **Launch GUST instantly** into memory via Blob URL
+- **Install/Export** `index.html` directly to disk
+- **Launch in a cloaked `about:blank` window**
+
+**Option 1: Just open the file**
 
 Download `index.html` and open it in any modern browser. That's it. That's the whole setup.
 
