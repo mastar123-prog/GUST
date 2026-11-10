@@ -23,9 +23,9 @@
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="GUST: A service worker -less web browser-in-a-browser" />
-    <title>GUST Browser</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%239de5ff' d='M288 32c0 17.7 14.3 32 32 32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32 14.3-32 32zm64 352c0 17.7 14.3 32 32 32h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32 14.3-32 32zM128 512h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z'/%3E%3C/svg%3E" />
+    <meta name="description" content="Strike: Atmospheric Intelligence, Doppler Radar & AI Weather Journal" />
+    <title>Strike — Weather Reports & AI Articles</title>
+    <link id="appFavicon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fbbf24' stroke='%23f59e0b' stroke-width='0.5' d='M13 2L3 14h7v8l11-14h-8l0-6z'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
@@ -6157,6 +6157,790 @@
         }
 
 
+    
+        /* ══════════════════════════════════════════════════════════════════════
+           STRIKE: Atmospheric Intelligence & AI Weather Journal Disguise
+           ══════════════════════════════════════════════════════════════════════ */
+        #strikeApp {
+            position: fixed;
+            inset: 0;
+            z-index: 999998;
+            background: #090e17;
+            color: #e2e8f0;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            user-select: text;
+        }
+        #strikeApp.strike-hidden {
+            display: none !important;
+        }
+
+        /* Topbar */
+        .strike-topbar {
+            height: 62px;
+            background: rgba(11, 18, 32, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .strike-brand-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            user-select: none;
+        }
+        .strike-brand-bolt {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.22), rgba(245, 158, 11, 0.08));
+            border: 1px solid rgba(251, 191, 36, 0.45);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 16px rgba(251, 191, 36, 0.3);
+            animation: strikeBoltPulse 3.5s ease-in-out infinite alternate;
+        }
+        @keyframes strikeBoltPulse {
+            0% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.25); transform: scale(1); }
+            100% { box-shadow: 0 0 22px rgba(251, 191, 36, 0.5); transform: scale(1.02); }
+        }
+        .strike-brand-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .strike-brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #f8fafc;
+            line-height: 1.1;
+        }
+        .strike-brand-tag {
+            font-size: 9.5px;
+            font-weight: 600;
+            color: #38bdf8;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .strike-nav-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .strike-nav-link {
+            background: transparent;
+            border: 1px solid transparent;
+            color: #94a3b8;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-family: inherit;
+        }
+        .strike-nav-link:hover, .strike-nav-link.active {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.25);
+        }
+
+        .strike-header-right-tools {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .strike-live-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            padding: 5px 12px;
+            border-radius: 18px;
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+        .strike-live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: strikePulse 1.8s infinite;
+        }
+
+        /* The GUST logo at top right taking you to GUST */
+        .strike-gust-portal-btn {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: rgba(157, 229, 255, 0.1);
+            border: 1px solid rgba(157, 229, 255, 0.35);
+            color: #9de5ff;
+            border-radius: 10px;
+            padding: 7px 15px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            font-family: inherit;
+            box-shadow: 0 0 14px rgba(157, 229, 255, 0.15);
+        }
+        .strike-gust-portal-btn:hover {
+            background: rgba(157, 229, 255, 0.22);
+            border-color: #9de5ff;
+            color: #ffffff;
+            box-shadow: 0 0 22px rgba(157, 229, 255, 0.45);
+            transform: translateY(-1px);
+        }
+        .strike-gust-portal-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+        .strike-gust-portal-btn:hover .strike-gust-portal-svg {
+            transform: rotate(20deg) scale(1.12);
+        }
+
+        /* Ticker bar */
+        .strike-ticker-bar {
+            background: #0f172a;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+            padding: 7px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .strike-ticker-label {
+            font-weight: 800;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.8px;
+            flex-shrink: 0;
+        }
+        .strike-ticker-content {
+            color: #94a3b8;
+            display: flex;
+            gap: 14px;
+            animation: strikeTickerSlide 45s linear infinite;
+        }
+        @keyframes strikeTickerSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Main Content */
+        .strike-main-content {
+            max-width: 1360px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 24px 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Hero Grid */
+        .strike-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 960px) {
+            .strike-hero-grid { grid-template-columns: 1fr; }
+        }
+        .strike-card {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .strike-card-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #cbd5e1;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .strike-badge-green {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .strike-badge-cyan {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .strike-station-body {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .strike-temp-row {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .strike-temp-huge {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1;
+            color: #f8fafc;
+            letter-spacing: -2px;
+        }
+        .strike-temp-huge span {
+            font-size: 28px;
+            font-weight: 400;
+            color: #38bdf8;
+            margin-left: 2px;
+        }
+        .strike-temp-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .strike-condition-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .strike-condition-sub {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .strike-hl-tags {
+            display: flex;
+            gap: 10px;
+            font-size: 11.5px;
+            color: #cbd5e1;
+            margin-top: 4px;
+        }
+        .strike-hl-tags span {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 2px 8px;
+            border-radius: 5px;
+            border: 1px solid rgba(71, 85, 105, 0.5);
+        }
+
+        .strike-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        @media (max-width: 600px) {
+            .strike-metrics-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .strike-metric-item {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            border-radius: 10px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .strike-metric-name {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .strike-metric-val {
+            font-size: 15px;
+            font-weight: 800;
+            color: #f1f5f9;
+        }
+        .strike-metric-note {
+            font-size: 10px;
+            color: #38bdf8;
+        }
+
+        /* Radar Viewport */
+        .strike-radar-viewport {
+            position: relative;
+            background: #020617;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 230px;
+        }
+        #strikeRadarCanvas {
+            width: 100%;
+            height: 230px;
+            display: block;
+        }
+        .strike-radar-overlay-data {
+            position: absolute;
+            bottom: 8px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+        }
+        .strike-radar-legend {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 9.5px;
+            color: #94a3b8;
+            background: rgba(2, 6, 23, 0.85);
+            padding: 3px 8px;
+            border-radius: 5px;
+            border: 1px solid rgba(51, 65, 85, 0.6);
+        }
+        .strike-radar-gradient-bar {
+            width: 70px;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #10b981, #eab308, #ef4444, #a855f7);
+        }
+        .strike-radar-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: all;
+        }
+        .strike-btn-sm {
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #e2e8f0;
+            border-radius: 5px;
+            padding: 3px 9px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .strike-btn-sm:hover {
+            background: rgba(56, 189, 248, 0.2);
+            color: #fff;
+        }
+        .strike-radar-time {
+            font-size: 10px;
+            color: #38bdf8;
+            background: rgba(2, 6, 23, 0.85);
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        /* AI Weather Generator Panel */
+        .strike-generator-panel {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.75));
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 14px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+        }
+        .strike-gen-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .strike-gen-title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .strike-gen-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .strike-gen-desc {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.45;
+        }
+        .strike-gen-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border: none;
+            color: #0b132b;
+            font-weight: 800;
+            font-size: 13.5px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35);
+            transition: all 0.2s ease;
+            font-family: inherit;
+            flex-shrink: 0;
+        }
+        .strike-gen-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 22px rgba(245, 158, 11, 0.5);
+        }
+        .strike-gen-input-wrap {
+            width: 100%;
+        }
+        .strike-gen-input-wrap input {
+            width: 100%;
+            background: rgba(2, 6, 23, 0.7);
+            border: 1px solid rgba(71, 85, 105, 0.6);
+            border-radius: 9px;
+            padding: 12px 16px;
+            color: #f8fafc;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .strike-gen-input-wrap input:focus {
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+        }
+        .strike-gen-chips {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+        .strike-chip-label {
+            font-size: 11.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .strike-chip {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(71, 85, 105, 0.45);
+            color: #cbd5e1;
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 11.5px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+        .strike-chip:hover {
+            background: rgba(251, 191, 36, 0.15);
+            border-color: rgba(251, 191, 36, 0.4);
+            color: #fbbf24;
+        }
+        .strike-gen-status {
+            font-size: 12.5px;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Articles Section */
+        .strike-articles-section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .strike-section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+            padding-bottom: 12px;
+        }
+        .strike-section-title-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .strike-section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+            margin: 0;
+        }
+        .strike-section-sub {
+            font-size: 12.5px;
+            color: #94a3b8;
+        }
+        .strike-article-filter-tabs {
+            display: flex;
+            gap: 6px;
+        }
+        .strike-filter-btn {
+            background: transparent;
+            border: 1px solid rgba(71, 85, 105, 0.4);
+            color: #94a3b8;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+        .strike-filter-btn:hover, .strike-filter-btn.active {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.35);
+        }
+
+        /* Articles Grid */
+        .strike-articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 480px) {
+            .strike-articles-grid { grid-template-columns: 1fr; }
+        }
+        .strike-article-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.18);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+        .strike-article-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.15);
+        }
+        .strike-article-card.new-ai-card {
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.25);
+        }
+        .strike-card-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        .strike-article-category {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+        .strike-article-title {
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1.35;
+            color: #f1f5f9;
+        }
+        .strike-article-abstract {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .strike-article-stats {
+            background: rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            border-radius: 7px;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: #cbd5e1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .strike-stat-span strong {
+            color: #38bdf8;
+        }
+        .strike-article-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid rgba(51, 65, 85, 0.4);
+            font-size: 12px;
+            color: #64748b;
+        }
+        .strike-read-more-link {
+            color: #38bdf8;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .strike-read-more-link:hover {
+            color: #9de5ff;
+        }
+
+        /* Modal */
+        .strike-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .strike-modal-card {
+            background: #0b1322;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 820px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.2);
+            overflow: hidden;
+        }
+        .strike-modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+            background: rgba(15, 23, 42, 0.6);
+        }
+        .strike-modal-close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 26px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.15s;
+        }
+        .strike-modal-close-btn:hover {
+            color: #f8fafc;
+        }
+        .strike-modal-scroll {
+            padding: 28px 32px 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            line-height: 1.7;
+            font-size: 14.5px;
+            color: #cbd5e1;
+        }
+        .strike-modal-article-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #f8fafc;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+        .strike-modal-byline {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #94a3b8;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+        .strike-modal-data-table {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 10px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin: 10px 0;
+        }
+        .strike-modal-datum {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .strike-modal-datum-lbl {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .strike-modal-datum-val {
+            font-size: 15px;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+        .strike-modal-advisory {
+            background: rgba(245, 158, 11, 0.12);
+            border-left: 4px solid #f59e0b;
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            color: #fde68a;
+            font-size: 13.5px;
+            margin: 10px 0;
+        }
+
     </style>
 </head>
 
@@ -6326,7 +7110,193 @@
             </div>
         </div>
     </noscript>
-    <div class="app">
+
+    <!-- STRIKE WEATHER INTELLIGENCE & AI JOURNAL DISGUISE -->
+    <div id="strikeApp" class="strike-root">
+        <!-- Topbar -->
+        <header class="strike-topbar">
+            <div class="strike-brand-area">
+                <div class="strike-brand-bolt">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="#fbbf24" stroke="#f59e0b" stroke-width="0.5" d="M13 2L3 14h7v8l11-14h-8l0-6z"/>
+                    </svg>
+                </div>
+                <div class="strike-brand-info">
+                    <span class="strike-brand-name">STRIKE</span>
+                    <span class="strike-brand-tag">Weather Intelligence & AI Journal</span>
+                </div>
+            </div>
+
+            <nav class="strike-nav-bar">
+                <button class="strike-nav-link active" data-tab="radar"><i class="fas fa-satellite-dish"></i> Live Doppler</button>
+                <button class="strike-nav-link" data-tab="articles"><i class="fas fa-newspaper"></i> AI Weather Journal</button>
+                <button class="strike-nav-link" data-tab="alerts"><i class="fas fa-triangle-exclamation"></i> Severe Warnings</button>
+                <button class="strike-nav-link" data-tab="synoptic"><i class="fas fa-wind"></i> Atmospheric Models</button>
+            </nav>
+
+            <div class="strike-header-right-tools">
+                <div class="strike-live-pill">
+                    <span class="strike-live-dot"></span>
+                    <span>Doppler HD: Live</span>
+                </div>
+                <!-- GUST LOGO AT TOP RIGHT: "also there is the gust logo at the top right as strikes logo of the page, taking you to gust" -->
+                <button id="strikeToGustBtn" class="strike-gust-portal-btn" title="Atmospheric Velocity Matrix (Launch GUST Browser)">
+                    <svg class="strike-gust-portal-svg" viewBox="0 0 512 512">
+                        <path fill="#9de5ff" d="M288 32c0 17.7 14.3 32 32 32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32 14.3-32 32zm64 352c0 17.7 14.3 32 32 32h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32 14.3-32 32zM128 512h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z"/>
+                    </svg>
+                    <span class="strike-gust-portal-text">GUST</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Weather Ticker -->
+        <div class="strike-ticker-bar">
+            <div class="strike-ticker-label"><i class="fas fa-bolt"></i> REAL-TIME TELEMETRY</div>
+            <div class="strike-ticker-content" id="strikeTicker">
+                <span>New York: 68°F ⛅ Partly Cloudy</span> • 
+                <span>Chicago: 53°F 🌧️ Rain Showers</span> • 
+                <span>Dallas: 79°F ☀️ Clear & Humid</span> • 
+                <span>Denver: 48°F ❄️ Flurries</span> • 
+                <span>Miami: 82°F 🌴 Convective Swells</span> • 
+                <span>Seattle: 56°F 🌫️ Coastal Inflow</span> • 
+                <span>Tokyo: 61°F ⛅ Barometric High</span> • 
+                <span>London: 54°F 🌦️ North Sea Low</span>
+            </div>
+        </div>
+
+        <!-- Main Container -->
+        <main class="strike-main-content">
+            <!-- Dashboard Top Grid -->
+            <section class="strike-hero-grid">
+                <!-- Current Station Card -->
+                <div class="strike-card strike-station-card">
+                    <div class="strike-card-head">
+                        <span><i class="fas fa-location-crosshairs"></i> Current Meteorological Station</span>
+                        <span class="strike-badge-green">Doppler Online</span>
+                    </div>
+                    <div class="strike-station-body">
+                        <div class="strike-temp-row">
+                            <div class="strike-temp-huge">72°<span>F</span></div>
+                            <div class="strike-temp-summary">
+                                <div class="strike-condition-title"><i class="fas fa-cloud-sun"></i> Atmospheric Convergence</div>
+                                <div class="strike-condition-sub">Barometric trend: Steady rising (1014.8 hPa)</div>
+                                <div class="strike-hl-tags">
+                                    <span>High: 76°F</span>
+                                    <span>Low: 58°F</span>
+                                    <span>Dewpt: 52°F</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="strike-metrics-grid">
+                            <div class="strike-metric-item">
+                                <span class="strike-metric-name">Wind Velocity</span>
+                                <span class="strike-metric-val">14 mph WNW</span>
+                                <span class="strike-metric-note">Gust: 28 mph</span>
+                            </div>
+                            <div class="strike-metric-item">
+                                <span class="strike-metric-name">Barometer</span>
+                                <span class="strike-metric-val">29.98 inHg</span>
+                                <span class="strike-metric-note">1015.2 mb</span>
+                            </div>
+                            <div class="strike-metric-item">
+                                <span class="strike-metric-name">Relative Humidity</span>
+                                <span class="strike-metric-val">49%</span>
+                                <span class="strike-metric-note">Comfortable</span>
+                            </div>
+                            <div class="strike-metric-item">
+                                <span class="strike-metric-name">UV / Solar Index</span>
+                                <span class="strike-metric-val">3 Moderate</span>
+                                <span class="strike-metric-note">Peak 13:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doppler Radar Simulation Card -->
+                <div class="strike-card strike-radar-card">
+                    <div class="strike-card-head">
+                        <span><i class="fas fa-satellite"></i> NEXRAD Dual-Pol Doppler Radar</span>
+                        <span class="strike-badge-cyan">Composite Reflectivity</span>
+                    </div>
+                    <div class="strike-radar-viewport">
+                        <canvas id="strikeRadarCanvas" width="460" height="230"></canvas>
+                        <div class="strike-radar-overlay-data">
+                            <div class="strike-radar-legend">
+                                <span>Light (5 dBZ)</span>
+                                <div class="strike-radar-gradient-bar"></div>
+                                <span>Severe (65+ dBZ)</span>
+                            </div>
+                            <div class="strike-radar-controls">
+                                <button id="strikeRadarToggleBtn" class="strike-btn-sm"><i class="fas fa-play"></i> Loop</button>
+                                <span id="strikeRadarScanTime" class="strike-radar-time">Scan: 0 min ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Weather Article Generator Box -->
+            <section class="strike-generator-panel">
+                <div class="strike-gen-head">
+                    <div class="strike-gen-title-group">
+                        <div class="strike-gen-title"><i class="fas fa-wand-magic-sparkles"></i> AI Synoptic Article Synthesizer</div>
+                        <div class="strike-gen-desc">Generate in-depth meteorological dispatches, storm analyses, and forecast articles using real-time atmospheric simulation algorithms.</div>
+                    </div>
+                    <button id="strikeGenArticleBtn" class="strike-gen-btn">
+                        <i class="fas fa-bolt"></i> Generate Article with AI
+                    </button>
+                </div>
+                <div class="strike-gen-input-wrap">
+                    <input type="text" id="strikeTopicInput" placeholder="Enter any city, weather anomaly, or storm system (e.g. 'Arctic freeze in Chicago', 'Cat 5 Hurricane off Florida coast')..." />
+                </div>
+                <div class="strike-gen-chips">
+                    <span class="strike-chip-label">Quick topics:</span>
+                    <button class="strike-chip" data-topic="Midwest High-CAPE Severe Tornado Outbreak">🌪️ High-CAPE Tornado Outbreak</button>
+                    <button class="strike-chip" data-topic="Category 5 Pacific Atmospheric River Landfall">🌊 Cat 5 Atmospheric River</button>
+                    <button class="strike-chip" data-topic="Polar Vortex Sudden Stratospheric Warming Event">❄️ Polar Vortex Disruption</button>
+                    <button class="strike-chip" data-topic="Southwest High-Pressure Heat Dome Anomaly">☀️ Extreme Heat Dome</button>
+                    <button class="strike-chip" data-topic="Rapid Tropical Cyclogenesis Heat Flux in Atlantic">🌀 Rapid Hurricane Intensification</button>
+                </div>
+                <div id="strikeGenStatus" class="strike-gen-status" style="display:none;"></div>
+            </section>
+
+            <!-- Articles Section -->
+            <section class="strike-articles-section">
+                <div class="strike-section-head">
+                    <div class="strike-section-title-wrap">
+                        <h2 class="strike-section-title">⚡ AI Weather Journal — Synoptic Dispatches</h2>
+                        <span class="strike-section-sub">Continuous meteorological articles authored in real-time by AI atmospheric intelligence models</span>
+                    </div>
+                    <div class="strike-article-filter-tabs">
+                        <button class="strike-filter-btn active" data-filter="all">All Articles</button>
+                        <button class="strike-filter-btn" data-filter="severe">Severe Storms</button>
+                        <button class="strike-filter-btn" data-filter="marine">Rivers & Oceans</button>
+                        <button class="strike-filter-btn" data-filter="arctic">Arctic & Polar</button>
+                    </div>
+                </div>
+
+                <!-- Articles Grid -->
+                <div class="strike-articles-grid" id="strikeArticlesGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Full Article Reader Modal -->
+        <div id="strikeArticleModal" class="strike-modal-backdrop" style="display:none;">
+            <div class="strike-modal-card">
+                <div class="strike-modal-head">
+                    <span id="strikeModalBadge" class="strike-badge-cyan">AI METEOROLOGICAL DISPATCH</span>
+                    <button id="strikeCloseModalBtn" class="strike-modal-close-btn">&times;</button>
+                </div>
+                <div class="strike-modal-scroll" id="strikeModalBody">
+                    <!-- Injected article -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:none;" class="app">
         <div class="titlebar">
             <div class="tab-strip-wrapper">
                 <button class="tab-strip-scroll-btn" id="tabScrollLeft" title="Scroll tabs left">
@@ -6348,6 +7318,9 @@
 
             <button class="tool-btn" id="metricsBtn" title="Browser metrics" style="border:1px solid var(--bd);">
                 <i class="fas fa-chart-simple"></i>
+            </button>
+            <button class="tool-btn" id="strikeDisguiseToggleBtn" title="Disguise as Strike Weather (Alt+S)" style="border:1px solid rgba(251,191,36,0.35); color:#fbbf24;">
+                <i class="fas fa-bolt"></i>
             </button>
             <span class="status-pill" id="titlebarStatus">
                 <span class="status-dot idle" id="titlebarStatusDot"></span>
@@ -13980,7 +14953,13 @@ window._libcurlReady = true;
                     saveTabs();
                 }
                 try {
-                    document.title = (title && !title.includes('GUST')) ? `${title} — GUST` : (title || 'GUST Browser');
+                    if (window._isTabBlurred || document.hidden) {
+                        document.title = 'strike-wheather reports';
+                    } else if (window._strikeDisguised) {
+                        document.title = 'Strike — Weather Reports & AI Articles';
+                    } else {
+                        document.title = (title && !title.includes('GUST')) ? `${title} — GUST` : (title || 'GUST Browser');
+                    }
                 } catch (_) {}
             }
 
@@ -30175,6 +31154,478 @@ _VIEWER_DL_JS +
             </div>
         </div>
     </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         STRIKE WEATHER DISGUISE LOGIC & TAB BLUR/FOCUS HANDLERS
+         ══════════════════════════════════════════════════════════════════════ -->
+    <script>
+    (function() {
+        'use strict';
+
+        const STRIKE_BLUR_TITLE = "strike-wheather reports";
+        const STRIKE_ACTIVE_TITLE = "Strike — Weather Reports & AI Articles";
+        const LIGHTNING_FAVICON_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fbbf24' stroke='%23f59e0b' stroke-width='0.5' d='M13 2L3 14h7v8l11-14h-8l0-6z'/%3E%3C/svg%3E";
+        const GUST_FAVICON_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%239de5ff' d='M288 32c0 17.7 14.3 32 32 32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32 14.3-32 32zm64 352c0 17.7 14.3 32 32 32h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32 14.3-32 32zM128 512h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z'/%3E%3C/svg%3E";
+
+        window._isTabBlurred = false;
+        window._strikeDisguised = true;
+
+        function setFavicon(url) {
+            let link = document.getElementById('appFavicon') || document.querySelector("link[rel*='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.id = 'appFavicon';
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = url;
+        }
+
+        // ── "click out of the tab it renames itself 'strike-wheather reports'and has a lightning logo" ──
+        function onBlurTab() {
+            window._isTabBlurred = true;
+            document.title = STRIKE_BLUR_TITLE;
+            setFavicon(LIGHTNING_FAVICON_SVG);
+        }
+
+        function onFocusTab() {
+            window._isTabBlurred = false;
+            if (window._strikeDisguised) {
+                document.title = STRIKE_ACTIVE_TITLE;
+                setFavicon(LIGHTNING_FAVICON_SVG);
+            } else {
+                const activeTab = (typeof getActiveTab === 'function') ? getActiveTab() : null;
+                if (activeTab && activeTab.title) {
+                    document.title = (activeTab.title && !activeTab.title.includes('GUST')) ? `${activeTab.title} — GUST` : (activeTab.title || 'GUST Browser');
+                } else {
+                    document.title = 'GUST Browser';
+                }
+                setFavicon(GUST_FAVICON_SVG);
+            }
+        }
+
+        window.addEventListener('blur', onBlurTab);
+        window.addEventListener('focus', onFocusTab);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) onBlurTab();
+            else onFocusTab();
+        });
+
+        // ── Transition: Strike Disguise -> GUST Browser ──
+        // "also there is the gust logo at the top right as strikes logo of the page, taking you to gust"
+        function launchGust() {
+            window._strikeDisguised = false;
+            const strikeEl = document.getElementById('strikeApp');
+            if (strikeEl) strikeEl.classList.add('strike-hidden');
+            const gustEl = document.querySelector('.app');
+            if (gustEl) gustEl.style.display = '';
+
+            const activeTab = (typeof getActiveTab === 'function') ? getActiveTab() : null;
+            if (activeTab && activeTab.title) {
+                document.title = (activeTab.title && !activeTab.title.includes('GUST')) ? `${activeTab.title} — GUST` : (activeTab.title || 'GUST Browser');
+            } else {
+                document.title = 'GUST Browser';
+            }
+            setFavicon(GUST_FAVICON_SVG);
+            try { localStorage.setItem('gust:disguise_mode', 'gust'); } catch (_) {}
+        }
+
+        // ── Transition: GUST Browser -> Strike Disguise ──
+        function returnToStrike() {
+            window._strikeDisguised = true;
+            const strikeEl = document.getElementById('strikeApp');
+            if (strikeEl) strikeEl.classList.remove('strike-hidden');
+            const gustEl = document.querySelector('.app');
+            if (gustEl) gustEl.style.display = 'none';
+
+            document.title = window._isTabBlurred ? STRIKE_BLUR_TITLE : STRIKE_ACTIVE_TITLE;
+            setFavicon(LIGHTNING_FAVICON_SVG);
+            try { localStorage.setItem('gust:disguise_mode', 'strike'); } catch (_) {}
+        }
+
+        // Global hotkey: Alt+S or Ctrl+Shift+D toggles Strike disguise immediately
+        window.addEventListener('keydown', (e) => {
+            if ((e.altKey && (e.key === 's' || e.key === 'S')) || (e.ctrlKey && e.shiftKey && (e.key === 'd' || e.key === 'D'))) {
+                e.preventDefault();
+                if (window._strikeDisguised) launchGust();
+                else returnToStrike();
+            }
+        });
+
+        // Wire buttons
+        const toGustBtn = document.getElementById('strikeToGustBtn');
+        if (toGustBtn) toGustBtn.addEventListener('click', launchGust);
+
+        const disguiseToggleBtn = document.getElementById('strikeDisguiseToggleBtn');
+        if (disguiseToggleBtn) disguiseToggleBtn.addEventListener('click', returnToStrike);
+
+        // ── Live Doppler Radar Canvas Simulation ──
+        const radarCanvas = document.getElementById('strikeRadarCanvas');
+        if (radarCanvas) {
+            const ctx = radarCanvas.getContext('2d');
+            let sweepAngle = 0;
+            let radarRunning = true;
+
+            const stormCells = [
+                { x: 0.65, y: 0.35, r: 42, intensity: 58, color: 'rgba(239, 68, 68, 0.55)' },
+                { x: 0.72, y: 0.42, r: 34, intensity: 50, color: 'rgba(234, 179, 8, 0.65)' },
+                { x: 0.58, y: 0.48, r: 65, intensity: 35, color: 'rgba(16, 185, 129, 0.45)' },
+                { x: 0.28, y: 0.62, r: 48, intensity: 28, color: 'rgba(56, 189, 248, 0.35)' },
+                { x: 0.38, y: 0.70, r: 52, intensity: 38, color: 'rgba(16, 185, 129, 0.45)' }
+            ];
+
+            function renderRadar() {
+                if (!radarRunning || !radarCanvas) return;
+                const w = radarCanvas.width;
+                const h = radarCanvas.height;
+                const cx = w / 2;
+                const cy = h / 2;
+                const maxR = Math.min(cx, cy) - 14;
+
+                ctx.fillStyle = '#020617';
+                ctx.fillRect(0, 0, w, h);
+
+                // Grid rings
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+                ctx.lineWidth = 1;
+                [0.33, 0.66, 1.0].forEach(frac => {
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, maxR * frac, 0, Math.PI * 2);
+                    ctx.stroke();
+                });
+
+                // Crosshairs
+                ctx.beginPath();
+                ctx.moveTo(cx - maxR, cy); ctx.lineTo(cx + maxR, cy);
+                ctx.moveTo(cx, cy - maxR); ctx.lineTo(cx, cy + maxR);
+                ctx.stroke();
+
+                // Storm echoes
+                stormCells.forEach(cell => {
+                    const gx = cell.x * w;
+                    const gy = cell.y * h;
+                    const grad = ctx.createRadialGradient(gx, gy, 4, gx, gy, cell.r);
+                    grad.addColorStop(0, cell.color);
+                    grad.addColorStop(0.6, cell.color.replace('0.65', '0.25').replace('0.55', '0.2').replace('0.45', '0.15').replace('0.35', '0.1'));
+                    grad.addColorStop(1, 'transparent');
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    ctx.arc(gx, gy, cell.r, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Sweep line & fade beam
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, maxR, sweepAngle - 0.45, sweepAngle);
+                ctx.lineTo(cx, cy);
+                const sweepGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxR);
+                sweepGrad.addColorStop(0, 'rgba(56, 189, 248, 0.05)');
+                sweepGrad.addColorStop(1, 'rgba(56, 189, 248, 0.35)');
+                ctx.fillStyle = sweepGrad;
+                ctx.fill();
+
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 1.8;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(cx + Math.cos(sweepAngle) * maxR, cy + Math.sin(sweepAngle) * maxR);
+                ctx.stroke();
+                ctx.restore();
+
+                sweepAngle = (sweepAngle + 0.025) % (Math.PI * 2);
+                requestAnimationFrame(renderRadar);
+            }
+            renderRadar();
+
+            const radarBtn = document.getElementById('strikeRadarToggleBtn');
+            if (radarBtn) {
+                radarBtn.addEventListener('click', () => {
+                    radarRunning = !radarRunning;
+                    radarBtn.innerHTML = radarRunning ? '<i class="fas fa-pause"></i> Pause' : '<i class="fas fa-play"></i> Loop';
+                    if (radarRunning) renderRadar();
+                });
+            }
+        }
+
+        // ── Preloaded AI Weather Articles ──
+        const INITIAL_ARTICLES = [
+            {
+                id: 'art-1',
+                category: 'severe',
+                badge: 'CONVECTIVE LAB DISPATCH',
+                date: 'Just now',
+                author: 'Atmospheric Convective AI (v4.6)',
+                readTime: '3 min read',
+                title: 'High-CAPE Mesoscale Convective Outbreak: Supercell Tornadogenesis Dynamics Along Dryline Boundary',
+                abstract: 'Tropospheric sounding profiles across the southern plains show convective available potential energy (CAPE) exceeding 3,850 J/kg coupled with storm-relative helicity of 340 m²/s². Dual-polarization radar signals indicate intense rotating updrafts capable of producing long-track tornadoes and giant hail exceeding 2.75 inches.',
+                stats: [
+                    { label: 'Surface CAPE', val: '3,850 J/kg' },
+                    { label: '0-1km Helicity', val: '340 m²/s²' },
+                    { label: 'Peak Reflectivity', val: '68 dBZ' },
+                    { label: 'Severe Risk', val: 'High / Enhanced' }
+                ],
+                body: `
+                    <p>Recent atmospheric soundings released from regional meteorological stations demonstrate extreme instability across the warm sector. An advancing Pacific shortwave trough is currently interacting with an unseasonably moist boundary layer (dew points exceeding 68°F), creating a localized ceiling of high kinetic potential.</p>
+                    <div class="strike-modal-data-table">
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">CAPE Maximum</span><span class="strike-modal-datum-val">3,850 J/kg</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">0-1km Shear</span><span class="strike-modal-datum-val">38 kts</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Downdraft CAPE</span><span class="strike-modal-datum-val">1,240 J/kg</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Supercell Composite</span><span class="strike-modal-datum-val">18.4</span></div>
+                    </div>
+                    <p>High-resolution Doppler velocity loops confirm mesocyclone formation within discrete cells initiated along the dryline. Updraft helicity swaths generated by neural weather simulations point to multiple discrete supercells maintaining persistent rotation through the evening hours.</p>
+                    <div class="strike-modal-advisory"><strong>⚠️ Meteorological Advisory:</strong> Residents within the convective path are advised to monitor NOAA weather radio broadcasts, identify subterranean shelter locations, and avoid low-lying drainage basins prone to localized flash flooding.</div>
+                    <p>As the cold front advances overnight, storm mode is expected to transition into a high-precipitation quasi-linear convective system (QLCS) with widespread damaging wind gusts up to 75 mph.</p>
+                `
+            },
+            {
+                id: 'art-2',
+                category: 'marine',
+                badge: 'PACIFIC BASIN SYNTHESIS',
+                date: '2 hours ago',
+                author: 'Satellite AI Telemetry Lab',
+                readTime: '4 min read',
+                title: 'Category 5 Atmospheric River Landfall: Record Integrated Vapor Transport and Orographic Inflow',
+                abstract: 'Satellite microwave radiometry confirms an exceptional moisture conveyor belt originating in the subtropical central Pacific. Integrated Vapor Transport (IVT) values exceeding 1,320 kg/m/s indicate intense precipitation yields up to 10-14 inches across windward mountain ranges.',
+                stats: [
+                    { label: 'IVT Intensity', val: '1,320 kg/m/s' },
+                    { label: 'Category', val: 'Cat 5 Exceptional' },
+                    { label: 'Precipitation', val: '10-14 inches' },
+                    { label: 'Freezing Level', val: '8,500 ft' }
+                ],
+                body: `
+                    <p>Atmospheric moisture sensors on polar-orbiting satellites have recorded continuous vapor transport values that rank among the top 1% of climatological records for the Pacific coast. The moisture plume stretches over 2,200 miles from the Hawaiian archipelago to coastal mountain passes.</p>
+                    <div class="strike-modal-data-table">
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Moisture Column</span><span class="strike-modal-datum-val">58 mm PWAT</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">700mb Wind</span><span class="strike-modal-datum-val">65 kts WSW</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Orographic Factor</span><span class="strike-modal-datum-val">2.8x Multiplier</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Soil Saturation</span><span class="strike-modal-datum-val">94% Capacity</span></div>
+                    </div>
+                    <p>Orographic lift along the coastal and interior ranges is projected to induce sustained rainfall rates between 0.8 and 1.4 inches per hour. High antecedent soil saturation significantly heightens risks of debris flows and rapid hydrologic cresting across tributary basins.</p>
+                    <div class="strike-modal-advisory"><strong>🌊 Hydrologic Warning:</strong> River crest forecasts predict moderate-to-major flood stage on several coastal rivers. Saturated hillsides present elevated landslide vulnerabilities during periods of peak rainfall intensity.</div>
+                `
+            },
+            {
+                id: 'art-3',
+                category: 'arctic',
+                badge: 'POLAR SYNOPTIC LAB',
+                date: '4 hours ago',
+                author: 'Synoptic Intelligence Neural Engine',
+                readTime: '3 min read',
+                title: 'Polar Vortex Stratospheric Fracture: Deep Meridional Jet Buckling and Arctic Cold Pool Inflow',
+                abstract: 'A sudden stratospheric warming (SSW) event has fractured the circumpolar vortex into twin low-pressure centers. The resultant meridional amplification of the polar jet stream is routing dense Siberian-Canadian arctic air masses directly into mid-latitudes.',
+                stats: [
+                    { label: '500hPa Anomaly', val: '-38 dam' },
+                    { label: 'Surface Min', val: '-26°F' },
+                    { label: 'Wind Chill Index', val: '-45°F' },
+                    { label: 'Duration', val: '5-7 Days' }
+                ],
+                body: `
+                    <p>Stratospheric temperature anomalies reaching +42°C over the Arctic circle have collapsed the canonical wintertime vortex circulation. This breakdown has initiated strong downward wave coupling, causing the tropospheric jet stream to buckle into deep, slow-moving meridional troughs.</p>
+                    <div class="strike-modal-data-table">
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Core Temp 850mb</span><span class="strike-modal-datum-val">-32°C</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Surface Pressure</span><span class="strike-modal-datum-val">1048 hPa</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Meridional Wind</span><span class="strike-modal-datum-val">85 kts N</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Frost Duration</span><span class="strike-modal-datum-val">140 hrs</span></div>
+                    </div>
+                    <p>Sub-zero surface temperatures combined with sustained 25-35 mph northerly winds will produce dangerous wind chill values as low as -45°F. Hypothermia and frostbite can occur on exposed skin in less than 10 minutes under these conditions.</p>
+                    <div class="strike-modal-advisory"><strong>❄️ Extreme Cold Emergency:</strong> Protect exposed water infrastructure, ensure livestock and domestic animals have winterized shelter, and limit outdoor exposure during peak nocturnal wind chill hours.</div>
+                `
+            },
+            {
+                id: 'art-4',
+                category: 'marine',
+                badge: 'HURRICANE AI CENTER',
+                date: 'Yesterday',
+                author: 'Ocean-Atmosphere Coupling AI',
+                readTime: '5 min read',
+                title: 'Marine Heatwave Coupling and Rapid Tropical Cyclogenesis in the Subtropical Atlantic Basin',
+                abstract: 'Unprecedented sea surface temperature anomalies (+2.4°C above baseline) across the tropical Atlantic have compressed the convective inhibition threshold. Relaxed vertical wind shear combined with high ocean heat content creates optimal conditions for rapid cyclone intensification.',
+                stats: [
+                    { label: 'SST Anomaly', val: '+2.4°C (30.4°C)' },
+                    { label: 'Ocean Heat Content', val: '115 kJ/cm²' },
+                    { label: 'Vertical Shear', val: '7 kts' },
+                    { label: 'RI Probability', val: '78%' }
+                ],
+                body: `
+                    <p>Thermodynamic analyses of upper ocean heat content indicate deep warm pools extending below the 80-meter isotherm. Tropical disturbances entering this oceanic environment experience negligible cold water upwelling feedback, removing a primary natural brake against rapid intensification.</p>
+                    <div class="strike-modal-data-table">
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Central Pressure</span><span class="strike-modal-datum-val">942 hPa</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Max Sustained</span><span class="strike-modal-datum-val">135 mph</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Inner Core Radius</span><span class="strike-modal-datum-val">22 nm</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Storm Surge Est</span><span class="strike-modal-datum-val">12-16 ft</span></div>
+                    </div>
+                    <p>Neural atmospheric trajectory algorithms project a continuous westward trajectory with high potential for Category 4 or Category 5 intensity prior to coastal proximity. Aircraft reconnaissance confirms a closed eyewall with explosive inner-core lightning outbreaks.</p>
+                    <div class="strike-modal-advisory"><strong>🌀 Marine Cyclone Warning:</strong> Maritime vessels are advised to divert courses away from the outer quadrant. Coastal communities should review hurricane preparation protocols.</div>
+                `
+            }
+        ];
+
+        let articlesList = [...INITIAL_ARTICLES];
+
+        function renderArticles(filter = 'all') {
+            const grid = document.getElementById('strikeArticlesGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? articlesList : articlesList.filter(a => a.category === filter);
+
+            filtered.forEach(art => {
+                const card = document.createElement('div');
+                card.className = 'strike-article-card' + (art.isNew ? ' new-ai-card' : '');
+                card.innerHTML = `
+                    <div class="strike-card-meta-row">
+                        <span class="strike-article-category">${art.badge}</span>
+                        <span><i class="far fa-clock"></i> ${art.date}</span>
+                    </div>
+                    <div class="strike-article-title">${art.title}</div>
+                    <div class="strike-article-abstract">${art.abstract}</div>
+                    <div class="strike-article-stats">
+                        ${art.stats.map(s => `<span class="strike-stat-span">${s.label}: <strong>${s.val}</strong></span>`).join('')}
+                    </div>
+                    <div class="strike-article-card-footer">
+                        <span><i class="fas fa-robot"></i> ${art.author}</span>
+                        <a class="strike-read-more-link" href="javascript:void(0);">Read Report <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                `;
+                card.addEventListener('click', () => openArticleModal(art));
+                grid.appendChild(card);
+            });
+        }
+
+        function openArticleModal(art) {
+            const modal = document.getElementById('strikeArticleModal');
+            const body = document.getElementById('strikeModalBody');
+            const badge = document.getElementById('strikeModalBadge');
+            if (!modal || !body) return;
+
+            if (badge) badge.textContent = art.badge || 'AI METEOROLOGICAL DISPATCH';
+            body.innerHTML = `
+                <div class="strike-modal-article-title">${art.title}</div>
+                <div class="strike-modal-byline">
+                    <span><i class="fas fa-microchip"></i> ${art.author}</span>
+                    <span><i class="far fa-calendar"></i> ${art.date}</span>
+                    <span><i class="far fa-clock"></i> ${art.readTime || '3 min read'}</span>
+                </div>
+                ${art.body || `<p>${art.abstract}</p>`}
+            `;
+            modal.style.display = 'flex';
+        }
+
+        const closeModalBtn = document.getElementById('strikeCloseModalBtn');
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                const modal = document.getElementById('strikeArticleModal');
+                if (modal) modal.style.display = 'none';
+            });
+        }
+        const modalBackdrop = document.getElementById('strikeArticleModal');
+        if (modalBackdrop) {
+            modalBackdrop.addEventListener('click', (e) => {
+                if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
+            });
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.strike-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.strike-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderArticles(btn.dataset.filter);
+            });
+        });
+
+        // ── Interactive AI Weather Article Generator ──
+        async function generateAiWeatherArticle(topicPrompt) {
+            const topic = (topicPrompt || (document.getElementById('strikeTopicInput') ? document.getElementById('strikeTopicInput').value : '')).trim();
+            if (!topic) {
+                alert('Please enter a weather event, storm system, or city to synthesize a meteorological article.');
+                return;
+            }
+
+            const statusEl = document.getElementById('strikeGenStatus');
+            const genBtn = document.getElementById('strikeGenArticleBtn');
+            if (statusEl) {
+                statusEl.style.display = 'flex';
+                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Synthesizing Doppler telemetry, isobaric grids, and meteorological dispatches for: <strong>' + topic + '</strong>...';
+            }
+            if (genBtn) genBtn.disabled = true;
+
+            // Generate realistic high-grade meteorological article
+            const tempVal = Math.floor(Math.random() * 45) + 35;
+            const windVal = Math.floor(Math.random() * 55) + 25;
+            const gustVal = windVal + Math.floor(Math.random() * 25) + 12;
+            const mbVal = 980 + Math.floor(Math.random() * 35);
+            const capeVal = 1800 + Math.floor(Math.random() * 2400);
+
+            const newArticle = {
+                id: 'art-gen-' + Date.now(),
+                category: topic.toLowerCase().includes('arctic') || topic.toLowerCase().includes('polar') || topic.toLowerCase().includes('freeze') ? 'arctic' : (topic.toLowerCase().includes('river') || topic.toLowerCase().includes('hurricane') || topic.toLowerCase().includes('ocean') ? 'marine' : 'severe'),
+                badge: '✨ AI SYNTHESIS: ' + topic.slice(0, 24).toUpperCase(),
+                date: 'Just now',
+                author: 'Neural Synoptic Intelligence v4.8',
+                readTime: '3 min read',
+                isNew: true,
+                title: `Atmospheric Anomaly & Synoptic Analysis: ${topic} — Mesoscale Projections`,
+                abstract: `Real-time numerical modeling across the synoptic grid reveals anomalous vorticity vectors and thermal advection associated with ${topic}. Low-level isobaric compression indicates sharp baroclinic gradients across affected sectors with surface gusts peaking at ${gustVal} mph.`,
+                stats: [
+                    { label: 'Surface Pressure', val: mbVal + ' hPa' },
+                    { label: 'Peak Wind Gust', val: gustVal + ' mph' },
+                    { label: 'CAPE / Energy', val: capeVal + ' J/kg' },
+                    { label: 'AI Confidence', val: '98.4%' }
+                ],
+                body: `
+                    <p>Continuous satellite radiometry and ground-based Doppler arrays have captured rapid atmospheric boundary reorganization surrounding <strong>${topic}</strong>. High-resolution isobaric analyses display an intensified pressure gradient force funneling turbulent momentum downward into the boundary layer.</p>
+                    <div class="strike-modal-data-table">
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Barometric Minimum</span><span class="strike-modal-datum-val">${mbVal} hPa</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Sustained Wind</span><span class="strike-modal-datum-val">${windVal} mph</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Instability Energy</span><span class="strike-modal-datum-val">${capeVal} J/kg</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Doppler Velocity</span><span class="strike-modal-datum-val">${gustVal} mph</span></div>
+                    </div>
+                    <p>Vertical atmospheric soundings indicate a steep lapse rate of 7.8°C/km in the mid-troposphere, accelerating convective overturning and generating localized microscale wind shear. Dual-polarization radar signatures reveal prominent hydrometeor sorting consistent with severe convective precipitation.</p>
+                    <div class="strike-modal-advisory"><strong>⚡ Meteorological Alert:</strong> Field spotters and municipal emergency coordinators should prepare for localized infrastructural impacts, rapid hydrologic response in vulnerable catchments, and intermittent electrical disruption.</div>
+                    <p>Numerical ensemble forecasts project the primary axis of atmospheric instability to traverse the sector over the next 18-24 hours before gradually dissipating as post-frontal cold advection stabilizes the air mass.</p>
+                `
+            };
+
+            setTimeout(() => {
+                articlesList.unshift(newArticle);
+                renderArticles('all');
+                if (statusEl) {
+                    statusEl.innerHTML = '<span style="color:#10b981;"><i class="fas fa-check-circle"></i> Meteorological article generated and published to AI Weather Journal!</span>';
+                }
+                if (genBtn) genBtn.disabled = false;
+                openArticleModal(newArticle);
+            }, 800);
+        }
+
+        const genBtn = document.getElementById('strikeGenArticleBtn');
+        if (genBtn) genBtn.addEventListener('click', () => generateAiWeatherArticle());
+
+        const topicInput = document.getElementById('strikeTopicInput');
+        if (topicInput) {
+            topicInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') generateAiWeatherArticle();
+            });
+        }
+
+        document.querySelectorAll('.strike-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const t = chip.dataset.topic;
+                if (topicInput) topicInput.value = t;
+                generateAiWeatherArticle(t);
+            });
+        });
+
+        // Initialize articles
+        renderArticles('all');
+
+        // Initial check: if tab is already blurred when page loads
+        if (document.hidden) onBlurTab();
+    })();
+    </script>
 
 </body>
 
