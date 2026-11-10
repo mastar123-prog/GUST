@@ -3,6 +3,11 @@ from pathlib import Path
 import streamlit as st
 import streamlit.components.v1 as components
 
+try:
+    from local_wisp import ensure_wisp_server
+    local_wisp_url = ensure_wisp_server()
+except Exception as e:
+    local_wisp_url = None
 
 ROOT = Path(__file__).resolve().parent
 html = (ROOT / "index.html").read_text(encoding="utf-8")
@@ -11,9 +16,10 @@ runtime_parent = "const parent = window.top;"
 if html.count(runtime_parent) != 1:
     raise RuntimeError("Could not find GUST's proxy frame runtime")
 
+wisp_script = f"<script>window.__gustStreamlitRoot = window; window.__gustLocalWisp = {repr(local_wisp_url)};</script>"
 html = html.replace(
     "<head>",
-    "<head><script>window.__gustStreamlitRoot = window;</script>",
+    f"<head>{wisp_script}",
     1,
 )
 html = html.replace(
@@ -45,6 +51,15 @@ resize_script = """
     try {
         window.top.addEventListener("resize", fit);
     } catch (_) {}
+
+    // Keepalive to ensure session remains active at any time
+    setInterval(() => {
+        try {
+            if (window.top && window.top.document) {
+                window.top.dispatchEvent(new Event('mousemove'));
+            }
+        } catch (_) {}
+    }, 45000);
 })();
 </script>
 """

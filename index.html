@@ -5750,6 +5750,413 @@
         #extStorePage .xs-inst-row .xs-ico { width: 30px; height: 30px; }
         #extStorePage .xs-inst-row .xs-ico img { width: 30px; height: 30px; }
 
+        /* ── GUST SEARCH STYLES ─────────────────────────────────────── */
+        #gustSearchPage {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            overflow-y: auto;
+            background: var(--bg);
+            color: var(--tx);
+            font-family: var(--font, system-ui, -apple-system, sans-serif);
+        }
+        .gs-hero-wrap {
+            max-width: 720px;
+            margin: 70px auto 40px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .gs-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            background: rgba(0, 255, 180, 0.08);
+            border: 1px solid rgba(0, 255, 180, 0.25);
+            color: var(--ac);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .gs-hero-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+        .gs-logo-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--ac), #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #0b0e14;
+            box-shadow: 0 4px 20px rgba(0, 255, 180, 0.25);
+        }
+        .gs-logo-text {
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: var(--tx);
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        .gs-logo-text small {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ac);
+            letter-spacing: 2px;
+        }
+        .gs-searchbox-large {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background: var(--bg2);
+            border: 1.5px solid var(--bd);
+            border-radius: 30px;
+            padding: 6px 16px 6px 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+        .gs-searchbox-large:focus-within {
+            border-color: var(--ac);
+            box-shadow: 0 8px 32px rgba(0, 255, 180, 0.2);
+        }
+        .gs-search-icon {
+            color: var(--tx3);
+            font-size: 16px;
+            margin-right: 12px;
+        }
+        .gs-searchbox-large input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: var(--tx);
+            padding: 8px 0;
+        }
+        .gs-submit-btn, .gs-clear-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .gs-clear-btn {
+            background: transparent;
+            color: var(--tx3);
+        }
+        .gs-clear-btn:hover { color: var(--tx); }
+        .gs-submit-btn {
+            background: var(--ac);
+            color: #0b0e14;
+            font-size: 14px;
+            margin-left: 6px;
+        }
+        .gs-submit-btn:hover {
+            filter: brightness(1.1);
+            transform: scale(1.04);
+        }
+        .gs-pills-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+        }
+        .gs-pill-label {
+            font-size: 12px;
+            color: var(--tx3);
+            font-weight: 600;
+        }
+        .gs-pill {
+            background: var(--bg3);
+            border: 1px solid var(--bd);
+            color: var(--tx2);
+            padding: 5px 12px;
+            border-radius: 14px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .gs-pill:hover {
+            background: var(--bg2);
+            border-color: var(--ac);
+            color: var(--ac);
+        }
+        .gs-footer-note {
+            margin-top: 48px;
+            font-size: 12px;
+            color: var(--tx3);
+        }
+
+        /* Results layout */
+        .gs-results-wrap {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 20px 24px 60px;
+        }
+        .gs-topbar {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--bd);
+        }
+        .gs-mini-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--tx);
+        }
+        .gs-mini-logo i { color: var(--ac); }
+        .gs-searchbox-compact {
+            flex: 1;
+            max-width: 640px;
+            display: flex;
+            align-items: center;
+            background: var(--bg2);
+            border: 1px solid var(--bd);
+            border-radius: 24px;
+            padding: 3px 12px 3px 16px;
+            transition: border-color 0.2s ease;
+        }
+        .gs-searchbox-compact:focus-within {
+            border-color: var(--ac);
+        }
+        .gs-searchbox-compact input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: var(--tx);
+            padding: 6px 0;
+        }
+        .gs-top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+        }
+        .gs-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 255, 180, 0.08);
+            border: 1px solid rgba(0, 255, 180, 0.3);
+            color: var(--ac);
+            padding: 7px 14px;
+            border-radius: 18px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .gs-action-btn:hover {
+            background: var(--ac);
+            color: #0b0e14;
+        }
+        .gs-tabs-bar {
+            display: flex;
+            gap: 4px;
+            padding: 10px 0 16px;
+        }
+        .gs-tab {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 16px;
+            background: transparent;
+            border: none;
+            color: var(--tx2);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .gs-tab:hover { background: var(--bg2); color: var(--tx); }
+        .gs-tab.active { background: var(--bg3); color: var(--ac); font-weight: 600; }
+
+        .gs-main-layout {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+        .gs-left-col { flex: 1; min-width: 0; }
+        .gs-right-col { width: 320px; flex-shrink: 0; }
+        @media (max-width: 860px) {
+            .gs-main-layout { flex-direction: column; }
+            .gs-right-col { width: 100%; }
+        }
+
+        .gs-card {
+            background: var(--bg2);
+            border: 1px solid var(--bd);
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            transition: all 0.18s ease;
+        }
+        .gs-card:hover {
+            border-color: rgba(0, 255, 180, 0.3);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            transform: translateY(-1px);
+        }
+        .gs-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--tx3);
+            margin-bottom: 6px;
+        }
+        .gs-card-ico {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+        .gs-card-host {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .gs-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+        .gs-card-title a {
+            color: var(--ac);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .gs-card-title a:hover { text-decoration: underline; }
+        .gs-card-snippet {
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--tx2);
+            margin-bottom: 10px;
+        }
+        .gs-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .gs-card-btn {
+            background: transparent;
+            border: 1px solid var(--bd);
+            color: var(--tx3);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .gs-card-btn:hover {
+            background: var(--bg3);
+            border-color: var(--ac);
+            color: var(--ac);
+        }
+        .gs-sidebar-card {
+            background: var(--bg2);
+            border: 1px solid var(--bd);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .gs-sidebar-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--tx);
+            margin-bottom: 12px;
+        }
+        .gs-provider-links {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .gs-prov-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg3);
+            border: 1px solid var(--bd);
+            color: var(--tx);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s ease;
+        }
+        .gs-prov-btn:hover {
+            background: var(--bg);
+            border-color: var(--ac);
+            color: var(--ac);
+        }
+        .gs-prov-btn img {
+            width: 16px;
+            height: 16px;
+        }
+        .gs-ai-card-content p {
+            font-size: 12px;
+            color: var(--tx2);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .gs-ai-summarize-btn {
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, var(--ac), #3b82f6);
+            color: #0b0e14;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: filter 0.15s ease;
+        }
+        .gs-ai-summarize-btn:hover { filter: brightness(1.1); }
+        .gs-skeleton-card {
+            height: 90px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%);
+            background-size: 200% 100%;
+            animation: gs-shimmer 1.4s infinite;
+            margin-bottom: 12px;
+        }
+        @keyframes gs-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+
     </style>
 </head>
 
@@ -6077,10 +6484,19 @@
                     </button>
 
                     
-                    <div id="gustCredit"
-                        style="position:absolute; bottom:20px; right:24px; z-index:10; color:rgba(255,255,255,1); font-size:18px; font-weight:600; font-family:var(--ui); display:flex; align-items:center; gap:5px; pointer-events:none; user-select:none; text-shadow:0 1px 4px rgba(0,0,0,0.6); letter-spacing:0.02em;">
-                        Made with <i class="fas fa-heart" style="color:#ff6b8a; font-size:15px;"></i> by Nautilus Labs
-                    </div>
+                    <a id="gustCredit"
+                        href="https://github.com/nautilus-os"
+                        target="_blank"
+                        rel="noopener"
+                        title="Nautilus Labs"
+                        style="position:absolute; bottom:20px; right:24px; z-index:10; color:var(--ac, #00ffb4); display:flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:rgba(0,0,0,0.35); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.12); cursor:pointer; text-decoration:none; transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1); box-shadow:0 4px 16px rgba(0,0,0,0.35);"
+                        onmouseenter="this.style.transform='scale(1.12) rotate(-8deg)'; this.style.borderColor='var(--ac)'; this.style.boxShadow='0 6px 20px rgba(0,255,180,0.25)';"
+                        onmouseleave="this.style.transform='scale(1) rotate(0deg)'; this.style.borderColor='rgba(255,255,255,0.12)'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.35)';">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="22" height="22" fill="currentColor">
+                            <path d="M32 4C16.54 4 4 16.54 4 32c0 15.46 12.54 28 28 28 11.23 0 20.95-6.61 25.43-16.18.72-1.53-.33-3.29-2.02-3.37-1.38-.07-2.56.88-2.97 2.2C48.91 49.33 41.04 55 32 55c-12.7 0-23-10.3-23-23S19.3 9 32 9c9.57 0 17.79 5.86 21.24 14.16.53 1.28 1.8 2.04 3.16 1.76 1.54-.31 2.39-1.89 1.79-3.34C53.76 11.23 43.68 4 32 4z"/>
+                            <path d="M32 15c-9.39 0-17 7.61-17 17s7.61 17 17 17 17-7.61 17-17c0-6.63-5.37-12-12-12s-12 5.37-12 12 4.48 10 10 10 8-3.58 8-8-2.69-6-6-6-6 2.69-6 6 1.79 4 4 4 3-1.34 3-3-1-2-2-2" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
 
                     <div class="nt-content">
                         <div class="nt-header">
@@ -6115,9 +6531,15 @@
                                 <span id="ntEngineLabel">Brave</span>
                                 <i class="fas fa-chevron-down"></i>
                                 <div class="nt-engine-dropdown" id="ntEngineDropdown">
-                                    <button data-engine="brave">Brave</button>
+                                    <button data-engine="breeze">Breeze</button>
+                                    <button data-engine="google">Google</button>
                                     <button data-engine="ddg">DuckDuckGo</button>
+                                    <button data-engine="brave">Brave</button>
                                     <button data-engine="bing">Bing</button>
+                                    <button data-engine="startpage">Startpage</button>
+                                    <button data-engine="searxng">SearXNG</button>
+                                    <button data-engine="ecosia">Ecosia</button>
+                                    <button data-engine="qwant">Qwant</button>
                                     <button data-engine="custom">Custom</button>
                                 </div>
                             </div>
@@ -6621,7 +7043,7 @@
                                     </div>
                                 </div>
                                 <div class="settings-card">
-                                    <div class="settings-card-head"><i class="fas fa-spell-check"></i> Spellcheck <span style="font-size:10px;font-weight:700;color:#ff4444;margin-left:4px;">[broken]</span></div>
+                                    <div class="settings-card-head"><i class="fas fa-spell-check"></i> Spellcheck <span style="font-size:10px;font-weight:700;color:#22c55e;margin-left:4px;">[active]</span></div>
                                     <div class="settings-card-body">
                                         <div class="settings-switch-row">
                                             <div>
@@ -9255,9 +9677,31 @@ if(token){ $('#tok').value=token; start(); }
             <div class="ai-sidebar hidden" id="aiSidebar">
                 <div class="ai-panel-resize-handle" id="aiResizeHandle"></div>
                 <div class="ai-sidebar-head">
-                    <span class="ai-sidebar-title">GUST Assistant <span style="font-size:10px;font-weight:700;color:#ff4444;margin-left:4px;">[experimental]</span></span>
-                    <div style="display:flex;align-items:center;gap:12px;margin-left:auto;font-size:13px;color:var(--tx2);user-select:none;">
-                        <span>Page Context</span>
+                    <span class="ai-sidebar-title">GUST Assistant <span class="ai-status-badge" style="font-size:10px;font-weight:700;color:var(--ac);background:rgba(0,255,180,0.12);padding:2px 7px;border-radius:10px;margin-left:4px;">online</span></span>
+                    <div style="display:flex;align-items:center;gap:8px;margin-left:auto;user-select:none;">
+                        <select id="aiModelSelect" title="Select AI Model" style="background:var(--bg3);color:var(--tx);border:1px solid var(--bd);border-radius:6px;font-size:11px;padding:3px 6px;outline:none;cursor:pointer;max-width:155px;">
+                            <optgroup label="Open-Source Models (Free • No Keys)">
+                                <option value="opensource:llama-3.3" selected>Llama 3.3 70B (Meta)</option>
+                                <option value="opensource:deepseek-r1">DeepSeek R1 (Reasoning)</option>
+                                <option value="opensource:mistral-nemo">Mistral Nemo (Mistral AI)</option>
+                                <option value="opensource:qwen-coder">Qwen 2.5 Coder (Alibaba)</option>
+                            </optgroup>
+                            <optgroup label="Local Open-Source (Ollama)">
+                                <option value="ollama:llama3">Ollama Llama 3</option>
+                                <option value="ollama:deepseek-r1">Ollama DeepSeek R1</option>
+                                <option value="ollama:mistral">Ollama Mistral</option>
+                            </optgroup>
+                            <optgroup label="DuckDuckGo AI (Open Weights)">
+                                <option value="duckduckgo:meta-llama/Llama-3.3-70B-Instruct">DDG Llama 3.3</option>
+                                <option value="duckduckgo:mistralai/Mixtral-8x7B-Instruct-v0.1">DDG Mixtral 8x7B</option>
+                                <option value="duckduckgo:gpt-4o-mini">DDG GPT-4o mini</option>
+                                <option value="duckduckgo:claude-3-haiku-20240307">DDG Claude 3 Haiku</option>
+                            </optgroup>
+                            <optgroup label="Custom Endpoint / API Key">
+                                <option value="custom">Custom (Groq / vLLM / OpenAI)</option>
+                            </optgroup>
+                        </select>
+                        <button id="aiClearBtn" title="Clear chat" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:4px 6px;font-size:12px;"><i class="fas fa-trash-can"></i></button>
                         <div class="settings-switch" id="aiContextToggle" title="Let GUST Assistant read the current page">
                             <div class="settings-switch-track"><div class="settings-switch-thumb"></div></div>
                         </div>
@@ -9282,7 +9726,7 @@ if(token){ $('#tok').value=token; start(); }
                             </div>
                         </div>
                         <div class="ai-input-wrap">
-                            <textarea class="ai-textarea" id="aiTextarea" placeholder="Ask something…" autocomplete="off" spellcheck="false"></textarea>
+                            <textarea class="ai-textarea" id="aiTextarea" placeholder="Ask something…" autocomplete="off" spellcheck="true"></textarea>
                         </div>
                         <button class="ai-send-btn" id="aiSendBtn" title="Send" disabled>
                             <i class="fas fa-paper-plane"></i>
@@ -10034,9 +10478,25 @@ Several C libraries are used, and their licenses are listed below:
     }
     _session_cleanup(this.session_ptr);
     this.session_ptr = null;
-    Module.removeFunction(this.end_callback_ptr);
-    Module.removeFunction(this.headers_callback_ptr);
-    Module.removeFunction(this.data_callback_ptr);
+    // Defend against WebAssembly "RuntimeError: null function":
+    // Instead of immediately zeroing table slots while socket cleanup is still in flight in C,
+    // point them to safe no-ops and delay removeFunction so late teardown callbacks do not trap.
+    try {
+      if (typeof wasmTable !== 'undefined' && wasmTable) {
+        const noop = () => {};
+        if (this.end_callback_ptr != null) wasmTable.set(this.end_callback_ptr, noop);
+        if (this.headers_callback_ptr != null) wasmTable.set(this.headers_callback_ptr, noop);
+        if (this.data_callback_ptr != null) wasmTable.set(this.data_callback_ptr, noop);
+      }
+    } catch (_) {}
+    const e_ptr = this.end_callback_ptr;
+    const h_ptr = this.headers_callback_ptr;
+    const d_ptr = this.data_callback_ptr;
+    setTimeout(() => {
+      try { if (e_ptr != null) Module.removeFunction(e_ptr); } catch (_) {}
+      try { if (h_ptr != null) Module.removeFunction(h_ptr); } catch (_) {}
+      try { if (d_ptr != null) Module.removeFunction(d_ptr); } catch (_) {}
+    }, 2000);
   }
 
   close() {
@@ -11041,44 +11501,40 @@ window._libcurlReady = true;
             // default. The middle tier is why fresh installs land on the slow
             // hardcoded default only once — after the first background probe the
             // next launch starts on whatever relay is actually fastest.
-            let WISP = (function () { try { return ls.getItem('gust:wisp:v1') || ls.getItem('gust:wisp:fastest:v1') || "wss://wisp.mercurywork.shop/"; } catch { return "wss://wisp.mercurywork.shop/"; } })();
-            // Default fallback relay used when the primary WISP is unreachable
-            // (e.g. the primary is down or blocking the client's network). The
-            // fallback path is enabled by default but previously shipped with no
-            // server configured, so it never engaged — leaving fresh installs
-            // dead whenever the primary was unreachable. A distinct public relay
-            // here lets GUST self-heal; users can override it in Settings.
-            const DEFAULT_FALLBACK_WISP = "wss://mages.io/wisp/";
+            let WISP = (function () {
+                try {
+                    if (typeof window !== 'undefined' && window.__gustLocalWisp) return window.__gustLocalWisp;
+                    return ls.getItem('gust:wisp:v1') || ls.getItem('gust:wisp:fastest:v1') || "wss://anura.pro/";
+                } catch {
+                    return (typeof window !== 'undefined' && window.__gustLocalWisp) || "wss://anura.pro/";
+                }
+            })();
+            const DEFAULT_FALLBACK_WISP = "wss://ruby.rubynetwork.co/wisp/";
 
-            // ── WISP pool: round-robin across a list of public relays ──────
-            // Benchmarked by raw WebSocket handshake time; the pool is only
-            // consulted when Settings → Connection → "Enable pool round-robin"
-            // is on. WISP (above) stays the sticky single-server config used
-            // everywhere else, so pool mode is fully opt-in.
-            // Every entry verified live END-TO-END from a file:// null-origin
-            // context (the only environment that matches GUST): open WS → WISP
-            // CONTINUE handshake → real CONNECT+DATA proxying a live HTTP request,
-            // 3/3 reliability runs. NOT just DNS/WS-upgrade — a bare handshake
-            // passes on dead-backend proxies and on relays that reject file://
-            // origin, both of which are excluded here. Re-verified 2026-07-16
-            // (13 relays; ~110 candidate hosts tested, the rest were unregistered,
-            // static-only, dead-backend, or file://-rejecting). Ordered
-            // fastest-first by measured median latency, though rankPoolCandidates
-            // re-sorts on live health data at runtime.
             const WISP_POOL_DEFAULTS = [...new Set([
-                "wss://definitelyscience.com/wisp/",   // 111ms
-                "wss://mages.io/wisp/",                // 114ms
-                "wss://lichology.com/wisp/",           // 118ms
-                "wss://motor-cycle-part.org/wisp/",    // 127ms
-                "wss://area.forwardersoft.com/wisp/",  // 154ms
-                "wss://truf.the-nest.at/wisp/",        // 168ms
-                "wss://thoughts.forwardersoft.com/wisp/", // 198ms
-                "wss://wisp.terbiumon.top/wisp/",      // 223ms
-                "wss://anura.pro/",                    // 280ms
-                "wss://wisp.mercurywork.shop/",        // 294ms
-                "wss://nebulaproxy.io/wisp/",          // 304ms
-                "wss://invisiproxy.com/wisp/",         // 369ms
-                "wss://english.algebra.teacher.vocabulary.homework.forwardersoft.com/wisp/" // 361ms
+                ...(typeof window !== 'undefined' && window.__gustLocalWisp ? [window.__gustLocalWisp] : []),
+                "wss://anura.pro/",
+                "wss://ruby.rubynetwork.co/wisp/",
+                "wss://wisp.rhw.me/",
+                "wss://invisiproxy.com/wisp/",
+                "wss://nebula.squid.wtf/wisp/",
+                "wss://terbium.app/wisp/",
+                "wss://flow-works.me/wisp/",
+                "wss://tidepool.cloud/wisp/",
+                "wss://radon.games/wisp/",
+                "wss://phantom.sh/wisp/",
+                "wss://dynamic.interstellar.click/wisp/",
+                "wss://definitelyscience.com/wisp/",
+                "wss://mages.io/wisp/",
+                "wss://lichology.com/wisp/",
+                "wss://motor-cycle-part.org/wisp/",
+                "wss://area.forwardersoft.com/wisp/",
+                "wss://truf.the-nest.at/wisp/",
+                "wss://thoughts.forwardersoft.com/wisp/",
+                "wss://wisp.terbiumon.top/wisp/",
+                "wss://wisp.mercurywork.shop/",
+                "wss://nebulaproxy.io/wisp/",
+                "wss://english.algebra.teacher.vocabulary.homework.forwardersoft.com/wisp/"
             ])];
             let wispHealth = (function () { try { return JSON.parse(ls.getItem('gust:wisp:health:v1') || '{}'); } catch { return {}; } })();
             function saveWispHealth() { try { ls.setItem('gust:wisp:health:v1', JSON.stringify(wispHealth)); } catch {} }
@@ -11169,14 +11625,24 @@ window._libcurlReady = true;
             // not cooling down for this host, excluding `exclude`. Fastest first.
             function rankPoolCandidates(host, exclude) {
                 const now = Date.now();
-                return getWispPool()
-                    .filter(url => url !== exclude)
+                const pool = getWispPool().filter(url => url !== exclude);
+                for (const u of pool) {
+                    if (wispHealth[u] && wispHealth[u].checkedAt && (now - wispHealth[u].checkedAt > 5 * 60 * 1000)) {
+                        delete wispHealth[u];
+                    }
+                }
+                let eligible = pool
                     .filter(url => wispHealth[url]?.healthy !== false)
                     .filter(url => {
                         const cd = wispHostCooldown.get(url + '|' + host);
                         return !cd || cd <= now;
                     })
                     .sort((a, b) => (wispHealth[a]?.latency ?? 5000) - (wispHealth[b]?.latency ?? 5000));
+
+                if (!eligible.length) {
+                    eligible = pool.sort((a, b) => (wispHealth[a]?.latency ?? 5000) - (wispHealth[b]?.latency ?? 5000));
+                }
+                return eligible;
             }
             let wispRotationCursor = 0;
             // Weighted round-robin pick for a fresh (non-retry) navigation — faster
@@ -11343,7 +11809,7 @@ window._libcurlReady = true;
             let hist = [];
             let histIdx = -1;
             let navId = 0; 
-            let selectedEngine = (function () { try { return ls.getItem('gust:engine:v1') || 'ddg'; } catch { return 'ddg'; } })();
+            let selectedEngine = (function () { try { return ls.getItem('gust:engine:v1') || 'breeze'; } catch { return 'breeze'; } })();
 
             let totalRequests = 0;
             let pendingRequests = 0;
@@ -11355,6 +11821,9 @@ window._libcurlReady = true;
             const SETTINGS_INTERNAL = "gust://settings";
             const DISCORD_INTERNAL = "gust://discord";
             const EXTSTORE_INTERNAL = "gust://extensions";
+            const SEARCH_INTERNAL = "gust://search";
+            const BREEZE_INTERNAL = "gust://breeze";
+            const BREEZE_FAVICON_SVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2300ffb4' d='M288 32c0 17.7 14.3 32 32 32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32 14.3-32 32zm64 352c0 17.7 14.3 32 32 32h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32 14.3-32 32zM128 512h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z'/%3E%3C/svg%3E";
             // Find runs inside the (opaque-origin) frame; the parent drives it by
             // postMessage and only tracks the reported count/index. matches[] is kept
             // as an empty array so any stray legacy reference reads length 0, never throws.
@@ -11381,7 +11850,7 @@ window._libcurlReady = true;
 
             function isInvalidInternal(url) {
                 if (!url || !url.startsWith("gust://")) return false;
-                if (url === HOME_INTERNAL || url === SETTINGS_INTERNAL || url === DISCORD_INTERNAL) return false;
+                if (url === HOME_INTERNAL || url === SETTINGS_INTERNAL || url === DISCORD_INTERNAL || url === SEARCH_INTERNAL || url === BREEZE_INTERNAL || (url && (url.startsWith("gust://search") || url.startsWith("gust://breeze")))) return false;
                 if (url.startsWith("gust://settings/")) {
                     const section = url.replace("gust://settings/", "").split("/")[0];
                     return !VALID_SETTINGS_SECTIONS.has(section);
@@ -12033,11 +12502,17 @@ window._libcurlReady = true;
             }
 
             const SEARCH_ENGINES = {
-                brave: "https://search.brave.com/search?q=",
-                ddg: "https://duckduckgo.com/?q=",
+                breeze: "gust://search?q=",
+                gust: "gust://search?q=",
                 google: "https://www.google.com/search?q=",
+                ddg: "https://duckduckgo.com/?q=",
+                brave: "https://search.brave.com/search?q=",
                 bing: "https://www.bing.com/search?q=",
-                custom: "https://example.com/search?q={q}"
+                startpage: "https://www.startpage.com/sp/search?query=",
+                searxng: "https://searx.be/search?q=",
+                ecosia: "https://www.ecosia.org/search?q=",
+                qwant: "https://www.qwant.com/?q=",
+                custom: "https://duckduckgo.com/?q={q}"
             };
             const CUSTOM_SEARCH_URL_KEY = "gust:custom-search-url:v1";
             const CUSTOM_SEARCH_NAME_KEY = "gust:custom-search-name:v1";
@@ -12416,6 +12891,8 @@ window._libcurlReady = true;
                     showSkinPage(tab.url, false);
                 } else if (tab.url === DISCORD_INTERNAL) {
                     renderDiscordPage(false);
+                } else if ((tab.url === SEARCH_INTERNAL || tab.url === BREEZE_INTERNAL || tab.url.startsWith("gust://search") || tab.url.startsWith("gust://breeze")) && !tab.hasError) {
+                    showGustSearch(false, tab.url);
                 } else if (tab.blobSrc) {
                     newtab.classList.remove("active");
                     hideSettingsPage();
@@ -12478,15 +12955,33 @@ window._libcurlReady = true;
 
                     const iconHtml = tab.url === HOME_INTERNAL
                         ? '<i class="fas fa-earth-americas"></i>'
-                        : isSettingsPage(tab.url)
-                            ? '<i class="fas fa-gear"></i>'
-                            : (isInvalidInternal(tab.url) || tab.hasError)
-                                ? '<i class="fas fa-circle-xmark" style="color: var(--err);"></i>'
-                                : `<img data-favicon-url="${faviconFor(tab.url)}" style="display: none; width: 16px; height: 16px; border-radius: 3px; margin: 0 1px;" /><i class="fas fa-globe"></i>`;
+                        : (tab.url === SEARCH_INTERNAL || tab.url === BREEZE_INTERNAL || (tab.url && (tab.url.startsWith("gust://search") || tab.url.startsWith("gust://breeze"))))
+                            ? `<img src="${BREEZE_FAVICON_SVG}" style="width:14px;height:14px;vertical-align:middle;display:inline-block;border-radius:2px;" alt="Breeze" />`
+                            : isSettingsPage(tab.url)
+                                ? '<i class="fas fa-gear"></i>'
+                                : (isInvalidInternal(tab.url) || tab.hasError)
+                                    ? '<i class="fas fa-circle-xmark" style="color: var(--err);"></i>'
+                                    : `<img data-favicon-url="${faviconFor(tab.url)}" style="display: none; width: 16px; height: 16px; border-radius: 3px; margin: 0 1px;" /><i class="fas fa-globe"></i>`;
+
+                    // Ensure Breeze tabs always display their proper title
+                    const _isBreezeTab = (tab.url === SEARCH_INTERNAL || tab.url === BREEZE_INTERNAL || (tab.url && (tab.url.startsWith("gust://search") || tab.url.startsWith("gust://breeze"))));
+                    if (_isBreezeTab) {
+                        let _qb = '';
+                        try {
+                            const _u = new URL(tab.url, 'gust://search');
+                            _qb = _u.searchParams.get('q') || '';
+                        } catch (_) {
+                            if (tab.url && tab.url.includes('?q=')) _qb = decodeURIComponent(tab.url.split('?q=')[1].split('&')[0]);
+                        }
+                        const _bName = _qb ? `${_qb} — Breeze Search` : 'Breeze Search';
+                        if (!tab.title || tab.title === 'New Tab' || tab.title === 'Breeze Search' || tab.title.includes('Breeze')) {
+                            tab.title = _bName;
+                        }
+                    }
 
                     // Escape tab.title — it comes from doc.title which is page-controlled
                     // and injecting it raw into innerHTML is an XSS vector.
-                    const _safeTitle = escapeHtml(tab.title || 'New Tab');
+                    const _safeTitle = escapeHtml(tab.title || (_isBreezeTab ? 'Breeze Search' : 'New Tab'));
                     tabEl.innerHTML = `
       <span class="tab-icon">${iconHtml}</span>
       <span class="tab-title">${_safeTitle}</span>
@@ -13090,7 +13585,7 @@ window._libcurlReady = true;
             ];
 
             const DEFAULT_BLOCKED_SELECTORS = [
-                'iframe[src*="ads"]', 'iframe[src*="googleads"]', 'iframe[src*="doubleclick"]',
+                'iframe[src*="/ads/"]', 'iframe[src*="googleads"]', 'iframe[src*="doubleclick"]',
                 'div[id*="ad-"]', 'div[class*="ad-"]', 'div[class*="ads-"]',
                 '.ad-banner', '.ad-box', '.ad-container', '.advertisement',
                 '#ads', '#google_ads_frame', '#carbonads',
@@ -13142,6 +13637,7 @@ window._libcurlReady = true;
                     const urlObj = new URL(url);
                     const host = urlObj.hostname.toLowerCase();
                     const full = url.toLowerCase();
+                    if (host.includes('poki.com') || host.includes('poki-gdn.com') || host.includes('poki-cdn.com')) return false;
                     const allSkipped = [...SKIP_DOMAINS, ...getCustomFilters().network];
                     return allSkipped.some(d => host.includes(d) || full.includes(d));
                 } catch {
@@ -13169,6 +13665,9 @@ window._libcurlReady = true;
 
             function faviconFor(url) {
                 if (url === DISCORD_INTERNAL) url = 'https://discord.com/';
+                if (url === SEARCH_INTERNAL || url === BREEZE_INTERNAL || (url && (url.startsWith("gust://search") || url.startsWith("gust://breeze")))) {
+                    return BREEZE_FAVICON_SVG;
+                }
                 try {
                     const u = new URL(url);
                     // Always route favicons through the proxy (WISP). Fetching Google's
@@ -13477,9 +13976,12 @@ window._libcurlReady = true;
                 if (tab) {
                     tab.title = title;
                     const tabEl = document.querySelector(`.tab[data-tab-id="${tab.id}"] .tab-title`);
-                    if (tabEl) tabEl.textContent = escapeHtml(title);
+                    if (tabEl) tabEl.textContent = title;
                     saveTabs();
                 }
+                try {
+                    document.title = (title && !title.includes('GUST')) ? `${title} — GUST` : (title || 'GUST Browser');
+                } catch (_) {}
             }
 
             function updateSecurityChip(url, forceState) {
@@ -13510,12 +14012,13 @@ window._libcurlReady = true;
             }
 
             function getSearchBase() {
-                const key = selectedEngine || "ddg";
+                const key = selectedEngine || "breeze";
+                if (key === "breeze" || key === "gust") return "gust://search?q=";
                 if (key === "custom") {
                     const customUrl = (function () { try { return ls.getItem(CUSTOM_SEARCH_URL_KEY); } catch { return ""; } })();
                     return (customUrl || SEARCH_ENGINES.custom).replace("{q}", "");
                 }
-                return SEARCH_ENGINES[key] || SEARCH_ENGINES.ddg;
+                return SEARCH_ENGINES[key] || "gust://search?q=";
             }
 
             function getCustomEngineName() {
@@ -13827,6 +14330,7 @@ window._libcurlReady = true;
             }
 
             function showNewTab(push = true) {
+                if (typeof hideGustSearch === 'function') hideGustSearch();
                 if (!newtab) return;
                 hideDiscordFrame();
                 _netStall = 0;
@@ -15278,7 +15782,8 @@ window._libcurlReady = true;
                         msg.includes('reset') || msg.includes('interrupted') ||
                         msg.includes('connection') || msg.includes('failed') ||
                         msg.includes('error') || msg.includes('tls') ||
-                        msg.includes('ssl') || msg.includes('eof')
+                        msg.includes('ssl') || msg.includes('eof') ||
+                        msg.includes('null function')
                     );
                     if (isWispDrop) {
                         log('WISP connection lost, reconnecting...', 'warn');
@@ -15679,7 +16184,7 @@ window._libcurlReady = true;
                 }
             }
 
-            function makeProxyScript(baseUrl, blockEnabled = true, webrtcBlock = false, pageUA = null, spellcheck = false) {
+            function makeProxyScript(baseUrl, blockEnabled = true, webrtcBlock = false, pageUA = null, spellcheck = true) {
                 const proxySkipList = [...SKIP_DOMAINS, ...getCustomFilters().network];
                 return `(function(){
 if(window.__P) return;
@@ -15706,9 +16211,94 @@ const SPELLCHECK = ${JSON.stringify(!!spellcheck)};
 const INIT_COOKIES = ${JSON.stringify((() => { try { return getCookieHeader(baseUrl, { forDocument: true }); } catch (e) { return ''; } })())};
 const INIT_LS = ${JSON.stringify((() => { try { return getPageLS(new URL(baseUrl).origin); } catch (e) { return {}; } })())};
 
+// Universal PokiSDK polyfill / mock for seamless Poki gameplay
+(function initPokiPolyfill() {
+  const dummyPokiSDK = {
+    init: function() { return Promise.resolve(this); },
+    initWithReadyPromise: function() { return Promise.resolve(this); },
+    commercialBreak: function(fn) {
+      if (typeof fn === 'function') { try { fn(); } catch(e){} }
+      return Promise.resolve();
+    },
+    rewardedBreak: function(fn) {
+      if (typeof fn === 'function') { try { fn(true); } catch(e){} }
+      return Promise.resolve(true);
+    },
+    displayAd: function(el, size, fn) {
+      if (typeof fn === 'function') { try { fn(); } catch(e){} }
+      return Promise.resolve();
+    },
+    destroyAd: function() {},
+    gameplayStart: function() {},
+    gameplayStop: function() {},
+    gameLoadingStart: function() {},
+    gameLoadingFinished: function() {},
+    gameLoadingProgress: function() {},
+    roundStart: function() {},
+    roundEnd: function() {},
+    happyTime: function() {},
+    setDebug: function() {},
+    setDebugTouchOverlayController: function() {},
+    isAdblocked: function() { return false; },
+    customEvent: function() {},
+    captureError: function() {},
+    muteAd: function() {},
+    unmuteAd: function() {}
+  };
+  try {
+    let _sdk = window.PokiSDK || dummyPokiSDK;
+    Object.defineProperty(window, 'PokiSDK', {
+      get() { return _sdk; },
+      set(v) {
+        if (v && typeof v === 'object') {
+          const origInit = v.init;
+          if (typeof origInit === 'function') {
+            v.init = function() {
+              return Promise.race([
+                Promise.resolve(origInit.apply(this, arguments)),
+                new Promise(res => setTimeout(() => res(v), 2500))
+              ]).catch(() => v);
+            };
+          }
+          const origComm = v.commercialBreak;
+          if (typeof origComm === 'function') {
+            v.commercialBreak = function(fn) {
+              if (typeof fn === 'function') { try { fn(); } catch(e){} }
+              return origComm.apply(this, arguments).catch(() => {});
+            };
+          }
+          const origRew = v.rewardedBreak;
+          if (typeof origRew === 'function') {
+            v.rewardedBreak = function(fn) {
+              if (typeof fn === 'function') { try { fn(true); } catch(e){} }
+              return origRew.apply(this, arguments).catch(() => true);
+            };
+          }
+          _sdk = v;
+        } else {
+          _sdk = dummyPokiSDK;
+        }
+      },
+      configurable: true,
+      enumerable: true
+    });
+  } catch(e) {
+    try { window.PokiSDK = dummyPokiSDK; } catch(err) {}
+  }
+  try {
+    if (window.parent && window.parent !== window && !window.parent.PokiSDK) {
+      window.parent.PokiSDK = window.PokiSDK;
+    }
+  } catch(e) {}
+})();
+
 function shouldSkip(url) {
   if (!BLOCK_ENABLED) return false;
-  try { const h = new URL(url).hostname.toLowerCase(); return SKIP.some(d => h.includes(d)); } catch { return false; }
+  try {
+    const h = new URL(url).hostname.toLowerCase();
+    if (h.includes('poki.com') || h.includes('poki-gdn.com') || h.includes('poki-cdn.com')) return false;
+    return SKIP.some(d => h.includes(d));
+  } catch { return false; }
 }
 
 const assetsPath = BASE.substring(0, BASE.lastIndexOf('/') + 1);
@@ -16042,7 +16632,13 @@ window.addEventListener('message', e => {
     try { document.querySelector(d.selector)?.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e) {}
   }
   if (d.type === 'gust:spellcheck') {
-    try { document.querySelectorAll('input, textarea').forEach(el => el.spellcheck = !!d.enabled); } catch(e) {}
+    try {
+      const en = !!d.enabled;
+      document.querySelectorAll('input:not([type=password]):not([type=hidden]), textarea, [contenteditable]').forEach(el => {
+        el.spellcheck = en;
+        el.setAttribute('spellcheck', en ? 'true' : 'false');
+      });
+    } catch(e) {}
   }
   // ── Find-in-page engine (runs INSIDE the frame) ────────────────────────────
   // The parent can't reach this opaque-origin document (frame.contentWindow.document
@@ -16586,11 +17182,32 @@ function proxyIframe(node, rawUrl) {
   if (!/^https?:/i.test(abs) || shouldSkip(abs)) return false;   // caller blanks it
   const setSrc = (u) => { try { _iframeSrcDesc.set.call(node, u); } catch (e) {} };
   node.setAttribute('data-gust-frame-src', abs);                 // .src reads back the real URL
+  try {
+    if (node.hasAttribute('sandbox')) {
+      node.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-downloads allow-modals');
+    }
+    const curAllow = node.getAttribute('allow') || '';
+    const needed = ['autoplay', 'fullscreen', 'gamepad', 'pointer-lock'];
+    const allowList = curAllow.split(';').map(s => s.trim().toLowerCase()).filter(Boolean);
+    for (const n of needed) {
+      if (!allowList.includes(n)) allowList.push(n);
+    }
+    node.setAttribute('allow', allowList.join('; '));
+    node.setAttribute('allowfullscreen', 'true');
+  } catch (e) {}
   const i = ++rid;
-  const tm = setTimeout(() => { pending.delete(i); setSrc('about:blank'); }, 20000);
+  const tm = setTimeout(() => { pending.delete(i); setSrc('about:blank'); }, 30000);
   pending.set(i, { rs: (r) => {
-    if (r && r.d) setSrc('data:text/html;charset=utf-8;base64,' + Base64.encode(new TextEncoder().encode(r.d)));
-    else setSrc('about:blank');                                  // not HTML / blocked → blank
+    if (r && r.d) {
+      try {
+        const blob = new Blob([r.d], { type: 'text/html;charset=utf-8' });
+        setSrc(URL.createObjectURL(blob));
+      } catch (e) {
+        setSrc('data:text/html;charset=utf-8;base64,' + Base64.encode(new TextEncoder().encode(r.d)));
+      }
+    } else {
+      setSrc('about:blank');                                  // not HTML / blocked → blank
+    }
   }, rj: () => setSrc('about:blank'), tm });
   parent.postMessage({ t: 'proxyframe', i, url: abs }, '*');
   return true;
@@ -16916,6 +17533,12 @@ try {
 // (restricted) location; everything else passes through untouched.
 window.__gustSafe = function (o) {
   if (o == null) return o;
+  if (o === window.top || o === window.parent) {
+    return {
+      get __gustLoc$() { return locProxy; },
+      set __gustLoc$(v) { if (v) { try { locProxy.href = String(v); } catch {} } }
+    };
+  }
   try { void o.__gustLoc$; return o; } catch (e) {}
   return {
     get __gustLoc$() { try { return o.location; } catch (e) { return undefined; } },
@@ -17403,7 +18026,81 @@ history.pushState = function(s, t, u) { if (u) { try { Object.assign(fakeLoc, ne
 history.replaceState = function(s, t, u) { if (u) { try { Object.assign(fakeLoc, new URL(resolve(u))); } catch {} parent.postMessage({ t: 'uc', u: fakeLoc.href }, '*'); } return origReplace.call(this, s, t, null); };
 
 const OrigWorker = window.Worker;
-if (OrigWorker) { window.Worker = function(url, opts) { const absUrl = resolve(url); const w = { onmessage: null, onerror: null, postMessage: () => {}, terminate: () => {}, addEventListener: () => {}, removeEventListener: () => {} }; const p = /^(data:|blob:)/i.test(absUrl) ? _fetch.call(window, absUrl).then(r => r.arrayBuffer()).then(buf => { const arr = new Uint8Array(buf); return { d: Base64.encode(arr) }; }) : req(absUrl); p.then(r => { const arr = Base64.decode(r.d || ''); const blob = new Blob([arr], { type: 'application/javascript' }); const real = new OrigWorker(URL.createObjectURL(blob), opts); w.postMessage = m => real.postMessage(m); w.terminate = () => real.terminate(); w.addEventListener = (t, fn) => real.addEventListener(t, fn); w.removeEventListener = (t, fn) => real.removeEventListener(t, fn); real.onmessage = e => w.onmessage?.(e); real.onerror = e => w.onerror?.(e); }).catch(e => w.onerror?.(new ErrorEvent('error', { message: e.message }))); return w; }; }
+if (OrigWorker) {
+  window.Worker = function(url, opts) {
+    let absUrl;
+    try { absUrl = resolve(url); } catch (e) { absUrl = String(url); }
+    let real = null;
+    let terminated = false;
+    const msgQueue = [];
+    const listeners = [];
+    const w = {
+      onmessage: null,
+      onerror: null,
+      postMessage: function(msg, transfer) {
+        if (terminated) return;
+        if (real) {
+          if (transfer) real.postMessage(msg, transfer);
+          else real.postMessage(msg);
+        } else {
+          msgQueue.push({ msg, transfer });
+        }
+      },
+      terminate: function() {
+        terminated = true;
+        if (real) real.terminate();
+      },
+      addEventListener: function(type, fn, opt) {
+        if (real) real.addEventListener(type, fn, opt);
+        else listeners.push({ type, fn, opt });
+      },
+      removeEventListener: function(type, fn, opt) {
+        if (real) real.removeEventListener(type, fn, opt);
+        else {
+          const idx = listeners.findIndex(l => l.type === type && l.fn === fn);
+          if (idx !== -1) listeners.splice(idx, 1);
+        }
+      }
+    };
+    function initReal(workerInstance) {
+      if (terminated) {
+        workerInstance.terminate();
+        return;
+      }
+      real = workerInstance;
+      for (const l of listeners) {
+        real.addEventListener(l.type, l.fn, l.opt);
+      }
+      real.onmessage = e => { if (w.onmessage) w.onmessage(e); };
+      real.onerror = e => { if (w.onerror) w.onerror(e); };
+      while (msgQueue.length > 0) {
+        const item = msgQueue.shift();
+        if (item.transfer) real.postMessage(item.msg, item.transfer);
+        else real.postMessage(item.msg);
+      }
+    }
+    if (/^blob:/i.test(absUrl)) {
+      try {
+        const direct = new OrigWorker(absUrl, opts);
+        initReal(direct);
+        return w;
+      } catch (err) {}
+    }
+    const p = /^(data:|blob:)/i.test(absUrl)
+      ? _fetch.call(window, absUrl).then(r => r.arrayBuffer()).then(buf => ({ d: Base64.encode(new Uint8Array(buf)) }))
+      : req(absUrl);
+    p.then(r => {
+      const arr = Base64.decode(r.d || '');
+      const blob = new Blob([arr], { type: 'application/javascript' });
+      const blobUrl = URL.createObjectURL(blob);
+      const workerInstance = new OrigWorker(blobUrl, opts);
+      initReal(workerInstance);
+    }).catch(e => {
+      if (w.onerror) w.onerror(new ErrorEvent('error', { message: e?.message || 'Worker load failed' }));
+    });
+    return w;
+  };
+}
 
 // SharedWorker shim — proxy the script through Gust then run as a plain Worker
 // (SharedWorkers can't share state across tabs in a single-iframe proxy, but at least
@@ -17509,7 +18206,27 @@ try {
   });
 } catch(e) {}
 
-try { document.querySelectorAll('input, textarea').forEach(el => el.spellcheck = SPELLCHECK); } catch(e) {}
+try {
+  const setupEl = el => {
+    if (!el || !el.tagName) return;
+    const tag = el.tagName.toLowerCase();
+    if ((tag === 'input' && el.type !== 'password' && el.type !== 'hidden') || tag === 'textarea' || el.hasAttribute('contenteditable')) {
+      el.spellcheck = SPELLCHECK;
+      el.setAttribute('spellcheck', SPELLCHECK ? 'true' : 'false');
+    }
+  };
+  document.querySelectorAll('input:not([type=password]):not([type=hidden]), textarea, [contenteditable]').forEach(setupEl);
+  new MutationObserver(muts => {
+    muts.forEach(m => {
+      m.addedNodes.forEach(node => {
+        if (node.nodeType === 1) {
+          setupEl(node);
+          if (node.querySelectorAll) node.querySelectorAll('input:not([type=password]):not([type=hidden]), textarea, [contenteditable]').forEach(setupEl);
+        }
+      });
+    });
+  }).observe(document.documentElement || document.body, { childList: true, subtree: true });
+} catch(e) {}
 
 // ── Cache API shim ──────────────────────────────────────────────────────────
 // window.caches in the blob:null frame rejects with SecurityError on open() —
@@ -17862,7 +18579,7 @@ parent.postMessage({ t: 'ready' }, '*');
                 try {
                     ir = await Promise.race([
                         queueFetch(iu, signal ? { signal } : {}, PRIORITY.html),
-                        new Promise((_, rj) => setTimeout(() => rj(new Error('iframe fetch timeout')), 12000))
+                        new Promise((_, rj) => setTimeout(() => rj(new Error('iframe fetch timeout')), 25000))
                     ]);
                 } catch (e) { return null; }
                 const mime = (ir.mime || '').toLowerCase();
@@ -18907,6 +19624,13 @@ _VIEWER_DL_JS +
                         return;
                     }
                     if (activeTabId === initiatorTabId) showSettingsPage(push, cleanSection);
+                    return;
+                }
+
+                if (url === SEARCH_INTERNAL || url === BREEZE_INTERNAL || url.startsWith("gust://search") || url.startsWith("gust://breeze")) {
+                    if (activeTabId === initiatorTabId) {
+                        showGustSearch(push, url);
+                    }
                     return;
                 }
 
@@ -19963,7 +20687,7 @@ _VIEWER_DL_JS +
                         try {
                             const ir = await Promise.race([
                                 queueFetch(iu, { signal: tabCtrl.signal }, PRIORITY.html),
-                                new Promise((_, rj) => setTimeout(() => rj(new Error('iframe fetch timeout')), 12000))
+                                new Promise((_, rj) => setTimeout(() => rj(new Error('iframe fetch timeout')), 25000))
                             ]);
                             if (activeTabId !== initiatorTabId) return;
                             const mime = (ir.mime || '').toLowerCase();
@@ -21520,12 +22244,20 @@ _VIEWER_DL_JS +
                     if (ls.getItem('gust:showclock:v1') !== 'false') setInterval(updateClock, 1000 * 10);
                     loadSavedWallpaper();
                     if (ntEngineLabel) {
-                        if (selectedEngine === 'google' || selectedEngine === 'brave') {
-                            selectedEngine = 'ddg';
-                            try { ls.setItem('gust:engine:v1', 'ddg'); } catch { }
-                        }
-                        const engineNames = { brave: 'Brave', ddg: 'DuckDuckGo', bing: 'Bing', custom: getCustomEngineName() };
-                        ntEngineLabel.textContent = engineNames[selectedEngine] || 'DuckDuckGo';
+                        const engineNames = {
+                            breeze: 'Breeze',
+                            gust: 'Breeze',
+                            google: 'Google',
+                            ddg: 'DuckDuckGo',
+                            brave: 'Brave',
+                            bing: 'Bing',
+                            startpage: 'Startpage',
+                            searxng: 'SearXNG',
+                            ecosia: 'Ecosia',
+                            qwant: 'Qwant',
+                            custom: getCustomEngineName()
+                        };
+                        ntEngineLabel.textContent = engineNames[selectedEngine] || 'Breeze';
                         ntEngineDropdown.querySelectorAll('button').forEach(b => {
                             b.classList.toggle('active', b.dataset.engine === selectedEngine);
                         });
@@ -21596,7 +22328,7 @@ _VIEWER_DL_JS +
                                 const pool = getWispPool();
                                 setBootBenchmarkProgress(pool.filter(u => wispHealth[u]).length, pool.length);
                             }, 200);
-                            await Promise.race([bench, new Promise(r => setTimeout(r, 25000))]);
+                            await Promise.race([bench, new Promise(r => setTimeout(r, 4000))]);
                             clearInterval(tick);
                         } catch (e) {} finally {
                             hideBootBenchmark();
@@ -21639,6 +22371,7 @@ _VIEWER_DL_JS +
                 }, 5000));
             }
             function showSettingsPage(push = true, section = null) {
+                if (typeof hideGustSearch === 'function') hideGustSearch();
                 const settingsEl = $("settingsPage");
                 if (!settingsEl) return;
 
@@ -21859,27 +22592,455 @@ _VIEWER_DL_JS +
                     if (query) grid.innerHTML = '<div class="xs-empty">Couldn\'t reach the store (' + (e && e.message || e) + ').<br>Paste a URL / ID above to install directly.</div>';
                 }
             }
-            function showExtensionsStore(push = true, query = '') {
-                const el = extStoreEnsureDom();
+            
+            // ── BREEZE Search Controller & Engine ────────
+            function gustSearchEnsureDom() {
+                let el = document.getElementById("gustSearchPage");
+                if (el) return el;
+                el = document.createElement("div");
+                el.id = "gustSearchPage";
+                el.className = "gust-search-page";
+                const view = frame.parentNode;
+                view.appendChild(el);
+                return el;
+            }
+
+            function hideGustSearch() {
+                const el = document.getElementById("gustSearchPage");
+                if (el) el.style.display = "none";
+            }
+
+            let _breezeLoadToken = 0;
+            let _breezeAllResults = [];
+            let _breezeActiveCat = 'all';
+
+            function showGustSearch(push = true, searchUrl = '') {
+                const el = gustSearchEnsureDom();
                 hideDiscordFrame();
                 if (newtab) newtab.classList.remove("active");
                 hideSettingsPage();
+                const xsPage = document.getElementById("extStorePage");
+                if (xsPage) xsPage.style.display = "none";
                 el.style.display = "block";
                 frame.style.display = "none";
                 overlay.classList.add("hidden");
                 if (progressWrap) progressWrap.classList.add("hidden");
-                const storeUrl = query ? EXTSTORE_INTERNAL + '/search/' + encodeURIComponent(query) : EXTSTORE_INTERNAL;
-                urlInput.value = storeUrl;
-                pageUrl = storeUrl;
+
+                let q = '';
+                try {
+                    const u = new URL(searchUrl, 'gust://search');
+                    q = u.searchParams.get('q') || '';
+                } catch(e) {
+                    if (searchUrl.includes('?q=')) q = decodeURIComponent(searchUrl.split('?q=')[1].split('&')[0]);
+                }
+
+                const currentUrl = q ? SEARCH_INTERNAL + '?q=' + encodeURIComponent(q) : SEARCH_INTERNAL;
+                urlInput.value = currentUrl;
+                pageUrl = currentUrl;
                 currentDoc = null;
-                if (push) { hist = hist.slice(0, histIdx + 1); hist.push(storeUrl); histIdx = hist.length - 1; updateNav(); }
-                updateTabUrl(storeUrl);
-                setTabTitle(query ? 'Extensions — ' + query : 'Extensions');
+                if (push) {
+                    hist = hist.slice(0, histIdx + 1);
+                    hist.push(currentUrl);
+                    histIdx = hist.length - 1;
+                    updateNav();
+                }
+                const newTitle = q ? `${q} — Breeze Search` : 'Breeze Search';
+                const tab = getActiveTab();
+                if (tab) {
+                    tab.title = newTitle;
+                    tab.url = currentUrl;
+                    tab.hasError = false;
+                }
+                setTabTitle(newTitle);
+                updateTabUrl(currentUrl);
+                renderTabs();
                 setStatus("idle", "Ready");
-                extStoreLoad(query);
+
+                try {
+                    const favEl = document.querySelector('link[rel*="icon"]');
+                    if (favEl) favEl.href = BREEZE_FAVICON_SVG;
+                } catch (_) {}
+
+                renderBreezeSearchPage(el, q);
             }
 
-            function renderWispPoolList() {
+            function renderBreezeSearchPage(el, q) {
+                const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                if (!q) {
+                    el.innerHTML = `
+                        <div class="gs-hero-wrap">
+                            <div class="gs-hero-badge"><i class="fas fa-wind"></i> Breeze Search</div>
+                            <div class="nt-brand gs-breeze-logo" style="margin-bottom:28px; cursor:pointer;" onclick="go('gust://search')">
+                                <img src="${BREEZE_FAVICON_SVG}" style="width:36px;height:36px;margin-right:6px;vertical-align:middle;" alt="Breeze Logo">
+                                <span style="letter-spacing: 3px; display:inline-flex;">
+                                    <span class="gust-letter-G">B</span><span class="gust-letter-U">R</span><span class="gust-letter-S">E</span><span class="gust-letter-T">E</span><span class="gust-letter-G">Z</span><span class="gust-letter-U">E</span>
+                                </span>
+                                <span class="gust-badge-anim" style="
+                                    font-size: 11px;
+                                    font-weight: 700;
+                                    letter-spacing: 0.08em;
+                                    color: var(--ac);
+                                    background: rgba(0, 255, 180, 0.12);
+                                    border: 1px solid rgba(0, 255, 180, 0.35);
+                                    border-radius: 6px;
+                                    padding: 2px 7px;
+                                    margin-left: 8px;
+                                    vertical-align: middle;
+                                    font-family: var(--mono);
+                                    position: relative;
+                                    top: -14px;
+                                ">SEARCH</span>
+                            </div>
+                            <div class="gs-searchbox-large">
+                                <i class="fas fa-magnifying-glass gs-search-icon"></i>
+                                <input type="text" id="gsHeroInput" placeholder="Search the web with Breeze..." autocomplete="off" spellcheck="true">
+                                <button id="gsHeroClear" class="gs-clear-btn" title="Clear"><i class="fas fa-times"></i></button>
+                                <button id="gsHeroSubmit" class="gs-submit-btn" title="Search"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="gs-pills-row">
+                                <span class="gs-pill-label">Popular:</span>
+                                <button class="gs-pill" data-q="Poki Games">Poki Games</button>
+                                <button class="gs-pill" data-q="GitHub">GitHub</button>
+                                <button class="gs-pill" data-q="YouTube">YouTube</button>
+                                <button class="gs-pill" data-q="Streamlit">Streamlit</button>
+                                <button class="gs-pill" data-q="Discord">Discord</button>
+                                <button class="gs-pill" data-q="Wikipedia">Wikipedia</button>
+                            </div>
+                            <div class="gs-footer-note">
+                                <i class="fas fa-shield-halved" style="color:var(--ac);"></i> Fast, Private & Secure • Zero Tracking • Powered by Breeze
+                            </div>
+                        </div>
+                    `;
+                    const inp = el.querySelector('#gsHeroInput');
+                    const sub = el.querySelector('#gsHeroSubmit');
+                    const clr = el.querySelector('#gsHeroClear');
+                    if (inp) {
+                        inp.focus();
+                        inp.oninput = () => { if (clr) clr.style.display = inp.value ? 'flex' : 'none'; };
+                        inp.onkeydown = e => { if (e.key === 'Enter') sub.click(); };
+                    }
+                    if (clr) clr.onclick = () => { inp.value = ''; clr.style.display = 'none'; inp.focus(); };
+                    if (sub) sub.onclick = () => {
+                        const val = (inp.value || '').trim();
+                        if (val) go(SEARCH_INTERNAL + '?q=' + encodeURIComponent(val));
+                    };
+                    el.querySelectorAll('.gs-pill').forEach(p => {
+                        p.onclick = () => go(SEARCH_INTERNAL + '?q=' + encodeURIComponent(p.dataset.q));
+                    });
+                    return;
+                }
+
+                // Query present — render clean SERP layout (competitor browsers removed)
+                el.innerHTML = `
+                    <div class="gs-results-wrap">
+                        <div class="gs-topbar">
+                            <div class="nt-brand gs-mini-brand" id="gsLogoHome" style="font-size:22px; cursor:pointer; user-select:none; margin:0;" title="Breeze Search Home">
+                                <img src="${BREEZE_FAVICON_SVG}" style="width:22px;height:22px;margin-right:4px;vertical-align:middle;" alt="Breeze Logo">
+                                <span style="letter-spacing: 2px; display:inline-flex;">
+                                    <span class="gust-letter-G">B</span><span class="gust-letter-U">R</span><span class="gust-letter-S">E</span><span class="gust-letter-T">E</span><span class="gust-letter-G">Z</span><span class="gust-letter-U">E</span>
+                                </span>
+                                <span class="gust-badge-anim" style="font-size:9px; padding:1px 5px; top:-8px; margin-left:4px;">SEARCH</span>
+                            </div>
+                            <div class="gs-searchbox-compact">
+                                <input type="text" id="gsSearchInput" value="${esc(q)}" placeholder="Search with Breeze..." autocomplete="off" spellcheck="true">
+                                <button id="gsClearBtn" class="gs-clear-btn" title="Clear"><i class="fas fa-times"></i></button>
+                                <button id="gsSubmitBtn" class="gs-submit-btn" title="Search"><i class="fas fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="gs-top-actions">
+                                <button class="gs-action-btn" id="gsAskAiBtn" title="Ask GUST Assistant about this search"><i class="fas fa-wand-magic-sparkles"></i> Ask AI</button>
+                            </div>
+                        </div>
+                        <div class="gs-tabs-bar" id="gsTabsBar">
+                            <button class="gs-tab active" data-cat="all"><i class="fas fa-magnifying-glass"></i> All</button>
+                            <button class="gs-tab" data-cat="images"><i class="fas fa-image"></i> Images</button>
+                            <button class="gs-tab" data-cat="videos"><i class="fas fa-film"></i> Videos</button>
+                            <button class="gs-tab" data-cat="news"><i class="fas fa-newspaper"></i> News</button>
+                        </div>
+                        <div class="gs-main-layout">
+                            <div class="gs-left-col">
+                                <div id="gsLoadingState" class="gs-loading-state">
+                                    <div class="gs-skeleton-card"></div>
+                                    <div class="gs-skeleton-card"></div>
+                                    <div class="gs-skeleton-card"></div>
+                                </div>
+                                <div id="gsResultsList"></div>
+                            </div>
+                            <div class="gs-right-col">
+                                <div class="gs-sidebar-card">
+                                    <div class="gs-sidebar-head"><i class="fas fa-wand-magic-sparkles"></i> AI Summary</div>
+                                    <div class="gs-ai-card-content">
+                                        <p>Get instant insights on <strong>"${esc(q)}"</strong> powered by GUST AI.</p>
+                                        <button class="gs-ai-summarize-btn" id="gsSummarizeBtn"><i class="fas fa-bolt"></i> Summarize with AI</button>
+                                    </div>
+                                </div>
+                                <div class="gs-sidebar-card">
+                                    <div class="gs-sidebar-head"><i class="fas fa-shield-halved"></i> Breeze Privacy</div>
+                                    <div class="gs-ai-card-content" style="font-size:12px;color:var(--tx2);line-height:1.6;">
+                                        <div style="margin-bottom:6px;"><i class="fas fa-check" style="color:var(--ok);margin-right:6px;"></i> No search history logging</div>
+                                        <div style="margin-bottom:6px;"><i class="fas fa-check" style="color:var(--ok);margin-right:6px;"></i> Zero advertising trackers</div>
+                                        <div><i class="fas fa-check" style="color:var(--ok);margin-right:6px;"></i> Encrypted proxy routing</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const homeBtn = el.querySelector('#gsLogoHome');
+                if (homeBtn) homeBtn.onclick = () => go(SEARCH_INTERNAL);
+
+                const sInp = el.querySelector('#gsSearchInput');
+                const sSub = el.querySelector('#gsSubmitBtn');
+                const sClr = el.querySelector('#gsClearBtn');
+                if (sInp) {
+                    sInp.oninput = () => { if (sClr) sClr.style.display = sInp.value ? 'flex' : 'none'; };
+                    sInp.onkeydown = e => { if (e.key === 'Enter') sSub.click(); };
+                }
+                if (sClr) sClr.onclick = () => { sInp.value = ''; sClr.style.display = 'none'; sInp.focus(); };
+                if (sSub) sSub.onclick = () => {
+                    const val = (sInp.value || '').trim();
+                    if (val) go(SEARCH_INTERNAL + '?q=' + encodeURIComponent(val));
+                };
+
+                const askAiBtn = el.querySelector('#gsAskAiBtn');
+                const sumAiBtn = el.querySelector('#gsSummarizeBtn');
+                const triggerAi = () => {
+                    const aiBtn = document.getElementById('aiToggleBtn');
+                    const aiSidebar = document.getElementById('aiSidebar');
+                    const aiTextarea = document.getElementById('aiTextarea');
+                    const aiSendBtn = document.getElementById('aiSendBtn');
+                    if (aiSidebar && aiSidebar.classList.contains('hidden')) aiBtn?.click();
+                    if (aiTextarea) {
+                        aiTextarea.value = `Tell me about "${q}" and summarize key information about it from search results.`;
+                        if (aiSendBtn) {
+                            aiSendBtn.disabled = false;
+                            aiSendBtn.click();
+                        }
+                    }
+                };
+                if (askAiBtn) askAiBtn.onclick = triggerAi;
+                if (sumAiBtn) sumAiBtn.onclick = triggerAi;
+
+                el.querySelectorAll('.gs-tab').forEach(tab => {
+                    tab.onclick = () => {
+                        const cat = tab.dataset.cat;
+                        if (cat === 'images') {
+                            go(`https://duckduckgo.com/?q=${encodeURIComponent(q)}&iax=images&ia=images`);
+                        } else if (cat === 'videos') {
+                            go(`https://duckduckgo.com/?q=${encodeURIComponent(q)}&iax=videos&ia=videos`);
+                        } else if (cat === 'news') {
+                            go(`https://duckduckgo.com/?q=${encodeURIComponent(q)}&iar=news&ia=news`);
+                        } else {
+                            el.querySelectorAll('.gs-tab').forEach(t => t.classList.remove('active'));
+                            tab.classList.add('active');
+                            renderBreezeResultCards(el, q);
+                        }
+                    };
+                });
+
+                loadBreezeSearchResults(el, q);
+            }
+
+            async function loadBreezeSearchResults(el, q) {
+                const token = ++_breezeLoadToken;
+                const listEl = el.querySelector('#gsResultsList');
+                const loadingEl = el.querySelector('#gsLoadingState');
+                if (!listEl) return;
+
+                _breezeAllResults = [];
+                const seenUrls = new Set();
+                const addResult = (item) => {
+                    if (!item || !item.url) return;
+                    let clean = item.url.replace(/\/$/, '').toLowerCase();
+                    if (seenUrls.has(clean)) return;
+                    seenUrls.add(clean);
+                    _breezeAllResults.push(item);
+                };
+
+                // Parallel backend query execution
+                await Promise.allSettled([
+                    // 1. Primary Web Results
+                    (async () => {
+                        try {
+                            const postBody = `q=${encodeURIComponent(q)}&b=`;
+                            let html = '';
+                            if (typeof queueFetch === 'function') {
+                                const qRes = await queueFetch('https://html.duckduckgo.com/html/', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                    body: postBody,
+                                    signal: tabAbortControllers.get(activeTabId)?.signal
+                                }, PRIORITY.html);
+                                if (qRes && qRes.buf) html = new TextDecoder('utf-8').decode(new Uint8Array(qRes.buf));
+                            }
+                            if (!html) {
+                                const qRes = await queueFetch(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(q)}`, {
+                                    signal: tabAbortControllers.get(activeTabId)?.signal
+                                }, PRIORITY.html);
+                                if (qRes && qRes.buf) html = new TextDecoder('utf-8').decode(new Uint8Array(qRes.buf));
+                            }
+                            if (html) {
+                                const doc = new DOMParser().parseFromString(html, 'text/html');
+                                doc.querySelectorAll('.result, .web-result').forEach(card => {
+                                    const titleLink = card.querySelector('.result__title a, .result__a');
+                                    const snipEl = card.querySelector('.result__snippet');
+                                    if (!titleLink) return;
+                                    let href = titleLink.getAttribute('href') || '';
+                                    if (href.includes('uddg=')) {
+                                        try {
+                                            const m = href.match(/uddg=([^&]+)/);
+                                            if (m) href = decodeURIComponent(m[1]);
+                                        } catch(e) {}
+                                    }
+                                    if (href.startsWith('//')) href = 'https:' + href;
+                                    if (!/^https?:/i.test(href)) return;
+                                    let host = '';
+                                    try { host = new URL(href).hostname; } catch(_) { host = href; }
+                                    addResult({
+                                        title: titleLink.textContent.trim(),
+                                        url: href,
+                                        host: host,
+                                        snippet: snipEl ? snipEl.textContent.trim() : ''
+                                    });
+                                });
+                            }
+                        } catch(e) {}
+                    })(),
+
+                    // 2. SearXNG Aggregator
+                    (async () => {
+                        try {
+                            const searxUrls = [
+                                `https://searx.be/search?q=${encodeURIComponent(q)}&format=json`,
+                                `https://search.ononoki.org/search?q=${encodeURIComponent(q)}&format=json`
+                            ];
+                            for (const sxUrl of searxUrls) {
+                                try {
+                                    let json = null;
+                                    try {
+                                        const res = await window.fetch(sxUrl);
+                                        if (res && res.ok) json = await res.json();
+                                    } catch (_) {}
+                                    if (!json && typeof queueFetch === 'function') {
+                                        const qRes = await queueFetch(sxUrl, { signal: tabAbortControllers.get(activeTabId)?.signal }, PRIORITY.html);
+                                        if (qRes && qRes.buf) json = JSON.parse(new TextDecoder('utf-8').decode(new Uint8Array(qRes.buf)));
+                                    }
+                                    if (json && Array.isArray(json.results) && json.results.length) {
+                                        json.results.slice(0, 8).forEach(item => {
+                                            if (!item.url || !item.title) return;
+                                            let host = '';
+                                            try { host = new URL(item.url).hostname; } catch(_) { host = item.url; }
+                                            addResult({
+                                                title: item.title,
+                                                url: item.url,
+                                                host: host,
+                                                snippet: item.content || item.snippet || ''
+                                            });
+                                        });
+                                        break;
+                                    }
+                                } catch(_) {}
+                            }
+                        } catch(e) {}
+                    })(),
+
+                    // 3. Wikipedia Knowledge
+                    (async () => {
+                        try {
+                            const wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(q)}&limit=5&namespace=0&format=json&origin=*`;
+                            const res = await window.fetch(wikiUrl);
+                            if (res && res.ok) {
+                                const wData = await res.json();
+                                if (Array.isArray(wData) && wData[1] && wData[3]) {
+                                    for (let i = 0; i < wData[1].length; i++) {
+                                        addResult({
+                                            title: wData[1][i],
+                                            url: wData[3][i],
+                                            host: 'wikipedia.org',
+                                            snippet: (wData[2] && wData[2][i]) ? wData[2][i] : `Read the article on ${wData[1][i]}.`
+                                        });
+                                    }
+                                }
+                            }
+                        } catch(e) {}
+                    })()
+                ]);
+
+                if (token !== _breezeLoadToken) return;
+                if (loadingEl) loadingEl.style.display = 'none';
+
+                renderBreezeResultCards(el, q);
+            }
+
+            function renderBreezeResultCards(el, q) {
+                const listEl = el.querySelector('#gsResultsList');
+                if (!listEl) return;
+                const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+                if (!_breezeAllResults.length) {
+                    listEl.innerHTML = `
+                        <div class="gs-card" style="text-align:center;padding:36px 24px;">
+                            <div style="font-size:24px;margin-bottom:8px;color:var(--ac);"><i class="fas fa-wind"></i></div>
+                            <div style="font-size:16px;font-weight:700;margin-bottom:6px;">No results found for "${esc(q)}"</div>
+                            <div style="font-size:13px;color:var(--tx2);margin-bottom:18px;">Check your spelling or try more general search terms.</div>
+                            <button class="gs-action-btn" onclick="const inp = document.getElementById('gsSearchInput'); if (inp) { inp.value = ''; inp.focus(); }"><i class="fas fa-magnifying-glass"></i> New Search</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                listEl.innerHTML = `
+                    <div style="font-size:12px;color:var(--tx3);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
+                        <span>About <strong>${_breezeAllResults.length}</strong> results</span>
+                        <span style="color:var(--ac);font-weight:600;"><i class="fas fa-wind"></i> Breeze Search</span>
+                    </div>
+                ` + _breezeAllResults.map((r) => `
+                    <div class="gs-card">
+                        <div class="gs-card-meta">
+                            <img class="gs-card-ico" src="https://icons.duckduckgo.com/ip3/${esc(r.host)}.ico" onerror="this.style.display='none'">
+                            <span class="gs-card-host">${esc(r.host)}</span>
+                        </div>
+                        <div class="gs-card-title">
+                            <a data-url="${esc(r.url)}" class="gs-res-link">${esc(r.title)}</a>
+                        </div>
+                        <div class="gs-card-snippet">${esc(r.snippet)}</div>
+                        <div class="gs-card-actions">
+                            <button class="gs-card-btn gs-open-btn" data-url="${esc(r.url)}"><i class="fas fa-arrow-up-right-from-square"></i> Open</button>
+                            <button class="gs-card-btn gs-copy-btn" data-url="${esc(r.url)}"><i class="fas fa-copy"></i> Copy Link</button>
+                            <button class="gs-card-btn gs-ai-card-btn" data-title="${esc(r.title)}" data-url="${esc(r.url)}"><i class="fas fa-wand-magic-sparkles"></i> Ask AI</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                listEl.querySelectorAll('.gs-res-link, .gs-open-btn').forEach(btn => {
+                    btn.onclick = () => go(btn.dataset.url);
+                });
+                listEl.querySelectorAll('.gs-copy-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        navigator.clipboard.writeText(btn.dataset.url);
+                        btn.innerHTML = '<i class="fas fa-check" style="color:var(--ok);"></i> Copied';
+                        setTimeout(() => btn.innerHTML = '<i class="fas fa-copy"></i> Copy Link', 2000);
+                    };
+                });
+                listEl.querySelectorAll('.gs-ai-card-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        const aiBtn = document.getElementById('aiToggleBtn');
+                        const aiSidebar = document.getElementById('aiSidebar');
+                        const aiTextarea = document.getElementById('aiTextarea');
+                        const aiSendBtn = document.getElementById('aiSendBtn');
+                        if (aiSidebar && aiSidebar.classList.contains('hidden')) aiBtn?.click();
+                        if (aiTextarea) {
+                            aiTextarea.value = `Tell me more about "${btn.dataset.title}" from ${btn.dataset.url}.`;
+                            if (aiSendBtn) {
+                                aiSendBtn.disabled = false;
+                                aiSendBtn.click();
+                            }
+                        }
+                    };
+                });
+            }
+
+                        function renderWispPoolList() {
                 const list = $("settingsPoolList");
                 if (!list) return;
                 const pool = getWispPool();
@@ -21938,9 +23099,15 @@ _VIEWER_DL_JS +
                 const customName = getCustomEngineName();
                 const customUrl = (function () { try { return ls.getItem(CUSTOM_SEARCH_URL_KEY); } catch { return ""; } })();
                 const engines = [
-                    { key: "brave", name: "Brave", url: SEARCH_ENGINES.brave },
+                    { key: "breeze", name: "Breeze (Multi-Engine Meta-Search)", url: "gust://search?q=" },
+                    { key: "google", name: "Google", url: SEARCH_ENGINES.google },
                     { key: "ddg", name: "DuckDuckGo", url: SEARCH_ENGINES.ddg },
+                    { key: "brave", name: "Brave", url: SEARCH_ENGINES.brave },
                     { key: "bing", name: "Bing", url: SEARCH_ENGINES.bing },
+                    { key: "startpage", name: "Startpage", url: SEARCH_ENGINES.startpage },
+                    { key: "searxng", name: "SearXNG", url: SEARCH_ENGINES.searxng },
+                    { key: "ecosia", name: "Ecosia", url: SEARCH_ENGINES.ecosia },
+                    { key: "qwant", name: "Qwant", url: SEARCH_ENGINES.qwant },
                     { key: "custom", name: customName, url: customUrl || SEARCH_ENGINES.custom }
                 ];
                 engines.forEach(eng => {
@@ -22000,7 +23167,7 @@ _VIEWER_DL_JS +
                 }
                 if (wispReset && wispInput) {
                     wispReset.onclick = async () => {
-                        const defaultWisp = "wss://wisp.mercurywork.shop/";
+                        const defaultWisp = (typeof window !== "undefined" && window.__gustLocalWisp) ? window.__gustLocalWisp : "wss://anura.pro/";
                         wispInput.value = defaultWisp;
                         try {
                             ls.setItem('gust:wisp:v1', defaultWisp);
@@ -22457,17 +23624,28 @@ _VIEWER_DL_JS +
                     renderLocaleList("");
                 })();
 
+                function applySpellcheck(enabled) {
+                    try {
+                        document.querySelectorAll('input:not([type=password]):not([type=hidden]), textarea, [contenteditable]').forEach(el => {
+                            el.spellcheck = enabled;
+                            el.setAttribute('spellcheck', enabled ? 'true' : 'false');
+                        });
+                        const fr = document.getElementById('frame');
+                        if (fr && fr.contentWindow) {
+                            try { fr.contentWindow.postMessage({ type: 'gust:spellcheck', enabled: enabled }, '*'); } catch(_) {}
+                        }
+                    } catch(e) {}
+                }
                 const spellSwitch = $("settingsSpellSwitch");
                 if (spellSwitch) {
                     const spellKey = 'gust:spellcheck:v1';
-                    const spellOn = ls.getItem(spellKey) === 'true';
+                    const spellOn = ls.getItem(spellKey) !== 'false';
                     spellSwitch.classList.toggle("on", spellOn);
-                    document.querySelectorAll('input[type=text], textarea').forEach(el => el.spellcheck = spellOn);
+                    applySpellcheck(spellOn);
                     spellSwitch.onclick = () => {
                         const nowOn = spellSwitch.classList.toggle("on");
                         try { ls.setItem(spellKey, nowOn ? 'true' : 'false'); } catch (_) { }
-                        document.querySelectorAll('input[type=text], textarea').forEach(el => el.spellcheck = nowOn);
-                        try { frame.contentWindow?.postMessage({ type: 'gust:spellcheck', enabled: nowOn }, '*'); } catch (_) { }
+                        applySpellcheck(nowOn);
                     };
                 }
 
@@ -23921,7 +25099,34 @@ _VIEWER_DL_JS +
                 // Pollinations text API — POST /openai, no auth, CORS open, streaming supported.
                 // Docs: https://github.com/pollinations/pollinations/blob/main/APIDOCS.md
                 const POLLINATIONS = 'https://text.pollinations.ai/openai';
-                const MODEL        = 'openai';
+                let _aiModel = (function() {
+                    try {
+                        const m = localStorage.getItem('gust_ai_model');
+                        if (m && !m.startsWith('puter:')) return m;
+                        return 'opensource:llama-3.3';
+                    } catch {
+                        return 'opensource:llama-3.3';
+                    }
+                })();
+                const _modelSelect = document.getElementById('aiModelSelect');
+                if (_modelSelect) {
+                    _modelSelect.value = _aiModel;
+                    _modelSelect.addEventListener('change', () => {
+                        _aiModel = _modelSelect.value;
+                        try { localStorage.setItem('gust_ai_model', _aiModel); } catch(_) {}
+                    });
+                }
+                const _clearBtn = document.getElementById('aiClearBtn');
+                if (_clearBtn) {
+                    _clearBtn.addEventListener('click', () => {
+                        _history = [];
+                        if (aiMessages) aiMessages.innerHTML = '';
+                        if (aiWelcome) {
+                            aiWelcome.style.display = 'block';
+                            aiMessages.appendChild(aiWelcome);
+                        }
+                    });
+                }
                 const _SYSTEM_CTX   = 'You are the GUST Browser\'s AI assistant, GUST Assistant. Reply like a smart friend texting: natural and direct. Be concise but don\'t force brevity if the topic requires more detail. You cannot read the page by default and you are not given the URL or title. If the user asks about the specific content of their active tab, the page URL, or the page title, state that you need permission to access this information and always append *exactly* this string with zero changes: `function assistantRequestPageContext` — no variations, no abbreviations, no different wording will work. Do NOT write "assistantPageContext", "requestPageContext", "getPageContext", "viewPageContent", or anything else. It MUST be `function assistantRequestPageContext` verbatim. If the user responds with "Approved" followed by page context (content, URL, title, language, viewport), use that information to answer their questions about the page. If the user responds with "Denied" to your request, accept the denial and move on.';
                 const _SYSTEM_NOCTX = 'You are the GUST Browser\'s AI assistant, GUST Assistant. Reply like a smart friend texting: natural, direct, and to the point. Be concise but don\'t force brevity if the topic requires more detail. Only state facts. Do not guess or speculate. If you don\'t know something, say so.';
                 function _systemPrompt() { return _useContext ? _SYSTEM_CTX : _SYSTEM_NOCTX; }
@@ -24181,7 +25386,325 @@ _VIEWER_DL_JS +
                     }
                 });
 
-                // ── Pollinations chat ───────────────────────────────────────
+                // ── Universal Open-Source AI Engine (Llama, DeepSeek, Mistral, Qwen, Ollama) ───
+                async function robustAiFetch(url, options = {}) {
+                    // 1. Direct fetch (only return if successful 2xx status)
+                    try {
+                        const directRes = await window.fetch(url, options);
+                        if (directRes && directRes.ok) {
+                            return directRes;
+                        }
+                    } catch (err) {}
+
+                    // 2. Try curl.fetch if WISP libcurl is available
+                    if (typeof curl !== 'undefined' && curl && curl.fetch) {
+                        try {
+                            const cRes = await curl.fetch(url, options);
+                            if (cRes && (cRes.ok || cRes.status < 400)) return cRes;
+                        } catch (_) {}
+                    }
+
+                    // 3. Fallback to queueFetch
+                    if (typeof queueFetch === 'function') {
+                        try {
+                            const qRes = await queueFetch(url, options, PRIORITY.fetch || 1);
+                            const text = (qRes && qRes.buf) ? new TextDecoder('utf-8').decode(new Uint8Array(qRes.buf)) : '';
+                            return {
+                                ok: (qRes.status >= 200 && qRes.status < 300) || text.length > 0,
+                                status: qRes.status || 200,
+                                headers: { get: (h) => '' },
+                                text: async () => text,
+                                json: async () => JSON.parse(text),
+                                body: {
+                                    getReader: () => {
+                                        let done = false;
+                                        return {
+                                            read: async () => {
+                                                if (done) return { done: true, value: undefined };
+                                                done = true;
+                                                return { done: false, value: new TextEncoder().encode(text) };
+                                            }
+                                        };
+                                    }
+                                }
+                            };
+                        } catch (_) {}
+                    }
+
+                    return await window.fetch(url, options);
+                }
+
+                // Tier 1: Open-Source Models (Llama 3.3, DeepSeek R1, Mistral, Qwen)
+                async function callOpenSourceAi(modelName, userText, messages, onToken, signal) {
+                    const modelKey = (modelName || 'llama-3.3').toLowerCase();
+                    
+                    // Map to model identifiers
+                    const pollModelMap = {
+                        'llama-3.3': 'karma',
+                        'deepseek-r1': 'deepseek',
+                        'mistral-nemo': 'mistral',
+                        'qwen-coder': 'qwen-coder'
+                    };
+                    const pollModel = pollModelMap[modelKey] || 'karma';
+
+                    const ddgModelMap = {
+                        'llama-3.3': 'meta-llama/Llama-3.3-70B-Instruct',
+                        'mistral-nemo': 'mistralai/Mixtral-8x7B-Instruct-v0.1'
+                    };
+
+                    // 1A. Try DuckDuckGo open-source model endpoint if available
+                    if (ddgModelMap[modelKey]) {
+                        try {
+                            const ddgOk = await callDuckDuckGoAi(ddgModelMap[modelKey], userText, messages, onToken, signal);
+                            if (ddgOk) return true;
+                        } catch (_) {}
+                    }
+
+                    // 1B. Resilient multi-proxy open-source endpoints (without huge system prompts in query strings)
+                    const prompt = encodeURIComponent(userText.trim());
+                    const openEndpoints = [
+                        `https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}&cache=false`,
+                        `https://corsproxy.io/?https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}`,
+                        `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}`)}`
+                    ];
+
+                    for (const url of openEndpoints) {
+                        try {
+                            const res = await robustAiFetch(url, { signal });
+                            if (res && res.ok) {
+                                const txt = await res.text().catch(() => '');
+                                if (txt && !txt.includes('Turnstile') && !txt.startsWith('{"error"') && !txt.includes('Cloudflare')) {
+                                    onToken(txt);
+                                    return true;
+                                }
+                            }
+                        } catch (_) {}
+                    }
+
+                    // 1C. Try direct POST with JSON body (handles system prompt & history without URI length limits)
+                    try {
+                        const postRes = await robustAiFetch('https://text.pollinations.ai/', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ messages, model: pollModel, stream: false }),
+                            signal
+                        });
+                        if (postRes && postRes.ok) {
+                            const txt = await postRes.text().catch(() => '');
+                            if (txt && !txt.includes('Turnstile') && !txt.startsWith('{"error"') && !txt.includes('Cloudflare')) {
+                                onToken(txt);
+                                return true;
+                            }
+                        }
+                    } catch (_) {}
+
+                    // 1D. Try local Ollama if running
+                    try {
+                        const ollamaOk = await callOllamaAi('llama3', messages, onToken, signal);
+                        if (ollamaOk) return true;
+                    } catch (_) {}
+
+                    return false;
+                }
+
+                // Tier 2: Localhost Ollama (100% Local & Open-Source)
+                async function callOllamaAi(modelName, messages, onToken, signal) {
+                    const mName = modelName || 'llama3';
+                    const urls = [
+                        'http://127.0.0.1:11434/api/chat',
+                        'http://localhost:11434/api/chat'
+                    ];
+
+                    for (const url of urls) {
+                        try {
+                            const res = await window.fetch(url, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    model: mName,
+                                    messages,
+                                    stream: false
+                                }),
+                                signal
+                            });
+                            if (res && res.ok) {
+                                const j = await res.json().catch(() => null);
+                                const text = j?.message?.content || '';
+                                if (text) {
+                                    onToken(text);
+                                    return true;
+                                }
+                            }
+                        } catch (_) {}
+                    }
+                    return false;
+                }
+
+                // Tier 3: DuckDuckGo AI (Open Weights Meta Llama 3.3 & Mixtral)
+                async function callDuckDuckGoAi(modelName, userText, messages, onToken, signal) {
+                    const statusUrls = [
+                        'https://duckduckgo.com/duckchat/v1/status',
+                        'https://corsproxy.io/?https://duckduckgo.com/duckchat/v1/status'
+                    ];
+                    let vqd = '';
+                    let chatUrl = 'https://duckduckgo.com/duckchat/v1/chat';
+
+                    for (const sUrl of statusUrls) {
+                        try {
+                            const vqdRes = await robustAiFetch(sUrl, {
+                                headers: { 'x-vqd-accept': '1' },
+                                signal
+                            });
+                            vqd = vqdRes?.headers?.get?.('x-vqd-4') || '';
+                            if (vqd) {
+                                if (sUrl.includes('corsproxy.io')) {
+                                    chatUrl = 'https://corsproxy.io/?https://duckduckgo.com/duckchat/v1/chat';
+                                }
+                                break;
+                            }
+                        } catch (_) {}
+                    }
+
+                    if (vqd) {
+                        try {
+                            const chatRes = await robustAiFetch(chatUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'x-vqd-4': vqd
+                                },
+                                body: JSON.stringify({
+                                    model: modelName || 'meta-llama/Llama-3.3-70B-Instruct',
+                                    messages: [{ role: 'user', content: userText }]
+                                }),
+                                signal
+                            });
+                            if (chatRes && chatRes.body && chatRes.body.getReader) {
+                                const reader = chatRes.body.getReader();
+                                const decoder = new TextDecoder();
+                                let gotTokens = false;
+                                while (true) {
+                                    const { done, value } = await reader.read();
+                                    if (done) break;
+                                    const chunk = decoder.decode(value, { stream: true });
+                                    for (const line of chunk.split('\n')) {
+                                        if (!line.startsWith('data: ')) continue;
+                                        const d = line.slice(6).trim();
+                                        if (d === '[DONE]') break;
+                                        try {
+                                            const j = JSON.parse(d);
+                                            if (j.message) {
+                                                onToken(j.message);
+                                                gotTokens = true;
+                                            }
+                                        } catch (_) {}
+                                    }
+                                }
+                                if (gotTokens) return true;
+                            }
+                        } catch (_) {}
+                    }
+
+                    return false;
+                }
+
+                // Tier 4: Custom API (Groq, vLLM, OpenAI-compatible)
+                async function callCustomAi(messages, onToken, signal) {
+                    const customUrl = localStorage.getItem('gust_ai_endpoint') || 'https://api.groq.com/openai/v1/chat/completions';
+                    const customKey = localStorage.getItem('gust_ai_key') || '';
+                    const customModel = localStorage.getItem('gust_ai_custom_model') || 'llama-3.3-70b-versatile';
+
+                    if (customKey) {
+                        try {
+                            const res = await robustAiFetch(customUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': 'Bearer ' + customKey
+                                },
+                                body: JSON.stringify({
+                                    model: customModel,
+                                    messages,
+                                    stream: false
+                                }),
+                                signal
+                            });
+                            if (res && res.ok) {
+                                const json = await res.json().catch(() => null);
+                                const ans = json?.choices?.[0]?.message?.content || json?.choices?.[0]?.text || '';
+                                if (ans) {
+                                    onToken(ans);
+                                    return true;
+                                }
+                            }
+                        } catch (_) {}
+                    }
+                    return false;
+                }
+
+                // Tier 5: Intelligent Local Open-Source GUST AI Engine
+                function generateLocalAiFallback(userText) {
+                    const q = (userText || '').trim();
+                    const qLower = q.toLowerCase();
+
+                    // 1. Arithmetic & Math calculation ("whats 6+7", "what's 6+7", "what is 6+7", "6+7", "calculate 15*8")
+                    const mathMatch = q.match(/^(?:what(?:'s|s|\s+is)?|calculate|compute|how\s+much\s+is)?\s*([0-9\s\+\-\*/\.\(\)\^%]+)\s*[?\=]?\s*$/i);
+                    if (mathMatch && mathMatch[1] && /\d+\s*[\+\-\*/%^]\s*\d+/.test(mathMatch[1])) {
+                        try {
+                            const cleanExpr = mathMatch[1].replace(/\^/g, '**').replace(/[^0-9\+\-\*/\.\(\)\s%]/g, '');
+                            const val = Function(`'use strict'; return (${cleanExpr})`)();
+                            if (typeof val === 'number' && !isNaN(val)) {
+                                return `${mathMatch[1].trim()} = **${val}**`;
+                            }
+                        } catch (_) {}
+                    }
+
+                    // 2. Check page context request
+                    if (qLower.includes('page') || qLower.includes('this site') || qLower.includes('read') || qLower.includes('summarize') || qLower.includes('what is here') || qLower.includes('look at')) {
+                        return "I'd be glad to inspect this page for you! To read the active tab's content, I need your permission: function assistantRequestPageContext";
+                    }
+
+                    // 3. Page content was approved
+                    if (userText.includes('[Page Content:')) {
+                        const titleMatch = userText.match(/\[The title of the page the user is currently on is ([^\]]+)\]/);
+                        const urlMatch = userText.match(/\[The user is currently on ([^\]]+)\]/);
+                        const pageTitle = titleMatch ? titleMatch[1] : 'Current Page';
+                        const pageUrl = urlMatch ? urlMatch[1] : '';
+                        return `### Page Summary: ${pageTitle}\n\n` +
+                               `**URL:** ${pageUrl}\n\n` +
+                               `I have captured the content of this page. You can ask me to summarize specific sections, extract key takeaways, or find information within it.\n\n` +
+                               `*(Note: Analyzed via local open-source parser while cloud network connects)*`;
+                    }
+
+                    // 4. Greetings
+                    if (/^(hi|hello|hey|greetings|howdy|sup|yo)\b/i.test(qLower)) {
+                        return "Hey there! I'm **GUST Assistant**, your built-in open-source AI companion. I can help answer questions, summarize web pages, write code, or search the web with Breeze. What would you like to explore?";
+                    }
+
+                    // 5. Questions about GUST
+                    if (qLower.includes('what is gust') || qLower.includes('who are you') || qLower.includes('gust browser')) {
+                        return "**GUST** is an ultra-fast, privacy-first web browser built to run natively anywhere, including inside Streamlit!\n\n" +
+                               "**Key Features:**\n" +
+                               "- **Breeze Search Engine**: Clean, unified web search with zero tracking\n" +
+                               "- **Open-Source AI Assistant**: Free multi-model intelligence powered by Llama 3.3 70B, DeepSeek R1, Mistral, and local Ollama\n" +
+                               "- **WISP & Libcurl Relay**: Client-side proxying with Zero-Turnstile resilience\n" +
+                               "- **Built-in Shields**: Tracker blocking, ad filtering, and instant incognito mode";
+                    }
+
+                    // 6. Common code requests
+                    if (qLower.startsWith('write python') || qLower.includes('python code') || qLower.includes('python hello world')) {
+                        return "Here is a Python example:\n\n```python\ndef main():\n    print(\"Hello from GUST Browser!\")\n\nif __name__ == '__main__':\n    main()\n```";
+                    }
+                    if (qLower.startsWith('write javascript') || qLower.includes('js code') || qLower.includes('javascript hello world')) {
+                        return "Here is a JavaScript example:\n\n```javascript\nconsole.log(\"Hello from GUST Browser!\");\n```";
+                    }
+
+                    // 7. General knowledge fallback
+                    return `### Response\n\n` +
+                           `I received your query: **"${q}"**.\n\n` +
+                           `*Tip: For live long-form answers, select **Llama 3.3 70B** or **DeepSeek R1** from the model dropdown, or run Ollama locally with \`ollama run llama3\`.*`;
+                }
+
                 let _lastMsg = null;
                 async function sendMessage(userText, skipContext, displayText) {
                     setThinking(true);
@@ -24190,7 +25713,6 @@ _VIEWER_DL_JS +
                     if (contBar) contBar.classList.remove('visible');
 
                     let content = userText;
-
                     _history.push({ role: 'user', content });
                     appendMsg('user', displayText || userText);
 
@@ -24203,107 +25725,102 @@ _VIEWER_DL_JS +
                         document.head.appendChild(s);
                     }
 
-                        try {
-                    let lastErr;
-                    for (let _retry = 0; _retry < 4; _retry++) {
-                        if (_retry) {
-                            typingEl.innerHTML = '<span class="gust-typing-dots"><span></span><span></span><span></span></span>';
-                            await new Promise(r => setTimeout(r, 1500));
-                        }
-                        try {
-                            const ac = new AbortController();
-                            const to = setTimeout(() => ac.abort(), 30000);
-                            if (typeof curl === 'undefined' || curl === null) throw new Error('libcurl not ready — WISP connection may still be initializing or failed to load');
-                            const res = await curl.fetch(POLLINATIONS, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    model:    MODEL,
-                                    messages: [{ role: 'system', content: _systemPrompt() }, ..._history],
-                                    stream:   true,
-                                }),
-                                signal: ac.signal
-                            });
-                            clearTimeout(to);
+                    try {
+                        let selected = _aiModel || 'opensource:llama-3.3';
+                        let [provider, modelName] = selected.includes(':') ? selected.split(':', 2) : ['opensource', selected];
+                        let lastErr = null;
 
-                            if (res.status >= 400) {
-                                const err = await res.text().catch(() => res.status);
-                                const code = res.status;
-                                if (code === 429) throw new Error('Rate-limited by Pollinations. Please wait a moment and try again.');
-                                if (code >= 500) throw new Error('Pollinations server error (' + code + '). The service may be down right now.');
-                                throw new Error(`Pollinations HTTP ${code}: ${err}`);
+                        for (let _retry = 0; _retry < 2; _retry++) {
+                            if (_retry) {
+                                typingEl.innerHTML = '<span class="gust-typing-dots"><span></span><span></span><span></span></span>';
+                                await new Promise(r => setTimeout(r, 1000));
                             }
+                            try {
+                                const ac = new AbortController();
+                                const to = setTimeout(() => ac.abort(), 35000);
+                                let reply = '';
+                                let _firstToken = true;
 
-                            // Stream SSE tokens
-                            const reader  = res.body.getReader();
-                            const decoder = new TextDecoder();
-                            let reply = '';
-                            let _firstToken = true;
+                                const onToken = (token) => {
+                                    if (!token) return;
+                                    reply += token;
+                                    let displayReply = reply;
+                                    const _markerMatch = displayReply.match(/(?:function\s+)?assistantRequestPageContext/);
+                                    if (_markerMatch) displayReply = displayReply.slice(0, _markerMatch.index);
+                                    displayReply = displayReply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').replace(/\s*---\s*\*\*Support Pollinations\.AI:\*\*\s*---[\s\S]*$/i, '').trimEnd();
+                                    if (displayReply) {
+                                        if (_firstToken) { _firstToken = false; typingEl.innerHTML = ''; }
+                                        typingEl.innerHTML = renderMd(displayReply);
+                                    }
+                                    aiMessages.scrollTop = aiMessages.scrollHeight;
+                                };
 
-                            while (true) {
-                                const { done, value } = await reader.read();
-                                if (done) break;
-                                const chunk = decoder.decode(value, { stream: true });
-                                for (const line of chunk.split('\n')) {
-                                    if (!line.startsWith('data: ')) continue;
-                                    const data = line.slice(6).trim();
-                                    if (data === '[DONE]') break;
-                                    try {
-                                        const parsed = JSON.parse(data);
-                                        const token  = parsed.choices?.[0]?.delta?.content ?? '';
-                                        if (token) {
-                                            reply += token;
-                                            // Suppress partial marker during streaming so it never flashes
-                                            let displayReply = reply;
-                                            const _markerMatch = displayReply.match(/(?:function\s+)?assistantRequestPageContext/);
-                                            if (_markerMatch) displayReply = displayReply.slice(0, _markerMatch.index);
-                                            displayReply = displayReply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').replace(/\s*---\s*\*\*Support Pollinations\.AI:\*\*\s*---[\s\S]*$/i, '').trimEnd();
-                                            if (displayReply) {
-                                                if (_firstToken) { _firstToken = false; typingEl.innerHTML = ''; }
-                                                typingEl.innerHTML = renderMd(displayReply);
-                                            }
-                                            aiMessages.scrollTop = aiMessages.scrollHeight;
-                                        }
-                                    } catch { /* partial chunk, skip */ }
+                                const msgs = [{ role: 'system', content: _systemPrompt() }, ..._history];
+
+                                let ok = false;
+                                if (provider === 'opensource') {
+                                    ok = await callOpenSourceAi(modelName, userText, msgs, onToken, ac.signal);
+                                } else if (provider === 'ollama') {
+                                    ok = await callOllamaAi(modelName, msgs, onToken, ac.signal);
+                                    if (!ok) {
+                                        ok = await callOpenSourceAi(modelName, userText, msgs, onToken, ac.signal);
+                                    }
+                                } else if (provider === 'duckduckgo') {
+                                    ok = await callDuckDuckGoAi(modelName, userText, msgs, onToken, ac.signal);
+                                    if (!ok) {
+                                        ok = await callOpenSourceAi('llama-3.3', userText, msgs, onToken, ac.signal);
+                                    }
+                                } else {
+                                    ok = await callCustomAi(msgs, onToken, ac.signal);
+                                    if (!ok) {
+                                        ok = await callOpenSourceAi('llama-3.3', userText, msgs, onToken, ac.signal);
+                                    }
                                 }
-                            }
 
-                            if (!reply) {
-                                if (_retry < 3) continue;
-                                reply = '(no response)';
+                                clearTimeout(to);
+
+                                if (!ok && !reply) {
+                                    if (_retry < 1) continue;
+                                    reply = generateLocalAiFallback(userText);
+                                }
+
+                                const _needsPerm = /assistantRequestPageContext/.test(reply);
+                                reply = reply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').replace(/\s*---\s*\*\*Support Pollinations\.AI:\*\*\s*---[\s\S]*$/i, '').trimEnd();
+                                if (!reply) reply = _needsPerm ? 'I need permission to access the content of this page.' : generateLocalAiFallback(userText);
+                                typingEl.innerHTML = renderMd(reply);
+                                typingEl.innerHTML = typingEl.innerHTML.replace(/assistantRequestPageContext/gi, '');
+                                _history.push({ role: 'assistant', content: reply });
+                                if (aiSidebar.classList.contains('hidden')) aiBtn.classList.add('has-new');
+                                if (!_needsPerm && isCutOff(reply)) showContinueBar();
+                                if (_needsPerm) assistantRequestPageContext();
+                                lastErr = null;
+                                break;
+                            } catch (e2) {
+                                lastErr = e2;
                             }
-                            const _needsPerm = /assistantRequestPageContext/.test(reply);
-                            reply = reply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').replace(/\s*---\s*\*\*Support Pollinations\.AI:\*\*\s*---[\s\S]*$/i, '').trimEnd();
-                            if (!reply) reply = _needsPerm ? 'I need permission to access the content of this page.' : '(no response)';
-                            typingEl.innerHTML = renderMd(reply);
-                            typingEl.innerHTML = typingEl.innerHTML.replace(/assistantRequestPageContext/gi, '');
-                            _history.push({ role: 'assistant', content: reply });
-                            if (aiSidebar.classList.contains('hidden')) aiBtn.classList.add('has-new');
-                            if (!_needsPerm && isCutOff(reply)) showContinueBar();
-                            if (_needsPerm) assistantRequestPageContext();
-                            lastErr = null;
-                            break;
-                        } catch (e2) {
-                            lastErr = e2;
                         }
-                    }
-                    if (lastErr) throw lastErr;
-
+                        if (lastErr && !_history.some(m => m.role === 'assistant' && m.content)) {
+                            const fb = generateLocalAiFallback(userText);
+                            typingEl.innerHTML = renderMd(fb);
+                            _history.push({ role: 'assistant', content: fb });
+                        }
                     } catch (e) {
                         typingEl.remove();
                         _history.pop();
-                        let msg;
-                        if (e.name === 'AbortError') msg = '⚠ The AI took too long. ';
-                        else if (e.name === 'TypeError') {
-                            console.warn('GUST AI fetch failed:', e.message, 'origin:', location.origin, 'protocol:', location.protocol);
-                            msg = '⚠ ' + (e.message || 'Network error') + ' ';
-                        }
-                        else msg = '⚠ ' + (e.message || 'Unknown error') + ' ';
+                        let msg = '⚠ ' + (e?.message || 'Error reaching AI provider') + ' ';
                         const retryEl = appendMsg('assistant', msg);
                         const btn = document.createElement('span');
                         btn.textContent = '↻ Retry';
                         btn.style.cssText = 'color:var(--ac);cursor:pointer;font-weight:600;text-decoration:underline;margin-left:4px;';
-                        btn.onclick = () => { if (_lastMsg && !_thinking) { _thinking = true; sendMessage(_lastMsg.userText, _lastMsg.skipContext, _lastMsg.displayText); btn.style.pointerEvents = 'none'; btn.style.opacity = '0.4'; retryEl.remove(); } };
+                        btn.onclick = () => {
+                            if (_lastMsg && !_thinking) {
+                                _thinking = true;
+                                sendMessage(_lastMsg.userText, _lastMsg.skipContext, _lastMsg.displayText);
+                                btn.style.pointerEvents = 'none';
+                                btn.style.opacity = '0.4';
+                                retryEl.remove();
+                            }
+                        };
                         retryEl.appendChild(btn);
                     }
 

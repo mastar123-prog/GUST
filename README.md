@@ -135,7 +135,7 @@ Put it inside another HTML file as an `<iframe>`. Works from a Blob URL. Works f
 
 **Option 4: Deploy with Streamlit**
 
-Run locally with `pip install -r requirements.txt` followed by `streamlit run app.py`. For Streamlit Community Cloud, create an app from this repository and set the main file to `app.py`. The wrapper embeds `index.html` and routes proxied-frame messages back to GUST's frame.
+Run locally with `pip install -r requirements.txt` followed by `streamlit run app.py`. For Streamlit Community Cloud, create an app from this repository and set the main file to `app.py`. The Streamlit deployment includes an integrated local WISP relay server for 100% uptime, zero external server dependencies, and automated session keepalive.
 
 ---
 

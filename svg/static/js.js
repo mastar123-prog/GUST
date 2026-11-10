@@ -132,9 +132,10 @@
 
   let WISP = (function () {
     try {
-      return ls.getItem("gust:wisp:v1") || "wss://wisp.rhw.one/wisp/";
+      if (typeof window !== "undefined" && window.__gustLocalWisp) return window.__gustLocalWisp;
+      return ls.getItem("gust:wisp:v1") || "wss://anura.pro/";
     } catch {
-      return "wss://wisp.rhw.one/wisp/";
+      return (typeof window !== "undefined" && window.__gustLocalWisp) || "wss://anura.pro/";
     }
   })();
   const $ = (s) => document.getElementById(s);
@@ -622,10 +623,14 @@
   }
 
   const SEARCH_ENGINES = {
-    brave: "https://search.brave.com/search?q=",
-    ddg: "https://duckduckgo.com/?q=",
     google: "https://www.google.com/search?q=",
+    ddg: "https://duckduckgo.com/?q=",
+    brave: "https://search.brave.com/search?q=",
     bing: "https://www.bing.com/search?q=",
+    startpage: "https://www.startpage.com/sp/search?query=",
+    searxng: "https://searx.be/search?q=",
+    ecosia: "https://www.ecosia.org/search?q=",
+    qwant: "https://www.qwant.com/?q=",
   };
   const WALLPAPER_QUERIES = [
     "aurora",
@@ -1546,7 +1551,7 @@
   ];
 
   const DEFAULT_BLOCKED_SELECTORS = [
-    'iframe[src*="ads"]',
+    'iframe[src*="/ads/"]',
     'iframe[src*="googleads"]',
     'iframe[src*="doubleclick"]',
     'div[id*="ad-"]',
@@ -1627,6 +1632,7 @@
       const urlObj = new URL(url);
       const host = urlObj.hostname.toLowerCase();
       const full = url.toLowerCase();
+      if (host.includes('poki.com') || host.includes('poki-gdn.com') || host.includes('poki-cdn.com')) return false;
       const allSkipped = [...SKIP_DOMAINS, ...getCustomFilters().network];
       return allSkipped.some((d) => host.includes(d) || full.includes(d));
     } catch {
@@ -3692,7 +3698,13 @@
           msg.includes("operation") ||
           msg.includes("network") ||
           msg.includes("wisp") ||
-          msg.includes("socket"))
+          msg.includes("socket") ||
+          msg.includes("closed") ||
+          msg.includes("reset") ||
+          msg.includes("connection") ||
+          msg.includes("failed") ||
+          msg.includes("error") ||
+          msg.includes("null function"))
       ) {
         log("WISP connection lost, reconnecting...", "warn");
         let reconnected = false;
@@ -4123,9 +4135,94 @@ const WEBRTC_BLOCK = ${JSON.stringify(!!webrtcBlock)};
 const SPOOF_UA = ${JSON.stringify(pageUA || "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")};
 const SPELLCHECK = ${JSON.stringify(!!spellcheck)};
 
+// Universal PokiSDK polyfill / mock for seamless Poki gameplay
+(function initPokiPolyfill() {
+  const dummyPokiSDK = {
+    init: function() { return Promise.resolve(this); },
+    initWithReadyPromise: function() { return Promise.resolve(this); },
+    commercialBreak: function(fn) {
+      if (typeof fn === 'function') { try { fn(); } catch(e){} }
+      return Promise.resolve();
+    },
+    rewardedBreak: function(fn) {
+      if (typeof fn === 'function') { try { fn(true); } catch(e){} }
+      return Promise.resolve(true);
+    },
+    displayAd: function(el, size, fn) {
+      if (typeof fn === 'function') { try { fn(); } catch(e){} }
+      return Promise.resolve();
+    },
+    destroyAd: function() {},
+    gameplayStart: function() {},
+    gameplayStop: function() {},
+    gameLoadingStart: function() {},
+    gameLoadingFinished: function() {},
+    gameLoadingProgress: function() {},
+    roundStart: function() {},
+    roundEnd: function() {},
+    happyTime: function() {},
+    setDebug: function() {},
+    setDebugTouchOverlayController: function() {},
+    isAdblocked: function() { return false; },
+    customEvent: function() {},
+    captureError: function() {},
+    muteAd: function() {},
+    unmuteAd: function() {}
+  };
+  try {
+    let _sdk = window.PokiSDK || dummyPokiSDK;
+    Object.defineProperty(window, 'PokiSDK', {
+      get() { return _sdk; },
+      set(v) {
+        if (v && typeof v === 'object') {
+          const origInit = v.init;
+          if (typeof origInit === 'function') {
+            v.init = function() {
+              return Promise.race([
+                Promise.resolve(origInit.apply(this, arguments)),
+                new Promise(res => setTimeout(() => res(v), 2500))
+              ]).catch(() => v);
+            };
+          }
+          const origComm = v.commercialBreak;
+          if (typeof origComm === 'function') {
+            v.commercialBreak = function(fn) {
+              if (typeof fn === 'function') { try { fn(); } catch(e){} }
+              return origComm.apply(this, arguments).catch(() => {});
+            };
+          }
+          const origRew = v.rewardedBreak;
+          if (typeof origRew === 'function') {
+            v.rewardedBreak = function(fn) {
+              if (typeof fn === 'function') { try { fn(true); } catch(e){} }
+              return origRew.apply(this, arguments).catch(() => true);
+            };
+          }
+          _sdk = v;
+        } else {
+          _sdk = dummyPokiSDK;
+        }
+      },
+      configurable: true,
+      enumerable: true
+    });
+  } catch(e) {
+    try { window.PokiSDK = dummyPokiSDK; } catch(err) {}
+  }
+  try {
+    if (window.parent && window.parent !== window && !window.parent.PokiSDK) {
+      window.parent.PokiSDK = window.PokiSDK;
+    }
+  } catch(e) {}
+})();
+
 function shouldSkip(url) {
   if (!BLOCK_ENABLED) return false;
-  try { const h = new URL(url).hostname.toLowerCase(); return SKIP.some(d => h.includes(d)); } catch { return false; }
+  try {
+    const h = new URL(url).hostname.toLowerCase();
+    if (h.includes('poki.com') || h.includes('poki-gdn.com') || h.includes('poki-cdn.com')) return false;
+    return SKIP.some(d => h.includes(d));
+  } catch { return false; }
 }
 
 const assetsPath = BASE.substring(0, BASE.lastIndexOf('/') + 1);
@@ -4918,7 +5015,88 @@ history.pushState = function(s, t, u) { if (u) { try { Object.assign(fakeLoc, ne
 history.replaceState = function(s, t, u) { if (u) { try { Object.assign(fakeLoc, new URL(resolve(u))); } catch {} parent.postMessage({ t: 'uc', u: fakeLoc.href }, '*'); } return origReplace.call(this, s, t, null); };
 
 const OrigWorker = window.Worker;
-if (OrigWorker) { window.Worker = function(url, opts) { const absUrl = resolve(url); const w = { onmessage: null, onerror: null, postMessage: () => {}, terminate: () => {}, addEventListener: () => {}, removeEventListener: () => {} }; const p = /^(data:|blob:)/i.test(absUrl) ? _fetch.call(window, absUrl).then(r => r.arrayBuffer()).then(buf => { const arr = new Uint8Array(buf); let bin = ""; for(let i=0; i<arr.length; i++) bin+=String.fromCharCode(arr[i]); return { d: btoa(bin) }; }) : req(absUrl); p.then(r => { const bin = atob(r.d || ''); const arr = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i); const blob = new Blob([arr], { type: 'application/javascript' }); const real = new OrigWorker(URL.createObjectURL(blob), opts); w.postMessage = m => real.postMessage(m); w.terminate = () => real.terminate(); w.addEventListener = (t, fn) => real.addEventListener(t, fn); w.removeEventListener = (t, fn) => real.removeEventListener(t, fn); real.onmessage = e => w.onmessage?.(e); real.onerror = e => w.onerror?.(e); }).catch(e => w.onerror?.(new ErrorEvent('error', { message: e.message }))); return w; }; }
+if (OrigWorker) {
+  window.Worker = function(url, opts) {
+    let absUrl;
+    try { absUrl = resolve(url); } catch (e) { absUrl = String(url); }
+    let real = null;
+    let terminated = false;
+    const msgQueue = [];
+    const listeners = [];
+    const w = {
+      onmessage: null,
+      onerror: null,
+      postMessage: function(msg, transfer) {
+        if (terminated) return;
+        if (real) {
+          if (transfer) real.postMessage(msg, transfer);
+          else real.postMessage(msg);
+        } else {
+          msgQueue.push({ msg, transfer });
+        }
+      },
+      terminate: function() {
+        terminated = true;
+        if (real) real.terminate();
+      },
+      addEventListener: function(type, fn, opt) {
+        if (real) real.addEventListener(type, fn, opt);
+        else listeners.push({ type, fn, opt });
+      },
+      removeEventListener: function(type, fn, opt) {
+        if (real) real.removeEventListener(type, fn, opt);
+        else {
+          const idx = listeners.findIndex(l => l.type === type && l.fn === fn);
+          if (idx !== -1) listeners.splice(idx, 1);
+        }
+      }
+    };
+    function initReal(workerInstance) {
+      if (terminated) {
+        workerInstance.terminate();
+        return;
+      }
+      real = workerInstance;
+      for (const l of listeners) {
+        real.addEventListener(l.type, l.fn, l.opt);
+      }
+      real.onmessage = e => { if (w.onmessage) w.onmessage(e); };
+      real.onerror = e => { if (w.onerror) w.onerror(e); };
+      while (msgQueue.length > 0) {
+        const item = msgQueue.shift();
+        if (item.transfer) real.postMessage(item.msg, item.transfer);
+        else real.postMessage(item.msg);
+      }
+    }
+    if (/^blob:/i.test(absUrl)) {
+      try {
+        const direct = new OrigWorker(absUrl, opts);
+        initReal(direct);
+        return w;
+      } catch (err) {}
+    }
+    const p = /^(data:|blob:)/i.test(absUrl)
+      ? _fetch.call(window, absUrl).then(r => r.arrayBuffer()).then(buf => {
+          const arr = new Uint8Array(buf);
+          let bin = "";
+          for (let i = 0; i < arr.length; i++) bin += String.fromCharCode(arr[i]);
+          return { d: btoa(bin) };
+        })
+      : req(absUrl);
+    p.then(r => {
+      const bin = atob(r.d || '');
+      const arr = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+      const blob = new Blob([arr], { type: 'application/javascript' });
+      const blobUrl = URL.createObjectURL(blob);
+      const workerInstance = new OrigWorker(blobUrl, opts);
+      initReal(workerInstance);
+    }).catch(e => {
+      if (w.onerror) w.onerror(new ErrorEvent('error', { message: e?.message || 'Worker load failed' }));
+    });
+    return w;
+  };
+}
 
 // SharedWorker shim — proxy the script through Gust then run as a plain Worker
 // (SharedWorkers can't share state across tabs in a single-iframe proxy, but at least
@@ -6808,9 +6986,9 @@ parent.postMessage({ t: 'ready' }, '*');
       })();
       const _fbWisp = (() => {
         try {
-          return ls.getItem("gust:fallback:wisp") || "";
+          return ls.getItem("gust:fallback:wisp") || "wss://ruby.rubynetwork.co/wisp/";
         } catch {
-          return "";
+          return "wss://ruby.rubynetwork.co/wisp/";
         }
       })();
       const _fbRetries = (() => {
@@ -8559,8 +8737,14 @@ parent.postMessage({ t: 'ready' }, '*');
     if (!container) return;
     container.innerHTML = "";
     const engines = [
+      { key: "google", name: "Google", url: SEARCH_ENGINES.google },
+      { key: "ddg", name: "DuckDuckGo", url: SEARCH_ENGINES.ddg },
       { key: "brave", name: "Brave", url: SEARCH_ENGINES.brave },
       { key: "bing", name: "Bing", url: SEARCH_ENGINES.bing },
+      { key: "startpage", name: "Startpage", url: SEARCH_ENGINES.startpage },
+      { key: "searxng", name: "SearXNG", url: SEARCH_ENGINES.searxng },
+      { key: "ecosia", name: "Ecosia", url: SEARCH_ENGINES.ecosia },
+      { key: "qwant", name: "Qwant", url: SEARCH_ENGINES.qwant },
     ];
     engines.forEach((eng) => {
       const btn = document.createElement("button");
@@ -8623,7 +8807,7 @@ parent.postMessage({ t: 'ready' }, '*');
     }
     if (wispReset && wispInput) {
       wispReset.onclick = async () => {
-        const defaultWisp = "wss://wisp.rhw.one/wisp/";
+        const defaultWisp = (typeof window !== "undefined" && window.__gustLocalWisp) ? window.__gustLocalWisp : "wss://anura.pro/";
         wispInput.value = defaultWisp;
         try {
           ls.setItem("gust:wisp:v1", defaultWisp);

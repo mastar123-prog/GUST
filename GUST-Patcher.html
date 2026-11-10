@@ -1073,7 +1073,7 @@ function looksLikeGUST(t) {
   if (typeof t !== 'string' || t.length < 50000) return false;
   if (!t.toLowerCase().includes('<!doctype html')) return false;
   // Must contain GUST-specific identifiers (present in the real source)
-  return t.includes('GUST Browser') || t.includes('gust:') || t.includes('wisp.mercurywork');
+  return t.includes('GUST Browser') || t.includes('gust:') || t.includes('wisp.mercurywork') || t.includes('anura.pro');
 }
 async function fetchWithTimeout(url, ms, opts={}) {
   const c = new AbortController();
