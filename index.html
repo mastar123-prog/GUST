@@ -13717,6 +13717,10 @@ window._libcurlReady = true;
             // Result of an in-frame find (count + current index), reported by the
             // gust:find engine injected into the proxied page.
             window.addEventListener('message', (e) => {
+                if (e.data && (e.data.type === 'gust:panicCloak' || e.data.type === 'gust:returnToStrike')) {
+                    returnToStrike();
+                    return;
+                }
                 if (e.data && e.data.type === 'gust:openFind') {
                     if (isFindAvailable()) openFindBar();
                     return;
@@ -19577,6 +19581,30 @@ const anchorTargetDesc = Object.getOwnPropertyDescriptor(HTMLAnchorElement.proto
 if (anchorTargetDesc) { Object.defineProperty(HTMLAnchorElement.prototype, 'target', { get() { return '_self'; }, set(v) {}, configurable: true }); }
 const formTargetDesc = Object.getOwnPropertyDescriptor(HTMLFormElement.prototype, 'target');
 if (formTargetDesc) { Object.defineProperty(HTMLFormElement.prototype, 'target', { get() { return ''; }, set(v) {}, configurable: true }); }
+
+// ── GUST Panic Key & Media Pausing Interceptor ──
+try {
+  window.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.code === 'Space' || e.key === ' ' || e.keyCode === 32)) {
+      e.preventDefault();
+      e.stopPropagation();
+      try { window.parent.postMessage({ type: 'gust:panicCloak' }, '*'); } catch (_) {}
+    }
+  }, true);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && (e.data.type === 'gust:pauseAllMedia' || e.data.type === 'gust:panicCloak')) {
+      try {
+        document.querySelectorAll('video, audio').forEach(function(media) {
+          try {
+            media.pause();
+            media.muted = true;
+          } catch (_) {}
+        });
+      } catch (_) {}
+    }
+  });
+} catch (_) {}
 
 // ── GUST Password Manager Injected Form Interceptor & Autofill ──
 try {
@@ -32547,21 +32575,51 @@ _VIEWER_DL_JS +
             const gustEl = document.querySelector('.app');
             if (gustEl) gustEl.style.display = 'none';
 
+            // Emergency panic mute & pause for any playing iframe media
+            try {
+                const f = document.getElementById('frame');
+                if (f && f.contentWindow) {
+                    f.contentWindow.postMessage({ type: 'gust:panicCloak' }, '*');
+                    f.contentWindow.postMessage({ type: 'gust:pauseAllMedia' }, '*');
+                }
+            } catch (_) {}
+
+            // Dismiss any open modals, dropdowns, or save prompts
+            const vaultModal = document.getElementById('vaultModal');
+            if (vaultModal) vaultModal.style.display = 'none';
+            const vaultPinModal = document.getElementById('vaultPinModal');
+            if (vaultPinModal) vaultPinModal.style.display = 'none';
+            const savePrompt = document.getElementById('gustPasswordSavePrompt');
+            if (savePrompt) savePrompt.classList.add('hidden');
+
             if (typeof window._resumeRadar === 'function') window._resumeRadar();
 
             document.title = window._isTabBlurred ? STRIKE_BLUR_TITLE : STRIKE_ACTIVE_TITLE;
             setFavicon(LIGHTNING_FAVICON_SVG);
             try { localStorage.setItem('gust:disguise_mode', 'strike'); } catch (_) {}
+
+            // Focus article search on Strike disguise
+            const topicInput = document.getElementById('strikeTopicInput');
+            if (topicInput) setTimeout(() => topicInput.focus(), 60);
         }
 
-        // Global hotkey: Alt+S or Ctrl+Shift+D toggles Strike disguise immediately
+        // Panic Key: Ctrl+Space (or Cmd+Space, Alt+S, Ctrl+Shift+D) instantly triggers Strike disguise
         window.addEventListener('keydown', (e) => {
-            if ((e.altKey && (e.key === 's' || e.key === 'S')) || (e.ctrlKey && e.shiftKey && (e.key === 'd' || e.key === 'D'))) {
+            const isCtrlSpace = (e.ctrlKey || e.metaKey) && (e.code === 'Space' || e.key === ' ' || e.keyCode === 32);
+            const isLegacyDisguise = (e.altKey && (e.key === 's' || e.key === 'S')) || (e.ctrlKey && e.shiftKey && (e.key === 'd' || e.key === 'D'));
+
+            if (isCtrlSpace || isLegacyDisguise) {
                 e.preventDefault();
-                if (window._strikeDisguised) launchGust();
-                else returnToStrike();
+                e.stopPropagation();
+                if (isCtrlSpace) {
+                    // Panic key always snaps immediately to Strike disguise
+                    returnToStrike();
+                } else {
+                    if (window._strikeDisguised) launchGust();
+                    else returnToStrike();
+                }
             }
-        });
+        }, true);
 
         const disguiseToggleBtn = document.getElementById('strikeDisguiseToggleBtn');
         if (disguiseToggleBtn) disguiseToggleBtn.addEventListener('click', returnToStrike);

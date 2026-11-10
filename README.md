@@ -89,6 +89,7 @@ GUST ships with more features than a proxy arguably needs, but we wanted your pr
 - All expected nav buttons
 
 **Privacy & blocking**
+- Panic Key (`Ctrl+Space`): Emergency cloaking that instantly snaps back to the Strike weather intelligence screen, mutes active media/audio, and dismisses open modals from anywhere (including inside proxied web pages and games)
 - Built-in ad and tracker blocker with cosmetic filtering and customizable CSS filter rules
 - User-agent spoofing (request headers and `navigator.userAgent`)
 - WebRTC blocking to prevent IP leaks
