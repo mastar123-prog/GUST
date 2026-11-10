@@ -3599,6 +3599,362 @@
         .settings-nav-item[data-section="privacy"]:hover i {
             animation: _gust-ping .4s ease forwards;
         }
+        /* Passwords — key: wiggle */
+        .settings-nav-item[data-section="passwords"]:hover i {
+            animation: _gust-wiggle .45s ease forwards;
+        }
+
+        /* ── GUST Passwords & Vault CSS ── */
+        .vault-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--bd);
+            background: var(--bg3);
+            color: var(--tx);
+            transition: all 0.15s ease;
+        }
+        .vault-btn:hover {
+            background: var(--surface2, rgba(255,255,255,0.08));
+            border-color: var(--bd2, rgba(255,255,255,0.2));
+            color: var(--tx);
+        }
+        .vault-btn-primary {
+            background: var(--ac);
+            color: #000 !important;
+            border-color: var(--ac);
+            font-weight: 600;
+        }
+        .vault-btn-primary:hover {
+            background: #1affc2;
+            border-color: #1affc2;
+            color: #000 !important;
+        }
+        .vault-btn-secondary {
+            background: var(--bg3);
+            color: var(--tx2);
+        }
+        .vault-btn-sm {
+            padding: 5px 11px;
+            font-size: 12px;
+        }
+        .vault-stat-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 12px;
+            border-radius: 8px;
+            background: var(--bg3);
+            border: 1px solid var(--bd);
+            font-size: 12px;
+            font-family: var(--mono);
+            color: var(--ac);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .vault-security-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: rgba(0, 255, 180, 0.05);
+            border: 1px solid rgba(0, 255, 180, 0.2);
+            margin-bottom: 16px;
+        }
+        .vault-sec-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .vault-card-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: var(--bg2);
+            border: 1px solid var(--bd);
+            transition: all 0.15s ease;
+        }
+        .vault-card-item:hover {
+            border-color: var(--ac);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        .vault-card-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 0;
+        }
+        .vault-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--bg3);
+            border: 1px solid var(--bd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--ac);
+            flex-shrink: 0;
+            text-transform: uppercase;
+        }
+        .vault-card-details {
+            min-width: 0;
+            flex: 1;
+        }
+        .vault-card-domain {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--tx);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .vault-card-meta {
+            font-size: 12px;
+            color: var(--tx3);
+            display: flex;
+            gap: 12px;
+            margin-top: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .vault-card-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .vault-icon-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--bd);
+            background: var(--bg3);
+            color: var(--tx3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.12s;
+        }
+        .vault-icon-btn:hover {
+            color: var(--ac);
+            border-color: var(--ac);
+            background: var(--surface2, rgba(255,255,255,0.08));
+        }
+        .vault-icon-btn.delete:hover {
+            color: var(--err);
+            border-color: var(--err);
+        }
+        .vault-empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .vault-empty-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--tx3);
+            margin-bottom: 12px;
+        }
+        .vault-empty-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--tx);
+            margin-bottom: 4px;
+        }
+        .vault-empty-desc {
+            font-size: 13px;
+            color: var(--tx3);
+            max-width: 380px;
+            margin: 0 auto;
+        }
+        .vault-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .vault-modal {
+            background: var(--bg1);
+            border: 1px solid var(--bd);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+            overflow: hidden;
+            animation: vaultPop 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes vaultPop {
+            from { opacity: 0; transform: scale(0.94); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .vault-modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--bd);
+        }
+        .vault-modal-head h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--tx);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .vault-modal-close {
+            background: none;
+            border: none;
+            color: var(--tx3);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+        }
+        .vault-modal-close:hover {
+            color: var(--tx);
+        }
+        .vault-modal-body {
+            padding: 20px;
+        }
+        .vault-form-group {
+            margin-bottom: 14px;
+        }
+        .vault-form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--tx2);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .vault-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 14px 20px;
+            background: var(--bg2);
+            border-top: 1px solid var(--bd);
+        }
+        /* Save Password Prompt Floating Banner */
+        .gust-password-prompt {
+            position: fixed;
+            top: 76px;
+            right: 24px;
+            z-index: 99999;
+            background: var(--bg1);
+            border: 1px solid var(--ac);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.55);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: 420px;
+            animation: gppSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s ease;
+        }
+        .gust-password-prompt.hidden {
+            display: none !important;
+        }
+        @keyframes gppSlide {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gpp-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0,255,180,0.12);
+            color: var(--ac);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .gpp-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .gpp-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--tx);
+        }
+        .gpp-user {
+            font-size: 12px;
+            color: var(--tx3);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+        .gpp-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .gpp-btn {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+        .gpp-btn-save {
+            background: var(--ac);
+            color: #000 !important;
+        }
+        .gpp-btn-save:hover {
+            background: #1affc2;
+        }
+        .gpp-btn-dismiss {
+            background: var(--bg3);
+            color: var(--tx2);
+            border: 1px solid var(--bd);
+        }
+        .gpp-close {
+            background: none;
+            border: none;
+            color: var(--tx3);
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .gpp-close:hover {
+            color: var(--tx);
+        }
         /* Cache — database: beam (squish like stacking) */
         .settings-nav-item[data-section="cache"]:hover i {
             animation: _gust-beam .45s ease forwards;
@@ -7411,6 +7767,9 @@
             <button class="ext-puzzle-btn" id="extPuzzleBtn" title="Extensions">
                 <i class="fas fa-puzzle-piece"></i>
             </button>
+            <button class="tool-btn" id="passwordsBtn" title="Passwords & Vault (Ctrl+Shift+L)">
+                <i class="fas fa-key"></i>
+            </button>
             <button class="tool-btn" id="settingsBtn" title="Settings">
                 <i class="fas fa-gear"></i>
             </button>
@@ -7836,6 +8195,8 @@
                                         class="fas fa-magnifying-glass"></i><span>Search</span></button>
                                 <button class="settings-nav-item" data-section="privacy"><i
                                         class="fas fa-shield-halved"></i><span>Privacy</span></button>
+                                <button class="settings-nav-item" data-section="passwords"><i
+                                        class="fas fa-key"></i><span>Passwords</span></button>
                                 <button class="settings-nav-item" data-section="cache"><i
                                         class="fas fa-database"></i><span>Cache</span></button>
                                 <button class="settings-nav-item" data-section="filesandmedia"><i
@@ -8154,6 +8515,101 @@
                             </div>
 
                             
+                            <!-- Passwords & Vault Section -->
+                            <div class="settings-section" data-section="passwords" style="display:none;">
+                                <div class="settings-card">
+                                    <div class="settings-card-head" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                                        <div><i class="fas fa-key"></i> Passwords &amp; Credentials Vault</div>
+                                        <div style="display:flex; gap:8px; align-items:center;">
+                                            <button class="vault-btn vault-btn-primary" id="vaultAddBtn"><i class="fas fa-plus"></i> Add Login</button>
+                                            <button class="vault-btn vault-btn-secondary" id="vaultGenToolBtn"><i class="fas fa-wand-magic-sparkles"></i> Generator</button>
+                                            <button class="vault-btn vault-btn-secondary" id="vaultExportBtn" title="Export vault as JSON"><i class="fas fa-file-export"></i></button>
+                                            <button class="vault-btn vault-btn-secondary" id="vaultImportBtn" title="Import credentials"><i class="fas fa-file-import"></i></button>
+                                            <input type="file" id="vaultFileInput" accept=".json,.csv" style="display:none;">
+                                        </div>
+                                    </div>
+                                    <div class="settings-card-body">
+                                        <!-- Search & Stats Bar -->
+                                        <div style="display:flex; gap:10px; margin-bottom:14px; align-items:center;">
+                                            <div style="position:relative; flex:1;">
+                                                <i class="fas fa-magnifying-glass" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                                                <input type="text" class="settings-input" id="vaultSearchInput" placeholder="Search saved accounts by website, username, or notes..." style="padding-left:36px; width:100%;">
+                                            </div>
+                                            <div class="vault-stat-badge" id="vaultTotalCountBadge">0 saved</div>
+                                        </div>
+
+                                        <!-- Master PIN Security Banner -->
+                                        <div class="vault-security-banner" id="vaultSecurityBanner">
+                                            <div class="vault-sec-info">
+                                                <i class="fas fa-shield-halved" style="color:var(--ac); font-size:18px;"></i>
+                                                <div>
+                                                    <div style="font-weight:600; font-size:13px;">Master PIN Security</div>
+                                                    <div style="font-size:12px; color:var(--tx3);" id="vaultPinStatusText">Vault is currently unlocked. Set a PIN to protect your passwords on this device.</div>
+                                                </div>
+                                            </div>
+                                            <div style="display:flex; gap:8px; align-items:center;">
+                                                <button class="vault-btn vault-btn-sm" id="vaultSetPinBtn"><i class="fas fa-lock"></i> Set PIN</button>
+                                                <button class="vault-btn vault-btn-sm" id="vaultLockNowBtn" style="display:none;"><i class="fas fa-shield"></i> Lock Vault</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Lock Screen Overlay (shown when Master PIN is locked) -->
+                                        <div id="vaultLockScreen" style="display:none; text-align:center; padding:36px 20px;">
+                                            <div style="width:54px; height:54px; border-radius:50%; background:rgba(0,255,180,0.1); border:1px solid rgba(0,255,180,0.25); display:inline-flex; align-items:center; justify-content:center; color:var(--ac); font-size:22px; margin-bottom:12px;">
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                            <h3 style="margin:0 0 6px; font-size:16px;">Vault is Locked</h3>
+                                            <p style="font-size:13px; color:var(--tx2); margin:0 0 16px;">Enter your Master PIN to view and manage your saved passwords.</p>
+                                            <div style="display:flex; justify-content:center; gap:8px; max-width:280px; margin:0 auto;">
+                                                <input type="password" class="settings-input" id="vaultUnlockPinInput" placeholder="Enter PIN" style="text-align:center; letter-spacing:4px; font-size:16px; font-family:var(--mono);">
+                                                <button class="vault-btn vault-btn-primary" id="vaultUnlockBtn">Unlock</button>
+                                            </div>
+                                            <div id="vaultUnlockError" style="color:var(--err); font-size:12px; margin-top:8px; display:none;">Incorrect Master PIN</div>
+                                        </div>
+
+                                        <!-- Credentials List Container -->
+                                        <div id="vaultCredentialsList" style="display:flex; flex-direction:column; gap:8px;"></div>
+
+                                        <!-- Empty State Placeholder -->
+                                        <div id="vaultEmptyState" class="vault-empty-state" style="display:none;">
+                                            <div class="vault-empty-icon"><i class="fas fa-key"></i></div>
+                                            <div class="vault-empty-title">No passwords saved yet</div>
+                                            <div class="vault-empty-desc">Your credentials will appear here. Add one manually or save them automatically when logging into websites.</div>
+                                            <button class="vault-btn vault-btn-primary" id="vaultEmptyAddBtn" style="margin-top:14px;"><i class="fas fa-plus"></i> Add Your First Login</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Password Generator Card -->
+                                <div class="settings-card" id="vaultGeneratorCard" style="display:none; margin-top:16px;">
+                                    <div class="settings-card-head"><i class="fas fa-wand-magic-sparkles"></i> Built-in Password Generator</div>
+                                    <div class="settings-card-body">
+                                        <div style="display:flex; gap:10px; align-items:center; margin-bottom:14px;">
+                                            <input type="text" class="settings-input" id="vaultGenDisplay" readonly style="font-family:var(--mono); font-size:15px; font-weight:600; letter-spacing:1px; flex:1; background:var(--bg3); color:var(--ac);">
+                                            <button class="vault-btn vault-btn-primary" id="vaultGenCopyBtn"><i class="fas fa-copy"></i> Copy</button>
+                                            <button class="vault-btn vault-btn-secondary" id="vaultGenRegenBtn" title="Regenerate"><i class="fas fa-rotate"></i></button>
+                                        </div>
+                                        
+                                        <div style="display:flex; flex-direction:column; gap:12px;">
+                                            <div>
+                                                <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;">
+                                                    <span>Length: <strong id="vaultGenLengthLabel">16</strong> characters</span>
+                                                    <span id="vaultGenStrengthLabel" style="color:#10b981; font-weight:600;">Very Strong</span>
+                                                </div>
+                                                <input type="range" id="vaultGenLengthSlider" min="8" max="48" value="16" style="width:100%; accent-color:var(--ac);">
+                                            </div>
+
+                                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; font-size:13px;">
+                                                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="vaultGenUpper" checked> Uppercase (A-Z)</label>
+                                                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="vaultGenLower" checked> Lowercase (a-z)</label>
+                                                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="vaultGenNumbers" checked> Numbers (0-9)</label>
+                                                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="vaultGenSymbols" checked> Symbols (!@#$)</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="settings-section" data-section="cache" style="display:none;">
                                 <div class="settings-card">
                                     <div class="settings-card-head"><i class="fas fa-layer-group"></i> Tab Caching
@@ -10573,6 +11029,89 @@ async function start(){
 document.body.dataset.skin=localStorage.getItem('skin')||'default';
 if(token){ $('#tok').value=token; start(); }
 <\/script>
+
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
@@ -12838,7 +13377,7 @@ window._libcurlReady = true;
             }
 
             const VALID_SETTINGS_SECTIONS = new Set([
-                'connection','search','privacy','cache','filesandmedia',
+                'connection','search','privacy','passwords','cache','filesandmedia',
                 'appearance','skins','homescreen','shortcuts','language','tutorial','about','fallback'
             ]);
 
@@ -13493,6 +14032,89 @@ window._libcurlReady = true;
                 <i class="fas fa-server"></i>
                 Open Logs
             </button>
+        </div>
+    </div>
+
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
         </div>
     </div>
 </body>
@@ -18956,6 +19578,50 @@ if (anchorTargetDesc) { Object.defineProperty(HTMLAnchorElement.prototype, 'targ
 const formTargetDesc = Object.getOwnPropertyDescriptor(HTMLFormElement.prototype, 'target');
 if (formTargetDesc) { Object.defineProperty(HTMLFormElement.prototype, 'target', { get() { return ''; }, set(v) {}, configurable: true }); }
 
+// ── GUST Password Manager Injected Form Interceptor & Autofill ──
+try {
+  document.addEventListener('submit', function(e) {
+    try {
+      const form = e.target;
+      if (!form) return;
+      const passInput = form.querySelector('input[type="password"]');
+      if (!passInput || !passInput.value) return;
+      const userInput = form.querySelector('input[type="email"], input[type="text"]:not([type="password"]), input[name*="user" i], input[name*="login" i], input[name*="email" i], input[autocomplete="username"]');
+      const uVal = userInput ? userInput.value.trim() : '';
+      const pVal = passInput.value;
+      const domain = (location.hostname || location.host || '').replace(/^www\./i, '');
+      if (domain && pVal) {
+        window.parent.postMessage({
+          type: 'gust:savePasswordPrompt',
+          domain: domain,
+          username: uVal,
+          password: pVal
+        }, '*');
+      }
+    } catch (_) {}
+  }, true);
+
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'gust:autofillCredentials') {
+      const { username, password } = e.data;
+      const passInputs = document.querySelectorAll('input[type="password"]');
+      passInputs.forEach(pi => {
+        pi.value = password || '';
+        pi.dispatchEvent(new Event('input', { bubbles: true }));
+        pi.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+      if (username) {
+        const userInputs = document.querySelectorAll('input[type="email"], input[autocomplete="username"], input[name*="user" i], input[name*="login" i], input[name*="email" i], input[type="text"]');
+        if (userInputs.length > 0) {
+          userInputs[0].value = username;
+          userInputs[0].dispatchEvent(new Event('input', { bubbles: true }));
+          userInputs[0].dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    }
+  });
+} catch (_) {}
+
 // Intercept anchor .href property assignments (el.href = '...').
 // MutationObserver only fires for setAttribute() — direct property sets bypass it.
 // This catches dynamically-built result links (Brave, Google, etc.) that set
@@ -20189,7 +20855,90 @@ _VIEWER_BASE_CSS +
 '});' +
 'init();' +
 '<\/script>' +
-'</body></html>';
+'
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>';
             }
 
             // ── Shared toolbar CSS used by all viewers ─────────────────────
@@ -20270,7 +21019,90 @@ _VIEWER_DL_JS +
 'wrap.addEventListener("mousedown",e=>{dragging=true;sx=e.clientX;sy=e.clientY;sox=ox;soy=oy;wrap.classList.add("grabbing");});' +
 'window.addEventListener("mousemove",e=>{if(!dragging)return;ox=sox+(e.clientX-sx);oy=soy+(e.clientY-sy);apply();});' +
 'window.addEventListener("mouseup",()=>{dragging=false;wrap.classList.remove("grabbing");});' +
-'<\/script></body></html>';
+'<\/script>
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>';
             }
 
             function makeVideoViewer(buf, filename, mime) {
@@ -20299,7 +21131,90 @@ _VIEWER_DL_JS +
 _VIEWER_DL_JS +
 'const DATA=' + jDataUri + ';const FILENAME=' + jFilename + ';' +
 'document.getElementById("vid").src=DATA;' +
-'<\/script></body></html>';
+'<\/script>
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>';
             }
 
             function makeAudioViewer(buf, filename, mime) {
@@ -20341,7 +21256,90 @@ _VIEWER_DL_JS +
 'const DATA=' + jDataUri + ';const FILENAME=' + jFilename + ';const MIME=' + jMime + ';' +
 'document.getElementById("aud").src=DATA;' +
 'document.getElementById("mimeEl").textContent=MIME;' +
-'<\/script></body></html>';
+'<\/script>
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>';
             }
 
             function makeTextViewer(text, filename, mime) {
@@ -20406,7 +21404,90 @@ _VIEWER_DL_JS +
                     '</div>',
                     '<div id="codewrap"><pre id="pre"></pre></div>',
                     '<script src="' + scriptSrc + '"></scr' + 'ipt>',
-                    '</body></html>',
+                    '
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>',
                 ].join('');
             }
 
@@ -20455,7 +21536,90 @@ _VIEWER_DL_JS +
 '  if(navigator.clipboard){navigator.clipboard.writeText(ORIG);}' +
 '  else{var ta=document.createElement("textarea");ta.value=ORIG;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);}' +
 '}' +
-'<\/script></body></html>';
+'<\/script>
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>';
             }
 
             function makeBinaryDownloadPage(buf, filename, mime) {
@@ -20502,7 +21666,90 @@ _VIEWER_DL_JS +
 _VIEWER_DL_JS +
 'const DATA=' + jDataUri + ';const FILENAME=' + jFilename + ';' +
 'window.addEventListener("load",function(){setTimeout(function(){dl(DATA,FILENAME);},300);});' +
-'<\/script></body></html>';
+'<\/script>
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
+</body></html>';
             }
 
 
@@ -32030,11 +33277,827 @@ _VIEWER_DL_JS +
         initRealWeather();
         initRealTicker();
 
+
+        // ══════════════════════════════════════════════════════════════════════
+        // ── GUST Password Manager & Vault Engine ───────────────────────────
+        // ══════════════════════════════════════════════════════════════════════
+        (() => {
+            const STORAGE_KEY = 'gust:vault:credentials';
+            const MASTER_PIN_KEY = 'gust:vault:master_pin';
+            const NEVER_SITES_KEY = 'gust:vault:never_sites';
+
+            let _vaultLocked = false;
+            let _activeSearch = '';
+            let _pendingSave = null;
+
+            // Wire Toolbar Button & Shortcut
+            const pwBtn = document.getElementById('passwordsBtn');
+            if (pwBtn) {
+                pwBtn.addEventListener('click', () => {
+                    if (typeof go === 'function') go('gust://settings/passwords');
+                });
+            }
+
+            window.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'L' || e.key === 'l')) {
+                    e.preventDefault();
+                    if (typeof go === 'function') go('gust://settings/passwords');
+                }
+            });
+
+            function getMasterPin() {
+                try { return localStorage.getItem(MASTER_PIN_KEY) || ''; } catch { return ''; }
+            }
+
+            function setMasterPin(pin) {
+                try {
+                    if (pin) localStorage.setItem(MASTER_PIN_KEY, pin);
+                    else localStorage.removeItem(MASTER_PIN_KEY);
+                } catch {}
+                updatePinStatusUI();
+            }
+
+            function getNeverSites() {
+                try {
+                    const raw = localStorage.getItem(NEVER_SITES_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch { return []; }
+            }
+
+            function addNeverSite(domain) {
+                const list = getNeverSites();
+                if (!list.includes(domain)) {
+                    list.push(domain);
+                    try { localStorage.setItem(NEVER_SITES_KEY, JSON.stringify(list)); } catch {}
+                }
+            }
+
+            function getCredentials() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch { return []; }
+            }
+
+            function saveCredentials(creds) {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(creds));
+                } catch {}
+                renderCredentialsList();
+            }
+
+            function showVaultToast(msg, isErr = false) {
+                let t = document.getElementById('vaultToast');
+                if (!t) {
+                    t = document.createElement('div');
+                    t.id = 'vaultToast';
+                    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#0f172a;border:1px solid #00ffb4;color:#f8fafc;padding:9px 18px;border-radius:999px;font-size:13px;font-weight:500;z-index:9999999;box-shadow:0 8px 28px rgba(0,0,0,0.65);display:flex;align-items:center;gap:8px;opacity:0;transition:all .22s cubic-bezier(0.16,1,0.3,1);pointer-events:none;';
+                    document.body.appendChild(t);
+                }
+                t.innerHTML = isErr ? `<i class="fas fa-circle-exclamation" style="color:#ef4444;"></i> ${msg}` : `<i class="fas fa-check-circle" style="color:#00ffb4;"></i> ${msg}`;
+                t.style.opacity = '1';
+                t.style.transform = 'translateX(-50%) translateY(0)';
+                clearTimeout(t._timer);
+                t._timer = setTimeout(() => {
+                    t.style.opacity = '0';
+                    t.style.transform = 'translateX(-50%) translateY(10px)';
+                }, 2400);
+            }
+
+            function updatePinStatusUI() {
+                const pin = getMasterPin();
+                const banner = document.getElementById('vaultSecurityBanner');
+                const text = document.getElementById('vaultPinStatusText');
+                const setBtn = document.getElementById('vaultSetPinBtn');
+                const lockBtn = document.getElementById('vaultLockNowBtn');
+                const lockScreen = document.getElementById('vaultLockScreen');
+                const list = document.getElementById('vaultCredentialsList');
+                const empty = document.getElementById('vaultEmptyState');
+
+                if (pin) {
+                    if (text) text.innerHTML = '<span style="color:#10b981;"><i class="fas fa-check-circle"></i> Master PIN is active.</span> Credentials are protected on this device.';
+                    if (setBtn) setBtn.innerHTML = '<i class="fas fa-key"></i> Change PIN';
+                    if (lockBtn) lockBtn.style.display = 'inline-flex';
+
+                    if (_vaultLocked) {
+                        if (lockScreen) lockScreen.style.display = 'block';
+                        if (list) list.style.display = 'none';
+                        if (empty) empty.style.display = 'none';
+                    } else {
+                        if (lockScreen) lockScreen.style.display = 'none';
+                        if (list) list.style.display = 'flex';
+                    }
+                } else {
+                    if (text) text.textContent = 'Vault is currently unlocked. Set a Master PIN to protect your passwords on this device.';
+                    if (setBtn) setBtn.innerHTML = '<i class="fas fa-lock"></i> Set PIN';
+                    if (lockBtn) lockBtn.style.display = 'none';
+                    if (lockScreen) lockScreen.style.display = 'none';
+                    if (list) list.style.display = 'flex';
+                    _vaultLocked = false;
+                }
+            }
+
+            function renderCredentialsList() {
+                const list = document.getElementById('vaultCredentialsList');
+                const empty = document.getElementById('vaultEmptyState');
+                const badge = document.getElementById('vaultTotalCountBadge');
+                if (!list) return;
+
+                const creds = getCredentials();
+                if (badge) badge.textContent = `${creds.length} saved`;
+
+                const q = (_activeSearch || '').toLowerCase().trim();
+                const filtered = creds.filter(c => {
+                    if (!q) return true;
+                    return (c.domain && c.domain.toLowerCase().includes(q)) ||
+                           (c.username && c.username.toLowerCase().includes(q)) ||
+                           (c.notes && c.notes.toLowerCase().includes(q));
+                });
+
+                if (creds.length === 0) {
+                    list.innerHTML = '';
+                    if (empty) empty.style.display = 'block';
+                    return;
+                }
+
+                if (empty) empty.style.display = 'none';
+                list.innerHTML = '';
+
+                if (filtered.length === 0) {
+                    list.innerHTML = `<div style="text-align:center; padding:24px; color:var(--tx3); font-size:13px;">No accounts match "<strong>${q}</strong>"</div>`;
+                    return;
+                }
+
+                filtered.forEach(item => {
+                    const domain = item.domain || 'unknown';
+                    const initial = domain.replace(/^https?:\/\//i, '').charAt(0).toUpperCase() || 'W';
+                    const el = document.createElement('div');
+                    el.className = 'vault-card-item';
+                    el.dataset.id = item.id;
+
+                    const masked = '•'.repeat(Math.min(12, Math.max(8, (item.password || '').length)));
+
+                    el.innerHTML = `
+                        <div class="vault-card-left">
+                            <div class="vault-avatar">${initial}</div>
+                            <div class="vault-card-details">
+                                <div class="vault-card-domain">
+                                    <span>${escapeHtml(domain)}</span>
+                                    <button class="vault-icon-btn launch-site" title="Open site in GUST" style="width:22px;height:22px;font-size:10px;"><i class="fas fa-arrow-up-right-from-square"></i></button>
+                                </div>
+                                <div class="vault-card-meta">
+                                    <span><i class="fas fa-user" style="font-size:10px;"></i> ${escapeHtml(item.username || 'No username')}</span>
+                                    <span class="vault-pass-display" data-real="${escapeHtml(item.password || '')}" data-masked="${masked}" style="font-family:var(--mono);">${masked}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vault-card-actions">
+                            <button class="vault-icon-btn copy-user" title="Copy username"><i class="fas fa-user-check"></i></button>
+                            <button class="vault-icon-btn copy-pass" title="Copy password"><i class="fas fa-copy"></i></button>
+                            <button class="vault-icon-btn toggle-pass" title="Show/Hide password"><i class="fas fa-eye"></i></button>
+                            <button class="vault-icon-btn autofill-tab" title="Autofill into active tab"><i class="fas fa-bolt"></i></button>
+                            <button class="vault-icon-btn edit-entry" title="Edit account"><i class="fas fa-pen-to-square"></i></button>
+                            <button class="vault-icon-btn delete delete-entry" title="Delete account"><i class="fas fa-trash"></i></button>
+                        </div>
+                    `;
+
+                    // Actions
+                    el.querySelector('.launch-site').onclick = () => {
+                        let u = item.domain;
+                        if (!u.startsWith('http://') && !u.startsWith('https://')) u = 'https://' + u;
+                        if (typeof go === 'function') go(u);
+                    };
+
+                    el.querySelector('.copy-user').onclick = async () => {
+                        try {
+                            await navigator.clipboard.writeText(item.username || '');
+                            showVaultToast(`Copied username: ${item.username}`);
+                        } catch {
+                            showVaultToast('Could not copy username', true);
+                        }
+                    };
+
+                    el.querySelector('.copy-pass').onclick = async () => {
+                        if (isVaultLocked()) {
+                            showVaultToast('Unlock vault with PIN first', true);
+                            return;
+                        }
+                        try {
+                            await navigator.clipboard.writeText(item.password || '');
+                            showVaultToast(`Copied password for ${item.domain}`);
+                        } catch {
+                            showVaultToast('Could not copy password', true);
+                        }
+                    };
+
+                    const passDisplay = el.querySelector('.vault-pass-display');
+                    const toggleBtn = el.querySelector('.toggle-pass');
+                    let showing = false;
+                    toggleBtn.onclick = () => {
+                        if (isVaultLocked()) {
+                            showVaultToast('Unlock vault with PIN first', true);
+                            return;
+                        }
+                        showing = !showing;
+                        passDisplay.textContent = showing ? passDisplay.dataset.real : passDisplay.dataset.masked;
+                        toggleBtn.innerHTML = showing ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+                    };
+
+                    el.querySelector('.autofill-tab').onclick = () => {
+                        try {
+                            const f = document.getElementById('frame');
+                            if (f && f.contentWindow) {
+                                f.contentWindow.postMessage({
+                                    type: 'gust:autofillCredentials',
+                                    username: item.username,
+                                    password: item.password
+                                }, '*');
+                                showVaultToast(`Autofilled credentials for ${item.domain}!`);
+                            }
+                        } catch {
+                            showVaultToast('Could not autofill into frame', true);
+                        }
+                    };
+
+                    el.querySelector('.edit-entry').onclick = () => openEditModal(item);
+                    el.querySelector('.delete-entry').onclick = () => {
+                        if (confirm(`Delete saved password for ${item.domain} (${item.username})?`)) {
+                            const updated = getCredentials().filter(c => c.id !== item.id);
+                            saveCredentials(updated);
+                            showVaultToast(`Deleted login for ${item.domain}`);
+                        }
+                    };
+
+                    list.appendChild(el);
+                });
+            }
+
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+
+            // Search
+            const searchInput = document.getElementById('vaultSearchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    _activeSearch = searchInput.value;
+                    renderCredentialsList();
+                });
+            }
+
+            // Modals: Add / Edit
+            const vaultModal = document.getElementById('vaultModal');
+            const modalTitle = document.getElementById('vaultModalTitle');
+            const editId = document.getElementById('vaultEditId');
+            const formDomain = document.getElementById('vaultFormDomain');
+            const formUsername = document.getElementById('vaultFormUsername');
+            const formPassword = document.getElementById('vaultFormPassword');
+            const formNotes = document.getElementById('vaultFormNotes');
+            const togglePassBtn = document.getElementById('vaultFormTogglePassBtn');
+            const formGenBtn = document.getElementById('vaultFormGenBtn');
+            const modalSave = document.getElementById('vaultModalSave');
+            const modalCancel = document.getElementById('vaultModalCancel');
+            const modalClose = document.getElementById('vaultModalClose');
+
+            function openAddModal(prefill = {}) {
+                if (!vaultModal) return;
+                modalTitle.innerHTML = '<i class="fas fa-plus"></i> Add Login';
+                editId.value = '';
+                formDomain.value = prefill.domain || (typeof pageUrl !== 'undefined' && pageUrl && !pageUrl.startsWith('gust://') ? pageUrl.replace(/^https?:\/\//i, '').split('/')[0] : '');
+                formUsername.value = prefill.username || '';
+                formPassword.value = prefill.password || '';
+                formNotes.value = prefill.notes || '';
+                formPassword.type = 'password';
+                if (togglePassBtn) togglePassBtn.innerHTML = '<i class="fas fa-eye"></i>';
+                vaultModal.style.display = 'flex';
+                formDomain.focus();
+            }
+
+            function openEditModal(item) {
+                if (!vaultModal) return;
+                modalTitle.innerHTML = '<i class="fas fa-pen-to-square"></i> Edit Login';
+                editId.value = item.id;
+                formDomain.value = item.domain || '';
+                formUsername.value = item.username || '';
+                formPassword.value = item.password || '';
+                formNotes.value = item.notes || '';
+                formPassword.type = 'password';
+                if (togglePassBtn) togglePassBtn.innerHTML = '<i class="fas fa-eye"></i>';
+                vaultModal.style.display = 'flex';
+                formUsername.focus();
+            }
+
+            function closeVaultModal() {
+                if (vaultModal) vaultModal.style.display = 'none';
+            }
+
+            if (document.getElementById('vaultAddBtn')) document.getElementById('vaultAddBtn').onclick = () => openAddModal();
+            if (document.getElementById('vaultEmptyAddBtn')) document.getElementById('vaultEmptyAddBtn').onclick = () => openAddModal();
+            if (modalCancel) modalCancel.onclick = closeVaultModal;
+            if (modalClose) modalClose.onclick = closeVaultModal;
+
+            if (togglePassBtn) {
+                togglePassBtn.onclick = () => {
+                    const isPass = formPassword.type === 'password';
+                    formPassword.type = isPass ? 'text' : 'password';
+                    togglePassBtn.innerHTML = isPass ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+                };
+            }
+
+            if (formGenBtn) {
+                formGenBtn.onclick = () => {
+                    const pwd = generateSecurePassword(16, true, true, true, true);
+                    formPassword.value = pwd;
+                    formPassword.type = 'text';
+                    if (togglePassBtn) togglePassBtn.innerHTML = '<i class="fas fa-eye-slash"></i>';
+                    showVaultToast('Generated secure 16-character password!');
+                };
+            }
+
+            if (modalSave) {
+                modalSave.onclick = () => {
+                    let domain = (formDomain.value || '').trim();
+                    const username = (formUsername.value || '').trim();
+                    const password = (formPassword.value || '').trim();
+                    const notes = (formNotes.value || '').trim();
+
+                    if (!domain) {
+                        alert('Please enter a website or domain name.');
+                        formDomain.focus();
+                        return;
+                    }
+                    if (!password) {
+                        alert('Please enter a password.');
+                        formPassword.focus();
+                        return;
+                    }
+
+                    domain = domain.replace(/^https?:\/\//i, '').replace(/\/.*$/, '');
+                    const creds = getCredentials();
+                    const existingId = editId.value;
+
+                    if (existingId) {
+                        const idx = creds.findIndex(c => c.id === existingId);
+                        if (idx !== -1) {
+                            creds[idx] = { ...creds[idx], domain, username, password, notes, updated: Date.now() };
+                        }
+                    } else {
+                        creds.unshift({
+                            id: 'cred_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+                            domain,
+                            username,
+                            password,
+                            notes,
+                            created: Date.now()
+                        });
+                    }
+
+                    saveCredentials(creds);
+                    closeVaultModal();
+                    showVaultToast(`Saved login for ${domain}!`);
+                };
+            }
+
+            // ── Password Generator Tool ──
+            function generateSecurePassword(length = 16, upper = true, lower = true, numbers = true, symbols = true) {
+                const U = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const L = 'abcdefghijklmnopqrstuvwxyz';
+                const N = '0123456789';
+                const S = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+                let pool = '';
+                let result = [];
+
+                if (upper) { pool += U; result.push(U[Math.floor(Math.random() * U.length)]); }
+                if (lower) { pool += L; result.push(L[Math.floor(Math.random() * L.length)]); }
+                if (numbers) { pool += N; result.push(N[Math.floor(Math.random() * N.length)]); }
+                if (symbols) { pool += S; result.push(S[Math.floor(Math.random() * S.length)]); }
+
+                if (!pool) pool = L + N;
+
+                const cryptoObj = window.crypto || window.msCrypto;
+                const randomBytes = new Uint32Array(length);
+                if (cryptoObj && cryptoObj.getRandomValues) {
+                    cryptoObj.getRandomValues(randomBytes);
+                    for (let i = result.length; i < length; i++) {
+                        result.push(pool[randomBytes[i] % pool.length]);
+                    }
+                } else {
+                    for (let i = result.length; i < length; i++) {
+                        result.push(pool[Math.floor(Math.random() * pool.length)]);
+                    }
+                }
+
+                // Shuffle
+                for (let i = result.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [result[i], result[j]] = [result[j], result[i]];
+                }
+                return result.join('');
+            }
+
+            const genCard = document.getElementById('vaultGeneratorCard');
+            const genToolBtn = document.getElementById('vaultGenToolBtn');
+            const genDisplay = document.getElementById('vaultGenDisplay');
+            const genCopyBtn = document.getElementById('vaultGenCopyBtn');
+            const genRegenBtn = document.getElementById('vaultGenRegenBtn');
+            const genSlider = document.getElementById('vaultGenLengthSlider');
+            const genLengthLabel = document.getElementById('vaultGenLengthLabel');
+            const genUpper = document.getElementById('vaultGenUpper');
+            const genLower = document.getElementById('vaultGenLower');
+            const genNums = document.getElementById('vaultGenNumbers');
+            const genSyms = document.getElementById('vaultGenSymbols');
+
+            function refreshGen() {
+                if (!genDisplay) return;
+                const len = parseInt(genSlider?.value || 16, 10);
+                if (genLengthLabel) genLengthLabel.textContent = len;
+                const pwd = generateSecurePassword(
+                    len,
+                    genUpper?.checked ?? true,
+                    genLower?.checked ?? true,
+                    genNums?.checked ?? true,
+                    genSyms?.checked ?? true
+                );
+                genDisplay.value = pwd;
+            }
+
+            if (genToolBtn && genCard) {
+                genToolBtn.onclick = () => {
+                    const isHidden = genCard.style.display === 'none';
+                    genCard.style.display = isHidden ? 'block' : 'none';
+                    if (isHidden) {
+                        refreshGen();
+                        genCard.scrollIntoView({ behavior: 'smooth' });
+                    }
+                };
+            }
+            if (genRegenBtn) genRegenBtn.onclick = refreshGen;
+            if (genSlider) genSlider.oninput = refreshGen;
+            [genUpper, genLower, genNums, genSyms].forEach(cb => { if (cb) cb.onchange = refreshGen; });
+
+            if (genCopyBtn && genDisplay) {
+                genCopyBtn.onclick = async () => {
+                    try {
+                        await navigator.clipboard.writeText(genDisplay.value);
+                        showVaultToast('Copied generated password to clipboard!');
+                    } catch {
+                        showVaultToast('Could not copy to clipboard', true);
+                    }
+                };
+            }
+
+            // ── Master PIN Logic ──
+            const pinModal = document.getElementById('vaultPinModal');
+            const pinModalClose = document.getElementById('vaultPinModalClose');
+            const setPinBtn = document.getElementById('vaultSetPinBtn');
+            const lockNowBtn = document.getElementById('vaultLockNowBtn');
+            const pinSaveBtn = document.getElementById('vaultPinSaveBtn');
+            const pinRemoveBtn = document.getElementById('vaultPinRemoveBtn');
+            const newPinInput = document.getElementById('vaultNewPinInput');
+            const confirmPinInput = document.getElementById('vaultConfirmPinInput');
+            const pinError = document.getElementById('vaultPinError');
+            const unlockBtn = document.getElementById('vaultUnlockBtn');
+            const unlockPinInput = document.getElementById('vaultUnlockPinInput');
+            const unlockError = document.getElementById('vaultUnlockError');
+
+            if (setPinBtn && pinModal) {
+                setPinBtn.onclick = () => {
+                    if (newPinInput) newPinInput.value = '';
+                    if (confirmPinInput) confirmPinInput.value = '';
+                    if (pinError) pinError.style.display = 'none';
+                    if (pinRemoveBtn) pinRemoveBtn.style.display = getMasterPin() ? 'inline-flex' : 'none';
+                    pinModal.style.display = 'flex';
+                    if (newPinInput) newPinInput.focus();
+                };
+            }
+
+            if (pinModalClose && pinModal) pinModalClose.onclick = () => pinModal.style.display = 'none';
+
+            if (pinSaveBtn) {
+                pinSaveBtn.onclick = () => {
+                    const p1 = (newPinInput?.value || '').trim();
+                    const p2 = (confirmPinInput?.value || '').trim();
+                    if (!p1 || p1.length < 4) {
+                        if (pinError) { pinError.textContent = 'PIN must be at least 4 digits.'; pinError.style.display = 'block'; }
+                        return;
+                    }
+                    if (p1 !== p2) {
+                        if (pinError) { pinError.textContent = 'PINs do not match.'; pinError.style.display = 'block'; }
+                        return;
+                    }
+                    setMasterPin(p1);
+                    if (pinModal) pinModal.style.display = 'none';
+                    showVaultToast('Master PIN set successfully!');
+                };
+            }
+
+            if (pinRemoveBtn) {
+                pinRemoveBtn.onclick = () => {
+                    if (confirm('Remove Master PIN protection? Anyone using this browser will be able to view passwords.')) {
+                        setMasterPin('');
+                        if (pinModal) pinModal.style.display = 'none';
+                        showVaultToast('Master PIN removed.');
+                    }
+                };
+            }
+
+            if (lockNowBtn) {
+                lockNowBtn.onclick = () => {
+                    _vaultLocked = true;
+                    updatePinStatusUI();
+                    showVaultToast('Vault locked.');
+                };
+            }
+
+            if (unlockBtn && unlockPinInput) {
+                const handleUnlock = () => {
+                    const pin = getMasterPin();
+                    if (unlockPinInput.value === pin) {
+                        _vaultLocked = false;
+                        unlockPinInput.value = '';
+                        if (unlockError) unlockError.style.display = 'none';
+                        updatePinStatusUI();
+                        renderCredentialsList();
+                        showVaultToast('Vault unlocked.');
+                    } else {
+                        if (unlockError) unlockError.style.display = 'block';
+                        unlockPinInput.select();
+                    }
+                };
+                unlockBtn.onclick = handleUnlock;
+                unlockPinInput.onkeydown = (e) => { if (e.key === 'Enter') handleUnlock(); };
+            }
+
+            // ── Export / Import ──
+            const exportBtn = document.getElementById('vaultExportBtn');
+            const importBtn = document.getElementById('vaultImportBtn');
+            const fileInput = document.getElementById('vaultFileInput');
+
+            if (exportBtn) {
+                exportBtn.onclick = () => {
+                    if (isVaultLocked()) {
+                        showVaultToast('Unlock vault before exporting', true);
+                        return;
+                    }
+                    const creds = getCredentials();
+                    const json = JSON.stringify(creds, null, 2);
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `gust_passwords_${new Date().toISOString().slice(0,10)}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    showVaultToast(`Exported ${creds.length} passwords to JSON!`);
+                };
+            }
+
+            if (importBtn && fileInput) {
+                importBtn.onclick = () => fileInput.click();
+                fileInput.onchange = (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        try {
+                            const text = ev.target.result;
+                            let imported = [];
+                            if (file.name.endsWith('.json')) {
+                                imported = JSON.parse(text);
+                            } else {
+                                // Simple CSV parse
+                                const lines = text.split('\n');
+                                for (let i = 1; i < lines.length; i++) {
+                                    const parts = lines[i].split(',');
+                                    if (parts.length >= 3) {
+                                        imported.push({
+                                            domain: parts[0]?.replace(/"/g,'').trim(),
+                                            username: parts[1]?.replace(/"/g,'').trim(),
+                                            password: parts[2]?.replace(/"/g,'').trim()
+                                        });
+                                    }
+                                }
+                            }
+
+                            if (!Array.isArray(imported) || imported.length === 0) {
+                                showVaultToast('No valid credentials found in file', true);
+                                return;
+                            }
+
+                            const creds = getCredentials();
+                            let count = 0;
+                            imported.forEach(item => {
+                                if (item.domain && item.password) {
+                                    creds.push({
+                                        id: 'cred_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+                                        domain: item.domain.replace(/^https?:\/\//i,'').replace(/\/.*$/,''),
+                                        username: item.username || '',
+                                        password: item.password,
+                                        notes: item.notes || '',
+                                        created: Date.now()
+                                    });
+                                    count++;
+                                }
+                            });
+                            saveCredentials(creds);
+                            showVaultToast(`Successfully imported ${count} credentials!`);
+                        } catch (err) {
+                            showVaultToast('Error parsing credentials file', true);
+                        }
+                    };
+                    reader.readAsText(file);
+                    fileInput.value = '';
+                };
+            }
+
+            // ── In-Page Save Password Prompt Banner ──
+            const savePrompt = document.getElementById('gustPasswordSavePrompt');
+            const gppDomain = document.getElementById('gppDomain');
+            const gppUser = document.getElementById('gppUser');
+            const gppSaveBtn = document.getElementById('gppSaveBtn');
+            const gppNeverBtn = document.getElementById('gppNeverBtn');
+            const gppCloseBtn = document.getElementById('gppCloseBtn');
+
+            window.addEventListener('message', (e) => {
+                if (e.data && e.data.type === 'gust:savePasswordPrompt') {
+                    const { domain, username, password } = e.data;
+                    if (!domain || !password) return;
+
+                    const never = getNeverSites();
+                    if (never.includes(domain)) return;
+
+                    const creds = getCredentials();
+                    const existing = creds.find(c => c.domain.toLowerCase() === domain.toLowerCase() && c.username === username);
+                    if (existing && existing.password === password) return; // already identical
+
+                    _pendingSave = { domain, username, password };
+                    if (gppDomain) gppDomain.textContent = domain;
+                    if (gppUser) gppUser.textContent = username ? `Username: ${username}` : 'Password login';
+                    if (savePrompt) savePrompt.classList.remove('hidden');
+                }
+            });
+
+            if (gppSaveBtn) {
+                gppSaveBtn.onclick = () => {
+                    if (_pendingSave) {
+                        const creds = getCredentials();
+                        const existingIdx = creds.findIndex(c => c.domain.toLowerCase() === _pendingSave.domain.toLowerCase() && c.username === _pendingSave.username);
+                        if (existingIdx !== -1) {
+                            creds[existingIdx].password = _pendingSave.password;
+                            creds[existingIdx].updated = Date.now();
+                        } else {
+                            creds.unshift({
+                                id: 'cred_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+                                domain: _pendingSave.domain,
+                                username: _pendingSave.username,
+                                password: _pendingSave.password,
+                                created: Date.now()
+                            });
+                        }
+                        saveCredentials(creds);
+                        showVaultToast(`Saved password for ${_pendingSave.domain}!`);
+                        _pendingSave = null;
+                    }
+                    if (savePrompt) savePrompt.classList.add('hidden');
+                };
+            }
+
+            if (gppNeverBtn) {
+                gppNeverBtn.onclick = () => {
+                    if (_pendingSave && _pendingSave.domain) {
+                        addNeverSite(_pendingSave.domain);
+                        showVaultToast(`Will not ask to save passwords for ${_pendingSave.domain}.`);
+                    }
+                    _pendingSave = null;
+                    if (savePrompt) savePrompt.classList.add('hidden');
+                };
+            }
+
+            if (gppCloseBtn) {
+                gppCloseBtn.onclick = () => {
+                    _pendingSave = null;
+                    if (savePrompt) savePrompt.classList.add('hidden');
+                };
+            }
+
+            // Seed sample logins if empty (gives user an immediate working experience)
+            const existingCreds = getCredentials();
+            if (existingCreds.length === 0) {
+                const sampleCreds = [
+                    {
+                        id: 'cred_sample_gh',
+                        domain: 'github.com',
+                        username: 'developer@gust.io',
+                        password: 'ghp_' + generateSecurePassword(24, true, true, true, false),
+                        notes: 'Personal GitHub developer access token',
+                        created: Date.now()
+                    },
+                    {
+                        id: 'cred_sample_discord',
+                        domain: 'discord.com',
+                        username: 'nautilus_user#1337',
+                        password: generateSecurePassword(16, true, true, true, true),
+                        notes: 'Discord community account',
+                        created: Date.now()
+                    }
+                ];
+                saveCredentials(sampleCreds);
+            }
+
+            // Initial render
+            updatePinStatusUI();
+            renderCredentialsList();
+        })();
         // Initial check: if tab is already blurred when page loads
         if (document.hidden) onBlurTab();
     })();
     </script>
 
+
+    <!-- GUST Password Save Prompt (Floating Banner) -->
+    <div id="gustPasswordSavePrompt" class="gust-password-prompt hidden">
+        <div class="gpp-icon"><i class="fas fa-key"></i></div>
+        <div class="gpp-body">
+            <div class="gpp-title">Save password for <span id="gppDomain" style="color:var(--ac);"></span>?</div>
+            <div class="gpp-user" id="gppUser"></div>
+        </div>
+        <div class="gpp-actions">
+            <button class="gpp-btn gpp-btn-save" id="gppSaveBtn">Save</button>
+            <button class="gpp-btn gpp-btn-dismiss" id="gppNeverBtn">Never</button>
+            <button class="gpp-close" id="gppCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Credential -->
+    <div class="vault-modal-backdrop" id="vaultModal" style="display:none;">
+        <div class="vault-modal">
+            <div class="vault-modal-head">
+                <h3 id="vaultModalTitle"><i class="fas fa-key"></i> Add Login</h3>
+                <button class="vault-modal-close" id="vaultModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <input type="hidden" id="vaultEditId">
+                <div class="vault-form-group">
+                    <label>Website or Service Domain</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-globe" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormDomain" placeholder="e.g. github.com or https://..." style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Username or Email</label>
+                    <div style="position:relative;">
+                        <i class="fas fa-user" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--tx3); font-size:13px;"></i>
+                        <input type="text" class="settings-input" id="vaultFormUsername" placeholder="username or user@example.com" style="padding-left:36px; width:100%;">
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Password</label>
+                    <div style="display:flex; gap:6px; position:relative;">
+                        <input type="password" class="settings-input" id="vaultFormPassword" placeholder="••••••••••••" style="font-family:var(--mono); flex:1;">
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormTogglePassBtn" type="button" title="Show/Hide"><i class="fas fa-eye"></i></button>
+                        <button class="vault-btn vault-btn-secondary" id="vaultFormGenBtn" type="button" title="Generate Secure Password"><i class="fas fa-wand-magic-sparkles"></i></button>
+                    </div>
+                </div>
+                <div class="vault-form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea class="settings-input" id="vaultFormNotes" rows="2" placeholder="Account notes, security question answers, etc." style="width:100%; resize:vertical;"></textarea>
+                </div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultModalCancel">Cancel</button>
+                <button class="vault-btn vault-btn-primary" id="vaultModalSave">Save Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Set / Change Master PIN -->
+    <div class="vault-modal-backdrop" id="vaultPinModal" style="display:none;">
+        <div class="vault-modal" style="max-width:360px;">
+            <div class="vault-modal-head">
+                <h3><i class="fas fa-shield-halved"></i> Master PIN</h3>
+                <button class="vault-modal-close" id="vaultPinModalClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vault-modal-body">
+                <p style="font-size:13px; color:var(--tx2); margin:0 0 14px;">Set a 4-8 digit Master PIN to protect your passwords on this device.</p>
+                <div class="vault-form-group">
+                    <label>New Master PIN</label>
+                    <input type="password" class="settings-input" id="vaultNewPinInput" maxlength="12" placeholder="Enter PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div class="vault-form-group">
+                    <label>Confirm PIN</label>
+                    <input type="password" class="settings-input" id="vaultConfirmPinInput" maxlength="12" placeholder="Confirm PIN" style="letter-spacing:4px; font-family:var(--mono); text-align:center;">
+                </div>
+                <div id="vaultPinError" style="color:var(--err); font-size:12px; display:none; margin-top:4px;">PINs do not match or are too short.</div>
+            </div>
+            <div class="vault-modal-footer">
+                <button class="vault-btn vault-btn-secondary" id="vaultPinRemoveBtn" style="margin-right:auto; color:var(--err);">Remove PIN</button>
+                <button class="vault-btn vault-btn-primary" id="vaultPinSaveBtn">Save PIN</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

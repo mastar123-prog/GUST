@@ -94,6 +94,14 @@ GUST ships with more features than a proxy arguably needs, but we wanted your pr
 - WebRTC blocking to prevent IP leaks
 - Cookie jar isolation per origin
 
+**Passwords & Vault**
+- Built-in credential vault (`gust://settings/passwords` or `Ctrl+Shift+L`)
+- Automatic form submission detection with prompt to save login credentials
+- 1-click autofill into proxied web pages with instant credential synchronization
+- Built-in cryptographically secure password generator with customizable entropy and length
+- Optional Master PIN protection to lock and secure credentials on device
+- JSON / CSV export and import support for cross-browser credential portability
+
 **Developer tools**
 - Real-time request log with filtering, search, and type badges
 - DOM element inspector with styles, box model, and attributes panels
