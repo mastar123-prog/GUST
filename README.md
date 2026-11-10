@@ -196,6 +196,8 @@ Run locally with `pip install -r requirements.txt` followed by `streamlit run ap
 
 <div align="center">
 
-Made with ❤️ by Nautilus Labs
+<a href="https://github.com/nautilus-os" target="_blank" rel="noopener">
+  <img src="https://avatars.githubusercontent.com/u/159846395?s=200&v=4" width="48" height="48" style="border-radius:50%;" alt="Nautilus Labs"/>
+</a>
 
 </div>
