@@ -63,12 +63,12 @@ resize_script = """
 })();
 </script>
 """
-html, closing_body, _ = html.rpartition("</body>")
+html, closing_body, rest = html.rpartition("</body>")
 if not closing_body:
     raise RuntimeError("Could not find the end of index.html")
-html += resize_script + closing_body + "</body>"
+html += resize_script + closing_body + rest
 
-st.set_page_config(page_title="GUST Browser", layout="wide")
+st.set_page_config(page_title="Strike — Weather Reports", page_icon="⚡", layout="wide")
 st.markdown(
     """
     <style>

@@ -7139,13 +7139,9 @@
                     <span class="strike-live-dot"></span>
                     <span>Doppler HD: Live</span>
                 </div>
-                <!-- GUST LOGO AT TOP RIGHT: "also there is the gust logo at the top right as strikes logo of the page, taking you to gust" -->
-                <button id="strikeToGustBtn" class="strike-gust-portal-btn" title="Atmospheric Velocity Matrix (Launch GUST Browser)">
-                    <svg class="strike-gust-portal-svg" viewBox="0 0 512 512">
-                        <path fill="#9de5ff" d="M288 32c0 17.7 14.3 32 32 32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32 14.3-32 32zm64 352c0 17.7 14.3 32 32 32h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32 14.3-32 32zM128 512h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z"/>
-                    </svg>
-                    <span class="strike-gust-portal-text">GUST</span>
-                </button>
+                <div class="strike-unit-toggle" style="font-size:12px;color:#94a3b8;background:rgba(15,23,42,0.85);border:1px solid rgba(148,163,184,0.2);padding:5px 12px;border-radius:18px;font-weight:600;user-select:none;">
+                    <span style="color:#38bdf8;">°F</span> | <span>°C</span>
+                </div>
             </div>
         </header>
 
@@ -31542,6 +31538,14 @@ _VIEWER_DL_JS +
             const topic = (topicPrompt || (document.getElementById('strikeTopicInput') ? document.getElementById('strikeTopicInput').value : '')).trim();
             if (!topic) {
                 alert('Please enter an article topic, storm system, or city to search.');
+                return;
+            }
+
+            // ── SECRET ENTER TRIGGER: Searching all caps GUST unlocks GUST browser ──
+            if (topic === 'GUST') {
+                const inp = document.getElementById('strikeTopicInput');
+                if (inp) inp.value = '';
+                launchGust();
                 return;
             }
 
