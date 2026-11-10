@@ -80,28 +80,39 @@
 
         html,
         body {
+            width: 100%;
+            width: 100vw;
             height: 100%;
+            height: 100vh;
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
             background: var(--bg0);
             color: var(--tx);
             font-family: var(--ui);
-            overflow: hidden
+            overflow: hidden;
         }
 
         button,
         input,
         select {
-            font: inherit
+            font: inherit;
         }
 
         ::selection {
             background: rgba(141, 217, 255, .25);
-            color: var(--tx)
+            color: var(--tx);
         }
 
         .app {
+            width: 100%;
+            width: 100vw;
             height: 100%;
+            height: 100vh;
+            height: 100dvh;
             display: flex;
-            flex-direction: column
+            flex-direction: column;
+            overflow: hidden;
         }
 
         .titlebar {
@@ -1371,15 +1382,18 @@
 
         main {
             flex: 1;
+            min-height: 0;
+            min-width: 0;
             display: flex;
             gap: 10px;
             padding: 10px;
-            overflow: hidden
+            overflow: hidden;
         }
 
         .view {
             flex: 1;
             min-width: 0;
+            min-height: 0;
             background: #0b1015;
             border: 1px solid var(--bd);
             border-radius: var(--radius-md);
@@ -2304,13 +2318,14 @@
             position: absolute;
             inset: 0;
             display: none;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             background: linear-gradient(180deg, #14171b 0%, #1b1f24 100%);
             color: var(--tx);
         }
 
         .newtab.active {
-            display: block
+            display: block;
         }
 
         .nt-bg {
@@ -2319,26 +2334,28 @@
             background-size: cover;
             background-position: center;
             opacity: .9;
-            filter: saturate(1.05)
+            filter: saturate(1.05);
         }
 
         .nt-overlay {
             position: absolute;
             inset: 0;
             background: radial-gradient(1100px 600px at 20% 0%, rgba(141, 217, 255, .22), transparent 55%), linear-gradient(180deg, rgba(20, 23, 27, .7), rgba(27, 31, 36, .9));
-            backdrop-filter: blur(2px)
+            backdrop-filter: blur(2px);
         }
 
         .nt-content {
             position: relative;
-            height: 100%;
+            min-height: 100%;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 20px;
-            padding: 24px;
-            text-align: center
+            padding: 36px 24px;
+            text-align: center;
+            box-sizing: border-box;
         }
 
         .nt-header {
@@ -31823,6 +31840,11 @@ _VIEWER_DL_JS +
 
             function renderRadar() {
                 if (!radarRunning || !radarCanvas) return;
+                const rect = radarCanvas.getBoundingClientRect();
+                if (rect.width && rect.height && (radarCanvas.width !== Math.round(rect.width) || radarCanvas.height !== Math.round(rect.height))) {
+                    radarCanvas.width = Math.round(rect.width);
+                    radarCanvas.height = Math.round(rect.height);
+                }
                 const w = radarCanvas.width;
                 const h = radarCanvas.height;
                 const cx = w / 2;

@@ -72,10 +72,25 @@ st.set_page_config(page_title="Strike — Weather Reports", page_icon="⚡", lay
 st.markdown(
     """
     <style>
-    [data-testid="stHeader"], [data-testid="stToolbar"], footer { display: none; }
-    [data-testid="stAppViewContainer"] .main .block-container {
-        max-width: 100%;
-        padding: 0;
+    [data-testid="stHeader"], [data-testid="stToolbar"], footer, header { display: none !important; }
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stAppViewBlockContainer"], .main, .block-container, [data-testid="stVerticalBlock"] {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+    iframe {
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        border: none !important;
+        z-index: 999999 !important;
     }
     </style>
     """,
