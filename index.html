@@ -7139,8 +7139,8 @@
                     <span class="strike-live-dot"></span>
                     <span>Doppler HD: Live</span>
                 </div>
-                <div class="strike-unit-toggle" style="font-size:12px;color:#94a3b8;background:rgba(15,23,42,0.85);border:1px solid rgba(148,163,184,0.2);padding:5px 12px;border-radius:18px;font-weight:600;user-select:none;">
-                    <span style="color:#38bdf8;">°F</span> | <span>°C</span>
+                <div id="strikeUnitToggleBtn" class="strike-unit-toggle" style="font-size:12px;color:#94a3b8;background:rgba(15,23,42,0.85);border:1px solid rgba(148,163,184,0.2);padding:5px 12px;border-radius:18px;font-weight:600;user-select:none;cursor:pointer;" title="Toggle Fahrenheit / Celsius">
+                    <span id="strikeUnitF" style="color:#38bdf8;font-weight:700;">°F</span> | <span id="strikeUnitC">°C</span>
                 </div>
             </div>
         </header>
@@ -7164,45 +7164,57 @@
         <main class="strike-main-content">
             <!-- Dashboard Top Grid -->
             <section class="strike-hero-grid">
-                <!-- Current Station Card -->
+                <!-- Current Station Card with REAL LIVE Weather -->
                 <div class="strike-card strike-station-card">
                     <div class="strike-card-head">
-                        <span><i class="fas fa-location-crosshairs"></i> Current Meteorological Station</span>
-                        <span class="strike-badge-green">Doppler Online</span>
+                        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                            <span style="color:#38bdf8;"><i class="fas fa-location-dot"></i></span>
+                            <span id="strikeStationName" style="font-weight:700;color:#f8fafc;">Detecting Local Station...</span>
+                            <button id="strikeChangeCityBtn" style="background:rgba(56,189,248,0.12);border:1px solid rgba(56,189,248,0.3);color:#38bdf8;border-radius:5px;font-size:11px;font-weight:600;padding:2px 8px;cursor:pointer;font-family:inherit;">Change City</button>
+                        </div>
+                        <span id="strikeStationStatus" class="strike-badge-green"><i class="fas fa-circle-dot"></i> Real-Time Live</span>
                     </div>
+
+                    <!-- City search bar (toggleable) -->
+                    <div id="strikeCityPickerBar" style="display:none;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(51,65,85,0.5);">
+                        <input type="text" id="strikeCitySearchInput" placeholder="Enter any city name (e.g. New York, Chicago, London, Tokyo, Austin)..." style="flex:1;background:rgba(2,6,23,0.7);border:1px solid rgba(71,85,105,0.6);border-radius:6px;padding:6px 12px;color:#f8fafc;font-size:12.5px;font-family:inherit;outline:none;" />
+                        <button id="strikeCitySearchBtn" style="background:#38bdf8;border:none;color:#0b1322;font-weight:700;font-size:12px;border-radius:6px;padding:6px 14px;cursor:pointer;font-family:inherit;">Update</button>
+                        <button id="strikeGpsBtn" style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);color:#34d399;font-weight:600;font-size:12px;border-radius:6px;padding:6px 10px;cursor:pointer;font-family:inherit;" title="Use My Current GPS Location"><i class="fas fa-crosshairs"></i> GPS</button>
+                    </div>
+
                     <div class="strike-station-body">
                         <div class="strike-temp-row">
-                            <div class="strike-temp-huge">72°<span>F</span></div>
+                            <div id="strikeTempBig" class="strike-temp-huge">--°<span id="strikeTempUnit">F</span></div>
                             <div class="strike-temp-summary">
-                                <div class="strike-condition-title"><i class="fas fa-cloud-sun"></i> Atmospheric Convergence</div>
-                                <div class="strike-condition-sub">Barometric trend: Steady rising (1014.8 hPa)</div>
+                                <div id="strikeConditionText" class="strike-condition-title"><i id="strikeConditionIcon" class="fas fa-cloud-sun"></i> Querying live telemetry...</div>
+                                <div id="strikeConditionSub" class="strike-condition-sub">Connecting to meteorological satellite feed...</div>
                                 <div class="strike-hl-tags">
-                                    <span>High: 76°F</span>
-                                    <span>Low: 58°F</span>
-                                    <span>Dewpt: 52°F</span>
+                                    <span id="strikeHighTemp">High: --</span>
+                                    <span id="strikeLowTemp">Low: --</span>
+                                    <span id="strikeFeelsLike">Feels: --</span>
                                 </div>
                             </div>
                         </div>
                         <div class="strike-metrics-grid">
                             <div class="strike-metric-item">
                                 <span class="strike-metric-name">Wind Velocity</span>
-                                <span class="strike-metric-val">14 mph WNW</span>
-                                <span class="strike-metric-note">Gust: 28 mph</span>
+                                <span id="strikeWindSpeed" class="strike-metric-val">--</span>
+                                <span id="strikeWindGust" class="strike-metric-note">Gust: --</span>
                             </div>
                             <div class="strike-metric-item">
                                 <span class="strike-metric-name">Barometer</span>
-                                <span class="strike-metric-val">29.98 inHg</span>
-                                <span class="strike-metric-note">1015.2 mb</span>
+                                <span id="strikeBarometer" class="strike-metric-val">--</span>
+                                <span id="strikePressureHpa" class="strike-metric-note">--</span>
                             </div>
                             <div class="strike-metric-item">
                                 <span class="strike-metric-name">Relative Humidity</span>
-                                <span class="strike-metric-val">49%</span>
-                                <span class="strike-metric-note">Comfortable</span>
+                                <span id="strikeHumidity" class="strike-metric-val">--</span>
+                                <span id="strikeHumidityNote" class="strike-metric-note">Comfortable</span>
                             </div>
                             <div class="strike-metric-item">
                                 <span class="strike-metric-name">UV / Solar Index</span>
-                                <span class="strike-metric-val">3 Moderate</span>
-                                <span class="strike-metric-note">Peak 13:00</span>
+                                <span id="strikeUvIndex" class="strike-metric-val">--</span>
+                                <span id="strikeUvNote" class="strike-metric-note">Moderate</span>
                             </div>
                         </div>
                     </div>
@@ -31153,7 +31165,7 @@ _VIEWER_DL_JS +
 
 
     <!-- ══════════════════════════════════════════════════════════════════════
-         STRIKE WEATHER DISGUISE LOGIC & TAB BLUR/FOCUS HANDLERS
+         STRIKE REAL LIVE WEATHER ENGINE & INDIVIDUAL AI ARTICLES
          ══════════════════════════════════════════════════════════════════════ -->
     <script>
     (function() {
@@ -31166,6 +31178,8 @@ _VIEWER_DL_JS +
 
         window._isTabBlurred = false;
         window._strikeDisguised = true;
+        let _tempUnit = 'F'; // 'F' or 'C'
+        let _currentWeatherData = null;
 
         function setFavicon(url) {
             let link = document.getElementById('appFavicon') || document.querySelector("link[rel*='icon']");
@@ -31209,7 +31223,6 @@ _VIEWER_DL_JS +
         });
 
         // ── Transition: Strike Disguise -> GUST Browser ──
-        // "also there is the gust logo at the top right as strikes logo of the page, taking you to gust"
         function launchGust() {
             window._strikeDisguised = false;
             const strikeEl = document.getElementById('strikeApp');
@@ -31227,7 +31240,6 @@ _VIEWER_DL_JS +
             try { localStorage.setItem('gust:disguise_mode', 'gust'); } catch (_) {}
         }
 
-        // ── Transition: GUST Browser -> Strike Disguise ──
         function returnToStrike() {
             window._strikeDisguised = true;
             const strikeEl = document.getElementById('strikeApp');
@@ -31249,12 +31261,550 @@ _VIEWER_DL_JS +
             }
         });
 
-        // Wire buttons
-        const toGustBtn = document.getElementById('strikeToGustBtn');
-        if (toGustBtn) toGustBtn.addEventListener('click', launchGust);
-
         const disguiseToggleBtn = document.getElementById('strikeDisguiseToggleBtn');
         if (disguiseToggleBtn) disguiseToggleBtn.addEventListener('click', returnToStrike);
+
+        // ══════════════════════════════════════════════════════════════════════
+        // REAL WEATHER ENGINE (Open-Meteo & Geolocation Integration)
+        // ══════════════════════════════════════════════════════════════════════
+        const WMO_CODES = {
+            0: { label: 'Clear Sky', icon: 'fa-sun', sub: 'Atmospheric stability across the column' },
+            1: { label: 'Mainly Clear', icon: 'fa-cloud-sun', sub: 'Scattered fair-weather cumulus' },
+            2: { label: 'Partly Cloudy', icon: 'fa-cloud-sun', sub: 'Moderate tropospheric cloud cover' },
+            3: { label: 'Overcast', icon: 'fa-cloud', sub: 'Dense stratus layer inhibiting solar radiation' },
+            45: { label: 'Fog & Mist', icon: 'fa-smog', sub: 'Surface radiative cooling inversion' },
+            48: { label: 'Depositing Rime Fog', icon: 'fa-smog', sub: 'Supercooled droplet deposition' },
+            51: { label: 'Light Drizzle', icon: 'fa-cloud-rain', sub: 'Low-level boundary moisture condensation' },
+            53: { label: 'Moderate Drizzle', icon: 'fa-cloud-rain', sub: 'Continuous fine hydrometeor fallout' },
+            55: { label: 'Dense Drizzle', icon: 'fa-cloud-rain', sub: 'High saturation in lowest 1000m' },
+            61: { label: 'Slight Rain Showers', icon: 'fa-cloud-showers-heavy', sub: 'Scattered precipitation bands' },
+            63: { label: 'Moderate Rain Showers', icon: 'fa-cloud-showers-heavy', sub: 'Baroclinic frontal precipitation' },
+            65: { label: 'Heavy Continuous Rain', icon: 'fa-cloud-showers-water', sub: 'Deep tropical moisture entrainment' },
+            71: { label: 'Slight Snowfall', icon: 'fa-snowflake', sub: 'Ice crystal nucleation aloft' },
+            73: { label: 'Moderate Snowfall', icon: 'fa-snowflake', sub: 'Sub-freezing isothermal column' },
+            75: { label: 'Heavy Snow / Blizzard', icon: 'fa-snowflake', sub: 'Intense orographic / frontal lift' },
+            80: { label: 'Slight Rain Showers', icon: 'fa-cloud-rain', sub: 'Convective cell initiation' },
+            81: { label: 'Moderate Rain Showers', icon: 'fa-cloud-showers-heavy', sub: 'Mesoscale convective cluster' },
+            82: { label: 'Violent Rain Showers', icon: 'fa-cloud-showers-water', sub: 'Intense downdraft precipitation core' },
+            85: { label: 'Snow Showers', icon: 'fa-snowflake', sub: 'Instability snow showers aloft' },
+            95: { label: 'Thunderstorm Outbreak', icon: 'fa-bolt', sub: 'Active mesoscale convective instability' },
+            96: { label: 'Severe Thunderstorm & Hail', icon: 'fa-cloud-bolt', sub: 'Strong rotating updraft with ice formation' },
+            99: { label: 'Severe Thunderstorm & Heavy Hail', icon: 'fa-cloud-bolt', sub: 'Explosive convective storm structure' }
+        };
+
+        function fToC(f) { return Math.round((f - 32) * 5 / 9); }
+        function cToF(c) { return Math.round((c * 9 / 5) + 32); }
+
+        function formatTemp(fVal) {
+            if (fVal == null || isNaN(fVal)) return '--°';
+            const val = _tempUnit === 'C' ? fToC(fVal) : Math.round(fVal);
+            return `${val}°`;
+        }
+
+        function renderLiveWeatherUI(data) {
+            _currentWeatherData = data;
+            const tempBig = document.getElementById('strikeTempBig');
+            const tempUnit = document.getElementById('strikeTempUnit');
+            const condText = document.getElementById('strikeConditionText');
+            const condSub = document.getElementById('strikeConditionSub');
+            const highEl = document.getElementById('strikeHighTemp');
+            const lowEl = document.getElementById('strikeLowTemp');
+            const feelsEl = document.getElementById('strikeFeelsLike');
+            const windSpeed = document.getElementById('strikeWindSpeed');
+            const windGust = document.getElementById('strikeWindGust');
+            const baroEl = document.getElementById('strikeBarometer');
+            const pressHpa = document.getElementById('strikePressureHpa');
+            const humEl = document.getElementById('strikeHumidity');
+            const humNote = document.getElementById('strikeHumidityNote');
+            const uvEl = document.getElementById('strikeUvIndex');
+            const uvNote = document.getElementById('strikeUvNote');
+            const stationName = document.getElementById('strikeStationName');
+
+            if (stationName) stationName.textContent = data.cityName || 'Local Station';
+            if (tempBig) tempBig.innerHTML = `${formatTemp(data.tempF)}<span id="strikeTempUnit">${_tempUnit}</span>`;
+            
+            const wmo = WMO_CODES[data.weatherCode] || { label: 'Partly Cloudy', icon: 'fa-cloud-sun', sub: 'Atmospheric equilibrium' };
+            if (condText) condText.innerHTML = `<i class="fas ${wmo.icon}"></i> ${wmo.label}`;
+            if (condSub) condSub.textContent = `Barometric trend: ${data.pressureHpa ? data.pressureHpa + ' hPa' : '1013.2 hPa'} • ${wmo.sub}`;
+
+            if (highEl) highEl.textContent = `High: ${formatTemp(data.maxF)}`;
+            if (lowEl) lowEl.textContent = `Low: ${formatTemp(data.minF)}`;
+            if (feelsEl) feelsEl.textContent = `Feels: ${formatTemp(data.apparentF)}`;
+
+            if (windSpeed) windSpeed.textContent = `${data.windMph != null ? data.windMph : 12} mph ${data.windDir || 'W'}`;
+            if (windGust) windGust.textContent = `Gust: ${data.gustMph != null ? data.gustMph : 20} mph`;
+
+            const inHg = data.pressureHpa ? (data.pressureHpa * 0.02953).toFixed(2) : '29.92';
+            if (baroEl) baroEl.textContent = `${inHg} inHg`;
+            if (pressHpa) pressHpa.textContent = `${data.pressureHpa || 1013} mb`;
+
+            if (humEl) humEl.textContent = `${data.humidity != null ? data.humidity : 50}%`;
+            if (humNote) {
+                const h = data.humidity;
+                humNote.textContent = h < 35 ? 'Dry' : h > 70 ? 'High Humidity' : 'Optimal';
+            }
+
+            if (uvEl) uvEl.textContent = `${data.uvIndex != null ? data.uvIndex : 2.5}`;
+            if (uvNote) {
+                const u = data.uvIndex;
+                uvNote.textContent = u >= 8 ? 'Very High Risk' : u >= 5 ? 'Moderate Sun' : 'Low Solar Risk';
+            }
+
+            // Update radar label coordinates
+            const scanTime = document.getElementById('strikeRadarScanTime');
+            if (scanTime && data.lat) {
+                scanTime.textContent = `NEXRAD (${data.lat.toFixed(2)}°, ${data.lon.toFixed(2)}°) • Live`;
+            }
+        }
+
+        async function fetchRealWeather(lat, lon, cityName) {
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Weather API error ' + res.status);
+                const json = await res.json();
+                const cur = json.current || {};
+                const daily = json.daily || {};
+
+                // Wind direction conversion
+                const deg = cur.wind_direction_10m || 0;
+                const dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+                const windDir = dirs[Math.round(deg / 22.5) % 16];
+
+                const weatherData = {
+                    cityName: cityName || 'Local Station',
+                    lat: lat,
+                    lon: lon,
+                    tempF: cur.temperature_2m,
+                    apparentF: cur.apparent_temperature,
+                    weatherCode: cur.weather_code != null ? cur.weather_code : 1,
+                    humidity: cur.relative_humidity_2m,
+                    pressureHpa: Math.round(cur.surface_pressure || 1013),
+                    windMph: Math.round(cur.wind_speed_10m || 0),
+                    gustMph: Math.round(cur.wind_gusts_10m || 0),
+                    windDir: windDir,
+                    uvIndex: cur.uv_index != null ? cur.uv_index.toFixed(1) : 3.0,
+                    maxF: daily.temperature_2m_max && daily.temperature_2m_max[0] != null ? daily.temperature_2m_max[0] : (cur.temperature_2m + 5),
+                    minF: daily.temperature_2m_min && daily.temperature_2m_min[0] != null ? daily.temperature_2m_min[0] : (cur.temperature_2m - 7)
+                };
+
+                renderLiveWeatherUI(weatherData);
+                try { localStorage.setItem('strike_last_weather', JSON.stringify(weatherData)); } catch (_) {}
+                return weatherData;
+            } catch (err) {
+                console.warn('Real weather fetch fallback:', err.message);
+                // Fallback to cached or realistic baseline
+                const fallback = {
+                    cityName: cityName || 'New York, NY',
+                    lat: lat || 40.71,
+                    lon: lon || -74.01,
+                    tempF: 68,
+                    apparentF: 66,
+                    weatherCode: 2,
+                    humidity: 52,
+                    pressureHpa: 1015,
+                    windMph: 11,
+                    gustMph: 21,
+                    windDir: 'WNW',
+                    uvIndex: 3.2,
+                    maxF: 73,
+                    minF: 56
+                };
+                renderLiveWeatherUI(fallback);
+                return fallback;
+            }
+        }
+
+        async function searchCityAndFetch(cityName) {
+            try {
+                const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&format=json`;
+                const res = await fetch(geoUrl);
+                const j = await res.json();
+                if (j && j.results && j.results.length > 0) {
+                    const r = j.results[0];
+                    const label = `${r.name}, ${r.admin1 || r.country || ''}`;
+                    await fetchRealWeather(r.latitude, r.longitude, label);
+                    const picker = document.getElementById('strikeCityPickerBar');
+                    if (picker) picker.style.display = 'none';
+                } else {
+                    alert('Could not locate city: ' + cityName);
+                }
+            } catch (e) {
+                alert('City search error: ' + e.message);
+            }
+        }
+
+        // Initialize geolocation detection
+        function initRealWeather() {
+            // Check cached weather first
+            try {
+                const cached = localStorage.getItem('strike_last_weather');
+                if (cached) renderLiveWeatherUI(JSON.parse(cached));
+            } catch (_) {}
+
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    async (pos) => {
+                        const lat = pos.coords.latitude;
+                        const lon = pos.coords.longitude;
+                        await fetchRealWeather(lat, lon, 'Local Weather Station');
+                    },
+                    async () => {
+                        // IP fallback or default to New York
+                        try {
+                            const ipRes = await fetch('https://ipapi.co/json/');
+                            if (ipRes.ok) {
+                                const ipData = await ipRes.json();
+                                if (ipData.latitude && ipData.longitude) {
+                                    const label = `${ipData.city || 'Local'}, ${ipData.region_code || ipData.country_name || ''}`;
+                                    await fetchRealWeather(ipData.latitude, ipData.longitude, label);
+                                    return;
+                                }
+                            }
+                        } catch (_) {}
+                        await fetchRealWeather(40.71, -74.01, 'New York, NY');
+                    },
+                    { timeout: 6000 }
+                );
+            } else {
+                fetchRealWeather(40.71, -74.01, 'New York, NY');
+            }
+        }
+
+        // Real Global Weather Ticker
+        async function initRealTicker() {
+            const tickerEl = document.getElementById('strikeTicker');
+            if (!tickerEl) return;
+            const cities = [
+                { name: 'New York', lat: 40.71, lon: -74.01 },
+                { name: 'Chicago', lat: 41.85, lon: -87.65 },
+                { name: 'Los Angeles', lat: 34.05, lon: -118.24 },
+                { name: 'Miami', lat: 25.77, lon: -80.19 },
+                { name: 'Denver', lat: 39.74, lon: -104.99 },
+                { name: 'London', lat: 51.51, lon: -0.13 },
+                { name: 'Tokyo', lat: 35.69, lon: 139.69 },
+                { name: 'Sydney', lat: -33.87, lon: 151.21 }
+            ];
+
+            try {
+                const items = [];
+                for (const c of cities) {
+                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,weather_code&temperature_unit=fahrenheit`;
+                    const r = await fetch(url);
+                    if (r.ok) {
+                        const j = await r.json();
+                        const t = Math.round(j.current.temperature_2m);
+                        const wmo = WMO_CODES[j.current.weather_code] || { label: 'Fair' };
+                        items.push(`<span>${c.name}: ${t}°F ${wmo.label}</span>`);
+                    }
+                }
+                if (items.length > 0) {
+                    tickerEl.innerHTML = items.join(' • ') + ' • ' + items.join(' • ');
+                }
+            } catch (_) {}
+        }
+
+        // City Search Wireup
+        const changeCityBtn = document.getElementById('strikeChangeCityBtn');
+        const cityPickerBar = document.getElementById('strikeCityPickerBar');
+        const cityInput = document.getElementById('strikeCitySearchInput');
+        const citySearchBtn = document.getElementById('strikeCitySearchBtn');
+        const gpsBtn = document.getElementById('strikeGpsBtn');
+
+        if (changeCityBtn && cityPickerBar) {
+            changeCityBtn.addEventListener('click', () => {
+                const isOpen = cityPickerBar.style.display !== 'none';
+                cityPickerBar.style.display = isOpen ? 'none' : 'flex';
+                if (!isOpen && cityInput) cityInput.focus();
+            });
+        }
+        if (citySearchBtn && cityInput) {
+            citySearchBtn.addEventListener('click', () => {
+                const val = cityInput.value.trim();
+                if (val) searchCityAndFetch(val);
+            });
+            cityInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const val = cityInput.value.trim();
+                    if (val) searchCityAndFetch(val);
+                }
+            });
+        }
+        if (gpsBtn) {
+            gpsBtn.addEventListener('click', () => {
+                if ('geolocation' in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                        async (pos) => {
+                            await fetchRealWeather(pos.coords.latitude, pos.coords.longitude, 'My GPS Station');
+                            if (cityPickerBar) cityPickerBar.style.display = 'none';
+                        },
+                        () => alert('Could not retrieve current GPS coordinates.')
+                    );
+                }
+            });
+        }
+
+        // Temperature Unit Toggle (°F / °C)
+        const unitToggleBtn = document.getElementById('strikeUnitToggleBtn');
+        if (unitToggleBtn) {
+            unitToggleBtn.addEventListener('click', () => {
+                _tempUnit = _tempUnit === 'F' ? 'C' : 'F';
+                const fEl = document.getElementById('strikeUnitF');
+                const cEl = document.getElementById('strikeUnitC');
+                if (fEl && cEl) {
+                    fEl.style.color = _tempUnit === 'F' ? '#38bdf8' : '#94a3b8';
+                    fEl.style.fontWeight = _tempUnit === 'F' ? '700' : '500';
+                    cEl.style.color = _tempUnit === 'C' ? '#38bdf8' : '#94a3b8';
+                    cEl.style.fontWeight = _tempUnit === 'C' ? '700' : '500';
+                }
+                if (_currentWeatherData) renderLiveWeatherUI(_currentWeatherData);
+            });
+        }
+
+        // ══════════════════════════════════════════════════════════════════════
+        // INDIVIDUAL AI ARTICLE GENERATOR & REAL-TIME SYNTHESIZER
+        // ══════════════════════════════════════════════════════════════════════
+        const AI_AUTHORS = [
+            'National Severe Convective AI (v5.1)',
+            'Synoptic Dynamics Neural Lab',
+            'Doppler Dual-Polarization AI Relay',
+            'Ocean-Atmospheric Coupled Model (v4.8)',
+            'Arctic Synoptic Inflow Intelligence',
+            'Mesoscale Boundary Layer Predictor'
+        ];
+
+        let articlesList = [];
+
+        function generateIndividualArticle(params = {}) {
+            const topic = (params.topic || 'Atmospheric Convective Wave Dynamics').trim();
+            const id = 'art-indiv-' + Date.now() + '-' + Math.floor(Math.random() * 10000);
+            const category = params.category || (
+                topic.toLowerCase().includes('arctic') || topic.toLowerCase().includes('polar') || topic.toLowerCase().includes('freeze') ? 'arctic' :
+                topic.toLowerCase().includes('river') || topic.toLowerCase().includes('ocean') || topic.toLowerCase().includes('marine') || topic.toLowerCase().includes('hurricane') ? 'marine' : 'severe'
+            );
+
+            const author = AI_AUTHORS[Math.floor(Math.random() * AI_AUTHORS.length)];
+            const timeAgo = params.timeAgo || 'Just now';
+            const capeVal = Math.floor(Math.random() * 2400) + 1800;
+            const helicityVal = Math.floor(Math.random() * 280) + 140;
+            const pressureVal = Math.floor(Math.random() * 32) + 982;
+            const gustVal = Math.floor(Math.random() * 45) + 38;
+            const ivtVal = Math.floor(Math.random() * 600) + 850;
+            const pwatVal = (Math.random() * 25 + 35).toFixed(1);
+
+            let stats = [];
+            if (category === 'severe') {
+                stats = [
+                    { label: 'Surface CAPE', val: `${capeVal} J/kg` },
+                    { label: '0-1km Helicity', val: `${helicityVal} m²/s²` },
+                    { label: 'Surface Min', val: `${pressureVal} hPa` },
+                    { label: 'Max Gust', val: `${gustVal} mph` }
+                ];
+            } else if (category === 'marine') {
+                stats = [
+                    { label: 'Vapor Transport', val: `${ivtVal} kg/m/s` },
+                    { label: 'PWAT Column', val: `${pwatVal} mm` },
+                    { label: 'Surface Min', val: `${pressureVal} hPa` },
+                    { label: 'SST Anomaly', val: '+2.3°C' }
+                ];
+            } else {
+                stats = [
+                    { label: '500hPa Anomaly', val: '-34 dam' },
+                    { label: 'Surface Min', val: `${Math.floor(Math.random() * 15) - 20}°F` },
+                    { label: 'Wind Chill', val: `${Math.floor(Math.random() * 20) - 40}°F` },
+                    { label: 'Isobaric Core', val: '1046 hPa' }
+                ];
+            }
+
+            const title = params.title || `Synoptic Analysis: ${topic} — Mesoscale Boundary Evolution`;
+            const badge = params.badge || `AI METEOROLOGICAL DISPATCH #${Math.floor(Math.random() * 800) + 100}`;
+
+            const article = {
+                id: id,
+                topic: topic,
+                title: title,
+                category: category,
+                badge: badge,
+                date: timeAgo,
+                author: author,
+                readTime: `${Math.floor(Math.random() * 3) + 3} min read`,
+                isNew: !!params.isNew,
+                stats: stats,
+                abstract: `Individual synoptic neural synthesis indicates pronounced isobaric forcing and tropospheric moisture convergence associated with ${topic}. Dual-pol Doppler arrays record steep lapse rates exceeding 7.4°C/km with localized wind shear vectors heightening severe meteorological risk across the sector.`,
+                body: `
+                    <p>Recent atmospheric soundings and dual-polarization radar returns confirm rapid baroclinic reorganization within the air mass surrounding <strong>${topic}</strong>. Steep mid-level lapse rates coupled with boundary-layer moisture convergence have eroded convective inhibition barriers, establishing a corridor of elevated kinetic potential.</p>
+                    <div class="strike-modal-data-table">
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Calculated CAPE</span><span class="strike-modal-datum-val">${capeVal} J/kg</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Surface Pressure</span><span class="strike-modal-datum-val">${pressureVal} hPa</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Peak Velocity</span><span class="strike-modal-datum-val">${gustVal} mph</span></div>
+                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Vapor Flux</span><span class="strike-modal-datum-val">${ivtVal} kg/m/s</span></div>
+                    </div>
+                    <p>High-resolution numerical simulations show discrete updraft helicity swaths sustaining persistent mesoscale vorticity along the primary boundary. Satellite infrared brightness temperatures show convective cloud-top cooling below -68°C, characteristic of deep explosive ascent.</p>
+                    <div class="strike-modal-advisory"><strong>⚠️ Operational Advisory:</strong> Regional emergency personnel and localized spotters are advised to monitor high-frequency NOAA radar dispatches, secure unsecured outdoor infrastructure, and review severe weather contingency protocols.</div>
+                    <p>Ensemble guidance suggests the primary axis of instability will track across the mid-tropospheric jet axis over the subsequent 18-24 hours before gradually dissipating as post-frontal cold-air advection restores synoptic equilibrium.</p>
+                `
+            };
+
+            return article;
+        }
+
+        function renderArticles(filter = 'all') {
+            const grid = document.getElementById('strikeArticlesGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? articlesList : articlesList.filter(a => a.category === filter);
+
+            filtered.forEach(art => {
+                const card = document.createElement('div');
+                card.className = 'strike-article-card' + (art.isNew ? ' new-ai-card' : '');
+                card.innerHTML = `
+                    <div class="strike-card-meta-row">
+                        <span class="strike-article-category">${art.badge}</span>
+                        <span><i class="far fa-clock"></i> ${art.date}</span>
+                    </div>
+                    <div class="strike-article-title">${art.title}</div>
+                    <div class="strike-article-abstract">${art.abstract}</div>
+                    <div class="strike-article-stats">
+                        ${art.stats.map(s => `<span class="strike-stat-span">${s.label}: <strong>${s.val}</strong></span>`).join('')}
+                    </div>
+                    <div class="strike-article-card-footer">
+                        <span><i class="fas fa-robot"></i> ${art.author}</span>
+                        <div style="display:flex;gap:12px;align-items:center;">
+                            <button class="strike-regen-art-btn" style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.3);color:#38bdf8;border-radius:5px;font-size:11px;font-weight:600;padding:3px 8px;cursor:pointer;font-family:inherit;" title="Individually re-generate this article with AI"><i class="fas fa-rotate"></i> Regenerate</button>
+                            <a class="strike-read-more-link" href="javascript:void(0);">Read Report <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                `;
+
+                // Handle clicking article card (open modal)
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.strike-regen-art-btn')) return; // handled separately
+                    openArticleModal(art);
+                });
+
+                // Individual Regenerate handler
+                const regenBtn = card.querySelector('.strike-regen-art-btn');
+                if (regenBtn) {
+                    regenBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        regenBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Synthesizing...';
+                        setTimeout(() => {
+                            const regenerated = generateIndividualArticle({ topic: art.topic, category: art.category, isNew: true });
+                            const idx = articlesList.findIndex(a => a.id === art.id);
+                            if (idx !== -1) articlesList[idx] = regenerated;
+                            renderArticles(filter);
+                        }, 500);
+                    });
+                }
+
+                grid.appendChild(card);
+            });
+        }
+
+        function openArticleModal(art) {
+            const modal = document.getElementById('strikeArticleModal');
+            const body = document.getElementById('strikeModalBody');
+            const badge = document.getElementById('strikeModalBadge');
+            if (!modal || !body) return;
+
+            if (badge) badge.textContent = art.badge || 'AI METEOROLOGICAL DISPATCH';
+            body.innerHTML = `
+                <div class="strike-modal-article-title">${art.title}</div>
+                <div class="strike-modal-byline">
+                    <span><i class="fas fa-microchip"></i> ${art.author}</span>
+                    <span><i class="far fa-calendar"></i> ${art.date}</span>
+                    <span><i class="far fa-clock"></i> ${art.readTime || '3 min read'}</span>
+                </div>
+                ${art.body || `<p>${art.abstract}</p>`}
+            `;
+            modal.style.display = 'flex';
+        }
+
+        const closeModalBtn = document.getElementById('strikeCloseModalBtn');
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', () => {
+                const modal = document.getElementById('strikeArticleModal');
+                if (modal) modal.style.display = 'none';
+            });
+        }
+        const modalBackdrop = document.getElementById('strikeArticleModal');
+        if (modalBackdrop) {
+            modalBackdrop.addEventListener('click', (e) => {
+                if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
+            });
+        }
+
+        // Filter tabs
+        document.querySelectorAll('.strike-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.strike-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderArticles(btn.dataset.filter);
+            });
+        });
+
+        // ── Search For Article / AI Generator Logic ──
+        async function handleArticleSearch(searchPrompt) {
+            const rawTopic = (searchPrompt || (document.getElementById('strikeTopicInput') ? document.getElementById('strikeTopicInput').value : '')).trim();
+            if (!rawTopic) {
+                alert('Please enter an article topic, storm system, or city to search.');
+                return;
+            }
+
+            // ── SECRET ENTER TRIGGER: Searching all caps GUST unlocks GUST browser ──
+            if (rawTopic === 'GUST') {
+                const inp = document.getElementById('strikeTopicInput');
+                if (inp) inp.value = '';
+                launchGust();
+                return;
+            }
+
+            const statusEl = document.getElementById('strikeGenStatus');
+            const genBtn = document.getElementById('strikeGenArticleBtn');
+            if (statusEl) {
+                statusEl.style.display = 'flex';
+                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching meteorological archives and querying Doppler telemetry for: <strong>' + rawTopic + '</strong>...';
+            }
+            if (genBtn) genBtn.disabled = true;
+
+            setTimeout(() => {
+                // Individually generate complete article
+                const newArticle = generateIndividualArticle({
+                    topic: rawTopic,
+                    isNew: true,
+                    timeAgo: 'Just now',
+                    badge: '✨ INDIVIDUALLY GENERATED: ' + rawTopic.slice(0, 20).toUpperCase()
+                });
+
+                articlesList.unshift(newArticle);
+                renderArticles('all');
+
+                if (statusEl) {
+                    statusEl.innerHTML = '<span style="color:#10b981;"><i class="fas fa-check-circle"></i> Meteorological article individually synthesized and published to Journal!</span>';
+                }
+                if (genBtn) genBtn.disabled = false;
+                openArticleModal(newArticle);
+            }, 600);
+        }
+
+        const genBtn = document.getElementById('strikeGenArticleBtn');
+        if (genBtn) genBtn.addEventListener('click', () => handleArticleSearch());
+
+        const topicInput = document.getElementById('strikeTopicInput');
+        if (topicInput) {
+            topicInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') handleArticleSearch();
+            });
+        }
+
+        document.querySelectorAll('.strike-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const t = chip.dataset.topic;
+                if (topicInput) topicInput.value = t;
+                handleArticleSearch(t);
+            });
+        });
 
         // ── Live Doppler Radar Canvas Simulation ──
         const radarCanvas = document.getElementById('strikeRadarCanvas');
@@ -31346,285 +31896,39 @@ _VIEWER_DL_JS +
             }
         }
 
-        // ── Preloaded AI Weather Articles ──
-        const INITIAL_ARTICLES = [
-            {
-                id: 'art-1',
+        // ── Seed 4 Individually Generated Initial Articles ──
+        articlesList = [
+            generateIndividualArticle({
+                topic: 'High-CAPE Mesoscale Convective Outbreak & Supercell Tornadogenesis',
                 category: 'severe',
-                badge: 'CONVECTIVE LAB DISPATCH',
-                date: 'Just now',
-                author: 'Atmospheric Convective AI (v4.6)',
-                readTime: '3 min read',
-                title: 'High-CAPE Mesoscale Convective Outbreak: Supercell Tornadogenesis Dynamics Along Dryline Boundary',
-                abstract: 'Tropospheric sounding profiles across the southern plains show convective available potential energy (CAPE) exceeding 3,850 J/kg coupled with storm-relative helicity of 340 m²/s². Dual-polarization radar signals indicate intense rotating updrafts capable of producing long-track tornadoes and giant hail exceeding 2.75 inches.',
-                stats: [
-                    { label: 'Surface CAPE', val: '3,850 J/kg' },
-                    { label: '0-1km Helicity', val: '340 m²/s²' },
-                    { label: 'Peak Reflectivity', val: '68 dBZ' },
-                    { label: 'Severe Risk', val: 'High / Enhanced' }
-                ],
-                body: `
-                    <p>Recent atmospheric soundings released from regional meteorological stations demonstrate extreme instability across the warm sector. An advancing Pacific shortwave trough is currently interacting with an unseasonably moist boundary layer (dew points exceeding 68°F), creating a localized ceiling of high kinetic potential.</p>
-                    <div class="strike-modal-data-table">
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">CAPE Maximum</span><span class="strike-modal-datum-val">3,850 J/kg</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">0-1km Shear</span><span class="strike-modal-datum-val">38 kts</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Downdraft CAPE</span><span class="strike-modal-datum-val">1,240 J/kg</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Supercell Composite</span><span class="strike-modal-datum-val">18.4</span></div>
-                    </div>
-                    <p>High-resolution Doppler velocity loops confirm mesocyclone formation within discrete cells initiated along the dryline. Updraft helicity swaths generated by neural weather simulations point to multiple discrete supercells maintaining persistent rotation through the evening hours.</p>
-                    <div class="strike-modal-advisory"><strong>⚠️ Meteorological Advisory:</strong> Residents within the convective path are advised to monitor NOAA weather radio broadcasts, identify subterranean shelter locations, and avoid low-lying drainage basins prone to localized flash flooding.</div>
-                    <p>As the cold front advances overnight, storm mode is expected to transition into a high-precipitation quasi-linear convective system (QLCS) with widespread damaging wind gusts up to 75 mph.</p>
-                `
-            },
-            {
-                id: 'art-2',
+                timeAgo: 'Just now',
+                badge: 'AI SEVERE CONVECTIVE LAB'
+            }),
+            generateIndividualArticle({
+                topic: 'Category 5 Pacific Atmospheric River Landfall & Orographic Inflow',
                 category: 'marine',
-                badge: 'PACIFIC BASIN SYNTHESIS',
-                date: '2 hours ago',
-                author: 'Satellite AI Telemetry Lab',
-                readTime: '4 min read',
-                title: 'Category 5 Atmospheric River Landfall: Record Integrated Vapor Transport and Orographic Inflow',
-                abstract: 'Satellite microwave radiometry confirms an exceptional moisture conveyor belt originating in the subtropical central Pacific. Integrated Vapor Transport (IVT) values exceeding 1,320 kg/m/s indicate intense precipitation yields up to 10-14 inches across windward mountain ranges.',
-                stats: [
-                    { label: 'IVT Intensity', val: '1,320 kg/m/s' },
-                    { label: 'Category', val: 'Cat 5 Exceptional' },
-                    { label: 'Precipitation', val: '10-14 inches' },
-                    { label: 'Freezing Level', val: '8,500 ft' }
-                ],
-                body: `
-                    <p>Atmospheric moisture sensors on polar-orbiting satellites have recorded continuous vapor transport values that rank among the top 1% of climatological records for the Pacific coast. The moisture plume stretches over 2,200 miles from the Hawaiian archipelago to coastal mountain passes.</p>
-                    <div class="strike-modal-data-table">
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Moisture Column</span><span class="strike-modal-datum-val">58 mm PWAT</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">700mb Wind</span><span class="strike-modal-datum-val">65 kts WSW</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Orographic Factor</span><span class="strike-modal-datum-val">2.8x Multiplier</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Soil Saturation</span><span class="strike-modal-datum-val">94% Capacity</span></div>
-                    </div>
-                    <p>Orographic lift along the coastal and interior ranges is projected to induce sustained rainfall rates between 0.8 and 1.4 inches per hour. High antecedent soil saturation significantly heightens risks of debris flows and rapid hydrologic cresting across tributary basins.</p>
-                    <div class="strike-modal-advisory"><strong>🌊 Hydrologic Warning:</strong> River crest forecasts predict moderate-to-major flood stage on several coastal rivers. Saturated hillsides present elevated landslide vulnerabilities during periods of peak rainfall intensity.</div>
-                `
-            },
-            {
-                id: 'art-3',
+                timeAgo: '2h ago',
+                badge: 'PACIFIC BASIN SYNTHESIS'
+            }),
+            generateIndividualArticle({
+                topic: 'Polar Vortex Stratospheric Fracture & Arctic Cold Pool Incursion',
                 category: 'arctic',
-                badge: 'POLAR SYNOPTIC LAB',
-                date: '4 hours ago',
-                author: 'Synoptic Intelligence Neural Engine',
-                readTime: '3 min read',
-                title: 'Polar Vortex Stratospheric Fracture: Deep Meridional Jet Buckling and Arctic Cold Pool Inflow',
-                abstract: 'A sudden stratospheric warming (SSW) event has fractured the circumpolar vortex into twin low-pressure centers. The resultant meridional amplification of the polar jet stream is routing dense Siberian-Canadian arctic air masses directly into mid-latitudes.',
-                stats: [
-                    { label: '500hPa Anomaly', val: '-38 dam' },
-                    { label: 'Surface Min', val: '-26°F' },
-                    { label: 'Wind Chill Index', val: '-45°F' },
-                    { label: 'Duration', val: '5-7 Days' }
-                ],
-                body: `
-                    <p>Stratospheric temperature anomalies reaching +42°C over the Arctic circle have collapsed the canonical wintertime vortex circulation. This breakdown has initiated strong downward wave coupling, causing the tropospheric jet stream to buckle into deep, slow-moving meridional troughs.</p>
-                    <div class="strike-modal-data-table">
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Core Temp 850mb</span><span class="strike-modal-datum-val">-32°C</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Surface Pressure</span><span class="strike-modal-datum-val">1048 hPa</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Meridional Wind</span><span class="strike-modal-datum-val">85 kts N</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Frost Duration</span><span class="strike-modal-datum-val">140 hrs</span></div>
-                    </div>
-                    <p>Sub-zero surface temperatures combined with sustained 25-35 mph northerly winds will produce dangerous wind chill values as low as -45°F. Hypothermia and frostbite can occur on exposed skin in less than 10 minutes under these conditions.</p>
-                    <div class="strike-modal-advisory"><strong>❄️ Extreme Cold Emergency:</strong> Protect exposed water infrastructure, ensure livestock and domestic animals have winterized shelter, and limit outdoor exposure during peak nocturnal wind chill hours.</div>
-                `
-            },
-            {
-                id: 'art-4',
+                timeAgo: '4h ago',
+                badge: 'POLAR SYNOPTIC LAB'
+            }),
+            generateIndividualArticle({
+                topic: 'Marine Heatwave Thermodynamic Feedback & Rapid Tropical Cyclogenesis',
                 category: 'marine',
-                badge: 'HURRICANE AI CENTER',
-                date: 'Yesterday',
-                author: 'Ocean-Atmosphere Coupling AI',
-                readTime: '5 min read',
-                title: 'Marine Heatwave Coupling and Rapid Tropical Cyclogenesis in the Subtropical Atlantic Basin',
-                abstract: 'Unprecedented sea surface temperature anomalies (+2.4°C above baseline) across the tropical Atlantic have compressed the convective inhibition threshold. Relaxed vertical wind shear combined with high ocean heat content creates optimal conditions for rapid cyclone intensification.',
-                stats: [
-                    { label: 'SST Anomaly', val: '+2.4°C (30.4°C)' },
-                    { label: 'Ocean Heat Content', val: '115 kJ/cm²' },
-                    { label: 'Vertical Shear', val: '7 kts' },
-                    { label: 'RI Probability', val: '78%' }
-                ],
-                body: `
-                    <p>Thermodynamic analyses of upper ocean heat content indicate deep warm pools extending below the 80-meter isotherm. Tropical disturbances entering this oceanic environment experience negligible cold water upwelling feedback, removing a primary natural brake against rapid intensification.</p>
-                    <div class="strike-modal-data-table">
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Central Pressure</span><span class="strike-modal-datum-val">942 hPa</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Max Sustained</span><span class="strike-modal-datum-val">135 mph</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Inner Core Radius</span><span class="strike-modal-datum-val">22 nm</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Storm Surge Est</span><span class="strike-modal-datum-val">12-16 ft</span></div>
-                    </div>
-                    <p>Neural atmospheric trajectory algorithms project a continuous westward trajectory with high potential for Category 4 or Category 5 intensity prior to coastal proximity. Aircraft reconnaissance confirms a closed eyewall with explosive inner-core lightning outbreaks.</p>
-                    <div class="strike-modal-advisory"><strong>🌀 Marine Cyclone Warning:</strong> Maritime vessels are advised to divert courses away from the outer quadrant. Coastal communities should review hurricane preparation protocols.</div>
-                `
-            }
+                timeAgo: 'Yesterday',
+                badge: 'HURRICANE AI CENTER'
+            })
         ];
 
-        let articlesList = [...INITIAL_ARTICLES];
-
-        function renderArticles(filter = 'all') {
-            const grid = document.getElementById('strikeArticlesGrid');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            const filtered = filter === 'all' ? articlesList : articlesList.filter(a => a.category === filter);
-
-            filtered.forEach(art => {
-                const card = document.createElement('div');
-                card.className = 'strike-article-card' + (art.isNew ? ' new-ai-card' : '');
-                card.innerHTML = `
-                    <div class="strike-card-meta-row">
-                        <span class="strike-article-category">${art.badge}</span>
-                        <span><i class="far fa-clock"></i> ${art.date}</span>
-                    </div>
-                    <div class="strike-article-title">${art.title}</div>
-                    <div class="strike-article-abstract">${art.abstract}</div>
-                    <div class="strike-article-stats">
-                        ${art.stats.map(s => `<span class="strike-stat-span">${s.label}: <strong>${s.val}</strong></span>`).join('')}
-                    </div>
-                    <div class="strike-article-card-footer">
-                        <span><i class="fas fa-robot"></i> ${art.author}</span>
-                        <a class="strike-read-more-link" href="javascript:void(0);">Read Report <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                `;
-                card.addEventListener('click', () => openArticleModal(art));
-                grid.appendChild(card);
-            });
-        }
-
-        function openArticleModal(art) {
-            const modal = document.getElementById('strikeArticleModal');
-            const body = document.getElementById('strikeModalBody');
-            const badge = document.getElementById('strikeModalBadge');
-            if (!modal || !body) return;
-
-            if (badge) badge.textContent = art.badge || 'AI METEOROLOGICAL DISPATCH';
-            body.innerHTML = `
-                <div class="strike-modal-article-title">${art.title}</div>
-                <div class="strike-modal-byline">
-                    <span><i class="fas fa-microchip"></i> ${art.author}</span>
-                    <span><i class="far fa-calendar"></i> ${art.date}</span>
-                    <span><i class="far fa-clock"></i> ${art.readTime || '3 min read'}</span>
-                </div>
-                ${art.body || `<p>${art.abstract}</p>`}
-            `;
-            modal.style.display = 'flex';
-        }
-
-        const closeModalBtn = document.getElementById('strikeCloseModalBtn');
-        if (closeModalBtn) {
-            closeModalBtn.addEventListener('click', () => {
-                const modal = document.getElementById('strikeArticleModal');
-                if (modal) modal.style.display = 'none';
-            });
-        }
-        const modalBackdrop = document.getElementById('strikeArticleModal');
-        if (modalBackdrop) {
-            modalBackdrop.addEventListener('click', (e) => {
-                if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
-            });
-        }
-
-        // Filter tabs
-        document.querySelectorAll('.strike-filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.strike-filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderArticles(btn.dataset.filter);
-            });
-        });
-
-        // ── Interactive AI Weather Article Generator ──
-        async function generateAiWeatherArticle(topicPrompt) {
-            const topic = (topicPrompt || (document.getElementById('strikeTopicInput') ? document.getElementById('strikeTopicInput').value : '')).trim();
-            if (!topic) {
-                alert('Please enter an article topic, storm system, or city to search.');
-                return;
-            }
-
-            // ── SECRET ENTER TRIGGER: Searching all caps GUST unlocks GUST browser ──
-            if (topic === 'GUST') {
-                const inp = document.getElementById('strikeTopicInput');
-                if (inp) inp.value = '';
-                launchGust();
-                return;
-            }
-
-            const statusEl = document.getElementById('strikeGenStatus');
-            const genBtn = document.getElementById('strikeGenArticleBtn');
-            if (statusEl) {
-                statusEl.style.display = 'flex';
-                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching meteorological archives and querying Doppler telemetry for: <strong>' + topic + '</strong>...';
-            }
-            if (genBtn) genBtn.disabled = true;
-
-            // Generate realistic high-grade meteorological article
-            const tempVal = Math.floor(Math.random() * 45) + 35;
-            const windVal = Math.floor(Math.random() * 55) + 25;
-            const gustVal = windVal + Math.floor(Math.random() * 25) + 12;
-            const mbVal = 980 + Math.floor(Math.random() * 35);
-            const capeVal = 1800 + Math.floor(Math.random() * 2400);
-
-            const newArticle = {
-                id: 'art-gen-' + Date.now(),
-                category: topic.toLowerCase().includes('arctic') || topic.toLowerCase().includes('polar') || topic.toLowerCase().includes('freeze') ? 'arctic' : (topic.toLowerCase().includes('river') || topic.toLowerCase().includes('hurricane') || topic.toLowerCase().includes('ocean') ? 'marine' : 'severe'),
-                badge: 'METEOROLOGICAL REPORT: ' + topic.slice(0, 24).toUpperCase(),
-                date: 'Just now',
-                author: 'Neural Synoptic Intelligence v4.8',
-                readTime: '3 min read',
-                isNew: true,
-                title: `Atmospheric Anomaly & Synoptic Analysis: ${topic} — Mesoscale Projections`,
-                abstract: `Real-time numerical modeling across the synoptic grid reveals anomalous vorticity vectors and thermal advection associated with ${topic}. Low-level isobaric compression indicates sharp baroclinic gradients across affected sectors with surface gusts peaking at ${gustVal} mph.`,
-                stats: [
-                    { label: 'Surface Pressure', val: mbVal + ' hPa' },
-                    { label: 'Peak Wind Gust', val: gustVal + ' mph' },
-                    { label: 'CAPE / Energy', val: capeVal + ' J/kg' },
-                    { label: 'AI Confidence', val: '98.4%' }
-                ],
-                body: `
-                    <p>Continuous satellite radiometry and ground-based Doppler arrays have captured rapid atmospheric boundary reorganization surrounding <strong>${topic}</strong>. High-resolution isobaric analyses display an intensified pressure gradient force funneling turbulent momentum downward into the boundary layer.</p>
-                    <div class="strike-modal-data-table">
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Barometric Minimum</span><span class="strike-modal-datum-val">${mbVal} hPa</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Sustained Wind</span><span class="strike-modal-datum-val">${windVal} mph</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Instability Energy</span><span class="strike-modal-datum-val">${capeVal} J/kg</span></div>
-                        <div class="strike-modal-datum"><span class="strike-modal-datum-lbl">Doppler Velocity</span><span class="strike-modal-datum-val">${gustVal} mph</span></div>
-                    </div>
-                    <p>Vertical atmospheric soundings indicate a steep lapse rate of 7.8°C/km in the mid-troposphere, accelerating convective overturning and generating localized microscale wind shear. Dual-polarization radar signatures reveal prominent hydrometeor sorting consistent with severe convective precipitation.</p>
-                    <div class="strike-modal-advisory"><strong>⚡ Meteorological Alert:</strong> Field spotters and municipal emergency coordinators should prepare for localized infrastructural impacts, rapid hydrologic response in vulnerable catchments, and intermittent electrical disruption.</div>
-                    <p>Numerical ensemble forecasts project the primary axis of atmospheric instability to traverse the sector over the next 18-24 hours before gradually dissipating as post-frontal cold advection stabilizes the air mass.</p>
-                `
-            };
-
-            setTimeout(() => {
-                articlesList.unshift(newArticle);
-                renderArticles('all');
-                if (statusEl) {
-                    statusEl.innerHTML = '<span style="color:#10b981;"><i class="fas fa-check-circle"></i> Article retrieved and published to Weather Journal!</span>';
-                }
-                if (genBtn) genBtn.disabled = false;
-                openArticleModal(newArticle);
-            }, 800);
-        }
-
-        const genBtn = document.getElementById('strikeGenArticleBtn');
-        if (genBtn) genBtn.addEventListener('click', () => generateAiWeatherArticle());
-
-        const topicInput = document.getElementById('strikeTopicInput');
-        if (topicInput) {
-            topicInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') generateAiWeatherArticle();
-            });
-        }
-
-        document.querySelectorAll('.strike-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                const t = chip.dataset.topic;
-                if (topicInput) topicInput.value = t;
-                generateAiWeatherArticle(t);
-            });
-        });
-
-        // Initialize articles
         renderArticles('all');
+
+        // Initialize Real Live Weather & Real Ticker
+        initRealWeather();
+        initRealTicker();
 
         // Initial check: if tab is already blurred when page loads
         if (document.hidden) onBlurTab();
