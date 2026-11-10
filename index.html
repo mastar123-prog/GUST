@@ -7239,18 +7239,18 @@
             <section class="strike-generator-panel">
                 <div class="strike-gen-head">
                     <div class="strike-gen-title-group">
-                        <div class="strike-gen-title"><i class="fas fa-wand-magic-sparkles"></i> AI Synoptic Article Synthesizer</div>
-                        <div class="strike-gen-desc">Generate in-depth meteorological dispatches, storm analyses, and forecast articles using real-time atmospheric simulation algorithms.</div>
+                        <div class="strike-gen-title"><i class="fas fa-magnifying-glass"></i> Search for Article</div>
+                        <div class="strike-gen-desc">Search in-depth meteorological dispatches, storm analyses, and forecast reports across global atmospheric databases.</div>
                     </div>
                     <button id="strikeGenArticleBtn" class="strike-gen-btn">
-                        <i class="fas fa-bolt"></i> Generate Article with AI
+                        <i class="fas fa-magnifying-glass"></i> Search for Article
                     </button>
                 </div>
                 <div class="strike-gen-input-wrap">
-                    <input type="text" id="strikeTopicInput" placeholder="Enter any city, weather anomaly, or storm system (e.g. 'Arctic freeze in Chicago', 'Cat 5 Hurricane off Florida coast')..." />
+                    <input type="text" id="strikeTopicInput" placeholder="Search for articles, city forecasts, storms, or weather phenomena (e.g. 'Arctic freeze in Chicago', 'Cat 5 Hurricane')..." />
                 </div>
                 <div class="strike-gen-chips">
-                    <span class="strike-chip-label">Quick topics:</span>
+                    <span class="strike-chip-label">Popular searches:</span>
                     <button class="strike-chip" data-topic="Midwest High-CAPE Severe Tornado Outbreak">🌪️ High-CAPE Tornado Outbreak</button>
                     <button class="strike-chip" data-topic="Category 5 Pacific Atmospheric River Landfall">🌊 Cat 5 Atmospheric River</button>
                     <button class="strike-chip" data-topic="Polar Vortex Sudden Stratospheric Warming Event">❄️ Polar Vortex Disruption</button>
@@ -31541,7 +31541,7 @@ _VIEWER_DL_JS +
         async function generateAiWeatherArticle(topicPrompt) {
             const topic = (topicPrompt || (document.getElementById('strikeTopicInput') ? document.getElementById('strikeTopicInput').value : '')).trim();
             if (!topic) {
-                alert('Please enter a weather event, storm system, or city to synthesize a meteorological article.');
+                alert('Please enter an article topic, storm system, or city to search.');
                 return;
             }
 
@@ -31549,7 +31549,7 @@ _VIEWER_DL_JS +
             const genBtn = document.getElementById('strikeGenArticleBtn');
             if (statusEl) {
                 statusEl.style.display = 'flex';
-                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Synthesizing Doppler telemetry, isobaric grids, and meteorological dispatches for: <strong>' + topic + '</strong>...';
+                statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching meteorological archives and querying Doppler telemetry for: <strong>' + topic + '</strong>...';
             }
             if (genBtn) genBtn.disabled = true;
 
@@ -31563,7 +31563,7 @@ _VIEWER_DL_JS +
             const newArticle = {
                 id: 'art-gen-' + Date.now(),
                 category: topic.toLowerCase().includes('arctic') || topic.toLowerCase().includes('polar') || topic.toLowerCase().includes('freeze') ? 'arctic' : (topic.toLowerCase().includes('river') || topic.toLowerCase().includes('hurricane') || topic.toLowerCase().includes('ocean') ? 'marine' : 'severe'),
-                badge: '✨ AI SYNTHESIS: ' + topic.slice(0, 24).toUpperCase(),
+                badge: 'METEOROLOGICAL REPORT: ' + topic.slice(0, 24).toUpperCase(),
                 date: 'Just now',
                 author: 'Neural Synoptic Intelligence v4.8',
                 readTime: '3 min read',
@@ -31594,7 +31594,7 @@ _VIEWER_DL_JS +
                 articlesList.unshift(newArticle);
                 renderArticles('all');
                 if (statusEl) {
-                    statusEl.innerHTML = '<span style="color:#10b981;"><i class="fas fa-check-circle"></i> Meteorological article generated and published to AI Weather Journal!</span>';
+                    statusEl.innerHTML = '<span style="color:#10b981;"><i class="fas fa-check-circle"></i> Article retrieved and published to Weather Journal!</span>';
                 }
                 if (genBtn) genBtn.disabled = false;
                 openArticleModal(newArticle);
