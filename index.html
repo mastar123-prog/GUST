@@ -26330,9 +26330,17 @@ _VIEWER_DL_JS +
                 function isCutOff(text) {
                     const t = text.trim();
                     if (!t) return false;
-                    if (/[.!?)\]]$/.test(t)) return false;
-                    if (/[`([{*]$/.test(t)) return true;
-                    if (/\w$/.test(t)) return true;
+                    // Standard terminating punctuation means answer completed cleanly
+                    if (/[.!?…»”"')\]]$/.test(t)) return false;
+                    // Check for unclosed markdown code blocks (odd number of ```)
+                    const fences = (t.match(/```/g) || []).length;
+                    if (fences % 2 !== 0) return true;
+                    // Unclosed brackets or code literals
+                    if (/[`([{<]$/.test(t)) return true;
+                    // Trailing punctuation indicating incomplete phrase
+                    if (/[,:;\-–—]$/.test(t)) return true;
+                    // Trailing conjunction / preposition cut off mid-thought
+                    if (/\b(?:and|or|but|the|a|an|with|in|to|for|of|by|at|from|is|are|was|were|that|which|because|if|then|when|as)\s*$/i.test(t)) return true;
                     return false;
                 }
 
@@ -26451,24 +26459,66 @@ _VIEWER_DL_JS +
                     };
                     const pollModel = pollModelMap[modelKey] || 'karma';
 
-                    const ddgModelMap = {
-                        'llama-3.3': 'meta-llama/Llama-3.3-70B-Instruct',
-                        'mistral-nemo': 'mistralai/Mixtral-8x7B-Instruct-v0.1'
-                    };
+                    // 1A. High-Speed Streaming POST (Native Open-Source via Pollinations with max_tokens: 4096)
+                    try {
+                        const postRes = await robustAiFetch('https://text.pollinations.ai/', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                messages,
+                                model: pollModel,
+                                max_tokens: 4096,
+                                stream: true
+                            }),
+                            signal
+                        });
+                        if (postRes && postRes.ok) {
+                            if (postRes.body && postRes.body.getReader) {
+                                const reader = postRes.body.getReader();
+                                const decoder = new TextDecoder();
+                                let streamGotTokens = false;
+                                while (true) {
+                                    const { done, value } = await reader.read();
+                                    if (done) break;
+                                    const chunk = decoder.decode(value, { stream: true });
+                                    for (const rawLine of chunk.split('\n')) {
+                                        const line = rawLine.trim();
+                                        if (!line) continue;
+                                        if (line.startsWith('data: ')) {
+                                            const d = line.slice(6).trim();
+                                            if (d === '[DONE]') break;
+                                            try {
+                                                const j = JSON.parse(d);
+                                                const content = j.choices?.[0]?.delta?.content || j.choices?.[0]?.text || '';
+                                                if (content) {
+                                                    onToken(content);
+                                                    streamGotTokens = true;
+                                                }
+                                            } catch (_) {
+                                                onToken(d);
+                                                streamGotTokens = true;
+                                            }
+                                        } else if (!line.startsWith(':') && !line.startsWith('{')) {
+                                            onToken(line);
+                                            streamGotTokens = true;
+                                        }
+                                    }
+                                }
+                                if (streamGotTokens) return true;
+                            } else {
+                                const txt = await postRes.text().catch(() => '');
+                                if (txt && !txt.includes('Turnstile') && !txt.startsWith('{"error"') && !txt.includes('Cloudflare')) {
+                                    onToken(txt);
+                                    return true;
+                                }
+                            }
+                        }
+                    } catch (_) {}
 
-                    // 1A. Try DuckDuckGo open-source model endpoint if available
-                    if (ddgModelMap[modelKey]) {
-                        try {
-                            const ddgOk = await callDuckDuckGoAi(ddgModelMap[modelKey], userText, messages, onToken, signal);
-                            if (ddgOk) return true;
-                        } catch (_) {}
-                    }
-
-                    // 1B. Resilient multi-proxy open-source endpoints (without huge system prompts in query strings)
+                    // 1B. Direct GET / query fallback with max_tokens
                     const prompt = encodeURIComponent(userText.trim());
                     const openEndpoints = [
                         `https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}&cache=false`,
-                        `https://corsproxy.io/?https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}`,
                         `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}`)}`
                     ];
 
@@ -26485,24 +26535,7 @@ _VIEWER_DL_JS +
                         } catch (_) {}
                     }
 
-                    // 1C. Try direct POST with JSON body (handles system prompt & history without URI length limits)
-                    try {
-                        const postRes = await robustAiFetch('https://text.pollinations.ai/', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ messages, model: pollModel, stream: false }),
-                            signal
-                        });
-                        if (postRes && postRes.ok) {
-                            const txt = await postRes.text().catch(() => '');
-                            if (txt && !txt.includes('Turnstile') && !txt.startsWith('{"error"') && !txt.includes('Cloudflare')) {
-                                onToken(txt);
-                                return true;
-                            }
-                        }
-                    } catch (_) {}
-
-                    // 1D. Try local Ollama if running
+                    // 1C. Try local Ollama if running
                     try {
                         const ollamaOk = await callOllamaAi('llama3', messages, onToken, signal);
                         if (ollamaOk) return true;
@@ -26741,12 +26774,14 @@ _VIEWER_DL_JS +
                             }
                             try {
                                 const ac = new AbortController();
-                                const to = setTimeout(() => ac.abort(), 35000);
+                                let to = setTimeout(() => ac.abort(), 65000);
                                 let reply = '';
                                 let _firstToken = true;
 
                                 const onToken = (token) => {
                                     if (!token) return;
+                                    clearTimeout(to);
+                                    to = setTimeout(() => ac.abort(), 45000); // refresh timeout while tokens are actively streaming
                                     reply += token;
                                     let displayReply = reply;
                                     const _markerMatch = displayReply.match(/(?:function\s+)?assistantRequestPageContext/);
@@ -31242,6 +31277,7 @@ _VIEWER_DL_JS +
         // ── Transition: Strike Disguise -> GUST Browser ──
         function launchGust() {
             window._strikeDisguised = false;
+            if (typeof window._pauseRadar === 'function') window._pauseRadar();
             const strikeEl = document.getElementById('strikeApp');
             if (strikeEl) strikeEl.classList.add('strike-hidden');
             const gustEl = document.querySelector('.app');
@@ -31263,6 +31299,8 @@ _VIEWER_DL_JS +
             if (strikeEl) strikeEl.classList.remove('strike-hidden');
             const gustEl = document.querySelector('.app');
             if (gustEl) gustEl.style.display = 'none';
+
+            if (typeof window._resumeRadar === 'function') window._resumeRadar();
 
             document.title = window._isTabBlurred ? STRIKE_BLUR_TITLE : STRIKE_ACTIVE_TITLE;
             setFavicon(LIGHTNING_FAVICON_SVG);
@@ -31828,7 +31866,38 @@ _VIEWER_DL_JS +
         if (radarCanvas) {
             const ctx = radarCanvas.getContext('2d');
             let sweepAngle = 0;
-            let radarRunning = true;
+            let radarRunning = (window._strikeDisguised !== false);
+            let radarFrameId = null;
+
+            function syncRadarCanvasSize() {
+                if (!radarCanvas) return;
+                const rect = radarCanvas.getBoundingClientRect();
+                if (rect.width && rect.height) {
+                    const rw = Math.round(rect.width);
+                    const rh = Math.round(rect.height);
+                    if (radarCanvas.width !== rw || radarCanvas.height !== rh) {
+                        radarCanvas.width = rw;
+                        radarCanvas.height = rh;
+                    }
+                }
+            }
+            window.addEventListener('resize', syncRadarCanvasSize, { passive: true });
+            setTimeout(syncRadarCanvasSize, 50);
+
+            window._pauseRadar = () => {
+                radarRunning = false;
+                if (radarFrameId) {
+                    cancelAnimationFrame(radarFrameId);
+                    radarFrameId = null;
+                }
+            };
+
+            window._resumeRadar = () => {
+                if (radarRunning) return;
+                radarRunning = true;
+                syncRadarCanvasSize();
+                if (!radarFrameId) radarFrameId = requestAnimationFrame(renderRadar);
+            };
 
             const stormCells = [
                 { x: 0.65, y: 0.35, r: 42, intensity: 58, color: 'rgba(239, 68, 68, 0.55)' },
@@ -31839,17 +31908,16 @@ _VIEWER_DL_JS +
             ];
 
             function renderRadar() {
-                if (!radarRunning || !radarCanvas) return;
-                const rect = radarCanvas.getBoundingClientRect();
-                if (rect.width && rect.height && (radarCanvas.width !== Math.round(rect.width) || radarCanvas.height !== Math.round(rect.height))) {
-                    radarCanvas.width = Math.round(rect.width);
-                    radarCanvas.height = Math.round(rect.height);
+                radarFrameId = null;
+                const strikeEl = document.getElementById('strikeApp');
+                if (!radarRunning || !radarCanvas || !strikeEl || strikeEl.classList.contains('strike-hidden') || document.hidden) {
+                    return;
                 }
-                const w = radarCanvas.width;
-                const h = radarCanvas.height;
+                const w = radarCanvas.width || 460;
+                const h = radarCanvas.height || 260;
                 const cx = w / 2;
                 const cy = h / 2;
-                const maxR = Math.min(cx, cy) - 14;
+                const maxR = Math.max(10, Math.min(cx, cy) - 14);
 
                 ctx.fillStyle = '#020617';
                 ctx.fillRect(0, 0, w, h);
@@ -31904,16 +31972,26 @@ _VIEWER_DL_JS +
                 ctx.restore();
 
                 sweepAngle = (sweepAngle + 0.025) % (Math.PI * 2);
-                requestAnimationFrame(renderRadar);
+                if (radarRunning) {
+                    radarFrameId = requestAnimationFrame(renderRadar);
+                }
             }
-            renderRadar();
+            if (radarRunning) {
+                radarFrameId = requestAnimationFrame(renderRadar);
+            }
 
             const radarBtn = document.getElementById('strikeRadarToggleBtn');
             if (radarBtn) {
                 radarBtn.addEventListener('click', () => {
                     radarRunning = !radarRunning;
                     radarBtn.innerHTML = radarRunning ? '<i class="fas fa-pause"></i> Pause' : '<i class="fas fa-play"></i> Loop';
-                    if (radarRunning) renderRadar();
+                    if (radarRunning) {
+                        syncRadarCanvasSize();
+                        if (!radarFrameId) radarFrameId = requestAnimationFrame(renderRadar);
+                    } else if (radarFrameId) {
+                        cancelAnimationFrame(radarFrameId);
+                        radarFrameId = null;
+                    }
                 });
             }
         }
