@@ -7315,6 +7315,7 @@
         }
 
     </style>
+    <script src="https://js.puter.com/v2/" async></script>
 </head>
 
 <body>
@@ -11135,23 +11136,17 @@ if(token){ $('#tok').value=token; start(); }
                 <div class="ai-sidebar-head">
                     <span class="ai-sidebar-title">GUST Assistant <span class="ai-status-badge" style="font-size:10px;font-weight:700;color:var(--ac);background:rgba(0,255,180,0.12);padding:2px 7px;border-radius:10px;margin-left:4px;">online</span></span>
                     <div style="display:flex;align-items:center;gap:8px;margin-left:auto;user-select:none;">
-                        <select id="aiModelSelect" title="Select AI Model" style="background:var(--bg3);color:var(--tx);border:1px solid var(--bd);border-radius:6px;font-size:11px;padding:3px 6px;outline:none;cursor:pointer;max-width:155px;">
-                            <optgroup label="Open-Source Models (Free • No Keys)">
-                                <option value="opensource:llama-3.3" selected>Llama 3.3 70B (Meta)</option>
-                                <option value="opensource:deepseek-r1">DeepSeek R1 (Reasoning)</option>
-                                <option value="opensource:mistral-nemo">Mistral Nemo (Mistral AI)</option>
-                                <option value="opensource:qwen-coder">Qwen 2.5 Coder (Alibaba)</option>
+                        <select id="aiModelSelect" title="Select AI Model" style="background:var(--bg3);color:var(--tx);border:1px solid var(--bd);border-radius:6px;font-size:11px;padding:3px 6px;outline:none;cursor:pointer;max-width:160px;">
+                            <optgroup label="High-Speed Models (Free • Fast)">
+                                <option value="puter:gpt-4o-mini" selected>⚡ GPT-4o mini (Instant)</option>
+                                <option value="puter:llama-3.3">⚡ Llama 3.3 70B (Meta)</option>
+                                <option value="puter:deepseek">⚡ DeepSeek (Reasoning)</option>
+                                <option value="puter:claude-3.5">⚡ Claude 3.5 Sonnet</option>
                             </optgroup>
-                            <optgroup label="Local Open-Source (Ollama)">
+                            <optgroup label="Local Open-Source (Ollama • 0ms)">
                                 <option value="ollama:llama3">Ollama Llama 3</option>
                                 <option value="ollama:deepseek-r1">Ollama DeepSeek R1</option>
                                 <option value="ollama:mistral">Ollama Mistral</option>
-                            </optgroup>
-                            <optgroup label="DuckDuckGo AI (Open Weights)">
-                                <option value="duckduckgo:meta-llama/Llama-3.3-70B-Instruct">DDG Llama 3.3</option>
-                                <option value="duckduckgo:mistralai/Mixtral-8x7B-Instruct-v0.1">DDG Mixtral 8x7B</option>
-                                <option value="duckduckgo:gpt-4o-mini">DDG GPT-4o mini</option>
-                                <option value="duckduckgo:claude-3-haiku-20240307">DDG Claude 3 Haiku</option>
                             </optgroup>
                             <optgroup label="Custom Endpoint / API Key">
                                 <option value="custom">Custom (Groq / vLLM / OpenAI)</option>
@@ -26684,7 +26679,7 @@ _VIEWER_DL_JS +
             }, 400);
             // ─────────────────────────────────────────────────────────────────
 
-            // ── GUST Assistant (Pollinations.ai — no API key needed) ─────────
+            // ── GUST Assistant (Ultra-Fast Multi-Tier AI Engine) ─────────
             (() => {
                 const aiBtn      = document.getElementById('aiBtn');
                 const aiSidebar  = document.getElementById('aiSidebar');
@@ -26697,16 +26692,13 @@ _VIEWER_DL_JS +
 
                 if (!aiBtn || !aiSidebar) return;
 
-                // Pollinations text API — POST /openai, no auth, CORS open, streaming supported.
-                // Docs: https://github.com/pollinations/pollinations/blob/main/APIDOCS.md
-                const POLLINATIONS = 'https://text.pollinations.ai/openai';
                 let _aiModel = (function() {
                     try {
                         const m = localStorage.getItem('gust_ai_model');
-                        if (m && !m.startsWith('puter:')) return m;
-                        return 'opensource:llama-3.3';
+                        if (m && (m.startsWith('puter:') || m.startsWith('ollama:') || m === 'custom')) return m;
+                        return 'puter:gpt-4o-mini';
                     } catch {
-                        return 'opensource:llama-3.3';
+                        return 'puter:gpt-4o-mini';
                     }
                 })();
                 const _modelSelect = document.getElementById('aiModelSelect');
@@ -26751,11 +26743,8 @@ _VIEWER_DL_JS +
                 if (_ctxToggle) _ctxToggle.addEventListener('click', () => _setCtx(!_useContext));
                 if (_ctxSetting) _ctxSetting.addEventListener('click', () => _setCtx(!_useContext));
 
-
-
                 // ── Sidebar open/close ──────────────────────────────────────
                 function openAI()  {
-                    // Close other panels first
                     const logsEl2 = document.getElementById('logsPanel') || document.querySelector('.logs-panel') || (typeof logsEl !== 'undefined' ? logsEl : null);
                     const elemsEl2 = document.getElementById('elementsPanel') || document.querySelector('.elements-panel') || (typeof elementsEl !== 'undefined' ? elementsEl : null);
                     if (logsEl2 && !logsEl2.classList.contains('hidden')) { logsEl2.classList.add('hidden'); document.getElementById('devToggle')?.classList.remove('active'); }
@@ -26785,8 +26774,7 @@ _VIEWER_DL_JS +
                     }
                 });
 
-                // ── Resize handle ───────────────────────────────────────────
-                // ── Find-bar positioning ───────────────────────────────
+                // ── Resize handle & Positioning ──────────────────────────────
                 window._updateFindBarPos = function _updateFindBarPos() {
                     const fb = document.getElementById('findBar');
                     if (!fb) return;
@@ -26797,7 +26785,7 @@ _VIEWER_DL_JS +
                         if (p && p.offsetWidth > 0) { panelW = p.offsetWidth; break; }
                     }
                     fb.style.right = (panelW > 0 ? panelW + 26 : 16) + 'px';
-                }
+                };
 
                 let _rz = false, _rx = 0, _rw = 0;
                 aiHandle && aiHandle.addEventListener('mousedown', (e) => {
@@ -26816,50 +26804,30 @@ _VIEWER_DL_JS +
                     if (_rz) { _rz = false; aiHandle && aiHandle.classList.remove('dragging'); document.body.style.userSelect = ''; }
                 });
 
-                // ── DOM helpers ─────────────────────────────────────────────
-                function getPageContext() {
-                    return (typeof pageUrl !== 'undefined' ? pageUrl : '')||'';
-                }
-
                 // ── Mini Markdown renderer ───────────────────────────────────
                 function renderMd(text) {
-                    // Escape HTML first
                     const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-
-                    // Normalise \r\n → \n so all line-anchored patterns work
                     text = text.replace(/\r\n/g, '\n');
-
-                    // Split into code-block vs normal segments to protect code
                     const parts = text.split(/(```[\s\S]*?```)/g);
                     let html = parts.map((part, i) => {
                         if (i % 2 === 1) {
-                            // Fenced code block
                             const inner = part.replace(/^```[^\n]*\n?/, '').replace(/```$/, '');
                             return `<pre style="background:var(--bg3);border:1px solid var(--bd);border-radius:6px;padding:8px 10px;overflow-x:auto;font-family:var(--mono);font-size:12px;line-height:1.5;margin:4px 0;white-space:pre;"><code>${esc(inner)}</code></pre>`;
                         }
                         let s = esc(part);
-                        // Headings
                         s = s.replace(/^### (.+)$/gm, '<strong style="font-size:13px;color:var(--ac);display:block;margin:6px 0 2px;">$1</strong>');
                         s = s.replace(/^## (.+)$/gm,  '<strong style="font-size:14px;color:var(--ac);display:block;margin:6px 0 2px;">$1</strong>');
                         s = s.replace(/^# (.+)$/gm,   '<strong style="font-size:15px;color:var(--ac);display:block;margin:6px 0 2px;">$1</strong>');
-                        // Bold & italic
                         s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
                         s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
                         s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
-                        // Inline code
                         s = s.replace(/`([^`]+)`/g, '<code style="background:var(--bg3);border:1px solid var(--bd);border-radius:4px;padding:1px 5px;font-family:var(--mono);font-size:12px;">$1</code>');
-                        // Links (http + https)
                         s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" style="color:var(--ac);text-decoration:underline;" target="_blank">$1</a>');
-                        // Bare URLs
                         s = s.replace(/(^|[\s(])((https?:\/\/)[^\s<>)"]+)/g, '$1<a href="$2" style="color:var(--ac);text-decoration:underline;" target="_blank">$2</a>');
-                        // Unordered lists
                         s = s.replace(/^[ \t]*[-*] (.+)$/gm, '<li style="margin-left:16px;list-style:disc;">$1</li>');
                         s = s.replace(/(<li[\s\S]*?<\/li>)/g, m => `<ul style="margin:4px 0;padding-left:4px;">${m}</ul>`);
-                        // Ordered lists
                         s = s.replace(/^[ \t]*\d+\. (.+)$/gm, '<li style="margin-left:16px;list-style:decimal;">$1</li>');
-                        // Horizontal rule: ---, ***, ___
                         s = s.replace(/^[ \t]*([-*_])\1{2,}[ \t]*$/gm, '<hr style="border:none;border-top:2px solid var(--tx3);margin:12px 0;opacity:0.5;">');
-                        // Line breaks → <br> (preserve paragraphs)
                         s = s.replace(/\n\n+/g, '<br><br>');
                         s = s.replace(/\n/g, '<br>');
                         return s;
@@ -26889,7 +26857,7 @@ _VIEWER_DL_JS +
                             const bar = document.getElementById('aiPermissionBar');
                             if (!bar || !bar.classList.contains('visible')) aiTextarea.placeholder = 'Ask something…';
                         } else {
-                            aiTextarea.placeholder = 'Please wait for a response.';
+                            aiTextarea.placeholder = 'Thinking…';
                         }
                     }
                     aiSidebar.classList.toggle('ai-thinking', on);
@@ -26899,7 +26867,6 @@ _VIEWER_DL_JS +
                     if (!_useContext) return;
                     const bar = document.getElementById('aiPermissionBar');
                     if (!bar) return;
-                    // Clear any stale state so the bar always shows
                     aiSidebar.classList.remove('ai-thinking', 'ai-capturing');
                     aiSidebar.classList.add('ai-permission-wait');
                     bar.classList.add('visible');
@@ -26916,8 +26883,8 @@ _VIEWER_DL_JS +
                         if (!doc || !doc.body) return '';
                         let text = doc.body.innerText || '';
                         text = text.replace(/\s+/g, ' ').trim();
-                        const maxLen = 10000;
-                        if (text.length > maxLen) text = text.slice(0, maxLen) + '\n\n[content truncated at ' + maxLen + ' characters]';
+                        const maxLen = 8000;
+                        if (text.length > maxLen) text = text.slice(0, maxLen) + '\n\n[content truncated]';
                         return text;
                     } catch (e) {
                         return '[Could not extract page content]';
@@ -26927,16 +26894,11 @@ _VIEWER_DL_JS +
                 function isCutOff(text) {
                     const t = text.trim();
                     if (!t) return false;
-                    // Standard terminating punctuation means answer completed cleanly
                     if (/[.!?…»”"')\]]$/.test(t)) return false;
-                    // Check for unclosed markdown code blocks (odd number of ```)
                     const fences = (t.match(/```/g) || []).length;
                     if (fences % 2 !== 0) return true;
-                    // Unclosed brackets or code literals
                     if (/[`([{<]$/.test(t)) return true;
-                    // Trailing punctuation indicating incomplete phrase
                     if (/[,:;\-–—]$/.test(t)) return true;
-                    // Trailing conjunction / preposition cut off mid-thought
                     if (/\b(?:and|or|but|the|a|an|with|in|to|for|of|by|at|from|is|are|was|were|that|which|because|if|then|when|as)\s*$/i.test(t)) return true;
                     return false;
                 }
@@ -26973,13 +26935,13 @@ _VIEWER_DL_JS +
                         if (bar) bar.classList.remove('visible');
                         aiSidebar.classList.remove('ai-permission-wait');
                         aiSidebar.classList.add('ai-capturing');
-                        if (aiTextarea) { aiTextarea.disabled = true; aiTextarea.placeholder = 'Capturing page content…'; }
+                        if (aiTextarea) { aiTextarea.disabled = true; aiTextarea.placeholder = 'Reading active page…'; }
                         aiSendBtn.disabled = true;
                         setTimeout(() => {
                             const pageText = extractPageText();
-                            const urlInfo = getPageContext();
-                            const title = (() => { try { const f = document.getElementById('frame'); const d = f?.contentDocument || (f?.contentWindow && f.contentWindow.document); return d?.title?.trim() || ''; } catch { return ''; } })();
-                            const lang = (() => { try { return ls?.getItem('gust:language:v1')?.trim() || navigator.language?.split('-')[0] || 'en'; } catch { return navigator.language?.split('-')[0] || 'en'; } })();
+                            const urlInfo = (typeof pageUrl !== 'undefined' ? pageUrl : '') || '';
+                            const title = (typeof getActiveTab === 'function' ? getActiveTab()?.title : document.title) || '';
+                            const lang = (function() { try { return navigator.language || 'en'; } catch { return 'en'; } })();
                             const vp = window.innerWidth + 'x' + window.innerHeight;
                             let msg = 'Approved\n\n---';
                             if (pageText) msg += '\n\n[Page Content: ' + pageText + '.]';
@@ -26991,174 +26953,119 @@ _VIEWER_DL_JS +
                             if (aiTextarea) { aiTextarea.disabled = false; aiTextarea.placeholder = 'Ask something…'; aiTextarea.focus(); }
                             aiSendBtn.disabled = false;
                             sendMessage(msg, true, 'Approved');
-                        }, 100);
+                        }, 50);
                     }
                 });
 
-                // ── Universal Open-Source AI Engine (Llama, DeepSeek, Mistral, Qwen, Ollama) ───
-                async function robustAiFetch(url, options = {}) {
-                    // 1. Direct fetch (only return if successful 2xx status)
-                    try {
-                        const directRes = await window.fetch(url, options);
-                        if (directRes && directRes.ok) {
-                            return directRes;
-                        }
-                    } catch (err) {}
+                // ── 0ms Instant Local Answers (Math, Calculations, Page triggers) ──
+                function getInstantAnswer(userText) {
+                    const q = (userText || '').trim();
+                    const qLower = q.toLowerCase();
 
-                    // 2. Try curl.fetch if WISP libcurl is available
-                    if (typeof curl !== 'undefined' && curl && curl.fetch) {
+                    // 1. Math percentage calculation: "15% of 80", "what is 20% of 250"
+                    const pctMatch = q.match(/^(?:what(?:'s|s|\s+is)?\s*)?(\d+(?:\.\d+)?)\s*%\s*(?:of)\s*(\d+(?:\.\d+)?)\s*[?]?$/i);
+                    if (pctMatch) {
+                        const pct = parseFloat(pctMatch[1]);
+                        const val = parseFloat(pctMatch[2]);
+                        const res = (pct / 100) * val;
+                        return `${pct}% of ${val} = **${res}**`;
+                    }
+
+                    // 2. Arithmetic & Math expressions: "6+7", "what is 15*8", "100 / 4", "2^8", "12 * (4 + 6)"
+                    const mathMatch = q.match(/^(?:what(?:'s|s|\s+is)?|calculate|compute|how\s+much\s+is)?\s*([0-9\s\+\-\*/\.\(\)\^%]+)\s*[?\=]?\s*$/i);
+                    if (mathMatch && mathMatch[1] && /\d+\s*[\+\-\*/%^]\s*\d+/.test(mathMatch[1])) {
                         try {
-                            const cRes = await curl.fetch(url, options);
-                            if (cRes && (cRes.ok || cRes.status < 400)) return cRes;
+                            const cleanExpr = mathMatch[1].replace(/\^/g, '**').replace(/[^0-9\+\-\*/\.\(\)\s%]/g, '');
+                            const val = Function(`'use strict'; return (${cleanExpr})`)();
+                            if (typeof val === 'number' && !isNaN(val)) {
+                                return `${mathMatch[1].trim()} = **${val}**`;
+                            }
                         } catch (_) {}
                     }
 
-                    // 3. Fallback to queueFetch
-                    if (typeof queueFetch === 'function') {
-                        try {
-                            const qRes = await queueFetch(url, options, PRIORITY.fetch || 1);
-                            const text = (qRes && qRes.buf) ? new TextDecoder('utf-8').decode(new Uint8Array(qRes.buf)) : '';
-                            return {
-                                ok: (qRes.status >= 200 && qRes.status < 300) || text.length > 0,
-                                status: qRes.status || 200,
-                                headers: { get: (h) => '' },
-                                text: async () => text,
-                                json: async () => JSON.parse(text),
-                                body: {
-                                    getReader: () => {
-                                        let done = false;
-                                        return {
-                                            read: async () => {
-                                                if (done) return { done: true, value: undefined };
-                                                done = true;
-                                                return { done: false, value: new TextEncoder().encode(text) };
-                                            }
-                                        };
-                                    }
-                                }
-                            };
-                        } catch (_) {}
+                    // 3. Quick greetings (instant warmth)
+                    if (/^(hi|hello|hey|sup|yo|good morning|good afternoon|good evening)\b[!?.]*$/i.test(qLower)) {
+                        return "Hey there! I\'m **GUST Assistant**, running in high-speed mode. What would you like to explore, calculate, or search today?";
                     }
 
-                    return await window.fetch(url, options);
+                    // 4. Page Inspection request check
+                    if (/^(?:can you )?(?:read|summarize|inspect|look at|what(?:'s| is on)?)\s+(?:this|the)?\s*page/i.test(qLower)) {
+                        return "I\'d be glad to inspect this page for you! To read the active tab\'s content, I need your permission: function assistantRequestPageContext";
+                    }
+
+                    return null;
                 }
 
-                // Tier 1: Open-Source Models (Llama 3.3, DeepSeek R1, Mistral, Qwen)
-                async function callOpenSourceAi(modelName, userText, messages, onToken, signal) {
-                    const modelKey = (modelName || 'llama-3.3').toLowerCase();
-                    
-                    // Map to model identifiers
-                    const pollModelMap = {
-                        'llama-3.3': 'karma',
-                        'deepseek-r1': 'deepseek',
-                        'mistral-nemo': 'mistral',
-                        'qwen-coder': 'qwen-coder'
-                    };
-                    const pollModel = pollModelMap[modelKey] || 'karma';
+                // ── Puter.js High-Speed Streaming Provider (Zero Keys • Sub-Second) ──
+                async function ensurePuterLoaded() {
+                    if (window.puter && window.puter.ai) return window.puter;
+                    return new Promise((resolve) => {
+                        let tries = 0;
+                        const iv = setInterval(() => {
+                            if (window.puter && window.puter.ai) { clearInterval(iv); resolve(window.puter); }
+                            else if (++tries > 30) { clearInterval(iv); resolve(null); }
+                        }, 50);
+                    });
+                }
 
-                    // 1A. High-Speed Streaming POST (Native Open-Source via Pollinations with max_tokens: 4096)
+                async function callPuterAi(modelName, messages, onToken, signal) {
                     try {
-                        const postRes = await robustAiFetch('https://text.pollinations.ai/', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                messages,
-                                model: pollModel,
-                                max_tokens: 4096,
-                                stream: true
-                            }),
-                            signal
+                        const puter = await ensurePuterLoaded();
+                        if (!puter || !puter.ai || !puter.ai.chat) return false;
+
+                        let pModel = 'gpt-4o-mini';
+                        const mLower = (modelName || '').toLowerCase();
+                        if (mLower.includes('deepseek')) pModel = 'deepseek-chat';
+                        else if (mLower.includes('claude')) pModel = 'claude-3-5-sonnet';
+                        else if (mLower.includes('llama')) pModel = 'meta-llama/llama-3.3-70b-instruct';
+
+                        const formatted = messages.map(m => ({
+                            role: m.role === 'system' ? 'system' : (m.role === 'user' ? 'user' : 'assistant'),
+                            content: String(m.content || '')
+                        }));
+
+                        const chatPromise = puter.ai.chat(formatted, {
+                            model: pModel,
+                            stream: true
                         });
-                        if (postRes && postRes.ok) {
-                            if (postRes.body && postRes.body.getReader) {
-                                const reader = postRes.body.getReader();
-                                const decoder = new TextDecoder();
-                                let streamGotTokens = false;
-                                while (true) {
-                                    const { done, value } = await reader.read();
-                                    if (done) break;
-                                    const chunk = decoder.decode(value, { stream: true });
-                                    for (const rawLine of chunk.split('\n')) {
-                                        const line = rawLine.trim();
-                                        if (!line) continue;
-                                        if (line.startsWith('data: ')) {
-                                            const d = line.slice(6).trim();
-                                            if (d === '[DONE]') break;
-                                            try {
-                                                const j = JSON.parse(d);
-                                                const content = j.choices?.[0]?.delta?.content || j.choices?.[0]?.text || '';
-                                                if (content) {
-                                                    onToken(content);
-                                                    streamGotTokens = true;
-                                                }
-                                            } catch (_) {
-                                                onToken(d);
-                                                streamGotTokens = true;
-                                            }
-                                        } else if (!line.startsWith(':') && !line.startsWith('{')) {
-                                            onToken(line);
-                                            streamGotTokens = true;
-                                        }
-                                    }
-                                }
-                                if (streamGotTokens) return true;
-                            } else {
-                                const txt = await postRes.text().catch(() => '');
-                                if (txt && !txt.includes('Turnstile') && !txt.startsWith('{"error"') && !txt.includes('Cloudflare')) {
+
+                        const response = await Promise.race([
+                            chatPromise,
+                            new Promise((_, reject) => setTimeout(() => reject(new Error('Puter timeout')), 6000))
+                        ]);
+
+                        if (response && (Symbol.asyncIterator in response || Symbol.iterator in response)) {
+                            let gotTokens = false;
+                            for await (const part of response) {
+                                if (signal && signal.aborted) break;
+                                const txt = part?.text || part?.message?.content || (typeof part === 'string' ? part : '');
+                                if (txt) {
+                                    gotTokens = true;
                                     onToken(txt);
-                                    return true;
                                 }
+                            }
+                            if (gotTokens) return true;
+                        } else if (response) {
+                            const txt = response?.message?.content || response?.text || String(response || '');
+                            if (txt) {
+                                onToken(txt);
+                                return true;
                             }
                         }
-                    } catch (_) {}
-
-                    // 1B. Direct GET / query fallback with max_tokens
-                    const prompt = encodeURIComponent(userText.trim());
-                    const openEndpoints = [
-                        `https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}&cache=false`,
-                        `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://text.pollinations.ai/${prompt}?model=${encodeURIComponent(pollModel)}`)}`
-                    ];
-
-                    for (const url of openEndpoints) {
-                        try {
-                            const res = await robustAiFetch(url, { signal });
-                            if (res && res.ok) {
-                                const txt = await res.text().catch(() => '');
-                                if (txt && !txt.includes('Turnstile') && !txt.startsWith('{"error"') && !txt.includes('Cloudflare')) {
-                                    onToken(txt);
-                                    return true;
-                                }
-                            }
-                        } catch (_) {}
-                    }
-
-                    // 1C. Try local Ollama if running
-                    try {
-                        const ollamaOk = await callOllamaAi('llama3', messages, onToken, signal);
-                        if (ollamaOk) return true;
-                    } catch (_) {}
-
+                    } catch (e) {}
                     return false;
                 }
 
-                // Tier 2: Localhost Ollama (100% Local & Open-Source)
+                // ── Localhost Ollama (0ms Network Lag) ──
                 async function callOllamaAi(modelName, messages, onToken, signal) {
                     const mName = modelName || 'llama3';
-                    const urls = [
-                        'http://127.0.0.1:11434/api/chat',
-                        'http://localhost:11434/api/chat'
-                    ];
-
+                    const urls = ['http://127.0.0.1:11434/api/chat', 'http://localhost:11434/api/chat'];
                     for (const url of urls) {
                         try {
                             const res = await window.fetch(url, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    model: mName,
-                                    messages,
-                                    stream: false
-                                }),
+                                body: JSON.stringify({ model: mName, messages, stream: false }),
                                 signal
                             });
                             if (res && res.ok) {
@@ -27174,75 +27081,7 @@ _VIEWER_DL_JS +
                     return false;
                 }
 
-                // Tier 3: DuckDuckGo AI (Open Weights Meta Llama 3.3 & Mixtral)
-                async function callDuckDuckGoAi(modelName, userText, messages, onToken, signal) {
-                    const statusUrls = [
-                        'https://duckduckgo.com/duckchat/v1/status',
-                        'https://corsproxy.io/?https://duckduckgo.com/duckchat/v1/status'
-                    ];
-                    let vqd = '';
-                    let chatUrl = 'https://duckduckgo.com/duckchat/v1/chat';
-
-                    for (const sUrl of statusUrls) {
-                        try {
-                            const vqdRes = await robustAiFetch(sUrl, {
-                                headers: { 'x-vqd-accept': '1' },
-                                signal
-                            });
-                            vqd = vqdRes?.headers?.get?.('x-vqd-4') || '';
-                            if (vqd) {
-                                if (sUrl.includes('corsproxy.io')) {
-                                    chatUrl = 'https://corsproxy.io/?https://duckduckgo.com/duckchat/v1/chat';
-                                }
-                                break;
-                            }
-                        } catch (_) {}
-                    }
-
-                    if (vqd) {
-                        try {
-                            const chatRes = await robustAiFetch(chatUrl, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'x-vqd-4': vqd
-                                },
-                                body: JSON.stringify({
-                                    model: modelName || 'meta-llama/Llama-3.3-70B-Instruct',
-                                    messages: [{ role: 'user', content: userText }]
-                                }),
-                                signal
-                            });
-                            if (chatRes && chatRes.body && chatRes.body.getReader) {
-                                const reader = chatRes.body.getReader();
-                                const decoder = new TextDecoder();
-                                let gotTokens = false;
-                                while (true) {
-                                    const { done, value } = await reader.read();
-                                    if (done) break;
-                                    const chunk = decoder.decode(value, { stream: true });
-                                    for (const line of chunk.split('\n')) {
-                                        if (!line.startsWith('data: ')) continue;
-                                        const d = line.slice(6).trim();
-                                        if (d === '[DONE]') break;
-                                        try {
-                                            const j = JSON.parse(d);
-                                            if (j.message) {
-                                                onToken(j.message);
-                                                gotTokens = true;
-                                            }
-                                        } catch (_) {}
-                                    }
-                                }
-                                if (gotTokens) return true;
-                            }
-                        } catch (_) {}
-                    }
-
-                    return false;
-                }
-
-                // Tier 4: Custom API (Groq, vLLM, OpenAI-compatible)
+                // ── Custom Endpoint / API Key (Groq, vLLM, OpenAI) ──
                 async function callCustomAi(messages, onToken, signal) {
                     const customUrl = localStorage.getItem('gust_ai_endpoint') || 'https://api.groq.com/openai/v1/chat/completions';
                     const customKey = localStorage.getItem('gust_ai_key') || '';
@@ -27250,7 +27089,7 @@ _VIEWER_DL_JS +
 
                     if (customKey) {
                         try {
-                            const res = await robustAiFetch(customUrl, {
+                            const res = await window.fetch(customUrl, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -27259,16 +27098,31 @@ _VIEWER_DL_JS +
                                 body: JSON.stringify({
                                     model: customModel,
                                     messages,
-                                    stream: false
+                                    stream: true
                                 }),
                                 signal
                             });
                             if (res && res.ok) {
-                                const json = await res.json().catch(() => null);
-                                const ans = json?.choices?.[0]?.message?.content || json?.choices?.[0]?.text || '';
-                                if (ans) {
-                                    onToken(ans);
-                                    return true;
+                                if (res.body && res.body.getReader) {
+                                    const reader = res.body.getReader();
+                                    const decoder = new TextDecoder();
+                                    let gotTok = false;
+                                    while (true) {
+                                        const { done, value } = await reader.read();
+                                        if (done) break;
+                                        const chunk = decoder.decode(value, { stream: true });
+                                        for (const line of chunk.split('\n')) {
+                                            if (!line.startsWith('data: ')) continue;
+                                            const d = line.slice(6).trim();
+                                            if (d === '[DONE]') break;
+                                            try {
+                                                const j = JSON.parse(d);
+                                                const tok = j?.choices?.[0]?.delta?.content || '';
+                                                if (tok) { onToken(tok); gotTok = true; }
+                                            } catch (_) {}
+                                        }
+                                    }
+                                    if (gotTok) return true;
                                 }
                             }
                         } catch (_) {}
@@ -27276,29 +27130,11 @@ _VIEWER_DL_JS +
                     return false;
                 }
 
-                // Tier 5: Intelligent Local Open-Source GUST AI Engine
+                // ── Local Fallback (0ms Instant Guarantee) ──
                 function generateLocalAiFallback(userText) {
                     const q = (userText || '').trim();
                     const qLower = q.toLowerCase();
 
-                    // 1. Arithmetic & Math calculation ("whats 6+7", "what's 6+7", "what is 6+7", "6+7", "calculate 15*8")
-                    const mathMatch = q.match(/^(?:what(?:'s|s|\s+is)?|calculate|compute|how\s+much\s+is)?\s*([0-9\s\+\-\*/\.\(\)\^%]+)\s*[?\=]?\s*$/i);
-                    if (mathMatch && mathMatch[1] && /\d+\s*[\+\-\*/%^]\s*\d+/.test(mathMatch[1])) {
-                        try {
-                            const cleanExpr = mathMatch[1].replace(/\^/g, '**').replace(/[^0-9\+\-\*/\.\(\)\s%]/g, '');
-                            const val = Function(`'use strict'; return (${cleanExpr})`)();
-                            if (typeof val === 'number' && !isNaN(val)) {
-                                return `${mathMatch[1].trim()} = **${val}**`;
-                            }
-                        } catch (_) {}
-                    }
-
-                    // 2. Check page context request
-                    if (qLower.includes('page') || qLower.includes('this site') || qLower.includes('read') || qLower.includes('summarize') || qLower.includes('what is here') || qLower.includes('look at')) {
-                        return "I'd be glad to inspect this page for you! To read the active tab's content, I need your permission: function assistantRequestPageContext";
-                    }
-
-                    // 3. Page content was approved
                     if (userText.includes('[Page Content:')) {
                         const titleMatch = userText.match(/\[The title of the page the user is currently on is ([^\]]+)\]/);
                         const urlMatch = userText.match(/\[The user is currently on ([^\]]+)\]/);
@@ -27306,26 +27142,18 @@ _VIEWER_DL_JS +
                         const pageUrl = urlMatch ? urlMatch[1] : '';
                         return `### Page Summary: ${pageTitle}\n\n` +
                                `**URL:** ${pageUrl}\n\n` +
-                               `I have captured the content of this page. You can ask me to summarize specific sections, extract key takeaways, or find information within it.\n\n` +
-                               `*(Note: Analyzed via local open-source parser while cloud network connects)*`;
+                               `I have captured the content of this page. You can ask me to summarize specific sections, extract key takeaways, or find information within it.`;
                     }
 
-                    // 4. Greetings
-                    if (/^(hi|hello|hey|greetings|howdy|sup|yo)\b/i.test(qLower)) {
-                        return "Hey there! I'm **GUST Assistant**, your built-in open-source AI companion. I can help answer questions, summarize web pages, write code, or search the web with Breeze. What would you like to explore?";
-                    }
-
-                    // 5. Questions about GUST
                     if (qLower.includes('what is gust') || qLower.includes('who are you') || qLower.includes('gust browser')) {
-                        return "**GUST** is an ultra-fast, privacy-first web browser built to run natively anywhere, including inside Streamlit!\n\n" +
-                               "**Key Features:**\n" +
+                        return "**GUST** is an ultra-fast, privacy-first web browser built to run natively anywhere!\n\n" +
+                               "**Key Capabilities:**\n" +
+                               "- **High-Speed AI Assistant**: Instant streaming intelligence powered by Puter, Groq, and local Ollama\n" +
                                "- **Breeze Search Engine**: Clean, unified web search with zero tracking\n" +
-                               "- **Open-Source AI Assistant**: Free multi-model intelligence powered by Llama 3.3 70B, DeepSeek R1, Mistral, and local Ollama\n" +
-                               "- **WISP & Libcurl Relay**: Client-side proxying with Zero-Turnstile resilience\n" +
-                               "- **Built-in Shields**: Tracker blocking, ad filtering, and instant incognito mode";
+                               "- **Built-in Password Vault**: 1-click autofill & encrypted credential storage\n" +
+                               "- **Emergency Panic Key**: `Ctrl+Space` instant weather cloaking";
                     }
 
-                    // 6. Common code requests
                     if (qLower.startsWith('write python') || qLower.includes('python code') || qLower.includes('python hello world')) {
                         return "Here is a Python example:\n\n```python\ndef main():\n    print(\"Hello from GUST Browser!\")\n\nif __name__ == '__main__':\n    main()\n```";
                     }
@@ -27333,10 +27161,9 @@ _VIEWER_DL_JS +
                         return "Here is a JavaScript example:\n\n```javascript\nconsole.log(\"Hello from GUST Browser!\");\n```";
                     }
 
-                    // 7. General knowledge fallback
                     return `### Response\n\n` +
                            `I received your query: **"${q}"**.\n\n` +
-                           `*Tip: For live long-form answers, select **Llama 3.3 70B** or **DeepSeek R1** from the model dropdown, or run Ollama locally with \`ollama run llama3\`.*`;
+                           `*Tip: For maximum speed, GUST streams via Puter and local Ollama with zero waiting.*`;
                 }
 
                 let _lastMsg = null;
@@ -27350,6 +27177,19 @@ _VIEWER_DL_JS +
                     _history.push({ role: 'user', content });
                     appendMsg('user', displayText || userText);
 
+                    // 1. Check instant 0ms calculation/response
+                    const instant = getInstantAnswer(userText);
+                    if (instant) {
+                        const directEl = appendMsg('assistant', instant);
+                        _history.push({ role: 'assistant', content: instant });
+                        if (/assistantRequestPageContext/.test(instant)) {
+                            assistantRequestPageContext();
+                        }
+                        setThinking(false);
+                        aiMessages.scrollTop = aiMessages.scrollHeight;
+                        return;
+                    }
+
                     const typingEl = appendMsg('assistant', '');
                     typingEl.innerHTML = '<span class="gust-typing-dots"><span></span><span></span><span></span></span>';
                     if (!document.getElementById('gust-typing-style')) {
@@ -27360,86 +27200,66 @@ _VIEWER_DL_JS +
                     }
 
                     try {
-                        let selected = _aiModel || 'opensource:llama-3.3';
-                        let [provider, modelName] = selected.includes(':') ? selected.split(':', 2) : ['opensource', selected];
-                        let lastErr = null;
+                        let selected = _aiModel || 'puter:gpt-4o-mini';
+                        let [provider, modelName] = selected.includes(':') ? selected.split(':', 2) : ['puter', selected];
 
-                        for (let _retry = 0; _retry < 2; _retry++) {
-                            if (_retry) {
-                                typingEl.innerHTML = '<span class="gust-typing-dots"><span></span><span></span><span></span></span>';
-                                await new Promise(r => setTimeout(r, 1000));
+                        const ac = new AbortController();
+                        let to = setTimeout(() => ac.abort(), 7000); // Fast 7s cutoff instead of 65s!
+                        let reply = '';
+                        let _firstToken = true;
+
+                        const onToken = (token) => {
+                            if (!token) return;
+                            clearTimeout(to);
+                            to = setTimeout(() => ac.abort(), 20000);
+                            reply += token;
+                            let displayReply = reply;
+                            const _markerMatch = displayReply.match(/(?:function\s+)?assistantRequestPageContext/);
+                            if (_markerMatch) displayReply = displayReply.slice(0, _markerMatch.index);
+                            displayReply = displayReply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').trimEnd();
+                            if (displayReply) {
+                                if (_firstToken) { _firstToken = false; typingEl.innerHTML = ''; }
+                                typingEl.innerHTML = renderMd(displayReply);
                             }
-                            try {
-                                const ac = new AbortController();
-                                let to = setTimeout(() => ac.abort(), 65000);
-                                let reply = '';
-                                let _firstToken = true;
+                            aiMessages.scrollTop = aiMessages.scrollHeight;
+                        };
 
-                                const onToken = (token) => {
-                                    if (!token) return;
-                                    clearTimeout(to);
-                                    to = setTimeout(() => ac.abort(), 45000); // refresh timeout while tokens are actively streaming
-                                    reply += token;
-                                    let displayReply = reply;
-                                    const _markerMatch = displayReply.match(/(?:function\s+)?assistantRequestPageContext/);
-                                    if (_markerMatch) displayReply = displayReply.slice(0, _markerMatch.index);
-                                    displayReply = displayReply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').replace(/\s*---\s*\*\*Support Pollinations\.AI:\*\*\s*---[\s\S]*$/i, '').trimEnd();
-                                    if (displayReply) {
-                                        if (_firstToken) { _firstToken = false; typingEl.innerHTML = ''; }
-                                        typingEl.innerHTML = renderMd(displayReply);
-                                    }
-                                    aiMessages.scrollTop = aiMessages.scrollHeight;
-                                };
+                        const msgs = [{ role: 'system', content: _systemPrompt() }, ..._history];
 
-                                const msgs = [{ role: 'system', content: _systemPrompt() }, ..._history];
-
-                                let ok = false;
-                                if (provider === 'opensource') {
-                                    ok = await callOpenSourceAi(modelName, userText, msgs, onToken, ac.signal);
-                                } else if (provider === 'ollama') {
-                                    ok = await callOllamaAi(modelName, msgs, onToken, ac.signal);
-                                    if (!ok) {
-                                        ok = await callOpenSourceAi(modelName, userText, msgs, onToken, ac.signal);
-                                    }
-                                } else if (provider === 'duckduckgo') {
-                                    ok = await callDuckDuckGoAi(modelName, userText, msgs, onToken, ac.signal);
-                                    if (!ok) {
-                                        ok = await callOpenSourceAi('llama-3.3', userText, msgs, onToken, ac.signal);
-                                    }
-                                } else {
-                                    ok = await callCustomAi(msgs, onToken, ac.signal);
-                                    if (!ok) {
-                                        ok = await callOpenSourceAi('llama-3.3', userText, msgs, onToken, ac.signal);
-                                    }
-                                }
-
-                                clearTimeout(to);
-
-                                if (!ok && !reply) {
-                                    if (_retry < 1) continue;
-                                    reply = generateLocalAiFallback(userText);
-                                }
-
-                                const _needsPerm = /assistantRequestPageContext/.test(reply);
-                                reply = reply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').replace(/\s*---\s*\*\*Support Pollinations\.AI:\*\*\s*---[\s\S]*$/i, '').trimEnd();
-                                if (!reply) reply = _needsPerm ? 'I need permission to access the content of this page.' : generateLocalAiFallback(userText);
-                                typingEl.innerHTML = renderMd(reply);
-                                typingEl.innerHTML = typingEl.innerHTML.replace(/assistantRequestPageContext/gi, '');
-                                _history.push({ role: 'assistant', content: reply });
-                                if (aiSidebar.classList.contains('hidden')) aiBtn.classList.add('has-new');
-                                if (!_needsPerm && isCutOff(reply)) showContinueBar();
-                                if (_needsPerm) assistantRequestPageContext();
-                                lastErr = null;
-                                break;
-                            } catch (e2) {
-                                lastErr = e2;
+                        let ok = false;
+                        if (provider === 'puter' || provider === 'opensource') {
+                            ok = await callPuterAi(modelName || 'gpt-4o-mini', msgs, onToken, ac.signal);
+                            if (!ok) {
+                                ok = await callOllamaAi('llama3', msgs, onToken, ac.signal);
+                            }
+                        } else if (provider === 'ollama') {
+                            ok = await callOllamaAi(modelName, msgs, onToken, ac.signal);
+                            if (!ok) {
+                                ok = await callPuterAi('gpt-4o-mini', msgs, onToken, ac.signal);
+                            }
+                        } else {
+                            ok = await callCustomAi(msgs, onToken, ac.signal);
+                            if (!ok) {
+                                ok = await callPuterAi('gpt-4o-mini', msgs, onToken, ac.signal);
                             }
                         }
-                        if (lastErr && !_history.some(m => m.role === 'assistant' && m.content)) {
-                            const fb = generateLocalAiFallback(userText);
-                            typingEl.innerHTML = renderMd(fb);
-                            _history.push({ role: 'assistant', content: fb });
+
+                        clearTimeout(to);
+
+                        if (!ok && !reply) {
+                            reply = generateLocalAiFallback(userText);
                         }
+
+                        const _needsPerm = /assistantRequestPageContext/.test(reply);
+                        reply = reply.replace(/\s*`?\s*function\s+assistantRequestPageContext\s*`?\s*/gi, '').trimEnd();
+                        if (!reply) reply = _needsPerm ? 'I need permission to access the content of this page.' : generateLocalAiFallback(userText);
+                        typingEl.innerHTML = renderMd(reply);
+                        typingEl.innerHTML = typingEl.innerHTML.replace(/assistantRequestPageContext/gi, '');
+                        _history.push({ role: 'assistant', content: reply });
+                        if (aiSidebar.classList.contains('hidden')) aiBtn.classList.add('has-new');
+                        if (!_needsPerm && isCutOff(reply)) showContinueBar();
+                        if (_needsPerm) assistantRequestPageContext();
+
                     } catch (e) {
                         typingEl.remove();
                         _history.pop();
