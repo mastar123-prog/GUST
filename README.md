@@ -1,8 +1,8 @@
 <div align="center">
 
-# GUST, by [Nautilus Labs](https://github.com/nautilus-os)
+# GUST v4.0 Storm, by [Nautilus Labs](https://github.com/nautilus-os)
 
-![version](https://img.shields.io/badge/version-2.0-blue?style=flat-square)
+![version](https://img.shields.io/badge/version-v4.0%20Storm-00ffb4?style=flat-square)
 ![license](https://img.shields.io/badge/license-AGPLv3-green?style=flat-square)
 ![no service workers](https://img.shields.io/badge/service%20workers-absolutely%20not-red?style=flat-square)
 ![totally working svg](https://img.shields.io/badge/svg%20functionality-gorgeous%20and%20beautiful-blue?style=flat-square)
@@ -95,8 +95,19 @@ GUST ships with more features than a proxy arguably needs, but we wanted your pr
 - WebRTC blocking to prevent IP leaks
 - Cookie jar isolation per origin
 
-**Passwords & Vault**
+**Breeze Search & AI**
+- Private built-in search engine (`gust://search`) powered by Breeze
+- Zero query logging, zero advertising trackers, and encrypted proxy routing
+- Integrated AI assistant summaries for instant insights
+
+**Strike Weather Camouflage & Panic Key**
+- Ultra-realistic Strike Weather radar & AI articles disguise
+- Secret unlock: search `GUST` in all caps to enter browser
+- Emergency Panic Key (`Ctrl+Space`): instantly cloaks to Strike weather radar and silences all media
+
+**Passwords & Vault (v4.0 Storm)**
 - Built-in credential vault (`gust://settings/passwords` or `Ctrl+Shift+L`)
+- Key icon toolbar quick-access dropdown with 1-click domain-matched autofill
 - Automatic form submission detection with prompt to save login credentials
 - 1-click autofill into proxied web pages with instant credential synchronization
 - Built-in cryptographically secure password generator with customizable entropy and length
