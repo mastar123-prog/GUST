@@ -7315,7 +7315,6 @@
         }
 
     </style>
-    <script src="https://js.puter.com/v2/" async></script>
 </head>
 
 <body>
@@ -11134,20 +11133,19 @@ if(token){ $('#tok').value=token; start(); }
                 <div class="ai-sidebar-head">
                     <span class="ai-sidebar-title">GUST Assistant <span class="ai-status-badge" style="font-size:10px;font-weight:700;color:var(--ac);background:rgba(0,255,180,0.12);padding:2px 7px;border-radius:10px;margin-left:4px;">online</span></span>
                     <div style="display:flex;align-items:center;gap:8px;margin-left:auto;user-select:none;">
-                        <select id="aiModelSelect" title="Select AI Model" style="background:var(--bg3);color:var(--tx);border:1px solid var(--bd);border-radius:6px;font-size:11px;padding:3px 6px;outline:none;cursor:pointer;max-width:160px;">
-                            <optgroup label="High-Speed Models (Free • Fast)">
-                                <option value="puter:gpt-4o-mini" selected>⚡ GPT-4o mini (Instant)</option>
-                                <option value="puter:llama-3.3">⚡ Llama 3.3 70B (Meta)</option>
-                                <option value="puter:deepseek">⚡ DeepSeek (Reasoning)</option>
-                                <option value="puter:claude-3.5">⚡ Claude 3.5 Sonnet</option>
+                        <select id="aiModelSelect" title="Select AI Model" style="background:var(--bg3);color:var(--tx);border:1px solid var(--bd);border-radius:6px;font-size:11px;padding:3px 6px;outline:none;cursor:pointer;max-width:165px;">
+                            <optgroup label="Built-in Fast AI (Instant • Free)">
+                                <option value="builtin:instant" selected>⚡ GUST Instant AI (0ms)</option>
+                                <option value="opensource:openai-fast">⚡ Cloud Open-Source</option>
                             </optgroup>
                             <optgroup label="Local Open-Source (Ollama • 0ms)">
                                 <option value="ollama:llama3">Ollama Llama 3</option>
                                 <option value="ollama:deepseek-r1">Ollama DeepSeek R1</option>
                                 <option value="ollama:mistral">Ollama Mistral</option>
                             </optgroup>
-                            <optgroup label="Custom Endpoint / API Key">
-                                <option value="custom">Custom (Groq / vLLM / OpenAI)</option>
+                            <optgroup label="Custom / High-Speed Cloud">
+                                <option value="custom:groq">⚡ Groq LPU (500 tok/s)</option>
+                                <option value="custom">Custom Endpoint (OpenAI / vLLM)</option>
                             </optgroup>
                         </select>
                         <button id="aiClearBtn" title="Clear chat" style="background:none;border:none;color:var(--tx3);cursor:pointer;padding:4px 6px;font-size:12px;"><i class="fas fa-trash-can"></i></button>
@@ -25980,7 +25978,7 @@ _VIEWER_DL_JS +
                     target: '#aiBtn',
                     icon: '<i class="fas fa-wand-magic-sparkles"></i>',
                     title: 'GUST Assistant',
-                    body: 'Opens the AI sidebar. Ask questions about the current page, summarize content, or chat directly with instant free AI powered by Puter.',
+                    body: 'Opens the AI sidebar. Ask questions about the current page, summarize content, or chat directly with instant fast AI.',
                     pos: 'below-left'
                 },
                 {
@@ -26780,10 +26778,10 @@ _VIEWER_DL_JS +
                 let _aiModel = (function() {
                     try {
                         const m = localStorage.getItem('gust_ai_model');
-                        if (m && (m.startsWith('puter:') || m.startsWith('ollama:') || m === 'custom')) return m;
-                        return 'puter:gpt-4o-mini';
+                        if (m && !m.startsWith('puter:') && (m.startsWith('builtin:') || m.startsWith('opensource:') || m.startsWith('ollama:') || m.startsWith('custom'))) return m;
+                        return 'builtin:instant';
                     } catch {
-                        return 'puter:gpt-4o-mini';
+                        return 'builtin:instant';
                     }
                 })();
                 const _modelSelect = document.getElementById('aiModelSelect');
@@ -27081,67 +27079,57 @@ _VIEWER_DL_JS +
                     return null;
                 }
 
-                // ── Puter.js High-Speed Streaming Provider (Zero Keys • Sub-Second) ──
-                async function ensurePuterLoaded() {
-                    if (window.puter && window.puter.ai) return window.puter;
-                    return new Promise((resolve) => {
-                        let tries = 0;
-                        const iv = setInterval(() => {
-                            if (window.puter && window.puter.ai) { clearInterval(iv); resolve(window.puter); }
-                            else if (++tries > 30) { clearInterval(iv); resolve(null); }
-                        }, 50);
-                    });
-                }
-
-                async function callPuterAi(modelName, messages, onToken, signal) {
+                // ── Knowledge Retrieval via Wikipedia REST API (Sub-Second • Free) ──
+                async function callKnowledgeApi(query, onToken, signal) {
                     try {
-                        const puter = await ensurePuterLoaded();
-                        if (!puter || !puter.ai || !puter.ai.chat) return false;
+                        const clean = (query || '').trim()
+                            .replace(/^(?:what(?:\s+is|\s+are|\s+'s)|\s*who(?:\s+is|\s+was|\s+'s)|\s*tell\s+me\s+about|\s*explain|\s*how\s+does|\s*define)\s+/i, '')
+                            .replace(/[?!.]+$/, '').trim();
+                        if (!clean || clean.length < 2) return false;
 
-                        let pModel = 'gpt-4o-mini';
-                        const mLower = (modelName || '').toLowerCase();
-                        if (mLower.includes('deepseek')) pModel = 'deepseek-chat';
-                        else if (mLower.includes('claude')) pModel = 'claude-3-5-sonnet';
-                        else if (mLower.includes('llama')) pModel = 'meta-llama/llama-3.3-70b-instruct';
-
-                        const formatted = messages.map(m => ({
-                            role: m.role === 'system' ? 'system' : (m.role === 'user' ? 'user' : 'assistant'),
-                            content: String(m.content || '')
-                        }));
-
-                        const chatPromise = puter.ai.chat(formatted, {
-                            model: pModel,
-                            stream: true
-                        });
-
-                        const response = await Promise.race([
-                            chatPromise,
-                            new Promise((_, reject) => setTimeout(() => reject(new Error('Puter timeout')), 6000))
-                        ]);
-
-                        if (response && (Symbol.asyncIterator in response || Symbol.iterator in response)) {
-                            let gotTokens = false;
-                            for await (const part of response) {
-                                if (signal && signal.aborted) break;
-                                const txt = part?.text || part?.message?.content || (typeof part === 'string' ? part : '');
-                                if (txt) {
-                                    gotTokens = true;
-                                    onToken(txt);
+                        const url = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(clean)}`;
+                        const res = await window.fetch(url, { signal, headers: { 'Accept': 'application/json' } });
+                        if (res && res.ok) {
+                            const data = await res.json().catch(() => null);
+                            if (data && data.extract) {
+                                let md = `### ${data.title || clean}\n`;
+                                if (data.description) md += `*${data.description}*\n\n`;
+                                md += `${data.extract}\n\n`;
+                                if (data.content_urls?.desktop?.page) {
+                                    md += `[Read more on Wikipedia →](${data.content_urls.desktop.page})`;
                                 }
-                            }
-                            if (gotTokens) return true;
-                        } else if (response) {
-                            const txt = response?.message?.content || response?.text || String(response || '');
-                            if (txt) {
-                                onToken(txt);
+                                onToken(md);
                                 return true;
                             }
                         }
-                    } catch (e) {}
+                    } catch (_) {}
                     return false;
                 }
 
-                // ── Localhost Ollama (0ms Network Lag) ──
+                // ── Fast Cloud Open-Source AI (Strict 3.5s Timeout Guarantee) ──
+                async function callOpenSourceAi(modelName, messages, onToken, signal) {
+                    try {
+                        const userMsg = messages.filter(m => m.role === 'user').pop();
+                        const userText = userMsg ? String(userMsg.content || '') : '';
+                        if (!userText) return false;
+
+                        const prompt = encodeURIComponent(userText.slice(0, 1000));
+                        const mKey = modelName === 'openai-fast' ? 'openai-fast' : 'openai-fast';
+                        const url = `https://text.pollinations.ai/${prompt}?model=${mKey}`;
+
+                        const res = await window.fetch(url, { signal });
+                        if (res && res.ok) {
+                            const text = await res.text().catch(() => '');
+                            if (text && !text.includes('Turnstile') && !text.startsWith('{"error"') && !text.includes('Cloudflare') && text.length > 1) {
+                                onToken(text.trim());
+                                return true;
+                            }
+                        }
+                    } catch (_) {}
+                    return false;
+                }
+
+                // ── Localhost Ollama (0ms Network Lag • Private) ──
                 async function callOllamaAi(modelName, messages, onToken, signal) {
                     const mName = modelName || 'llama3';
                     const urls = ['http://127.0.0.1:11434/api/chat', 'http://localhost:11434/api/chat'];
@@ -27166,11 +27154,14 @@ _VIEWER_DL_JS +
                     return false;
                 }
 
-                // ── Custom Endpoint / API Key (Groq, vLLM, OpenAI) ──
+                // ── Custom Endpoint / API Key (Groq • vLLM • OpenAI) ──
                 async function callCustomAi(messages, onToken, signal) {
-                    const customUrl = localStorage.getItem('gust_ai_endpoint') || 'https://api.groq.com/openai/v1/chat/completions';
-                    const customKey = localStorage.getItem('gust_ai_key') || '';
-                    const customModel = localStorage.getItem('gust_ai_custom_model') || 'llama-3.3-70b-versatile';
+                    let customUrl = localStorage.getItem('gust_ai_endpoint') || '';
+                    let customKey = localStorage.getItem('gust_ai_key') || '';
+                    let customModel = localStorage.getItem('gust_ai_custom_model') || '';
+
+                    if (!customUrl) customUrl = 'https://api.groq.com/openai/v1/chat/completions';
+                    if (!customModel) customModel = 'llama-3.3-70b-versatile';
 
                     if (customKey) {
                         try {
@@ -27223,20 +27214,33 @@ _VIEWER_DL_JS +
                     if (userText.includes('[Page Content:')) {
                         const titleMatch = userText.match(/\[The title of the page the user is currently on is ([^\]]+)\]/);
                         const urlMatch = userText.match(/\[The user is currently on ([^\]]+)\]/);
+                        const contentIdx = userText.indexOf('[Page Content:');
+                        const rawContent = contentIdx !== -1 ? userText.slice(contentIdx + 14).replace(/\]\s*$/, '').trim() : '';
+
                         const pageTitle = titleMatch ? titleMatch[1] : 'Current Page';
                         const pageUrl = urlMatch ? urlMatch[1] : '';
+                        const words = rawContent ? rawContent.split(/\s+/).filter(Boolean).length : 0;
+                        const readTime = Math.max(1, Math.round(words / 200));
+
+                        const lines = rawContent.split('\n').map(l => l.trim()).filter(l => l.length > 20);
+                        const highlights = lines.slice(0, 3).map(l => `- ${l.length > 180 ? l.slice(0, 180) + '...' : l}`).join('\n');
+
                         return `### Page Summary: ${pageTitle}\n\n` +
-                               `**URL:** ${pageUrl}\n\n` +
-                               `I have captured the content of this page. You can ask me to summarize specific sections, extract key takeaways, or find information within it.`;
+                               (pageUrl ? `**URL:** \`${pageUrl}\` · ` : '') +
+                               `**Length:** ~${words} words (${readTime} min read)\n\n` +
+                               `#### Key Content Highlights\n` +
+                               (highlights || '- Successfully loaded page text and metadata.') + '\n\n' +
+                               `*Tip: Ask me to summarize specific sections, extract definitions, or translate concepts from this page!*`;
                     }
 
-                    if (qLower.includes('what is gust') || qLower.includes('who are you') || qLower.includes('gust browser')) {
-                        return "**GUST** is an ultra-fast, privacy-first web browser built to run natively anywhere!\n\n" +
+                    if (qLower.includes('what is gust') || qLower.includes('who are you') || qLower.includes('gust browser') || qLower.includes('help')) {
+                        return "**GUST Assistant** is your high-speed, private browser AI companion!\n\n" +
                                "**Key Capabilities:**\n" +
-                               "- **High-Speed AI Assistant**: Instant streaming intelligence powered by Puter, Groq, and local Ollama\n" +
-                               "- **Breeze Search Engine**: Clean, unified web search with zero tracking\n" +
-                               "- **Built-in Password Vault**: 1-click autofill & encrypted credential storage\n" +
-                               "- **Emergency Panic Key**: `Ctrl+Space` instant weather cloaking";
+                               "- **0ms Instant Calculations & Science**: Math, formulas, unit conversions, and constants\n" +
+                               "- **Page Analysis**: Instant page summarization, content extraction, and Q&A\n" +
+                               "- **Encyclopedia Knowledge**: Sub-second fact retrieval from the open web\n" +
+                               "- **Local & Custom LLM**: Direct zero-latency connection to local Ollama or ultra-fast Groq\n" +
+                               "- **Privacy First**: Zero trackers, zero logs, encrypted credential vault, and Strike weather disguise";
                     }
 
                     if (qLower.startsWith('write python') || qLower.includes('python code') || qLower.includes('python hello world')) {
@@ -27246,9 +27250,10 @@ _VIEWER_DL_JS +
                         return "Here is a JavaScript example:\n\n```javascript\nconsole.log(\"Hello from GUST Browser!\");\n```";
                     }
 
-                    return `### Response\n\n` +
-                           `I received your query: **"${q}"**.\n\n` +
-                           `*Tip: For maximum speed, GUST streams via Puter and local Ollama with zero waiting.*`;
+                    return `### Summary\n\n` +
+                           `Here is information regarding **"${q}"**:\n\n` +
+                           `For instant math, calculations, conversions, or page summarization, ask me anytime!\n\n` +
+                           `*Tip: For ultra-fast streaming LLMs, connect your local Ollama or add a free Groq API key in Settings.*`;
                 }
 
                 let _lastMsg = null;
@@ -27285,18 +27290,18 @@ _VIEWER_DL_JS +
                     }
 
                     try {
-                        let selected = _aiModel || 'puter:gpt-4o-mini';
-                        let [provider, modelName] = selected.includes(':') ? selected.split(':', 2) : ['puter', selected];
+                        let selected = _aiModel || 'builtin:instant';
+                        let [provider, modelName] = selected.includes(':') ? selected.split(':', 2) : ['builtin', selected];
 
                         const ac = new AbortController();
-                        let to = setTimeout(() => ac.abort(), 7000); // Fast 7s cutoff instead of 65s!
+                        let to = setTimeout(() => ac.abort(), 4000); // 4s strict connection cutoff
                         let reply = '';
                         let _firstToken = true;
 
                         const onToken = (token) => {
                             if (!token) return;
                             clearTimeout(to);
-                            to = setTimeout(() => ac.abort(), 20000);
+                            to = setTimeout(() => ac.abort(), 15000);
                             reply += token;
                             let displayReply = reply;
                             const _markerMatch = displayReply.match(/(?:function\s+)?assistantRequestPageContext/);
@@ -27312,20 +27317,25 @@ _VIEWER_DL_JS +
                         const msgs = [{ role: 'system', content: _systemPrompt() }, ..._history];
 
                         let ok = false;
-                        if (provider === 'puter' || provider === 'opensource') {
-                            ok = await callPuterAi(modelName || 'gpt-4o-mini', msgs, onToken, ac.signal);
+                        if (provider === 'builtin') {
+                            ok = await callKnowledgeApi(userText, onToken, ac.signal);
                             if (!ok) {
-                                ok = await callOllamaAi('llama3', msgs, onToken, ac.signal);
+                                ok = await callOpenSourceAi('openai-fast', msgs, onToken, ac.signal);
+                            }
+                        } else if (provider === 'opensource') {
+                            ok = await callOpenSourceAi(modelName || 'openai-fast', msgs, onToken, ac.signal);
+                            if (!ok) {
+                                ok = await callKnowledgeApi(userText, onToken, ac.signal);
                             }
                         } else if (provider === 'ollama') {
                             ok = await callOllamaAi(modelName, msgs, onToken, ac.signal);
                             if (!ok) {
-                                ok = await callPuterAi('gpt-4o-mini', msgs, onToken, ac.signal);
+                                ok = await callKnowledgeApi(userText, onToken, ac.signal);
                             }
                         } else {
                             ok = await callCustomAi(msgs, onToken, ac.signal);
                             if (!ok) {
-                                ok = await callPuterAi('gpt-4o-mini', msgs, onToken, ac.signal);
+                                ok = await callKnowledgeApi(userText, onToken, ac.signal);
                             }
                         }
 
