@@ -2802,6 +2802,114 @@
             font-size: 18px;
         }
 
+        .nt-proxies-wrap {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            z-index: 20;
+        }
+
+        .nt-proxies-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(157, 229, 255, 0.14);
+            border: 1px solid rgba(157, 229, 255, 0.3);
+            color: var(--ac);
+            font-family: var(--ui);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.15s;
+        }
+
+        .nt-proxies-btn:hover {
+            background: rgba(157, 229, 255, 0.24);
+            border-color: rgba(157, 229, 255, 0.5);
+        }
+
+        .nt-proxies-caret {
+            font-size: 11px;
+            transition: transform 0.18s ease;
+        }
+
+        .nt-proxies-wrap.open .nt-proxies-caret {
+            transform: rotate(180deg);
+        }
+
+        .nt-proxies-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            min-width: 245px;
+            padding: 6px;
+            border-radius: 12px;
+            background: var(--bg2, #1b1f24);
+            border: 1px solid rgba(157, 229, 255, 0.25);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.48);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 30;
+        }
+
+        .nt-proxies-wrap.open .nt-proxies-menu {
+            display: flex;
+        }
+
+        .nt-proxies-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 9px 11px;
+            border: none;
+            border-radius: 8px;
+            background: transparent;
+            color: var(--tx, #e6edf3);
+            font-family: var(--ui);
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .nt-proxies-item:hover {
+            background: rgba(157, 229, 255, 0.14);
+            color: var(--ac);
+        }
+
+        .nt-proxies-item i {
+            font-size: 16px;
+            color: var(--ac);
+            flex-shrink: 0;
+        }
+
+        .nt-proxies-item-meta {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .nt-proxies-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .nt-proxies-item-sub {
+            font-size: 11px;
+            color: var(--tx2, #8b949e);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         @media(max-width:1000px) {
             .logs {
                 display: none
@@ -5329,7 +5437,7 @@
 
         /* ── Chrome NTP (dark, reference-exact) ── */
         #newtab.skin-ntp .nt-content, #newtab.skin-ntp #gustCredit,
-        #newtab.skin-ntp .nt-wallpaper-btn, #newtab.skin-ntp #ntGithubBtn { display: none !important; }
+        #newtab.skin-ntp .nt-wallpaper-btn, #newtab.skin-ntp #ntGithubBtn, #newtab.skin-ntp #ntProxiesWrap { display: none !important; }
         #newtab.skin-ntp .nt-overlay { display: none; }
         #skinNTP { display: none; position: absolute; inset: 0; z-index: 5; overflow: auto; }
         #newtab.skin-ntp #skinNTP { display: block; }
@@ -7831,6 +7939,29 @@
                 <div class="newtab active" id="newtab">
                     <div class="nt-bg" id="ntBg"></div>
                     <div class="nt-overlay"></div>
+                    <div class="nt-proxies-wrap" id="ntProxiesWrap">
+                        <button class="nt-proxies-btn" id="ntProxiesBtn" type="button" aria-haspopup="true" aria-expanded="false" title="Quick Links">
+                            <i class="fas fa-compass"></i>
+                            <span>Links</span>
+                            <i class="fas fa-chevron-down nt-proxies-caret"></i>
+                        </button>
+                        <div class="nt-proxies-menu" id="ntProxiesMenu" role="menu">
+                            <button class="nt-proxies-item" type="button" role="menuitem" data-url="https://github.com/mastar123-prog/Space-proxy">
+                                <i class="fab fa-github"></i>
+                                <span class="nt-proxies-item-meta">
+                                    <span class="nt-proxies-item-title">Space-proxy</span>
+                                    <span class="nt-proxies-item-sub">mastar123-prog/Space-proxy</span>
+                                </span>
+                            </button>
+                            <button class="nt-proxies-item" type="button" role="menuitem" data-url="https://github.com/jkjkjiin/DaydreamX-">
+                                <i class="fab fa-github"></i>
+                                <span class="nt-proxies-item-meta">
+                                    <span class="nt-proxies-item-title">DaydreamX-</span>
+                                    <span class="nt-proxies-item-sub">jkjkjiin/DaydreamX-</span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
                     
                     <button class="nt-wallpaper-btn" id="ntGithubBtn" title="View on GitHub"
                         style="left:76px;right:auto;">
@@ -23641,6 +23772,36 @@ _VIEWER_DL_JS +
             };
             const ntGithubBtn = $("ntGithubBtn");
             if (ntGithubBtn) ntGithubBtn.onclick = () => window.open("https://github.com/nautilus-os/GUST", "_blank", "noopener,noreferrer");
+
+            const ntProxiesWrap = $("ntProxiesWrap");
+            const ntProxiesBtn = $("ntProxiesBtn");
+            if (ntProxiesWrap && ntProxiesBtn) {
+                const closeNtProxies = () => {
+                    ntProxiesWrap.classList.remove("open");
+                    ntProxiesBtn.setAttribute("aria-expanded", "false");
+                };
+                ntProxiesBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const isOpen = ntProxiesWrap.classList.toggle("open");
+                    ntProxiesBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+                ntProxiesWrap.querySelectorAll(".nt-proxies-item").forEach((item) => {
+                    item.addEventListener("click", () => {
+                        const targetUrl = item.getAttribute("data-url");
+                        closeNtProxies();
+                        if (targetUrl) {
+                            if (typeof go === "function") go(targetUrl);
+                            else window.open(targetUrl, "_blank", "noopener,noreferrer");
+                        }
+                    });
+                });
+                document.addEventListener("click", (e) => {
+                    if (!ntProxiesWrap.contains(e.target)) closeNtProxies();
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") closeNtProxies();
+                });
+            }
 
             ntWallpaperBtn.onclick = () => {
                 $("wallpaperUrlInput").value = "";
