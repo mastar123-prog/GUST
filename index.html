@@ -2806,7 +2806,7 @@
             position: absolute;
             top: 20px;
             right: 24px;
-            z-index: 20;
+            z-index: 40;
         }
 
         .nt-proxies-btn {
@@ -2845,7 +2845,7 @@
             position: absolute;
             top: calc(100% + 8px);
             right: 0;
-            min-width: 245px;
+            min-width: 235px;
             padding: 6px;
             border-radius: 12px;
             background: var(--bg2, #1b1f24);
@@ -2856,7 +2856,7 @@
             display: none;
             flex-direction: column;
             gap: 4px;
-            z-index: 30;
+            z-index: 45;
         }
 
         .nt-proxies-wrap.open .nt-proxies-menu {
@@ -2879,15 +2879,18 @@
             transition: background 0.15s, color 0.15s;
         }
 
-        .nt-proxies-item:hover {
+        .nt-proxies-item:hover,
+        .nt-proxies-item.active {
             background: rgba(157, 229, 255, 0.14);
             color: var(--ac);
         }
 
         .nt-proxies-item i {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--ac);
             flex-shrink: 0;
+            width: 18px;
+            text-align: center;
         }
 
         .nt-proxies-item-meta {
@@ -2908,6 +2911,341 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        /* ── Built-in Portal Views (Space-proxy & DaydreamX-) ── */
+        .gust-portal-view {
+            display: none;
+            position: absolute;
+            inset: 0;
+            z-index: 35;
+            overflow: hidden;
+            font-family: var(--ui);
+        }
+
+        .gust-portal-view.active {
+            display: flex;
+        }
+
+        /* Space-proxy Theme */
+        .space-portal {
+            background: radial-gradient(circle at 18% 20%, rgba(124, 58, 237, 0.25), transparent 45%),
+                        radial-gradient(circle at 82% 78%, rgba(56, 189, 248, 0.22), transparent 48%),
+                        linear-gradient(160deg, #0b0d17 0%, #121629 100%);
+            color: #eef2ff;
+        }
+
+        .space-sidebar {
+            width: 64px;
+            flex-shrink: 0;
+            background: rgba(15, 19, 36, 0.85);
+            border-right: 1px solid rgba(139, 92, 246, 0.22);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 0;
+            gap: 10px;
+            backdrop-filter: blur(14px);
+        }
+
+        .space-logo-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #7c3aed, #38bdf8);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 17px;
+            color: #fff;
+            margin-bottom: 8px;
+            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+        }
+
+        .space-nav-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            font-size: 17px;
+            transition: all 0.16s;
+        }
+
+        .space-nav-btn:hover,
+        .space-nav-btn.active {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.4);
+            color: #e9d5ff;
+        }
+
+        .space-main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 36px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .space-hero {
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 680px;
+            align-self: center;
+            padding: 30px 0;
+        }
+
+        .space-hero h1 {
+            font-size: clamp(32px, 5vw, 50px);
+            font-weight: 800;
+            margin: 0 0 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .space-type-accent {
+            background: linear-gradient(90deg, #a78bfa, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .space-hero p {
+            color: #94a3b8;
+            font-size: 15px;
+            margin: 0 0 24px;
+        }
+
+        .space-search-bar {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 560px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            border-radius: 999px;
+            padding: 6px 8px 6px 18px;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .space-search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .space-launch-btn {
+            padding: 9px 18px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, #7c3aed, #0ea5e9);
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+
+        .space-launch-btn:hover { opacity: 0.9; }
+
+        /* DaydreamX- Theme */
+        .ddx-portal {
+            flex-direction: column;
+            background: radial-gradient(circle at 50% 18%, rgba(20, 184, 166, 0.16), transparent 50%),
+                        linear-gradient(180deg, #101419 0%, #171d24 100%);
+            color: #e2e8f0;
+        }
+
+        .ddx-topbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            padding-right: 140px;
+            background: rgba(15, 20, 26, 0.9);
+            border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+            flex-shrink: 0;
+        }
+
+        .ddx-brand-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 15px;
+            color: #2dd4bf;
+            margin-right: 8px;
+        }
+
+        .ddx-tab-btn {
+            padding: 6px 13px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .ddx-tab-btn:hover,
+        .ddx-tab-btn.active {
+            background: rgba(45, 212, 191, 0.15);
+            border-color: rgba(45, 212, 191, 0.35);
+            color: #5eead4;
+        }
+
+        .ddx-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 28px 34px 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ddx-hero {
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 24px 0;
+        }
+
+        .ddx-hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            margin: 0 0 8px;
+            background: linear-gradient(90deg, #2dd4bf, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .ddx-search-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 540px;
+            margin-top: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(45, 212, 191, 0.35);
+            border-radius: 12px;
+            padding: 6px 8px 6px 16px;
+            gap: 10px;
+            clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+        }
+
+        .ddx-search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        /* Shared Portal Catalog Grid */
+        .portal-catalog-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-right: 110px;
+        }
+
+        .portal-filter-input {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 13px;
+            min-width: 220px;
+            outline: none;
+        }
+
+        .portal-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .portal-chip {
+            padding: 5px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: #cbd5e1;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .portal-chip.active,
+        .portal-chip:hover {
+            background: rgba(157, 229, 255, 0.18);
+            border-color: rgba(157, 229, 255, 0.45);
+            color: #fff;
+        }
+
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+            gap: 12px;
+        }
+
+        .portal-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 13px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            color: #f1f5f9;
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.14s, background 0.14s, border-color 0.14s;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(157, 229, 255, 0.42);
+        }
+
+        .portal-card-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: rgba(157, 229, 255, 0.14);
+            color: var(--ac, #9de5ff);
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .portal-card-name {
+            font-size: 13px;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         @media(max-width:1000px) {
@@ -7940,27 +8278,58 @@
                     <div class="nt-bg" id="ntBg"></div>
                     <div class="nt-overlay"></div>
                     <div class="nt-proxies-wrap" id="ntProxiesWrap">
-                        <button class="nt-proxies-btn" id="ntProxiesBtn" type="button" aria-haspopup="true" aria-expanded="false" title="Quick Links">
-                            <i class="fas fa-compass"></i>
-                            <span>Links</span>
+                        <button class="nt-proxies-btn" id="ntProxiesBtn" type="button" aria-haspopup="true" aria-expanded="false" title="Switch Home Mode">
+                            <i class="fas fa-layer-group"></i>
+                            <span id="ntProxiesLabel">Portals</span>
                             <i class="fas fa-chevron-down nt-proxies-caret"></i>
                         </button>
                         <div class="nt-proxies-menu" id="ntProxiesMenu" role="menu">
-                            <button class="nt-proxies-item" type="button" role="menuitem" data-url="https://github.com/mastar123-prog/Space-proxy">
-                                <i class="fab fa-github"></i>
+                            <button class="nt-proxies-item active" type="button" role="menuitem" data-portal="gust">
+                                <i class="fas fa-wind"></i>
                                 <span class="nt-proxies-item-meta">
-                                    <span class="nt-proxies-item-title">Space-proxy</span>
-                                    <span class="nt-proxies-item-sub">mastar123-prog/Space-proxy</span>
+                                    <span class="nt-proxies-item-title">GUST Home</span>
+                                    <span class="nt-proxies-item-sub">Default start page</span>
                                 </span>
                             </button>
-                            <button class="nt-proxies-item" type="button" role="menuitem" data-url="https://github.com/jkjkjiin/DaydreamX-">
-                                <i class="fab fa-github"></i>
+                            <button class="nt-proxies-item" type="button" role="menuitem" data-portal="space">
+                                <i class="fas fa-rocket"></i>
+                                <span class="nt-proxies-item-meta">
+                                    <span class="nt-proxies-item-title">Space-proxy</span>
+                                    <span class="nt-proxies-item-sub">Built-in Space portal, apps &amp; games</span>
+                                </span>
+                            </button>
+                            <button class="nt-proxies-item" type="button" role="menuitem" data-portal="daydreamx">
+                                <i class="fas fa-moon"></i>
                                 <span class="nt-proxies-item-meta">
                                     <span class="nt-proxies-item-title">DaydreamX-</span>
-                                    <span class="nt-proxies-item-sub">jkjkjiin/DaydreamX-</span>
+                                    <span class="nt-proxies-item-sub">Built-in DayDream X browser &amp; games</span>
                                 </span>
                             </button>
                         </div>
+                    </div>
+
+                    <!-- Embedded Space-proxy Portal -->
+                    <div class="gust-portal-view space-portal" id="spacePortalView">
+                        <div class="space-sidebar">
+                            <div class="space-logo-badge" title="Space-proxy">S</div>
+                            <button class="space-nav-btn active" type="button" data-space-tab="home" title="Space Home"><i class="fas fa-home"></i></button>
+                            <button class="space-nav-btn" type="button" data-space-tab="games" title="Space Games"><i class="fas fa-gamepad"></i></button>
+                            <button class="space-nav-btn" type="button" data-space-tab="apps" title="Space Apps"><i class="fas fa-th-large"></i></button>
+                            <div style="margin-top:auto;"></div>
+                            <button class="space-nav-btn" type="button" id="spaceBackGustBtn" title="Back to GUST Home"><i class="fas fa-arrow-left"></i></button>
+                        </div>
+                        <div class="space-main" id="spaceMainBody"></div>
+                    </div>
+
+                    <!-- Embedded DaydreamX- Portal -->
+                    <div class="gust-portal-view ddx-portal" id="ddxPortalView">
+                        <div class="ddx-topbar">
+                            <div class="ddx-brand-pill"><i class="fas fa-moon"></i> DayDream X</div>
+                            <button class="ddx-tab-btn active" type="button" data-ddx-tab="home">New Tab</button>
+                            <button class="ddx-tab-btn" type="button" data-ddx-tab="games">Games</button>
+                            <button class="ddx-tab-btn" type="button" id="ddxBackGustBtn" style="margin-left:auto;"><i class="fas fa-arrow-left"></i> GUST Home</button>
+                        </div>
+                        <div class="ddx-body" id="ddxMainBody"></div>
                     </div>
                     
                     <button class="nt-wallpaper-btn" id="ntGithubBtn" title="View on GitHub"
@@ -23775,6 +24144,197 @@ _VIEWER_DL_JS +
 
             const ntProxiesWrap = $("ntProxiesWrap");
             const ntProxiesBtn = $("ntProxiesBtn");
+            const ntProxiesLabel = $("ntProxiesLabel");
+            const spacePortalView = $("spacePortalView");
+            const ddxPortalView = $("ddxPortalView");
+            const spaceMainBody = $("spaceMainBody");
+            const ddxMainBody = $("ddxMainBody");
+
+            const SPACE_APPS_DATA = [{"n":"Amazon","u":"https://www.amazon.com/","c":["media"]},{"n":"Amazon Luna","u":"https://luna.amazon.com/","c":["game"]},{"n":"OpenAI","u":"https://chat.openai.com/","c":["media","popular","ai"]},{"n":"Chess.com","u":"https://chess.com/","c":["game"]},{"n":"Cool Math Games","u":"https://www.coolmathgames.com/cmg.jpg","c":["game"]},{"n":"Discord","u":"https://discord.com/","c":["social","messaging","media"]},{"n":"Discord | Login","u":"https://discord.com/login","c":["social","messaging","media"]},{"n":"ESPN","u":"https://www.espn.com/","c":["media","popular"]},{"n":"Flix HQ","u":"https://flixhq.bz/","c":["media","popular"]},{"n":"Geforce NOW","u":"https://play.geforcenow.com/","c":["game","popular"]},{"n":"GitHub","u":"https://github.com/","c":["social","ai"]},{"n":"HBO MAX","u":"https://www.max.com/","c":["media"]},{"n":"Newgrounds","u":"https://www.newgrounds.com/","c":["media","social"]},{"n":"Paramount Plus","u":"https://www.paramountplus.com/","c":["media"]},{"n":"Pinterest","u":"https://www.pinterest.com/","c":["media","social"]},{"n":"Pixlr","u":"https://pixlr.com/","c":["media"]},{"n":"Poki","u":"https://poki.com/","c":["game"]},{"n":"Soundcloud","u":"https://soundcloud.com/","c":["media"]},{"n":"Telegram","u":"https://web.telegram.org/","c":["messaging","media","social"]},{"n":"Temu","u":"https://www.temu.com/","c":["media"]},{"n":"TikTok","u":"https://www.tiktok.com/explore","c":["media","social"]},{"n":"Tumblr","u":"https://www.tumblr.com/","c":["messaging","social","media"]},{"n":"Twitch","u":"https://www.twitch.tv/","c":["social","media","game"]},{"n":"Twitter X","u":"https://twitter.com/","c":["media","messaging"]},{"n":"VS Code","u":"https://vscode.dev/","c":["media"]},{"n":"Y8 Games","u":"https://www.y8.com/","c":["game"]},{"n":"YouTube","u":"https://www.youtube.com","c":["media","popular"]},{"n":"webretro","u":"https://binbashbanana.github.io/webretro/","c":["game","popular"]},{"n":"Character.AI","u":"https://beta.character.ai","c":["ai","popular"]},{"n":"Snapchat","u":"https://www.snapchat.com","c":["media","messaging","popular"]},{"n":"Shuttle.lol","u":"https://shuttle.lol","c":["game"]},{"n":"Wattpad","u":"https://wattpad.com","c":["popular","media"]}];
+            const SPACE_GAMES_DATA = [{"n":"1v1.LOL","u":"https://1v1.lol/","c":["popular","multiplayer"]},{"n":"2048","u":"https://www.2048.org/","c":[]},{"n":"2048 Multitasking","u":"https://calculatorgames.github.io/simplegimes/2048-multitask/index.html","c":[]},{"n":"Ball Dodge","u":"https://3kh0-assets.silvereen.net/3kh0-assets/ball-dodge","c":[]},{"n":"3D Dino Game","u":"https://lagged.com/api/play2/t-rex-3d2/","c":[]},{"n":"60 Second Burger Run","u":"https://www.coolmathgames.com/0-60-second-burger-run/play","c":[]},{"n":"A Dark Room","u":"https://adarkroom.doublespeakgames.com/","c":["popular"]},{"n":"Age of War","u":"https://age-of-war.game-files.crazygames.com/ruffle/ageofwar.html","c":[]},{"n":"Happy Wheels","u":"https://totaljerkface.com","c":[]},{"n":"Basketball Random","u":"https://basketrandomonline.github.io/g8/basket-random/","c":["popular"]},{"n":"Soccer Random","u":"https://soccer-random.github.io/s8/soccer-random/","c":[]},{"n":"Basketball Stars","u":"https://basketballstars.pro/game/basketball-stars/","c":["popular"]},{"n":"Getaway Shootout","u":"https://www.twoplayergames.org/embed/getaway-shootout","c":["media"]},{"n":"Boxing Random","u":"https://boxingrandom.github.io/file/","c":[]},{"n":"Rooftop Snipers","u":"https://h52304.github.io/s/rooftop-snipers/","c":[]},{"n":"Glass City","u":"https://rpc.lol/games/projects/glass-city/index.html","c":[]},{"n":"Hacker Typer","u":"https://hackertyper.com/","c":[]},{"n":"Idle Shark Game","u":"https://alpha.shark.tobot.dev/","c":[]},{"n":"Interactive Buddy","u":"https://1kh0.github.io/projects/interactivebuddy/index.html","c":[]},{"n":"Just One Boss","u":"https://www.coolmathgames.com/0-just-one-boss/play","c":[]},{"n":"Portal Mario","u":"https://tannerrogalsky.com/mari0/","c":[]},{"n":"Eaglercraft v1.8","u":"https://mcv18.netlify.app/","c":["popular","multiplayer"]},{"n":"Eaglercraft v1.5.2","u":"https://mcv152.netlify.app/","c":["popular","multiplayer"]},{"n":"n-gon","u":"https://landgreen.github.io/n-gon/","c":["popular"]},{"n":"Paper.io","u":"https://paper-io.com/","c":["multiplayer","popular"]},{"n":"Portal Flash","u":"https://1kh0.github.io/projects/portalflash/index.html","c":["emulator","popular"]},{"n":"Retro Bowl","u":"https://1kh0.github.io/projects/retro-bowl/index.html","c":["popular"]},{"n":"Slope","u":"https://1kh0.github.io/projects/slope/index.html","c":["popular"]},{"n":"Sandspiel","u":"https://sandspiel.club/","c":[]},{"n":"Cryzen","u":"https://cryzen.io/play","c":[]},{"n":"Deeeep.io","u":"https://beta.deeeep.io/","c":["multiplayer"]},{"n":"diep.io","u":"https://diep.io/","c":["multiplayer"]},{"n":"Dreader","u":"https://donitz.itch.io/dreader","c":["horror"]},{"n":"Drift Hunters","u":"https://webglmath.github.io/drift-hunters/","c":[]},{"n":"OvO","u":"https://www.coolmathgames.com/0-ovo/play","c":[]},{"n":"Rainbow Tower","u":"https://www.mathplayground.com/mobile_rainbow_tower/index.html","c":[]},{"n":"Gunspin","u":"https://static.playunblocked.com/2019/11/gunspin/","c":[]},{"n":"Territorial.io","u":"https://territorial.io/","c":[]},{"n":"Madness: Haphazard","u":"https://f.silvergames.com/ruffle/player.php?id=3404","c":[]},{"n":"Space Plan","u":"http://www.jhollands.co.uk/spaceplan/","c":[]},{"n":"thisissand","u":"https://thisissand.com/","c":[]},{"n":"Shell Shockers","u":"https://shellshock.io/","c":["multiplayer"]},{"n":"Rooftop Snipers 2","u":"https://h52304.github.io/s6/rooftop-snipers-2/","c":[]},{"n":"Temple of Boom","u":"https://temple-of-boom.github.io/file/","c":[]},{"n":"Earn to Die 2012 P.2","u":"https://games-online.io/game/EarnToDie/index.html","c":[]},{"n":"FNAF 2","u":"https://sussygamedeveloper.github.io/FNAF2/","c":["horror"]},{"n":"FNAF 3","u":"https://sussygamedeveloper.github.io/fnaf3/","c":["popular","horror"]},{"n":"Time Shooter 2","u":"https://html5.gamedistribution.com/62a72f2da7cb4b609579a47653546e6a/","c":[]},{"n":"Haunt the House","u":"https://w8.snokido.com/games/flash/ruffle.html?g=haunt-the-house&v=231027","c":["popular"]},{"n":"Strike Force Heros","u":"https://f.silvergames.com/ruffle/player.php?id=2194","c":["popular"]},{"n":"Armed with Wings 3","u":"https://www.silvergames.com/en/armed-with-wings-3/gameframe","c":[]},{"n":"Amazing Strange Rope Police","u":"https://www.gamearter.com/game/amazing-strange-rope-police-vice-spider-vegas/","c":[]},{"n":"N-Game","u":"https://www.numuki.com/gameframe/n-game","c":["popular"]},{"n":"Gun Mayhem 2","u":"https://www.silvergames.com/en/gun-mayhem-2/gameframe","c":["popular"]},{"n":"Bullet Force","u":"https://games.crazygames.com/en_US/bullet-force-multiplayer/index.html","c":["multiplayer","popular"]},{"n":"People Playground","u":"https://html5.gamedistribution.com/rvvASMiM/4eacf9fb9012479194568af9a7e0417c/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fpeople-playground&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vcGVvcGxlLXBsYXlncm91bmQiLCJwYXJlbnREb21haW4iOiJzaWx2ZXJnYW1lcy5jb20iLCJ0b3BEb21haW4iOiJzaWx2ZXJnYW1lcy5jb20iLCJoYXNJbXByZXNzaW9uIjp0cnVlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D","c":["popular"]},{"n":"Hole.io","u":"https://hole-io.com/","c":["multiplayer","popular"]},{"n":"Color Tunnel","u":"https://f3.silvergames.com/html5/color-tunnel/","c":[]},{"n":"Slice it all","u":"https://html5.gamedistribution.com/rvvASMiM/efa941135635400f94bdb0b7430a92f4/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fslice-it-all&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vc2xpY2UtaXQtYWxsIiwicGFyZW50RG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwidG9wRG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwiaGFzSW1wcmVzc2lvbiI6dHJ1ZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9","c":[]},{"n":"Granny","u":"https://html5.gamemonetize.co/pm5wjn3np4xl59y8ie3a85xqs1m1nyma/","c":["horror"]},{"n":"Piano Tiles","u":"https://h5.4j.com/games/Piano-Tiles-2-Online/index.html?pubid=silvergames&v=1503580918","c":["popular"]},{"n":"Raze","u":"https://f.silvergames.com/ruffle/player.php?id=4195","c":["popular"]},{"n":"Intrusion","u":"https://f.silvergames.com/ruffle/player.php?id=2278","c":["popular"]},{"n":"10 Minutes till Dawn","u":"https://abinbins.github.io/a7/10-minutes-till-dawn/","c":[]},{"n":"Bitlife","u":"https://ubg365.github.io/bitlife-life-simulator/play.html","c":["popular"]},{"n":"Death Run 3D","u":"https://mathgames66.github.io/games/html5/deathrun3d/","c":[]},{"n":"Vex 3","u":"https://html5.gamedistribution.com/762c932b4db74c6da0c1d101b2da8be6/?timestamp=1713731401&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-3","c":[]},{"n":"Vex 4","u":"https://html5.gamedistribution.com/80e6a5ae477f4d4fbcd1ea293d10087d/?timestamp=1713731551&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-4","c":[]},{"n":"Vex 5","u":"https://html5.gamedistribution.com/f120262ab72743039fbce88c1f370df8/?timestamp=1713731604&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-5","c":[]},{"n":"Vex 6","u":"https://html5.gamedistribution.com/4925e12574364121a48c61c35f649c36/?timestamp=1713731635&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-6","c":[]},{"n":"Vex 7","u":"https://html5.gamedistribution.com/0c454c9562d249d28ba3a2b50564042c/?timestamp=1713731659&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-7","c":["popular"]},{"n":"Backrooms","u":"https://backroomsgame.io/game/backrooms/","c":["horror"]},{"n":"Cookie Clicker","u":"https://orteil.dashnet.org/cookieclicker/","c":["popular"]},{"n":"Toss the Turle","u":"https://kdata1.com/RS/game.php?r=https://kdata1.com/2024/02/tosstheturtle_0.swf&w=900&h=563&warnsupport=true","c":[]},{"n":"Binding of Issac","u":"https://f.kbhgames.com/RS/game.php?r=//f.kbhgames.com/2011/10/binding-of-issac.swf&w=800&h=600&warnsupport=true","c":[]},{"n":"Ultimate Car Driving Simulator","u":"https://app-258100.games.s3.yandex.net/258100/tjl3zpx5pqgflpnp9trchxb110lsyvvz/index.html?is-united-page=1&skip-guard=1&header=no&clid=2818308&flags=%7B%22adv_sticky_banner_disabled%22%3Atrue%7D&sdk=%2Fsdk%2F_%2Fv2.40602063910d0212bbe3.js#origin=https%3A%2F%2Fyandex.com&app-id=258100&device-type=desktop","c":["popular"]},{"n":"Madalin Cars Multiplayer","u":"https://f.kbhgames.com/2018/03/madalin-cars-multiplayer/","c":["popular"]},{"n":"Deadshot.io","u":"https://deadshot.io/","c":[]},{"n":"Stick Slasher","u":"https://kdata1.com/2023/03/stickslasher/","c":[]},{"n":"Basketbros.io","u":"https://kdata1.com/2023/03/stickslasher/","c":[]},{"n":"Fancy Pants Adventure: World 2","u":"https://kdata1.com/2022/12/fancy-pants-adventure-3/?kbhgames","c":[]},{"n":"Fancy Pants Adventure: World 1","u":"https://kbhgames.com/game/fancy-pants-adventures","c":[]},{"n":"Jetpack Joyride","u":"https://kdata1.com/2024/02/jetpack-joyride/","c":[]},{"n":"Station Meltdown","u":"https://kdata1.com/2022/03/station-meltdown/","c":["popular"]},{"n":"What Remains","u":"https://kdata1.com/2021/07/3911393/","c":[]},{"n":"Plazma Burst","u":"https://f.kbhgames.com/RS/game.php?r=//f.kbhgames.com/2018/swf/plazma-burst.swf&w=1000&h=500&warnsupport=true","c":[]},{"n":"Count Secure Operations 2","u":"https://app-256471.games.s3.yandex.net/256471/gctqmljj6yn6nvurax636mu4hme5gsqz/index.html?is-united-page=1&skip-guard=1&header=no&clid=2818308&flags=%7B%22adv_sticky_banner_disabled%22%3Atrue%7D&sdk=%2Fsdk%2F_%2Fv2.40602063910d0212bbe3.js#origin=https%3A%2F%2Fyandex.com&app-id=256471&device-type=desktop","c":[]},{"n":"10-103","u":"https://kdata1.com/2020/12/3100528/","c":[]},{"n":"10-103: Null Kevin","u":"https://kdata1.com/2021/06/4056473/","c":["popular"]},{"n":"Last Hope","u":"https://kdata1.com/2021/09/LastHope/","c":[]},{"n":"Make sure it's closed","u":"https://kdata1.com/2019/04/MSIC-WEBGL/","c":["horror"]},{"n":"Gun Knight","u":"https://stepford.itch.io/gun-knight","c":[]},{"n":"Mob Inc","u":"https://html-classic.itch.zone/html/1796576/index.html?v=1577643878","c":[]},{"n":"Black Resin","u":"https://html-classic.itch.zone/html/6957140/BR_WEBGL_NO_WRONG_DRONG/index.html","c":[]},{"n":"Feedvid Live","u":"https://html-classic.itch.zone/html/4941980-683813/index.html","c":["horror"]},{"n":"FNAF 1 (Scratch)","u":"https://run3.io/popgame/fnaf/fnaf1/","c":["horror"]},{"n":"FNAF 4 (Scratch)","u":"https://ubg98.github.io/FNAF4/","c":["horror"]},{"n":"Stumble Guys","u":"https://www.stumbleguys.com/play","c":[]},{"n":"Crossy Road","u":"https://h52304.github.io/s77/crossy-road/","c":[]},{"n":"Survivor.io","u":"https://html5.gamedistribution.com/rvvASMiM/f1c451e586c04b4c8cba01b0c50d9090/index.html","c":[]},{"n":"Super Mario 64","u":"https://probablykam.github.io/Mario64webgl/","c":[]},{"n":"Pokemon Emerald","u":"https://f.kbhgames.com/emujs/play.php?c=gba&f=pokemon-emerald.gba","c":["emulator"]},{"n":"Vex 8","u":"https://html5.gamedistribution.com/rvvASMiM/949009d40a2846f89f887de2285d6c28/index.html?gd_sdk_referrer_url=https%3A%2F%2Farcadespot.com%2Fgame%2Fvex-8&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2FyY2FkZXNwb3QuY29tL2dhbWUvdmV4LTgiLCJwYXJlbnREb21haW4iOiJhcmNhZGVzcG90LmNvbSIsInRvcERvbWFpbiI6ImFyY2FkZXNwb3QuY29tIiwiaGFzSW1wcmVzc2lvbiI6dHJ1ZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9","c":["popular"]},{"n":"Precision Client","u":"https://html-classic.itch.zone/html/7086310/PrecisionClient-Static-main/index.html","c":[]},{"n":"Idle Breakout","u":"https://www.coolmathgames.com/0-idle-breakout/play","c":[]},{"n":"Burrito Bison","u":"https://f.silvergames.com/awayfl/index.html?swf=burrito-bison.swf","c":[]},{"n":"Twitch Tetris","u":"https://www.rossipotti.de/ausgabe28/tetris/index.html","c":[]},{"n":"Mario Kart 64","u":"https://f.kbhgames.com/r/n64/game.php?file=mario-kart-64.zip","c":["emulator"]},{"n":"Pizza Tower","u":"https://kdata1.com/2021/03/3527391/2.1/","c":[]},{"n":"Shuttle.lol","u":"https://shuttle.lol","c":[]},{"n":"Subway Surfers","u":"https://subwaysurfersonlinegame.github.io/file/","c":["popular"]},{"n":"Ragdoll Archers","u":"https://ragdoll-archers.game-files.crazygames.com/ragdoll-archers/30/index.html","c":[]},{"n":"Stick Archers Battle","u":"https://html5.gamedistribution.com/rvvASMiM/a2eafb6bfed84d56a10d6c57e1e72417/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Fstick-archers-battle&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy50d29wbGF5ZXJnYW1lcy5vcmcvZ2FtZS9zdGljay1hcmNoZXJzLWJhdHRsZSIsInBhcmVudERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsInRvcERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsImhhc0ltcHJlc3Npb24iOmZhbHNlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D","c":[]},{"n":"Funny Shooter 2","u":"https://html5.gamedistribution.com/rvvASMiM/a1b7ac4025214a5cb0bd01a4f675513a/index.html?gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2Z1bm55c2hvb3RlcjIuY29tLyIsInBhcmVudERvbWFpbiI6ImZ1bm55c2hvb3RlcjIuY29tIiwidG9wRG9tYWluIjoiZnVubnlzaG9vdGVyMi5jb20iLCJoYXNJbXByZXNzaW9uIjpmYWxzZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9","c":["popular"]},{"n":"Tomb of the Mask","u":"https://tombofthemask.github.io/g8/tomb-of-the-mask/","c":[]},{"n":"Exit Path","u":"https://f.silvergames.com/ruffle/player.php?id=606","c":[]},{"n":"Awesome Planes","u":"https://f.silvergames.com/ruffle/player.php?id=2017","c":["emulator"]},{"n":"OvO 2","u":"https://dedragames.com/games/ovo2/0.2alpha/","c":["popular"]},{"n":"60 Seconds","u":"https://www.puzzlegame.com/games/60-Seconds-Atomic-Adventure/index.html?yad","c":[]},{"n":"BuildNow GG","u":"https://games.crazygames.com/en_US/buildnow-gg/index.html?v=1.282","c":["multiplayer"]},{"n":"Sans Fight","u":"https://jcw87.github.io/c2-sans-fight/","c":["emulator"]},{"n":"Super Mario Bros","u":"https://jcw87.github.io/c2-smb1/","c":["emulator"]},{"n":"Friday night Funkin","u":"https://uploads.ungrounded.net/alternate/1528000/1528775_alternate_113347_r112.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=6636730d4b7cd&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Baldis Basics","u":"https://en.gameslol.net/data/baldis-basics/index.html","c":["emulator","horror"]},{"n":"Assessment Examination","u":"https://html-classic.itch.zone/html/5392404/Web5/index.html","c":["popular","horror"]},{"n":"Dome Romantik","u":"https://bippinbits.itch.io/dome-romantik","c":[]},{"n":"Nightclub Showdown","u":"https://html-classic.itch.zone/html/3198875/index.html","c":["popular"]},{"n":"Goodnight Meowmie","u":"https://ddrkirbyisq.itch.io/goodnight-meowmie","c":["horror"]},{"n":"Blastronaut","u":"https://html-classic.itch.zone/html/2758024/index.html","c":[]},{"n":"UZG (COD Zombies)","u":"https://html-classic.itch.zone/html/5713982/UZG_webgl/index.html","c":["popular"]},{"n":"Commonweal","u":"https://html-classic.itch.zone/html/10287783/index.html","c":[]},{"n":"Holonomy","u":"https://html-classic.itch.zone/html/7959084/Holonomy%20Web/index.html","c":[]},{"n":"Enchain Classic","u":"https://html-classic.itch.zone/html/793359/Enchain%20WebGL/index.html?v=1542781876","c":["popular"]},{"n":"Hollow Knight Demake","u":"https://html-classic.itch.zone/html/4103396/web/index.html","c":["popular"]},{"n":"Dustsim","u":"https://kodub.itch.io/dustsim","c":[]},{"n":"Canabalt","u":"https://html-classic.itch.zone/html/9680307/index.html","c":[]},{"n":"Home Alone","u":"https://html-classic.itch.zone/html/8471641/BGJ%202022.2%20-%20Home%20Alone%20WebGL/index.html","c":["horror"]},{"n":"78 Hour Rain","u":"https://html-classic.itch.zone/html/2937814/78HourRain_Webv1/index.html","c":["horror"]},{"n":"Closing Doors","u":"https://collarpill.itch.io/closing-doors","c":["horror"]},{"n":"Backrooms 2D","u":"https://html-classic.itch.zone/html/8485327/index.html","c":[]},{"n":"Silhouette Showdown","u":"https://html-classic.itch.zone/html/7362417/SilhouetteShowdown080_HTML/index.html","c":["multiplayer"]},{"n":"Commando","u":"https://html-classic.itch.zone/html/1824008/www/index.html?v=1577643784","c":[]},{"n":"Hollow Knight (Silksong Demake)","u":"https://html-classic.itch.zone/html/4927768/web/index.html","c":["emulator"]},{"n":"Nip for speed","u":"https://html-classic.itch.zone/html/9641909/index.html","c":[]},{"n":"Vacant","u":"https://html-classic.itch.zone/html/5747771-565757/html/index.html","c":["horror"]},{"n":"Deep","u":"https://html-classic.itch.zone/html/3316252/index.html","c":[]},{"n":"Darkness in Spaceship","u":"https://html-classic.itch.zone/html/9272800/index.html","c":[]},{"n":"Station 141","u":"https://html-classic.itch.zone/html/3793918/index.html","c":[]},{"n":"Pew Pew Live","u":"https://pewpew.live/webasm/pewpew.html","c":[]},{"n":"Marble Race Generator","u":"https://html-classic.itch.zone/html/2029874/WebV2/index.html?v=1591302253","c":[]},{"n":"Cats Cradle","u":"https://georgioklironomos.itch.io/cats-cradle","c":["multiplayer"]},{"n":"Blackbox","u":"https://html-classic.itch.zone/html/3475546/index.html","c":["horror"]},{"n":"This is your life now","u":"https://html-classic.itch.zone/html/1398515/index.html?v=1574335650","c":[]},{"n":"Hinoken","u":"https://html-classic.itch.zone/html/3435599/hinoken_web_1/index.html","c":[]},{"n":"Necrobomb","u":"https://html-classic.itch.zone/html/3433821/index.html","c":[]},{"n":"Rocket League 2D","u":"https://html-classic.itch.zone/html/3325334/index.html","c":["multiplayer"]},{"n":"dud","u":"https://html-classic.itch.zone/html/10158091/index.html","c":["popular"]},{"n":"Crater","u":"https://html-classic.itch.zone/html/3300759/CraterWeb/index.html","c":[]},{"n":"Monolith","u":"https://html-classic.itch.zone/html/473205/index.html?v=1542781942","c":[]},{"n":"D.A-V.E","u":"https://html-classic.itch.zone/html/9967430/index.html","c":[]},{"n":"Bright Lancer","u":"https://html-classic.itch.zone/html/3228468/Bright%20Lancer%20Web%20Experimental/index.html","c":[]},{"n":"VSCS-I","u":"https://html-classic.itch.zone/html/7627512/index.html","c":[]},{"n":"Take out the trash","u":"https://html-classic.itch.zone/html/10334699/takeOutTheTrash/index.html","c":["horror"]},{"n":"Examination of Fear","u":"https://html-classic.itch.zone/html/7312990/index.html","c":["horror"]},{"n":"I am not what remains","u":"https://html-classic.itch.zone/html/2479198/index.html","c":[]},{"n":"Last train home","u":"https://html-classic.itch.zone/html/3300759/CraterWeb/index.html","c":["horror"]},{"n":"Dodge & Slash","u":"https://kindanice.itch.io/dodge-and-slash","c":[]},{"n":"Like Them","u":"https://html-classic.itch.zone/html/2367352/Like%20Them%20Demo%20HTML/index.html","c":[]},{"n":"Agent Pyxel","u":"https://html-classic.itch.zone/html/4491958/index.html","c":[]},{"n":"A Day in the Office","u":"https://html-classic.itch.zone/html/4268519/index.html","c":["horror"]},{"n":"Station Saturn","u":"https://html-classic.itch.zone/html/7537780/index.html","c":["popular"]},{"n":"DriftR","u":"https://example.com","c":[]},{"n":"Synesthesia","u":"https://html-classic.itch.zone/html/6726608/browser/index.html","c":[]},{"n":"Spectral Slash","u":"https://kdata1.com/2023/07/spectral-slash/","c":[]},{"n":"Rogue Fable III","u":"https://cache.armorgames.com/files/games/rogue-fable-iii-18602/index.html?v=1550624919","c":[]},{"n":"Human or Not?","u":"https://humanornot.so/","c":[]},{"n":"OVO Modded","u":"https://ovo-5yu.pages.dev/","c":[]},{"n":"We Become What We Behold","u":"https://html-classic.itch.zone/html/300364/index.html?v=1542781840","c":[]},{"n":"Buckshot Roulette","u":"https://buckshotroulette.online/game/v13/","c":[]},{"n":"Smash Karts.io","u":"https://smashkarts.io/","c":[]},{"n":"Cat Mario","u":"https://kdata1.com/2022/04/cat-marioo/","c":[]},{"n":"Rocket Bot Royale","u":"https://rocketbotroyale.winterpixel.io/","c":[]},{"n":"CSGO Clicker","u":"https://mtsl.dk/csgo/","c":[]},{"n":"Arsonate","u":"https://html-classic.itch.zone/html/10985323/ARSONATE%20-%20WEBGL_DEMO%20-%2020240722%20-%20RELEASE/index.html","c":[]},{"n":"Moon","u":"https://html.itch.zone/html/10993820/Moon/index.html","c":[]},{"n":"Bullet Bunny","u":"https://html-classic.itch.zone/html/8618172/Bullet%20Bunny/index.html","c":[]},{"n":"V.R.G.","u":"https://html.itch.zone/html/10999062/index.html","c":[]},{"n":"Everybody Must Die","u":"https://html-classic.itch.zone/html/4263236/index.html","c":[]},{"n":"Don't Let Her In","u":"https://html-classic.itch.zone/html/10594372/index.html","c":[]},{"n":"Monster Battlegrounds","u":"https://html-classic.itch.zone/html/10505998/Monster%20Battlegrounds%20(v0_3_0)%20html/index.html","c":[]},{"n":"Cuckoo Castle","u":"https://html-classic.itch.zone/html/2315059/CuckooCastle/index.html?v=1591301542","c":[]},{"n":"The Lesser Evil","u":"https://html-classic.itch.zone/html/4604027/TheLesserEvil_Web/index.html","c":[]},{"n":"Flooded Caves","u":"https://html-classic.itch.zone/html/5535808/index.html","c":[]},{"n":"Subject 26","u":"https://html-classic.itch.zone/html/196978/index.html?v=1542782131","c":[]},{"n":"Proctor","u":"https://html-classic.itch.zone/html/4833194-484298/index.html","c":[]},{"n":"Morphology","u":"https://html-classic.itch.zone/html/2174003/index.html?v=1591301905","c":[]},{"n":"Torchure","u":"https://html-classic.itch.zone/html/3473461/Builds/index.html","c":[]},{"n":"Hyper Jump","u":"https://html-classic.itch.zone/html/6364027/index.html","c":[]},{"n":"Void Golf","u":"https://html-classic.itch.zone/html/1669372/Void%20Golf%20Web/index.html?v=1574334979","c":[]},{"n":"Arena","u":"https://html-classic.itch.zone/html/7053230/index.html","c":[]},{"n":"8 Ball Pool","u":"https://8ballpool.com/en/game","c":[]},{"n":"Drift Boss","u":"https://www.hoodamath.com/mobile/games/drift-boss/game.html","c":[]},{"n":"Google Snake Modded","u":"https://googlesnakemods.com/v/current/","c":[]},{"n":"Helix Jump","u":"https://helixjumponline.com/","c":[]},{"n":"Mutilate-a-doll 2","u":"https://f.silvergames.com/ruffle/player.php?id=4638","c":[]},{"n":"Superfighers 2","u":"https://f.silvergames.com/ruffle/player.php?id=6456","c":[]},{"n":"Superhot","u":"https://f3.silvergames.com/html5/super-hot/","c":[]},{"n":"Pandemic Simulator","u":"https://html5.gamedistribution.com/rvvASMiM/f2a015a45b6443358238a54f8f4a557f/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fpandemic-simulator&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vcGFuZGVtaWMtc2ltdWxhdG9yIiwicGFyZW50RG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwidG9wRG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D","c":[]},{"n":"Raze 2","u":"https://f.silvergames.com/ruffle/player.php?id=1594","c":[]},{"n":"Strike Force Heros 2","u":"https://f.silvergames.com/ruffle/player.php?id=2879","c":[]},{"n":"Strike Force Heros 3","u":"https://f.silvergames.com/ruffle/player.php?id=5067","c":[]},{"n":"Sift Heads World","u":"https://f.silvergames.com/ruffle/player.php?id=8950","c":[]},{"n":"Stickman Dismount","u":"https://cdn.gamemonetize.com/d2pe3o8rrt57q6mro0vjkor7q0xequ04/","c":[]},{"n":"Sift Heads Cartels","u":"https://f.silvergames.com/ruffle/player.php?id=3199","c":[]},{"n":"Cut the Rope","u":"https://games.cdn.famobi.com/html5games/c/cut-the-rope/v070/?fg_domain=play.famobi.com&fg_aid=A-SILVERGAMES&fg_uid=4531b37c-a8e0-4a67-9ebd-e8d3190b6277&fg_pid=8a24e5f2-94a8-4593-b4e5-81cc68f524c8&fg_beat=969&original_ref=https%3A%2F%2Fwww.silvergames.com%2F","c":[]},{"n":"Give Up 2","u":"https://f.silvergames.com/ruffle/player.php?id=4717","c":[]},{"n":"Draw Climber","u":"https://f3.silvergames.com/m/draw-cube/","c":[]},{"n":"N-Game 2","u":"https://f.silvergames.com/ruffle/player.php?id=2987","c":[]},{"n":"Stickman Ragdoll Playground","u":"https://html5.gamedistribution.com/rvvASMiM/1c0a1c13e443454a9a029c155b957778/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fstickman-ragdoll-playground&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vc3RpY2ttYW4tcmFnZG9sbC1wbGF5Z3JvdW5kIiwicGFyZW50RG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwidG9wRG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D","c":[]},{"n":"Stealth Hunter 2","u":"https://f.silvergames.com/ruffle/player.php?id=1965","c":[]},{"n":"Castel Wars","u":"https://files.twoplayergames.org/files/games/o1/Castel_Wars/index.html","c":[]},{"n":"Castel Wars Modern","u":"https://files.twoplayergames.org/files/games/o1/Castel_Wars_Modern/index.html","c":[]},{"n":"Castel Wars New Era","u":"https://files.twoplayergames.org/files/games/o1/Castel_Wars_New_Era/index.html","c":[]},{"n":"Uno Online","u":"https://html5.gamedistribution.com/rvvASMiM/f2520bae00624e93a4f4614732fa259e/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Funo-online&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy50d29wbGF5ZXJnYW1lcy5vcmcvZ2FtZS91bm8tb25saW5lIiwicGFyZW50RG9tYWluIjoidHdvcGxheWVyZ2FtZXMub3JnIiwidG9wRG9tYWluIjoidHdvcGxheWVyZ2FtZXMub3JnIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D","c":[]},{"n":"Stick Duel Battle Hero","u":"https://files.twoplayergames.org/files/games/o1/Stick_Duel_Battle_Hero/index.html","c":[]},{"n":"House of Hazards","u":"https://www.twoplayergames.org/gameframe/house-of-hazards","c":[]},{"n":"Tennis Physics","u":"https://files.twoplayergames.org/files/games/o1/Tennis_Physics/index.html","c":[]},{"n":"Pixel Smash Duel","u":"https://html5.gamedistribution.com/81c5e3e4cae448a5876b1c2e424fd96b/?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Fpixel-smash-duel","c":[]},{"n":"Volley Random","u":"https://files.twoplayergames.org/files/games/o1/Volley_random/index.html","c":[]},{"n":"Fancy Snowboarding","u":"https://f.silvergames.com/ruffle/player.php?id=10106","c":[]},{"n":"Line Rider","u":"https://www.linerider.com/","c":[]},{"n":"Leap of Life","u":"https://html5.gamedistribution.com/rvvASMiM/a3cddb497804491ca590c34ee5fa7339/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fleap-of-life&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vbGVhcC1vZi1saWZlIiwicGFyZW50RG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwidG9wRG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D","c":[]},{"n":"Geometry Neon Dash Subzero","u":"https://html5.gamedistribution.com/1f37997f4c6845519807e0a335ed1c75/","c":[]},{"n":"Space Waves","u":"https://games.crazygames.com/en_US/space-waves/index.html","c":[]},{"n":"Worlds Hardest Game 3","u":"https://www.coolmathgames.com/0-worlds-hardest-game-3/play","c":[]},{"n":"Bad Dolls 2","u":"https://f3.silvergames.com/m/bad-dolls_v2/","c":[]},{"n":"Fire Circle","u":"https://f3.silvergames.com/m/fire-circle/","c":[]},{"n":"Grandpas Minigun","u":"https://uploads.ungrounded.net/alternate/1773000/1773956_alternate_160158_r103.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a97942d14be&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Seeking Peace Zombeez","u":"https://uploads.ungrounded.net/alternate/5903000/5903058_alternate_273533_r1.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a979cdd610c&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Stealth Optional","u":"https://uploads.ungrounded.net/alternate/5775000/5775059_alternate_266950_r2.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a987bbcbbc4&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Fruity Tower","u":"https://uploads.ungrounded.net/alternate/4622000/4622142_alternate_215472_r10.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a98ce60a9a3&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Armed with Wings Culmination","u":"https://uploads.ungrounded.net/ruffle_wrapper/ruffleembed.html?v=1.0.67&browsermode=default&props=%7B%22ruffle%22%3A%22%2Fruffle_wrapper%2Flib%2Fruffle.js%3F1722140126%22%2C%22public_path%22%3A%22%2Fruffle_wrapper%2Flib%2F%22%2C%22swf%22%3A%22https%3A%2F%2Fuploads.ungrounded.net%2F584000%2F584398_Culmination_coolbuddy_v2.swf%3F1691321603%22%2C%22vars%22%3A%7B%22NewgroundsAPI_PublisherID%22%3A1%2C%22NewgroundsAPI_SandboxID%22%3A%2266a98da258f08%22%2C%22NewgroundsAPI_SessionID%22%3A%22%22%2C%22NewgroundsAPI_UserName%22%3A%22%26lt%3Bdeleted%26gt%3B%22%2C%22NewgroundsAPI_UserID%22%3A0%2C%22ng_username%22%3A%22%26lt%3Bdeleted%26gt%3B%22%7D%2C%22width%22%3A800%2C%22height%22%3A480%2C%22icon%22%3A%22https%3A%2F%2Fpicon.ngfiles.com%2F584000%2Fflash_584398_card.webp%3Ff1679409096%22%2C%22warnOnUnsupportedContent%22%3Afalse%7D","c":[]},{"n":"Armed with Wings Ashbelt","u":"https://uploads.ungrounded.net/ruffle_wrapper/ruffleembed.html?v=1.0.67&browsermode=default&props=%7B%22ruffle%22%3A%22%2Fruffle_wrapper%2Flib%2Fruffle.js%3F1722140126%22%2C%22public_path%22%3A%22%2Fruffle_wrapper%2Flib%2F%22%2C%22swf%22%3A%22https%3A%2F%2Fuploads.ungrounded.net%2F782000%2F782748_game.swf%3F1616075212%22%2C%22vars%22%3A%7B%22NewgroundsAPI_PublisherID%22%3A1%2C%22NewgroundsAPI_SandboxID%22%3A%2266a98e02c7e2c%22%2C%22NewgroundsAPI_SessionID%22%3A%22%22%2C%22NewgroundsAPI_UserName%22%3A%22%26lt%3Bdeleted%26gt%3B%22%2C%22NewgroundsAPI_UserID%22%3A0%2C%22ng_username%22%3A%22%26lt%3Bdeleted%26gt%3B%22%7D%2C%22width%22%3A1280%2C%22height%22%3A720%2C%22icon%22%3A%22https%3A%2F%2Fpicon.ngfiles.com%2F782000%2Fflash_782748_card.png%3Ff1614591642%22%2C%22warnOnUnsupportedContent%22%3Afalse%7D","c":[]},{"n":"The I of It","u":"https://uploads.ungrounded.net/ruffle_wrapper/ruffleembed.html?v=1.0.67&browsermode=default&props=%7B%22ruffle%22%3A%22%2Fruffle_wrapper%2Flib%2Fruffle.js%3F1722140126%22%2C%22public_path%22%3A%22%2Fruffle_wrapper%2Flib%2F%22%2C%22swf%22%3A%22https%3A%2F%2Fuploads.ungrounded.net%2F570000%2F570709_theIofIt_640x400.swf%3F1306330288%22%2C%22vars%22%3A%7B%22NewgroundsAPI_PublisherID%22%3A1%2C%22NewgroundsAPI_SandboxID%22%3A%2266a98e3dc2710%22%2C%22NewgroundsAPI_SessionID%22%3A%22%22%2C%22NewgroundsAPI_UserName%22%3A%22%26lt%3Bdeleted%26gt%3B%22%2C%22NewgroundsAPI_UserID%22%3A0%2C%22ng_username%22%3A%22%26lt%3Bdeleted%26gt%3B%22%7D%2C%22width%22%3A640%2C%22height%22%3A400%2C%22icon%22%3A%22https%3A%2F%2Fpicon.ngfiles.com%2F570000%2Fflash_570709_card.png%3Ff1664325606%22%2C%22warnOnUnsupportedContent%22%3Afalse%7D","c":[]},{"n":"Armed with Wings Rearmed Trials","u":"https://uploads.ungrounded.net/ruffle_wrapper/ruffleembed.html?v=1.0.67&browsermode=default&props=%7B%22ruffle%22%3A%22%2Fruffle_wrapper%2Flib%2Fruffle.js%3F1722140126%22%2C%22public_path%22%3A%22%2Fruffle_wrapper%2Flib%2F%22%2C%22swf%22%3A%22https%3A%2F%2Fuploads.ungrounded.net%2F682000%2F682880_rearmed-survival.swf%3F1477582558%22%2C%22vars%22%3A%7B%22NewgroundsAPI_PublisherID%22%3A1%2C%22NewgroundsAPI_SandboxID%22%3A%2266a991c001117%22%2C%22NewgroundsAPI_SessionID%22%3A%22%22%2C%22NewgroundsAPI_UserName%22%3A%22%26lt%3Bdeleted%26gt%3B%22%2C%22NewgroundsAPI_UserID%22%3A0%2C%22ng_username%22%3A%22%26lt%3Bdeleted%26gt%3B%22%7D%2C%22width%22%3A960%2C%22height%22%3A540%2C%22icon%22%3A%22https%3A%2F%2Fpicon.ngfiles.com%2F682000%2Fflash_682880_card.png%3Ff1691322341%22%2C%22warnOnUnsupportedContent%22%3Afalse%7D","c":[]},{"n":"Bunny Bun","u":"https://uploads.ungrounded.net/alternate/1524000/1524514_alternate_251347_r26.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a994378fd7d&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Dark Sword: Light of Ainn","u":"https://uploads.ungrounded.net/alternate/5580000/5580932_alternate_257601_r8.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a9951709f9b&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Dark Sword","u":"https://uploads.ungrounded.net/alternate/4465000/4465067_alternate_208055_r41.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a9965971fd6&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Parking Ticket Mayhem","u":"https://uploads.ungrounded.net/alternate/5144000/5144516_alternate_238037_r1.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=66a9959e79ce0&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Sans Last Breath","u":"https://mario1d240.github.io/undertale-last-breath-remake-bad-time-simulator","c":[]},{"n":"Burger & Frights","u":"https://html-classic.itch.zone/html/5033568/index.html","c":[]},{"n":"Falling Art Ragdoll Simulator","u":"https://games.crazygames.com/en_US/falling-art-ragdoll-simulator/index.html","c":[]},{"n":"Zombie Survival v2","u":"https://f3.silvergames.com/html5/zombie-survival_v2/","c":[]},{"n":"Lonewolf","u":"https://f.silvergames.com/ruffle/player.php?id=5668","c":[]},{"n":"Evo-F4","u":"https://www.gamearter.com/game/evo-f4/","c":[]},{"n":"Pixel Warfare","u":"https://games.crazygames.com/en_US/pixel-warfare/index.html?v=1.295","c":[]},{"n":"Mine Shooter - Save your world","u":"https://games.crazygames.com/en_US/mine-shooter---save-your-world/index.html?v=1.295","c":[]},{"n":"Bodycamera Shooter","u":"https://games.crazygames.com/en_US/bodycamera-shooter/index.html?v=1.295","c":[]},{"n":"Bank Robbery 3","u":"https://games.crazygames.com/en_US/bank-robbery-3/index.html?v=1.295","c":[]},{"n":"Sniper Shot - Bullet Time","u":"https://games.crazygames.com/en_US/sniper-shot-bullet-time/index.html?v=1.295","c":[]},{"n":"Spy Highway","u":"https://games.crazygames.com/en_US/shotgun-highway/index.html?v=1.295","c":[]},{"n":"Save the Hostages","u":"https://games.crazygames.com/en_US/save-the-hostages/index.html?v=1.295","c":[]},{"n":"Zombie Shooter: Part 2","u":"https://games.crazygames.com/en_US/zombies-shooter-part-2/index.html?v=1.295","c":[]},{"n":"Sandbox City","u":"https://games.crazygames.com/en_US/sandbox-city---cars-zombies-ragdolls/index.html?v=1.295","c":[]},{"n":"Resident Zombies: Horror Shooter","u":"https://games.crazygames.com/en_US/resident-zombies---horror-shooter/index.html?v=1.295","c":[]},{"n":"Stickman Zombie Annihilation","u":"https://games.crazygames.com/en_US/stickman-zombie-annihilation/index.html?v=1.295","c":[]},{"n":"Deadly Red Spikes","u":"https://games.crazygames.com/en_US/deadly-red-spikes/index.html?v=1.295","c":[]},{"n":"Crazy Stunt Cars Multiplayer","u":"https://games.crazygames.com/en_US/crazy-stunt-cars-multiplayer/index.html?v=1.295","c":[]},{"n":"Supreme Bomb Tag","u":"https://games.crazygames.com/en_US/supreme-bomb-tag/index.html?v=1.295","c":[]},{"n":"Mini-Caps: Arena","u":"https://games.crazygames.com/en_US/mini-caps-arena/index.html?v=1.295","c":[]},{"n":"Mini-Caps: Bombs","u":"https://games.crazygames.com/en_US/mini-caps-bombs/index.html?v=1.295","c":[]},{"n":"Stickman Zombie Annihilation 2","u":"https://games.crazygames.com/en_US/stickman-annihilation-2/index.html?v=1.295","c":[]},{"n":"Derby Crash 5","u":"https://games.crazygames.com/en_US/derby-crash-5/index.html?v=1.295","c":[]},{"n":"Night City Racing","u":"https://games.crazygames.com/en_US/night-city-racing/index.html?v=1.295","c":[]},{"n":"Crazy for Speed","u":"https://games.crazygames.com/en_US/crazy-for-speed/index.html?v=1.295","c":[]}];
+            const DDX_GAMES_DATA = [{"n":"1v1.LOL","u":"https://1v1.lol/","c":["popular","multiplayer"]},{"n":"Swordbattle.io","u":"https://swordbattle.io/","c":["2d"]},{"n":"Stabfish.io","u":"https://stabfish.io/","c":["2P"]},{"n":"Dynast.io","u":"https://dynast.io","c":[]},{"n":"2048","u":"https://www.2048.org/","c":[]},{"n":"2048 Multitasking","u":"https://calculatorgames.github.io/simplegimes/2048-multitask/index.html","c":[]},{"n":"3D Dino Game","u":"https://lagged.com/api/play2/t-rex-3d2/","c":[]},{"n":"60 Second Burger Run","u":"https://www.coolmathgames.com/0-60-second-burger-run/play","c":[]},{"n":"A Dark Room","u":"https://adarkroom.doublespeakgames.com/","c":["popular"]},{"n":"Age of War","u":"https://age-of-war.game-files.crazygames.com/ruffle/ageofwar.html","c":[]},{"n":"Happy Wheels","u":"https://totaljerkface.com","c":[]},{"n":"YoHoHo.io","u":"https://yohoho.io/","c":["2P"]},{"n":"AntWar.io","u":"https://antwar.io/","c":["2P"]},{"n":"Tetr.io","u":"https://tetr.io/","c":["2P"]},{"n":"Piupiu Starship","u":"https://interestingsomething.com/","c":[]},{"n":"Basketball Random","u":"https://basketrandomonline.github.io/g8/basket-random/","c":["popular"]},{"n":"Soccer Random","u":"https://soccer-random.github.io/s8/soccer-random/","c":[]},{"n":"Basketball Stars","u":"https://basketballstars.pro/game/basketball-stars/","c":["popular"]},{"n":"Getaway Shootout","u":"https://www.twoplayergames.org/embed/getaway-shootout","c":["media"]},{"n":"Boxing Random","u":"https://boxingrandom.github.io/file/","c":[]},{"n":"Rooftop Snipers","u":"https://h52304.github.io/s/rooftop-snipers/","c":[]},{"n":"Glass City","u":"https://rpc.lol/games/projects/glass-city/index.html","c":[]},{"n":"Hacker Typer","u":"https://hackertyper.com/","c":[]},{"n":"Idle Shark Game","u":"https://alpha.shark.tobot.dev/","c":[]},{"n":"Interactive Buddy","u":"https://1kh0.github.io/projects/interactivebuddy/index.html","c":[]},{"n":"Just One Boss","u":"https://www.coolmathgames.com/0-just-one-boss/play","c":[]},{"n":"Portal Mario","u":"https://tannerrogalsky.com/mari0/","c":[]},{"n":"Eaglercraft v1.8","u":"https://mcv18.netlify.app/","c":["popular","multiplayer"]},{"n":"Eaglercraft v1.5.2","u":"https://mcv152.netlify.app/","c":["popular","multiplayer"]},{"n":"n-gon","u":"https://landgreen.github.io/n-gon/","c":["popular"]},{"n":"Paper.io","u":"https://paper-io.com/","c":["multiplayer","popular"]},{"n":"ShipCraft.io","u":"https://shipcraft.io/","c":[]},{"n":"Portal Flash","u":"https://1kh0.github.io/projects/portalflash/index.html","c":["emulator","popular"]},{"n":"Retro Bowl","u":"https://1kh0.github.io/projects/retro-bowl/index.html","c":["popular"]},{"n":"Slope","u":"https://1kh0.github.io/projects/slope/index.html","c":["popular"]},{"n":"Sandspiel","u":"https://sandspiel.club/","c":[]},{"n":"Cryzen","u":"https://cryzen.io/play","c":[]},{"n":"Deeeep.io","u":"https://beta.deeeep.io/","c":["multiplayer"]},{"n":"diep.io","u":"https://diep.io/","c":["multiplayer"]},{"n":"Dreader","u":"https://donitz.itch.io/dreader","c":["horror"]},{"n":"Drift Hunters","u":"https://webglmath.github.io/drift-hunters/","c":[]},{"n":"OvO","u":"https://www.coolmathgames.com/0-ovo/play","c":[]},{"n":"Rainbow Tower","u":"https://www.mathplayground.com/mobile_rainbow_tower/index.html","c":[]},{"n":"Gunspin","u":"https://static.playunblocked.com/2019/11/gunspin/","c":[]},{"n":"Territorial.io","u":"https://territorial.io/","c":[]},{"n":"Madness: Haphazard","u":"https://f.silvergames.com/ruffle/player.php?id=3404","c":[]},{"n":"Space Plan","u":"http://www.jhollands.co.uk/spaceplan/","c":[]},{"n":"thisissand","u":"https://thisissand.com/","c":[]},{"n":"Shell Shockers","u":"https://shellshock.io/","c":["multiplayer"]},{"n":"Rooftop Snipers 2","u":"https://h52304.github.io/s6/rooftop-snipers-2/","c":[]},{"n":"Temple of Boom","u":"https://temple-of-boom.github.io/file/","c":[]},{"n":"Earn to Die 2012 P.2","u":"https://games-online.io/game/EarnToDie/index.html","c":[]},{"n":"FNAF 2","u":"https://sussygamedeveloper.github.io/FNAF2/","c":["horror"]},{"n":"FNAF 3","u":"https://sussygamedeveloper.github.io/fnaf3/","c":["popular","horror"]},{"n":"Time Shooter 2","u":"https://html5.gamedistribution.com/62a72f2da7cb4b609579a47653546e6a/","c":[]},{"n":"Haunt the House","u":"https://w8.snokido.com/games/flash/ruffle.html?g=haunt-the-house&v=231027","c":["popular"]},{"n":"Strike Force Heros","u":"https://f.silvergames.com/ruffle/player.php?id=2194","c":["popular"]},{"n":"Armed with Wings 3","u":"https://www.silvergames.com/en/armed-with-wings-3/gameframe","c":[]},{"n":"Amazing Strange Rope Police","u":"https://www.gamearter.com/game/amazing-strange-rope-police-vice-spider-vegas/","c":[]},{"n":"N-Game","u":"https://www.numuki.com/gameframe/n-game","c":["popular"]},{"n":"Gun Mayhem 2","u":"https://www.silvergames.com/en/gun-mayhem-2/gameframe","c":["popular"]},{"n":"Bullet Force","u":"https://games.crazygames.com/en_US/bullet-force-multiplayer/index.html","c":["multiplayer","popular"]},{"n":"People Playground","u":"https://html5.gamedistribution.com/rvvASMiM/4eacf9fb9012479194568af9a7e0417c/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fpeople-playground&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vcGVvcGxlLXBsYXlncm91bmQiLCJwYXJlbnREb21haW4iOiJzaWx2ZXJnYW1lcy5jb20iLCJ0b3BEb21haW4iOiJzaWx2ZXJnYW1lcy5jb20iLCJoYXNJbXByZXNzaW9uIjp0cnVlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D","c":["popular"]},{"n":"Hole.io","u":"https://hole-io.com/","c":["multiplayer","popular"]},{"n":"Color Tunnel","u":"https://f3.silvergames.com/html5/color-tunnel/","c":[]},{"n":"Slice it all","u":"https://html5.gamedistribution.com/rvvASMiM/efa941135635400f94bdb0b7430a92f4/index.html?gdpr-targeting=1&gd_sdk_referrer_url=https%3A%2F%2Fwww.silvergames.com%2Fen%2Fslice-it-all&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5zaWx2ZXJnYW1lcy5jb20vZW4vc2xpY2UtaXQtYWxsIiwicGFyZW50RG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwidG9wRG9tYWluIjoic2lsdmVyZ2FtZXMuY29tIiwiaGFzSW1wcmVzc2lvbiI6dHJ1ZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9","c":[]},{"n":"Granny","u":"https://html5.gamemonetize.co/pm5wjn3np4xl59y8ie3a85xqs1m1nyma/","c":["horror"]},{"n":"Piano Tiles","u":"https://h5.4j.com/games/Piano-Tiles-2-Online/index.html?pubid=silvergames&v=1503580918","c":["popular"]},{"n":"Raze","u":"https://f.silvergames.com/ruffle/player.php?id=4195","c":["popular"]},{"n":"Intrusion","u":"https://f.silvergames.com/ruffle/player.php?id=2278","c":["popular"]},{"n":"10 Minutes till Dawn","u":"https://abinbins.github.io/a7/10-minutes-till-dawn/","c":[]},{"n":"Bitlife","u":"https://ubg365.github.io/bitlife-life-simulator/play.html","c":["popular"]},{"n":"Death Run 3D","u":"https://mathgames66.github.io/games/html5/deathrun3d/","c":[]},{"n":"Vex 3","u":"https://html5.gamedistribution.com/762c932b4db74c6da0c1d101b2da8be6/?timestamp=1713731401&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-3","c":[]},{"n":"Vex 4","u":"https://html5.gamedistribution.com/80e6a5ae477f4d4fbcd1ea293d10087d/?timestamp=1713731551&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-4","c":[]},{"n":"Vex 5","u":"https://html5.gamedistribution.com/f120262ab72743039fbce88c1f370df8/?timestamp=1713731604&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-5","c":[]},{"n":"Vex 6","u":"https://html5.gamedistribution.com/4925e12574364121a48c61c35f649c36/?timestamp=1713731635&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-6","c":[]},{"n":"Vex 7","u":"https://html5.gamedistribution.com/0c454c9562d249d28ba3a2b50564042c/?timestamp=1713731659&countryCode=en&siteLocale=en&locale=en&gd_sdk_referrer_url=https%3A%2F%2Fkizi.com%2Fgames%2Fvex-7","c":["popular"]},{"n":"Backrooms","u":"https://backroomsgame.io/game/backrooms/","c":["horror"]},{"n":"Cookie Clicker","u":"https://orteil.dashnet.org/cookieclicker/","c":["popular"]},{"n":"Soundboard","u":"https://www.myinstants.com/en/categories/sound%20effects/","c":["popular"]},{"n":"Toss the Turle","u":"https://kdata1.com/RS/game.php?r=https://kdata1.com/2024/02/tosstheturtle_0.swf&w=900&h=563&warnsupport=true","c":[]},{"n":"Binding of Issac","u":"https://f.kbhgames.com/RS/game.php?r=//f.kbhgames.com/2011/10/binding-of-issac.swf&w=800&h=600&warnsupport=true","c":[]},{"n":"Ultimate Car Driving Simulator","u":"https://app-258100.games.s3.yandex.net/258100/tjl3zpx5pqgflpnp9trchxb110lsyvvz/index.html?is-united-page=1&skip-guard=1&header=no&clid=2818308&flags=%7B%22adv_sticky_banner_disabled%22%3Atrue%7D&sdk=%2Fsdk%2F_%2Fv2.40602063910d0212bbe3.js#origin=https%3A%2F%2Fyandex.com&app-id=258100&device-type=desktop","c":["popular"]},{"n":"Madalin Cars Multiplayer","u":"https://f.kbhgames.com/2018/03/madalin-cars-multiplayer/","c":["popular"]},{"n":"Deadshot.io","u":"https://deadshot.io/","c":[]},{"n":"Stick Slasher","u":"https://kdata1.com/2023/03/stickslasher/","c":[]},{"n":"Basketbros.io","u":"https://kdata1.com/2023/03/stickslasher/","c":[]},{"n":"Fancy Pants Adventure: World 2","u":"https://kdata1.com/2022/12/fancy-pants-adventure-3/?kbhgames","c":[]},{"n":"Fancy Pants Adventure: World 1","u":"https://kbhgames.com/game/fancy-pants-adventures","c":[]},{"n":"Jetpack Joyride","u":"https://kdata1.com/2024/02/jetpack-joyride/","c":[]},{"n":"Station Meltdown","u":"https://kdata1.com/2022/03/station-meltdown/","c":["popular"]},{"n":"What Remains","u":"https://kdata1.com/2021/07/3911393/","c":[]},{"n":"Plazma Burst","u":"https://f.kbhgames.com/RS/game.php?r=//f.kbhgames.com/2018/swf/plazma-burst.swf&w=1000&h=500&warnsupport=true","c":[]},{"n":"Count Secure Operations 2","u":"https://app-256471.games.s3.yandex.net/256471/gctqmljj6yn6nvurax636mu4hme5gsqz/index.html?is-united-page=1&skip-guard=1&header=no&clid=2818308&flags=%7B%22adv_sticky_banner_disabled%22%3Atrue%7D&sdk=%2Fsdk%2F_%2Fv2.40602063910d0212bbe3.js#origin=https%3A%2F%2Fyandex.com&app-id=256471&device-type=desktop","c":[]},{"n":"10-103","u":"https://kdata1.com/2020/12/3100528/","c":[]},{"n":"10-103: Null Kevin","u":"https://kdata1.com/2021/06/4056473/","c":["popular"]},{"n":"Last Hope","u":"https://kdata1.com/2021/09/LastHope/","c":[]},{"n":"Make sure it's closed","u":"https://kdata1.com/2019/04/MSIC-WEBGL/","c":["horror"]},{"n":"Gun Knight","u":"https://stepford.itch.io/gun-knight","c":[]},{"n":"Mob Inc","u":"https://html-classic.itch.zone/html/1796576/index.html?v=1577643878","c":[]},{"n":"Black Resin","u":"https://html-classic.itch.zone/html/6957140/BR_WEBGL_NO_WRONG_DRONG/index.html","c":[]},{"n":"Feedvid Live","u":"https://html-classic.itch.zone/html/4941980-683813/index.html","c":["horror"]},{"n":"FNAF 1 (Scratch)","u":"https://run3.io/popgame/fnaf/fnaf1/","c":["horror"]},{"n":"FNAF 4 (Scratch)","u":"https://ubg98.github.io/FNAF4/","c":["horror"]},{"n":"Stumble Guys","u":"https://www.stumbleguys.com/play","c":[]},{"n":"Crossy Road","u":"https://h52304.github.io/s77/crossy-road/","c":[]},{"n":"Survivor.io","u":"https://html5.gamedistribution.com/rvvASMiM/f1c451e586c04b4c8cba01b0c50d9090/index.html","c":[]},{"n":"Super Mario 64","u":"https://probablykam.github.io/Mario64webgl/","c":[]},{"n":"Pokemon Emerald","u":"https://f.kbhgames.com/emujs/play.php?c=gba&f=pokemon-emerald.gba","c":["emulator"]},{"n":"Vex 8","u":"https://html5.gamedistribution.com/rvvASMiM/949009d40a2846f89f887de2285d6c28/index.html?gd_sdk_referrer_url=https%3A%2F%2Farcadespot.com%2Fgame%2Fvex-8&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2FyY2FkZXNwb3QuY29tL2dhbWUvdmV4LTgiLCJwYXJlbnREb21haW4iOiJhcmNhZGVzcG90LmNvbSIsInRvcERvbWFpbiI6ImFyY2FkZXNwb3QuY29tIiwiaGFzSW1wcmVzc2lvbiI6dHJ1ZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9","c":["popular"]},{"n":"Precision Client","u":"https://html-classic.itch.zone/html/7086310/PrecisionClient-Static-main/index.html","c":[]},{"n":"Idle Breakout","u":"https://www.coolmathgames.com/0-idle-breakout/play","c":[]},{"n":"Burrito Bison","u":"https://f.silvergames.com/awayfl/index.html?swf=burrito-bison.swf","c":[]},{"n":"Twitch Tetris","u":"https://www.rossipotti.de/ausgabe28/tetris/index.html","c":[]},{"n":"Mario Kart 64","u":"https://f.kbhgames.com/r/n64/game.php?file=mario-kart-64.zip","c":["emulator"]},{"n":"Pizza Tower","u":"https://kdata1.com/2021/03/3527391/2.1/","c":[]},{"n":"Subway Surfers","u":"https://subwaysurfersonlinegame.github.io/file/","c":["popular"]},{"n":"Ragdoll Archers","u":"https://ragdoll-archers.game-files.crazygames.com/ragdoll-archers/30/index.html","c":[]},{"n":"Stick Archers Battle","u":"https://html5.gamedistribution.com/rvvASMiM/a2eafb6bfed84d56a10d6c57e1e72417/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Fstick-archers-battle&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy50d29wbGF5ZXJnYW1lcy5vcmcvZ2FtZS9zdGljay1hcmNoZXJzLWJhdHRsZSIsInBhcmVudERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsInRvcERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsImhhc0ltcHJlc3Npb24iOmZhbHNlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D","c":[]},{"n":"Funny Shooter 2","u":"https://html5.gamedistribution.com/rvvASMiM/a1b7ac4025214a5cb0bd01a4f675513a/index.html?gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2Z1bm55c2hvb3RlcjIuY29tLyIsInBhcmVudERvbWFpbiI6ImZ1bm55c2hvb3RlcjIuY29tIiwidG9wRG9tYWluIjoiZnVubnlzaG9vdGVyMi5jb20iLCJoYXNJbXByZXNzaW9uIjpmYWxzZSwibG9hZGVyRW5hYmxlZCI6dHJ1ZSwiaG9zdCI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidmVyc2lvbiI6IjEuNS4xNyJ9","c":["popular"]},{"n":"Tomb of the Mask","u":"https://tombofthemask.github.io/g8/tomb-of-the-mask/","c":[]},{"n":"Exit Path","u":"https://f.silvergames.com/ruffle/player.php?id=606","c":[]},{"n":"Awesome Planes","u":"https://f.silvergames.com/ruffle/player.php?id=2017","c":["emulator"]},{"n":"OvO 2","u":"https://dedragames.com/games/ovo2/0.2alpha/","c":["popular"]},{"n":"60 Seconds","u":"https://www.puzzlegame.com/games/60-Seconds-Atomic-Adventure/index.html?yad","c":[]},{"n":"BuildNow GG","u":"https://games.crazygames.com/en_US/buildnow-gg/index.html?v=1.282","c":["multiplayer"]},{"n":"Sans Fight","u":"https://jcw87.github.io/c2-sans-fight/","c":["emulator"]},{"n":"Super Mario Bros","u":"https://jcw87.github.io/c2-smb1/","c":["emulator"]},{"n":"Friday night Funkin","u":"https://uploads.ungrounded.net/alternate/1528000/1528775_alternate_113347_r112.zip/?NewgroundsAPI_PublisherID=1&NewgroundsAPI_SandboxID=6636730d4b7cd&NewgroundsAPI_SessionID=&NewgroundsAPI_UserName=%26lt%3Bdeleted%26gt%3B&NewgroundsAPI_UserID=0&ng_username=%26lt%3Bdeleted%26gt%3B","c":[]},{"n":"Baldis Basics","u":"https://en.gameslol.net/data/baldis-basics/index.html","c":["emulator","horror"]},{"n":"Assessment Examination","u":"https://html-classic.itch.zone/html/5392404/Web5/index.html","c":["popular","horror"]},{"n":"Dome Romantik","u":"https://bippinbits.itch.io/dome-romantik","c":[]},{"n":"Nightclub Showdown","u":"https://html-classic.itch.zone/html/3198875/index.html","c":["popular"]},{"n":"Goodnight Meowmie","u":"https://ddrkirbyisq.itch.io/goodnight-meowmie","c":["horror"]},{"n":"Blastronaut","u":"https://html-classic.itch.zone/html/2758024/index.html","c":[]},{"n":"UZG (COD Zombies)","u":"https://html-classic.itch.zone/html/5713982/UZG_webgl/index.html","c":["popular"]},{"n":"Commonweal","u":"https://html-classic.itch.zone/html/10287783/index.html","c":[]},{"n":"Holonomy","u":"https://html-classic.itch.zone/html/7959084/Holonomy%20Web/index.html","c":[]},{"n":"Enchain Classic","u":"https://html-classic.itch.zone/html/793359/Enchain%20WebGL/index.html?v=1542781876","c":["popular"]},{"n":"Hollow Knight Demake","u":"https://html-classic.itch.zone/html/4103396/web/index.html","c":["popular"]},{"n":"Dustsim","u":"https://kodub.itch.io/dustsim","c":[]},{"n":"Canabalt","u":"https://html-classic.itch.zone/html/9680307/index.html","c":[]},{"n":"Home Alone","u":"https://html-classic.itch.zone/html/8471641/BGJ%202022.2%20-%20Home%20Alone%20WebGL/index.html","c":["horror"]},{"n":"78 Hour Rain","u":"https://html-classic.itch.zone/html/2937814/78HourRain_Webv1/index.html","c":["horror"]},{"n":"Closing Doors","u":"https://collarpill.itch.io/closing-doors","c":["horror"]},{"n":"Backrooms 2D","u":"https://html-classic.itch.zone/html/8485327/index.html","c":[]},{"n":"Silhouette Showdown","u":"https://html-classic.itch.zone/html/7362417/SilhouetteShowdown080_HTML/index.html","c":["multiplayer"]},{"n":"Commando","u":"https://html-classic.itch.zone/html/1824008/www/index.html?v=1577643784","c":[]},{"n":"Hollow Knight (Silksong Demake)","u":"https://html-classic.itch.zone/html/4927768/web/index.html","c":["emulator"]},{"n":"Nip for speed","u":"https://html-classic.itch.zone/html/9641909/index.html","c":[]},{"n":"Vacant","u":"https://html-classic.itch.zone/html/5747771-565757/html/index.html","c":["horror"]},{"n":"Deep","u":"https://html-classic.itch.zone/html/3316252/index.html","c":[]},{"n":"Darkness in Spaceship","u":"https://html-classic.itch.zone/html/9272800/index.html","c":[]},{"n":"Station 141","u":"https://html-classic.itch.zone/html/3793918/index.html","c":[]},{"n":"Pew Pew Live","u":"https://pewpew.live/webasm/pewpew.html","c":[]},{"n":"Marble Race Generator","u":"https://html-classic.itch.zone/html/2029874/WebV2/index.html?v=1591302253","c":[]},{"n":"Cats Cradle","u":"https://georgioklironomos.itch.io/cats-cradle","c":["multiplayer"]},{"n":"Blackbox","u":"https://html-classic.itch.zone/html/3475546/index.html","c":["horror"]},{"n":"This is your life now","u":"https://html-classic.itch.zone/html/1398515/index.html?v=1574335650","c":[]},{"n":"Hinoken","u":"https://html-classic.itch.zone/html/3435599/hinoken_web_1/index.html","c":[]},{"n":"Necrobomb","u":"https://html-classic.itch.zone/html/3433821/index.html","c":[]},{"n":"Rocket League 2D","u":"https://html-classic.itch.zone/html/3325334/index.html","c":["multiplayer"]},{"n":"dud","u":"https://html-classic.itch.zone/html/10158091/index.html","c":["popular"]},{"n":"Crater","u":"https://html-classic.itch.zone/html/3300759/CraterWeb/index.html","c":[]},{"n":"Monolith","u":"https://html-classic.itch.zone/html/473205/index.html?v=1542781942","c":[]},{"n":"D.A-V.E","u":"https://html-classic.itch.zone/html/9967430/index.html","c":[]},{"n":"Bright Lancer","u":"https://html-classic.itch.zone/html/3228468/Bright%20Lancer%20Web%20Experimental/index.html","c":[]},{"n":"VSCS-I","u":"https://html-classic.itch.zone/html/7627512/index.html","c":[]},{"n":"Take out the trash","u":"https://html-classic.itch.zone/html/10334699/takeOutTheTrash/index.html","c":["horror"]},{"n":"Examination of Fear","u":"https://html-classic.itch.zone/html/7312990/index.html","c":["horror"]},{"n":"I\u0337\u0350\u031a\u0310\u033c\u0327\u0353 \u0336\u0346\u0358\u0300\u0343\u031a\u031c\u0347\u0320\u0328a\u0338\u0351\u0308\u0348\u031cm\u0337\u0304\u0341\u0341\u030f\u0355 \u0334\u031a\u0358\u0350\u0308\u0305\u0322\u0327n\u0336\u030c\u030a\u0316\u0348\u0318\u0327o\u0337\u0311\u035c\u0328\u0329t\u0335\u0346\u0312\u031b\u0348\u0326\u032d\u0353 \u0336\u0357\u035d\u032e\u0347\u0329\u0333\u0359w\u0336\u030d\u033f\u0357\u0342\u0357\u0327\u0316\u031c\u034eh\u0335\u030d\u031d\u0327\u033ba\u0334\u0304\u0332\u032f\u0323t\u0336\u0308\u030b\u0344\u030f\u0306\u033a\u0325\u032a\u0356\u032a \u0334\u034c\u0307\u030c\u0306\u034b\u0331r\u0336\u033f\u0342\u0317e\u0334\u0301\u0346\u033d\u030c\u032dm\u0337\u030f\u031a\u031b\u0340\u0304\u032f\u0322a\u0338\u0309\u0352\u033c\u032ai\u0337\u033f\u034a\u030c\u0344\u031b\u0327n\u0334\u033d\u030e\u030e\u0324\u031cs\u0336\u0310\u0306\u0342\u0307\u0344\u0319\u033b\u0345\u0336\u0311\u030c\u035d\u0356\u032e\u0322\u032a","u":"https://html-classic.itch.zone/html/2479198/index.html","c":[]},{"n":"Last train home","u":"https://html-classic.itch.zone/html/3300759/CraterWeb/index.html","c":["horror"]},{"n":"Dodge & Slash","u":"https://kindanice.itch.io/dodge-and-slash","c":[]},{"n":"Like Them","u":"https://html-classic.itch.zone/html/2367352/Like%20Them%20Demo%20HTML/index.html","c":[]},{"n":"Agent Pyxel","u":"https://html-classic.itch.zone/html/4491958/index.html","c":[]},{"n":"A Day in the Office","u":"https://html-classic.itch.zone/html/4268519/index.html","c":["horror"]},{"n":"Station Saturn","u":"https://html-classic.itch.zone/html/7537780/index.html","c":["popular"]},{"n":"DriftR","u":"https://html-classic.itch.zone/html/3300759/CraterWeb/index.html","c":[]},{"n":"Synesthesia","u":"https://html-classic.itch.zone/html/6726608/browser/index.html","c":[]},{"n":"Spectral Slash","u":"https://kdata1.com/2023/07/spectral-slash/","c":[]},{"n":"Rogue Fable III","u":"https://cache.armorgames.com/files/games/rogue-fable-iii-18602/index.html?v=1550624919","c":[]},{"n":"Human or Not?","u":"https://humanornot.so/","c":[]}];
+
+            const launchInGust = (raw) => {
+                const q = (raw || "").trim();
+                if (!q) return;
+                const url = /^https?:\/\//i.test(q)
+                    ? q
+                    : (/^[a-z0-9-]+(\.[a-z0-9-]+)+([/:?#].*)?$/i.test(q)
+                        ? "https://" + q
+                        : "https://duckduckgo.com/?q=" + encodeURIComponent(q));
+                if (typeof go === "function") go(url);
+                else window.open(url, "_blank", "noopener,noreferrer");
+            };
+
+            const renderCatalog = (container, title, items, accentPlaceholder) => {
+                const cats = ["all"];
+                items.forEach((it) => (it.c || []).forEach((c) => { if (!cats.includes(c)) cats.push(c); }));
+                let activeCat = "all";
+                let query = "";
+
+                container.innerHTML = `
+                    <div class="portal-catalog-head">
+                        <h2 style="margin:0;font-size:22px;font-weight:700;">${title} <span style="opacity:.55;font-size:14px;">(${items.length})</span></h2>
+                        <input type="text" class="portal-filter-input" placeholder="${accentPlaceholder}" />
+                    </div>
+                    <div class="portal-chips"></div>
+                    <div class="portal-grid"></div>
+                `;
+                const filterInput = container.querySelector(".portal-filter-input");
+                const chipsEl = container.querySelector(".portal-chips");
+                const gridEl = container.querySelector(".portal-grid");
+
+                const drawChips = () => {
+                    chipsEl.innerHTML = "";
+                    cats.slice(0, 12).forEach((cat) => {
+                        const btn = document.createElement("button");
+                        btn.type = "button";
+                        btn.className = "portal-chip" + (cat === activeCat ? " active" : "");
+                        btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                        btn.onclick = () => { activeCat = cat; drawChips(); drawGrid(); };
+                        chipsEl.appendChild(btn);
+                    });
+                };
+
+                const drawGrid = () => {
+                    gridEl.innerHTML = "";
+                    const q = query.toLowerCase();
+                    const filtered = items.filter((it) => {
+                        const catOk = activeCat === "all" || (it.c && it.c.includes(activeCat));
+                        const qOk = !q || it.n.toLowerCase().includes(q);
+                        return catOk && qOk;
+                    });
+                    filtered.forEach((it) => {
+                        const card = document.createElement("button");
+                        card.type = "button";
+                        card.className = "portal-card";
+                        card.title = it.u;
+                        card.innerHTML = `<span class="portal-card-icon">${it.n.charAt(0).toUpperCase()}</span><span class="portal-card-name"></span>`;
+                        card.querySelector(".portal-card-name").textContent = it.n;
+                        card.onclick = () => launchInGust(it.u);
+                        gridEl.appendChild(card);
+                    });
+                };
+
+                filterInput.addEventListener("input", () => {
+                    query = filterInput.value.trim();
+                    drawGrid();
+                });
+                drawChips();
+                drawGrid();
+            };
+
+            let spaceWordTimer = null;
+            const renderSpaceTab = (tab) => {
+                if (!spaceMainBody) return;
+                if (spaceWordTimer) { clearInterval(spaceWordTimer); spaceWordTimer = null; }
+                spacePortalView.querySelectorAll("[data-space-tab]").forEach((b) => {
+                    b.classList.toggle("active", b.getAttribute("data-space-tab") === tab);
+                });
+                if (tab === "home") {
+                    spaceMainBody.innerHTML = `
+                        <div class="space-hero">
+                            <h1>Welcome to <span class="space-type-accent" id="spaceTypeWord">Space.</span></h1>
+                            <p>Start your unblocking journey today inside GUST.</p>
+                            <div class="space-search-bar">
+                                <i class="fas fa-search" style="color:#a78bfa;"></i>
+                                <input type="text" id="spaceSearchInput" placeholder="Search the web or enter a URL..." />
+                                <button type="button" class="space-launch-btn" id="spaceGoBtn">Launch</button>
+                            </div>
+                        </div>
+                    `;
+                    const words = ["Space.", "freedom.", "aesthetic.", "privacy.", "fast.", "all you need."];
+                    let wi = 0;
+                    const wordEl = $("spaceTypeWord");
+                    spaceWordTimer = setInterval(() => {
+                        wi = (wi + 1) % words.length;
+                        if (wordEl) wordEl.textContent = words[wi];
+                    }, 2000);
+                    const sIn = $("spaceSearchInput");
+                    const sGo = $("spaceGoBtn");
+                    if (sGo && sIn) {
+                        sGo.onclick = () => launchInGust(sIn.value);
+                        sIn.onkeydown = (e) => { if (e.key === "Enter") launchInGust(sIn.value); };
+                        setTimeout(() => sIn.focus(), 50);
+                    }
+                } else if (tab === "games") {
+                    renderCatalog(spaceMainBody, "Space Games", SPACE_GAMES_DATA, "Search Space games...");
+                } else if (tab === "apps") {
+                    renderCatalog(spaceMainBody, "Space Apps", SPACE_APPS_DATA, "Search Space apps...");
+                }
+            };
+
+            const renderDdxTab = (tab) => {
+                if (!ddxMainBody) return;
+                ddxPortalView.querySelectorAll("[data-ddx-tab]").forEach((b) => {
+                    b.classList.toggle("active", b.getAttribute("data-ddx-tab") === tab);
+                });
+                if (tab === "home") {
+                    ddxMainBody.innerHTML = `
+                        <div class="ddx-hero">
+                            <h1>DayDream X</h1>
+                            <p style="color:#94a3b8;margin:0;">Fast, clean proxy browsing &amp; games inside GUST</p>
+                            <div class="ddx-search-box">
+                                <i class="fas fa-search" style="color:#2dd4bf;"></i>
+                                <input type="text" id="ddxSearchInput" placeholder="Search the Web or enter URL..." />
+                                <button type="button" class="space-launch-btn" style="background:linear-gradient(135deg,#0d9488,#0284c7);" id="ddxGoBtn">Go</button>
+                            </div>
+                            <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px;">
+                                <button type="button" class="portal-chip" data-ddx-quick="https://discord.com">Discord</button>
+                                <button type="button" class="portal-chip" data-ddx-quick="https://youtube.com">YouTube</button>
+                                <button type="button" class="portal-chip" data-ddx-quick="https://github.com">GitHub</button>
+                                <button type="button" class="portal-chip" id="ddxOpenGamesQuick">Browse Games (${DDX_GAMES_DATA.length})</button>
+                            </div>
+                        </div>
+                    `;
+                    const dIn = $("ddxSearchInput");
+                    const dGo = $("ddxGoBtn");
+                    if (dGo && dIn) {
+                        dGo.onclick = () => launchInGust(dIn.value);
+                        dIn.onkeydown = (e) => { if (e.key === "Enter") launchInGust(dIn.value); };
+                        setTimeout(() => dIn.focus(), 50);
+                    }
+                    ddxMainBody.querySelectorAll("[data-ddx-quick]").forEach((btn) => {
+                        btn.onclick = () => launchInGust(btn.getAttribute("data-ddx-quick"));
+                    });
+                    const dGamesBtn = $("ddxOpenGamesQuick");
+                    if (dGamesBtn) dGamesBtn.onclick = () => renderDdxTab("games");
+                } else if (tab === "games") {
+                    renderCatalog(ddxMainBody, "DayDream X Games", DDX_GAMES_DATA, "Search DayDream X games...");
+                }
+            };
+
+            const setActivePortal = (portal) => {
+                if (spacePortalView) spacePortalView.classList.toggle("active", portal === "space");
+                if (ddxPortalView) ddxPortalView.classList.toggle("active", portal === "daydreamx");
+                if (ntProxiesWrap) {
+                    ntProxiesWrap.querySelectorAll(".nt-proxies-item").forEach((el) => {
+                        el.classList.toggle("active", el.getAttribute("data-portal") === portal);
+                    });
+                }
+                if (ntProxiesLabel) {
+                    ntProxiesLabel.textContent = portal === "space" ? "Space-proxy" : (portal === "daydreamx" ? "DaydreamX-" : "Portals");
+                }
+                if (portal === "space") renderSpaceTab("home");
+                if (portal === "daydreamx") renderDdxTab("home");
+                if (portal === "gust" && spaceWordTimer) { clearInterval(spaceWordTimer); spaceWordTimer = null; }
+            };
+
+            if (spacePortalView) {
+                spacePortalView.querySelectorAll("[data-space-tab]").forEach((btn) => {
+                    btn.addEventListener("click", () => renderSpaceTab(btn.getAttribute("data-space-tab")));
+                });
+                const sBack = $("spaceBackGustBtn");
+                if (sBack) sBack.addEventListener("click", () => setActivePortal("gust"));
+            }
+            if (ddxPortalView) {
+                ddxPortalView.querySelectorAll("[data-ddx-tab]").forEach((btn) => {
+                    btn.addEventListener("click", () => renderDdxTab(btn.getAttribute("data-ddx-tab")));
+                });
+                const dBack = $("ddxBackGustBtn");
+                if (dBack) dBack.addEventListener("click", () => setActivePortal("gust"));
+            }
+
             if (ntProxiesWrap && ntProxiesBtn) {
                 const closeNtProxies = () => {
                     ntProxiesWrap.classList.remove("open");
@@ -23787,12 +24347,9 @@ _VIEWER_DL_JS +
                 });
                 ntProxiesWrap.querySelectorAll(".nt-proxies-item").forEach((item) => {
                     item.addEventListener("click", () => {
-                        const targetUrl = item.getAttribute("data-url");
+                        const portal = item.getAttribute("data-portal") || "gust";
                         closeNtProxies();
-                        if (targetUrl) {
-                            if (typeof go === "function") go(targetUrl);
-                            else window.open(targetUrl, "_blank", "noopener,noreferrer");
-                        }
+                        setActivePortal(portal);
                     });
                 });
                 document.addEventListener("click", (e) => {
