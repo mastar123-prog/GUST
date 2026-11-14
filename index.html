@@ -8305,6 +8305,21 @@
                                     <span class="nt-proxies-item-sub">Built-in DayDream X browser &amp; games</span>
                                 </span>
                             </button>
+                            <div style="height:1px;background:rgba(157,229,255,0.14);margin:4px 6px;"></div>
+                            <button class="nt-proxies-item" type="button" role="menuitem" data-proxy-url="https://gointospace.app/">
+                                <i class="fas fa-globe"></i>
+                                <span class="nt-proxies-item-meta">
+                                    <span class="nt-proxies-item-title">gointospace.app</span>
+                                    <span class="nt-proxies-item-sub">Open live Space-proxy in GUST</span>
+                                </span>
+                            </button>
+                            <button class="nt-proxies-item" type="button" role="menuitem" data-proxy-url="https://daydreamx.pro/">
+                                <i class="fas fa-globe"></i>
+                                <span class="nt-proxies-item-meta">
+                                    <span class="nt-proxies-item-title">daydreamx.pro</span>
+                                    <span class="nt-proxies-item-sub">Open live DaydreamX- in GUST</span>
+                                </span>
+                            </button>
                         </div>
                     </div>
 
@@ -24191,9 +24206,14 @@ _VIEWER_DL_JS +
                 });
                 ntProxiesWrap.querySelectorAll(".nt-proxies-item").forEach((item) => {
                     item.addEventListener("click", () => {
+                        const proxyUrl = item.getAttribute("data-proxy-url");
                         const portal = item.getAttribute("data-portal") || "gust";
                         closeNtProxies();
-                        setActivePortal(portal);
+                        if (proxyUrl) {
+                            launchInGust(proxyUrl);
+                        } else {
+                            setActivePortal(portal);
+                        }
                     });
                 });
                 document.addEventListener("click", (e) => {
@@ -24429,18 +24449,8 @@ _VIEWER_DL_JS +
                     // ponytail: 25s cap; raise only if huge pools routinely exceed it.
                     if (poolModeOn() && typeof curl !== 'undefined' && curl) {
                         try {
-                            showBootBenchmark();
-                            const bench = benchmarkWispPool(setBootBenchmarkProgress).then(() => { try { rememberFastestRelay(); } catch (e) {} });
-                            // live progress even when setup started the benchmark first
-                            const tick = setInterval(() => {
-                                const pool = getWispPool();
-                                setBootBenchmarkProgress(pool.filter(u => wispHealth[u]).length, pool.length);
-                            }, 200);
-                            await Promise.race([bench, new Promise(r => setTimeout(r, 4000))]);
-                            clearInterval(tick);
-                        } catch (e) {} finally {
-                            hideBootBenchmark();
-                        }
+                            benchmarkWispPool().then(() => { try { rememberFastestRelay(); } catch (e) {} }).catch(() => {});
+                        } catch (e) {}
                     }
 
             // Signal that libcurl init is complete so deferred UI (tutorial, etc.) can start
