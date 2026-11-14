@@ -2823,10 +2823,12 @@
             color: #e9d5ff !important;
         }
         #gustSearchPage.gs-theme-celest .gs-search-box,
+        #gustSearchPage.gs-theme-celest .gs-card,
         #gustSearchPage.gs-theme-celest .gs-result-card {
             background: rgba(255, 255, 255, 0.05) !important;
             border-color: rgba(167, 139, 250, 0.3) !important;
         }
+        #gustSearchPage.gs-theme-celest .gs-card:hover,
         #gustSearchPage.gs-theme-celest .gs-result-card:hover {
             border-color: #38bdf8 !important;
             background: rgba(56, 189, 248, 0.1) !important;
@@ -2847,10 +2849,12 @@
             color: #e9d5ff !important;
         }
         #gustSearchPage.gs-theme-deepsleep .gs-search-box,
+        #gustSearchPage.gs-theme-deepsleep .gs-card,
         #gustSearchPage.gs-theme-deepsleep .gs-result-card {
             background: rgba(18, 14, 28, 0.78) !important;
             border-color: rgba(141, 1, 255, 0.35) !important;
         }
+        #gustSearchPage.gs-theme-deepsleep .gs-card:hover,
         #gustSearchPage.gs-theme-deepsleep .gs-result-card:hover {
             border-color: rgb(141, 1, 255) !important;
             background: rgba(141, 1, 255, 0.15) !important;
@@ -25042,6 +25046,13 @@ _VIEWER_DL_JS +
 
                 _breezeAllResults = [];
                 const seenUrls = new Set();
+                let _renderedEarly = false;
+                const flushEarly = () => {
+                    if (token !== _breezeLoadToken || !_breezeAllResults.length) return;
+                    if (loadingEl) loadingEl.style.display = 'none';
+                    renderBreezeResultCards(el, q);
+                    _renderedEarly = true;
+                };
                 const addResult = (item) => {
                     if (!item || !item.url) return;
                     let clean = item.url.replace(/\/$/, '').toLowerCase();
@@ -25050,8 +25061,10 @@ _VIEWER_DL_JS +
                     _breezeAllResults.push(item);
                 };
 
-                // Parallel backend query execution
-                await Promise.allSettled([
+                const withTimeout = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
+
+                // Parallel backend query execution (capped at 4s total so search never hangs)
+                await withTimeout(Promise.allSettled([
                     // 1. Primary Web Results
                     (async () => {
                         try {
@@ -25153,11 +25166,12 @@ _VIEWER_DL_JS +
                                             snippet: (wData[2] && wData[2][i]) ? wData[2][i] : `Read the article on ${wData[1][i]}.`
                                         });
                                     }
+                                    flushEarly();
                                 }
                             }
                         } catch(e) {}
                     })()
-                ]);
+                ]), 4000);
 
                 if (token !== _breezeLoadToken) return;
                 if (loadingEl) loadingEl.style.display = 'none';
