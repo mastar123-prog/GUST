@@ -13287,8 +13287,8 @@ window._libcurlReady = true;
             }
 
             const VALID_SETTINGS_SECTIONS = new Set([
-                'connection','search','privacy','passwords','cache','filesandmedia',
-                'appearance','skins','homescreen','shortcuts','language','tutorial','about','fallback'
+                'connection','aiassistant','search','privacy','passwords','cache','filesandmedia',
+                'appearance','skins','homescreen','shortcuts','language','tutorial','tutorial-page','about','fallback'
             ]);
 
             function isSettingsPage(url) {
@@ -16635,6 +16635,7 @@ window._libcurlReady = true;
 
             let _overlayDotsInterval = null;
 
+            let _overlayWatchdog = null;
             function showOverlay(msg) {
                 const base = msg.replace(/\.+$/, '');
                 let dotCount = 1;
@@ -16645,11 +16646,18 @@ window._libcurlReady = true;
                     dotCount = (dotCount % 3) + 1;
                     overlayText.textContent = base + '.'.repeat(dotCount);
                 }, 400);
+                if (_overlayWatchdog) clearTimeout(_overlayWatchdog);
+                _overlayWatchdog = setTimeout(() => {
+                    if (overlay && !overlay.classList.contains('hidden') && !overlay.classList.contains('error')) {
+                        hideOverlay();
+                    }
+                }, 18000);
             }
 
             function showOverlayError(reason) {
                 // Stop any dots animation
                 if (_overlayDotsInterval) { clearInterval(_overlayDotsInterval); _overlayDotsInterval = null; }
+                if (_overlayWatchdog) { clearTimeout(_overlayWatchdog); _overlayWatchdog = null; }
                 // Swap spinner for mini error triangle
                 const spinner = overlay.querySelector('.spinner');
                 if (spinner) {
@@ -16796,7 +16804,10 @@ window._libcurlReady = true;
             function normUrl(u) {
                 u = (u || "").trim();
                 if (!u) return "";
-                if (/^gust:\/\/settings(\/.*)?$/i.test(u)) return u.toLowerCase().startsWith("gust://settings/") ? u : SETTINGS_INTERNAL;
+                if (/^(?:gust|about|chrome):\/\/settings(\/.*)?$/i.test(u) || /^about:settings(\/.*)?$/i.test(u)) {
+                    const sub = u.replace(/^(?:gust:\/\/|chrome:\/\/|about:)settings\/?/i, '');
+                    return sub ? `gust://settings/${sub.toLowerCase()}` : SETTINGS_INTERNAL;
+                }
                 if (/^gust:\/\/newtab$/i.test(u) || /^about:newtab$/i.test(u)) return HOME_INTERNAL;
                 if (/^gust:\/\/discord$/i.test(u) || /^about:discord$/i.test(u)) return DISCORD_INTERNAL;
                 // gust://extensions = native fallback store; the REAL Chrome Web Store
@@ -17246,7 +17257,16 @@ window._libcurlReady = true;
                         if (opts.signal?.aborted) rj(new DOMException("Aborted", "AbortError"));
                         opts.signal?.addEventListener("abort", () => rj(new DOMException("Aborted", "AbortError")));
                     });
-                    resp = await Promise.race([fetchPromise, abortPromise]);
+                    const _reqTimeoutMs = opts.timeoutMs || (isDoc ? 12000 : 6000);
+                    let _reqTimer = null;
+                    const timeoutPromise = new Promise((_, rj) => {
+                        _reqTimer = setTimeout(() => rj(new Error(`Request timed out after ${_reqTimeoutMs}ms`)), _reqTimeoutMs);
+                    });
+                    try {
+                        resp = await Promise.race([fetchPromise, abortPromise, timeoutPromise]);
+                    } finally {
+                        if (_reqTimer) clearTimeout(_reqTimer);
+                    }
                 } catch (curlErr) {
                     const msg = (curlErr.message || '').toLowerCase();
                     const isAborted = curlErr.name === 'AbortError' || (opts.signal?.aborted);
@@ -22403,6 +22423,7 @@ _VIEWER_DL_JS +
                 } catch (e) {
                     if (e.name === "AbortError") {
                         log("Aborted", "warn");
+                        if (activeTabId === initiatorTabId) hideOverlay();
                         return;
                     }
 
@@ -23494,37 +23515,16 @@ _VIEWER_DL_JS +
             // remember the fastest healthy relay as next launch's startup default.
             Promise.resolve(benchmarkWispPool()).then(rememberFastestRelay, () => {});
 
-            document.querySelectorAll('.settings-nav-item').forEach(navBtn => {
-                navBtn.addEventListener('click', () => {
-                    const section = navBtn.dataset.section;
-                    const settingsUrl = `gust://settings/${section}`;
-                    urlInput.value = settingsUrl;
-                    pageUrl = settingsUrl;
-                    setTabTitle(`Settings - ${section.charAt(0).toUpperCase() + section.slice(1)}`);
-                    updateTabUrl(settingsUrl);
-
-                    hist = hist.slice(0, histIdx + 1);
-                    hist.push(settingsUrl);
-                    histIdx = hist.length - 1;
-                    updateNav();
-
-                    document.querySelectorAll('.settings-nav-item').forEach(b => b.classList.remove('active'));
-                    navBtn.classList.add('active');
-                    document.querySelectorAll('.settings-section').forEach(s => s.style.display = 'none');
-                    const target = document.querySelector('.settings-section[data-section="' + section + '"]');
-                    if (section === 'tutorial') {
-                        document.querySelectorAll('.settings-section').forEach(s => s.style.display = 'none');
-                        const tutSec = document.querySelector('.settings-section[data-section="tutorial-page"]');
-                        if (tutSec) tutSec.style.display = 'flex';
-                        document.querySelectorAll('.settings-nav-item').forEach(b => b.classList.remove('active'));
-                        document.querySelector('.settings-nav-item[data-section="tutorial"]')?.classList.add('active');
-                        return;
-                    }
-                    if (target) {
-                        target.style.display = 'flex';
+            const _settingsPageEl = $("settingsPage");
+            if (_settingsPageEl) {
+                _settingsPageEl.addEventListener('click', (e) => {
+                    const navBtn = e.target.closest('.settings-nav-item');
+                    if (navBtn && navBtn.dataset.section) {
+                        e.preventDefault();
+                        showSettingsPage(true, navBtn.dataset.section);
                     }
                 });
-            });
+            }
 
             const firstNavItem = document.querySelector('.settings-nav-item');
             if (firstNavItem) {
@@ -23918,19 +23918,23 @@ _VIEWER_DL_JS +
             }
             function showSettingsPage(push = true, section = null) {
                 if (typeof hideGustSearch === 'function') hideGustSearch();
+                if (typeof closeSkinPages === 'function') closeSkinPages();
+                const storeEl = $("extStorePage");
+                if (storeEl) storeEl.style.display = "none";
                 const settingsEl = $("settingsPage");
                 if (!settingsEl) return;
 
                 if (!section && pageUrl && pageUrl.startsWith("gust://settings/")) {
                     section = pageUrl.replace("gust://settings/", "");
                 }
-                if (!section) section = "skins";
+                if (section === "tutorial-page") section = "tutorial";
+                if (!section || !VALID_SETTINGS_SECTIONS.has(section)) section = "skins";
 
                 hideDiscordFrame();
                 if (newtab) newtab.classList.remove("active");
                 settingsEl.style.display = "block";
                 frame.style.display = "none";
-                overlay.classList.add("hidden");
+                hideOverlay();
                 if (progressWrap) progressWrap.classList.add("hidden");
 
                 const settingsUrl = `gust://settings/${section}`;
